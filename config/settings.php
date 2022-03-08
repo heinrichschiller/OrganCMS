@@ -74,5 +74,30 @@ return [
         'filename' => $_ENV['LOGGER_FILENAME'],
         'level' => Logger::DEBUG,
         'filePermission' => $_ENV['LOGGER_FILE_PERMISSIONS']
-    ]
+    ],
+
+    /*
+     *----------------------------------------------------------------------------
+     * Settings for Mustache template engine
+     *----------------------------------------------------------------------------
+     *
+     * For more information, see:
+     * https://github.com/bobthecow/mustache.php
+     *
+     */
+    'mustache' => [
+        'cache' => ROOT_DIR . '/var/caches/mustache',
+        'charset' => 'UTF-8',
+        'escape' => function(string $var) {
+            return htmlspecialchars($var, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+        },
+        'loader' => new Mustache_Loader_FilesystemLoader(
+            ROOT_DIR . 'resources/views', 
+            ['extension' => '.html']
+        ),
+        'partials_loader' => new Mustache_Loader_FilesystemLoader(
+            ROOT_DIR . 'resources/views/partials',
+            ['extension' => '.html']
+        )
+    ],
 ];

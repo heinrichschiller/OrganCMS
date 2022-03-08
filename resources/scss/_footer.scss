@@ -1,0 +1,29 @@
+footer {
+    color: #e2cd9f;
+    background-image: url('https://www.lutherorgel-plauen.de/assets/svg/Orgel-stil.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-top: 4px solid #e2cd9f;
+    text-align: center;
+}
+
+footer a {
+    color:#e2cd9f;
+}
+
+footer img {
+    width: 100%;
+}
+
+footer .container-xl .row .col-md-4 {
+    margin: 1em 0em;
+}
+
+.footer-brand {
+    display: inline-block;
+    padding-top: 0.3125rem;
+    padding-bottom: 0.3125rem;
+    font-size: 1.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+}

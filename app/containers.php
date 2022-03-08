@@ -27,6 +27,7 @@
 
 declare(strict_types=1);
 
+use App\Error\Renderer\HtmlErrorRenderer;
 use DI\ContainerBuilder;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -36,7 +37,8 @@ use Psr\Log\LoggerInterface;
 use Slim\App;
 use Slim\Factory\AppFactory;
 use Symfony\Component\Console\Application;
-use Symfony\Component\Console\INput\InputOption;
+use Slim\Views\Mustache;
+use Slim\Views\ViewInterface;
 
 use Slim\Middleware\ErrorMiddleware;
 
@@ -91,6 +93,13 @@ return function(ContainerBuilder $builder)
             $logger->pushHandler($streamHandler);
 
             return $logger;
+        },
+
+        ViewInterface::class => function(ContainerInterface $container): ViewInterface
+        {
+            $options = $container->get('settings')['mustache'];
+
+            return new Mustache($options);
         }
     ]);
 };

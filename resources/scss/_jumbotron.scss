@@ -1,0 +1,26 @@
+.jumbotron {
+    background-image: url('https://www.lutherorgel-plauen.de/assets/img/banner-main-mobile.jpg');
+    background-size: cover;
+    height: 90vh;
+    padding: 0em !important
+}
+
+@media screen and (min-width: 768px) {
+    .jumbotron {
+        background-image: url('https://www.lutherorgel-plauen.de/assets/img/banner-main-tablet.jpg');
+        height: 94vh;
+        border-bottom: 4px solid #e2cd9f;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .jumbotron {
+        background-image: url('/assets/img/banner-main-2021.jpg');
+        background-size: cover;
+        height: 94vh;
+    }
+}
+
+.jumbotron-divider {
+    background-color: ghostwhite;
+}

@@ -1,0 +1,184 @@
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "../../node_modules/bootstrap/scss/functions";
+
+// 2. Include any default variable overrides here
+$primary: rgb(179,64,65);
+$dark: #212121;
+
+h1, .h1 {
+    font-weight: lighter !important;
+}
+
+h3, .h3 {
+    font-weight: 400 !important;
+}
+
+a.btn-jumbotron {
+    color: ghostwhite;
+    border: 2px solid ghostwhite;
+}
+
+a.btn-jumbotron:hover {
+    background-color: ghostwhite;
+    color: black;
+}
+
+.card {
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.04);
+    box-shadow: 0px 0px 4px 4px #e2cd9f;
+}
+
+.foil {
+    background-color: #343a40;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    color: white;
+}
+
+.featurette-divider {
+    margin: 2.25rem 0rem;
+}
+
+.company {
+    padding: 15px;
+    background-color: #6c757d;
+    color: ghostwhite;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 3px;
+    text-align: center;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.company:hover {
+    background-color: rgb(80, 80, 80);
+}
+
+.news-corner {
+    background-image: url("https://www.lutherorgel-plauen.de/assets/svg/organ-stil.svg");
+}
+
+.gallery img {
+    transform:none;
+    transition: 0.3s ease-in-out;
+}
+.gallery img:hover {
+    transform: scale(1.04);
+    //width: 350px;
+    box-shadow: 0px 0px 4px 4px#e2cd9f;
+}
+
+.featurette-heading {
+    font-family: "Great Vibes", cursive;
+    font-weight: 300;
+    font-size: 7vh;
+    text-align: center;
+    color: #b34041;
+}
+
+.mainpage-gallery {
+    background-image: url(https://www.lutherorgel-plauen.de/assets/svg/Orgel-stil.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.btn-round {
+    width: 220px;
+    height: 220px;
+    border-radius: 50% !important;
+    font-size: 32px !important;
+}
+
+.circle {
+    width: 2em;
+    height: 2em;
+    border: 0.5em solid #b34041;
+    border-radius: 50%;
+
+    span {
+        font-family: "Great Vibes", cursive;
+        font-size: 1.4em;
+        font-weight: bold;
+        color: #b34041;
+        position: relative;
+        top: -0.45em;
+        left: 2em;
+    }
+}
+
+.line {
+    border-left: 0.2em solid #8f4033;
+    margin-left: 0.9em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+
+    p {
+        margin-left: 1.7em;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .pr-sm-0 {
+        padding-right: 0px !important;
+    }
+}
+
+@import "jumbotron";
+@import "navbar";
+@import "footer";
+
+// overides-end
+
+// 3. Include remainder of required Bootstrap stylesheets
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/utilities";
+
+@import "../../node_modules/bootstrap/scss/root";
+@import "../../node_modules/bootstrap/scss/reboot";
+@import "../../node_modules/bootstrap/scss/type";
+@import "../../node_modules/bootstrap/scss/images";
+@import "../../node_modules/bootstrap/scss/code";
+@import "../../node_modules/bootstrap/scss/grid";
+@import "../../node_modules/bootstrap/scss/tables";
+@import "../../node_modules/bootstrap/scss/forms";
+@import "../../node_modules/bootstrap/scss/buttons";
+@import "../../node_modules/bootstrap/scss/transitions";
+@import "../../node_modules/bootstrap/scss/dropdown";
+@import "../../node_modules/bootstrap/scss/button-group";
+@import "../../node_modules/bootstrap/scss/input-group";
+@import "../../node_modules/bootstrap/scss/custom-forms";
+@import "../../node_modules/bootstrap/scss/nav";
+@import "../../node_modules/bootstrap/scss/navbar";
+@import "../../node_modules/bootstrap/scss/card";
+@import "../../node_modules/bootstrap/scss/breadcrumb";
+@import "../../node_modules/bootstrap/scss/pagination";
+@import "../../node_modules/bootstrap/scss/badge";
+@import "../../node_modules/bootstrap/scss/jumbotron";
+@import "../../node_modules/bootstrap/scss/alert";
+@import "../../node_modules/bootstrap/scss/progress";
+@import "../../node_modules/bootstrap/scss/media";
+@import "../../node_modules/bootstrap/scss/list-group";
+@import "../../node_modules/bootstrap/scss/close";
+@import "../../node_modules/bootstrap/scss/toasts";
+@import "../../node_modules/bootstrap/scss/modal";
+@import "../../node_modules/bootstrap/scss/tooltip";
+@import "../../node_modules/bootstrap/scss/popover";
+@import "../../node_modules/bootstrap/scss/carousel";
+@import "../../node_modules/bootstrap/scss/spinners";
+@import "../../node_modules/bootstrap/scss/print";
+
+
+// google-fonts
+
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Srisakdi&display=swap');

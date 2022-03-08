@@ -2,6 +2,9 @@
 
 composer.lock
 
+/node_modules/
+/public/assets/
 /var/caches/phpunit/*
+/var/caches/mustache/*
 !/var/caches/phpunit/README.md
 /vendor/

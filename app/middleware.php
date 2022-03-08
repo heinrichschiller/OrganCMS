@@ -27,6 +27,7 @@
 
 declare(strict_types=1);
 
+use App\Error\Renderer\HtmlErrorRenderer;
 use Slim\App;
 use Slim\Middleware\ErrorMiddleware;
 
@@ -46,10 +47,17 @@ return function(App $app)
      */
     $app->addRoutingMiddleware();
 
+    $errorMiddleware = $app->addErrorMiddleware(true, true, true);
+
+    $errorHandler = $errorMiddleware->getDefaultErrorHandler();
+    $errorHandler->registerErrorRenderer('text/html', HtmlErrorRenderer::class);
+        
     /*
      *----------------------------------------------------------------------------
      * Catch exceptions and errors
      *----------------------------------------------------------------------------
      */
     $app->add(ErrorMiddleware::class);
+
+    
 };

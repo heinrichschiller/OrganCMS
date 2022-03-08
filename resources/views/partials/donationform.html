@@ -1,0 +1,207 @@
+<!-- Large modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Formular zur Orgelpfeifen-Patenschaft in der Lutherkirche zu Plauen</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="container-xl">
+            <form action="/spendenformular/send" method="post">
+              <div class="form-group">
+                <h5>Sie möchten den Neubau der Orgel in der Lutherkirche zu Plauen mit einer Spende unterstützen?</h5>
+                <!-- <input type="checkbox" name="einmalige_spende"> -->
+                <span id="einmalige_spende">
+                  Ja, ich/wir möchte(n) den Neubau der Orgel in der Lutherkirche zu Plauen mit 
+                  einer Spende unterstützen. Den Betrag von 
+                  <input type="number" 
+                      step="0.01" 
+                      name="einmalige_spende_betrag" 
+                      placeholder="0" 
+                      class="einmalige-spende" 
+                      min="1" 
+                      max="500000"> € werde(n) ich/wir auf das Konto der Ev.-Luth.
+                  Lutherkirche Plauen, Zahlungsgrund: Orgel überweisen.
+                </span>
+              </div>
+
+              <h5>Sie möchten eine Orgelpfeifen-Patenschaft übernehmen?</h5>
+              <div class="form-group">
+                <input type="checkbox" name="wishorganpipe" id="wishorganpipe">
+                <label for="wishorganpipe" class="patenschaft-label">Dann wählen Sie bitte hier Ihre Wunschorgelpfeife(n)!</label>
+                <div class="auswahl_optionen">
+                  <div class="form-row">
+                    <div class="col-md-3  mb-2">
+                      <select class="custom-select" name="work" id="work" disabled>
+                        <option value="" disabled selected hidden>Werk</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3  mb-2">
+                      <select name="wunschorgelpfeife_register" id="register" class="custom-select" disabled>
+                        <option value="" disabled selected hidden>Register</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                      <select name="wunschorgelpfeife_ton" id="ton" class="custom-select" disabled>
+                        <option value="" disabled selected hidden>Ton</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3">
+                      <button 
+                        class="btn btn-success w-100"
+                        id="add-new-pipe"
+                        role="button"
+                        title="Noch eine Pfeife hinzufügen"
+                        disabled
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group text-wrap">
+                <input type="checkbox" name="keine_wunschorgelpfeife" id="keine_wunschorgelpfeife">
+                <label for="keine_wunschorgelpfeife" class="d-inline">Ich/wir haben keine Wunschorgelpfeife. Bitte weisen Sie mir/uns eine Pfeife zu, 
+                die dem angekreuzten Betrag entspricht.</label>
+              </div>
+  
+              <div class="form-group">
+                <input type="checkbox" name="alternative_orgelpfeife" id="alternative_orgelpfeife">
+                <label for="alternative_orgelpfeife" class="d-inline">Sollte die ausgewählte Pfeife vergeben sein, bin ich/sind wir damit einverstanden, 
+                dass mir/uns eine andere Pfeife in gleicher Preiskategorie zugeordnet wird.</label>
+              </div>
+  
+              <h5>Patenschaft als Geschenk?</h5>
+
+              <div class="form-group">
+                <input type="checkbox" name="gift" id="pipe__as__gift">
+                <label for="pipe__as__gift">Die Patenschaft dieser Orgelpfeife ist ein Geschenk für</label>
+                <div id="recipient__input">
+                  <div class="row mb-2">
+                    <div class="col-sm-6 col-lg-10">
+                      <input 
+                        type="text" 
+                        name="name-recipients[]" 
+                        id="name__recipient" 
+                        class="form-control mb-2" 
+                        disabled
+                      >
+                    </div>
+                    <div class="col-sm-6 col-lg-2">
+                      <button 
+                        class="btn btn-success w-100"
+                        id="new__recipient__input"
+                        role="button"
+                        title="Einen Namen zusätzlich hinzufügen"
+                        type="button"
+                        disabled
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                Bitte tragen Sie diesen Namen in die Patenschafts-Urkunde ein.
+              </div>
+  
+              <hr>
+
+              <div class="form-group">
+                <input type="checkbox" name="spendenbescheinigung" id="spendenbescheinigung">
+                <label for="spendenbescheinigung">Ich/wir bitten um eine Spendenbescheinigung.</label>
+              </div>
+
+              <h5>Soll ihr Name auf der Spendentafel erscheinen?</h5>
+
+              <div>
+                Mit einer Veröffentlichung meines/unseres Namens auf einer Spendentafel bin ich/sind wir
+                <div class="form-check">
+                  <input type="radio" name="zustimmung" class="form-check-input" id="agree" value="1" checked>
+                  <label class="form-check-label" for="agree">einverstanden</label>
+                </div>
+                <div class="form-check">
+                  <input type="radio" name="zustimmung" class="form-check-input" id="disagree" value="0">
+                  <label class="form-check-label" for="disagree">nicht einverstanden</label>
+                </div>
+              </div>
+  
+              <hr>
+              
+              <h5>Ihre Kontaktdaten:</h5>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="firstName">Name/Firma:*</label>
+                  <input type="text" name="firstname" id="firstName" class="form-control" required>
+                </div>
+                <div class="form-group col-md-6"> 
+                  <label for="lastName">Vorname(n):</label>
+                  <input type="text" name="givenname" id="lastName" class="form-control">
+                </div>
+              </div>
+  
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="street">Straße:*</label>
+                  <input type="text" name="street" id="street" class="form-control" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="zip">PLZ/Ort:*</label>
+                  <input type="text" name="zip" id="zip" class="form-control" required>
+                </div>
+              </div>
+  
+              <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="email">Email:*</label>
+                    <input type="email" name="email" id="email" class="form-control" required>
+                    <p class="email-hinweis">Ihre Email-Adresse wird für die Rückmeldung benötigt.</p>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="phone">Telefon:</label>
+                    <input type="tel" name="phone" id="phone" class="form-control">
+                  </div>
+              </div>
+  
+              <div></div>
+  
+              <div class="unterschrift">
+                <div class="form-row">
+                  <div class="col-md-6">
+                    * Pflichtfelder
+                  </div>
+                  <div class="col-md-6">
+                    <strong>Unser Spendenkonto</strong>
+                    <div>
+                      Ev.-Luth. Lutherkirche Plauen
+                    </div>
+                    <div>
+                      Sparkasse Vogtland
+                    </div>
+                    <div>
+                      IBAN: DE10 8705 8000 3000 0051 60
+                    </div>
+                    <div>
+                      BIC/SWIFT: WELA DED1 PLX
+                    </div>
+                    <div>
+                      Zahlungsgrund: Orgel
+                    </div>
+                  </div>
+                </div>
+              </div>
+                  
+              <div class="d-flex justify-content-center mt-5">
+                <button type="submit" class="btn btn-primary text-center">Spenden</button>
+              </div>
+  
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>

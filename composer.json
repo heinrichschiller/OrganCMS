@@ -19,7 +19,8 @@
         "vlucas/phpdotenv": "^5.4",
         "monolog/monolog": "^2.3",
         "symfony/console": "^6.0.1",
-        "heinrichschiller/slim4-mustache-view": "dev-main"
+        "heinrichschiller/slim4-mustache-view": "dev-main",
+        "odan/session": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5.11",

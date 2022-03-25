@@ -27,13 +27,42 @@
 
 declare(strict_types=1);
 
+use App\Domain\User\Repository\UserAuthRepository;
+use App\Domain\User\Repository\UserReaderRepository;
+use App\Domain\User\Repository\UserUpdaterRepository;
+use App\Domain\User\User;
+use App\Factory\PDOFactory;
 use DI\ContainerBuilder;
+use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 
 return function(ContainerBuilder $builder)
 {
     $builder->addDefinitions([
 
-        // put your own dependencies here
+        UserReaderRepository::class => function(ContainerInterface $container): UserReaderRepository
+        {
+            return new UserReaderRepository(
+                $container->get(PDOFactory::class),
+                $container->get(User::class)
+            );
+        },
+
+        UserAuthRepository::class => function(ContainerInterface $container): UserAuthRepository
+        {
+            return new UserAuthRepository(
+                $container->get(PDOFactory::class),
+                $container->get(User::class)
+            );
+        },   
         
+        UserUpdaterRepository::class => function(ContainerInterface $container): UserUpdaterRepository
+        {
+            return new UserUpdaterRepository(
+                $container->get(LoggerInterface::class),
+                $container->get(PDOFactory::class),
+                $container->get(User::class)
+            );
+        }
     ]);
 };

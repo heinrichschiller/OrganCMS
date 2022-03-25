@@ -88,16 +88,45 @@ return [
     'mustache' => [
         'cache' => ROOT_DIR . '/var/caches/mustache',
         'charset' => 'UTF-8',
-        'escape' => function(string $var) {
+        'escape' => function (string $var) {
             return htmlspecialchars($var, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
         },
         'loader' => new Mustache_Loader_FilesystemLoader(
-            ROOT_DIR . 'resources/views', 
+            ROOT_DIR . 'resources/views',
             ['extension' => '.html']
         ),
         'partials_loader' => new Mustache_Loader_FilesystemLoader(
             ROOT_DIR . 'resources/views/partials',
             ['extension' => '.html']
         )
+    ],
+
+    /*
+     *----------------------------------------------------------------------------
+     * Settings for Odan session
+     *----------------------------------------------------------------------------
+     *
+     * For more information, see:
+     * https://github.com/odan/session
+     *
+     */
+    'session' => [
+        'name' => $_ENV['APP_NAME'],
+        'cache_expire' => $_ENV['CACHE_EXPIRE'],
+    ],
+
+    /*
+     *----------------------------------------------------------------------------
+     * Settings for PDO sqlite connection
+     *----------------------------------------------------------------------------
+     *
+     * For more information, see:
+     * https://www.php.net/manual/en/book.pdo.php
+     * https://www.php.net/manual/en/ref.pdo-sqlite.php
+     *
+     */
+    'database' => [
+        'type' => $_ENV['DATABASE_TYPE'],
+        'dbname' => ROOT_DIR . $_ENV['DATABASE_NAME']
     ],
 ];

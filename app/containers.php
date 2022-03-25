@@ -27,12 +27,17 @@
 
 declare(strict_types=1);
 
-use App\Error\Renderer\HtmlErrorRenderer;
+use App\Factory\PDOFactory;
 use DI\ContainerBuilder;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Monolog\Processor\UidProcessor;
+use Odan\Session\Middleware\SessionMiddleware;
+use Odan\Session\PhpSession;
+use Odan\Session\SessionInterface;
+use PDO;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Log\LoggerInterface;
 use Slim\App;
 use Slim\Factory\AppFactory;
@@ -100,6 +105,36 @@ return function(ContainerBuilder $builder)
             $options = $container->get('settings')['mustache'];
 
             return new Mustache($options);
+        },
+
+        SessionInterface::class => function(ContainerInterface $container): SessionInterface
+        {
+            $settings = $container->get('settings')['session'];
+
+            $session = new PhpSession();
+            $session->setOptions((array) $settings);
+
+            return $session;
+        },
+
+        SessionMiddleware::class => function(ContainerInterface $container)
+        {
+            return new SessionMiddleware($container->get(SessionInterface::class));
+        },
+
+        ResponseFactoryInterface::class => function(ContainerInterface $container)
+        {
+            return $container->get(App::class)->getResponseFactory();
+        },
+
+        PDOFactory::class => function(ContainerInterface $container): PDO
+        {
+            $options = $container->get('settings')['database'];
+            $logger = $container->get(LoggerInterface::class);
+
+            $pdo = new PDOFactory($logger, $options);
+
+            return $pdo->create();
         }
     ]);
 };

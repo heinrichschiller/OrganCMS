@@ -27,9 +27,9 @@
 
 declare(strict_types=1);
 
+use App\Middleware\User\UserAuthMiddleware;
 use Slim\App;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+use Slim\Routing\RouteCollectorProxy;
 
 /*
  *----------------------------------------------------------------------------
@@ -42,6 +42,18 @@ use Psr\Http\Message\ResponseInterface as Response;
  */
 return function(App $app)
 {
+    $app->group('/users', function(RouteCollectorProxy $group) {
+        $group->get('/', \App\Actions\User\UserAction::class)->setName('users');
+        $group->get('/user', \App\Actions\User\AboutAction::class)->setName('users');
+        $group->post('/user/update', \App\Actions\User\UserUpdateAction::class)->setName('users');
+        $group->get('/logout', \App\Actions\Auth\LogoutAction::class)->setName('logout');
+
+    })->add(UserAuthMiddleware::class);
+
     $app->get('/', \App\Actions\Pages\IndexAction::class);
-    $app->get('/{page}', \App\Actions\Pages\PagesAction::class);
+
+    $app->get('/login', \App\Actions\Auth\LoginAction::class)->setName('login');
+    $app->post('/login', \App\Actions\Auth\LoginSubmitAction::class);
+    
+    $app->get('/{page}', \App\Actions\Pages\PagesAction::class);    
 };

@@ -61,7 +61,7 @@ final class UserUpdaterRepository
 
     /**
      * The constructor
-     * 
+     *
      * @param Logger $logger
      * @param PDO $pdo
      * @param User $user
@@ -75,7 +75,7 @@ final class UserUpdaterRepository
 
     /**
      * User update
-     * 
+     *
      * @param string $identity      User identifier (username, email, etc)
      * @param string $credentials   User password
      */
@@ -109,7 +109,7 @@ final class UserUpdaterRepository
 
     /**
      * Return user update status
-     * 
+     *
      * @return bool
      */
     public function isUpdated(): bool

@@ -33,7 +33,7 @@ final class User
 {
     /**
      * User id
-     * 
+     *
      * @var int
      */
     private int $id = 0;
@@ -74,7 +74,7 @@ final class User
 
     /**
      * Get user id
-     * 
+     *
      * @return int
      */
     public function getId(): int
@@ -84,7 +84,7 @@ final class User
 
     /**
      * Set user id
-     * 
+     *
      * @param int $id
      */
     public function setId(int $id): void

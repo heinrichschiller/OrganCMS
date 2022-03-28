@@ -80,7 +80,7 @@ final class LoginSubmitAction
         
         $this->auth->authenticate($username, $password);
 
-        if($this->auth->isAuth()) {
+        if ($this->auth->isAuth()) {
             $user = $this->auth->getUsername();
         }
 

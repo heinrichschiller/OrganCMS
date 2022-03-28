@@ -48,7 +48,7 @@ final class UserReaderRepository
 
     /**
      * The contructor
-     * 
+     *
      * @param PDO $pdo
      * @param User $user
      */
@@ -60,9 +60,9 @@ final class UserReaderRepository
 
     /**
      * Get user by username
-     * 
+     *
      * @param string $username
-     * 
+     *
      * @return User
      */
     public function getByUsername(string $username): User

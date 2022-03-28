@@ -53,7 +53,7 @@ final class UserAuthRepository
 
     /**
      * The constructor
-     * 
+     *
      * @param PDO $pdo
      * @param User $user
      */
@@ -65,7 +65,7 @@ final class UserAuthRepository
 
     /**
      * Authenticate user
-     * 
+     *
      * @param string $identify      User identifier (username, email, etc)
      * @param string $credentials   User password
      */
@@ -85,7 +85,7 @@ final class UserAuthRepository
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if(null !== $credentials && password_verify($credentials, $result['password'])) {
+        if (null !== $credentials && password_verify($credentials, $result['password'])) {
             $this->user->setUsername($result['username']);
 
             $this->isAuth = true;
@@ -94,7 +94,7 @@ final class UserAuthRepository
 
     /**
      * Get username
-     * 
+     *
      * @return string
      */
     public function getUsername(): string
@@ -104,7 +104,7 @@ final class UserAuthRepository
     
     /**
      * Return user authentication
-     * 
+     *
      * @return bool
      */
     public function isAuth(): bool

@@ -33,11 +33,10 @@ final class UserUpdateAction
         $flash->clear();
         
         if ($firstPassword === $repeatPassword) {
-
             $this->updater->update($identity, $firstPassword);
 
             if ($this->updater->isUpdated()) {
-                $flash->add('success', 'User successfully updated.' );
+                $flash->add('success', 'User successfully updated.');
             } else {
                 $flash->add('failure', 'User update failed.');
             }

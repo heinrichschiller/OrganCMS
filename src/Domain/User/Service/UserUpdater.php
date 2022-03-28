@@ -40,7 +40,7 @@ final class UserUpdater
 
     /**
      * The constructor
-     * 
+     *
      * @param UserUpdaterRepository $repository
      */
     public function __construct(UserUpdaterRepository $repository)
@@ -50,7 +50,7 @@ final class UserUpdater
 
     /**
      * Update user
-     * 
+     *
      * @param string $identity      User identifier (username, email, etc)
      * @param string $credentials   User password
      */
@@ -61,7 +61,7 @@ final class UserUpdater
 
     /**
      * Return user update status
-     * 
+     *
      * @return bool
      */
     public function isUpdated(): bool

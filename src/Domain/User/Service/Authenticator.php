@@ -41,7 +41,7 @@ final class Authenticator
 
     /**
      * The constructor
-     * 
+     *
      * @param UserAuthRepository $reader
      */
     public function __construct(UserAuthRepository $reader)
@@ -51,7 +51,7 @@ final class Authenticator
 
     /**
      * Authenticates user
-     * 
+     *
      * @param string $identity      User identifier (username, usermail, etc.)
      * @param string $credentials   User password
      */
@@ -62,7 +62,7 @@ final class Authenticator
 
     /**
      * Get user name
-     * 
+     *
      * @return string
      */
     public function getUsername(): string
@@ -72,7 +72,7 @@ final class Authenticator
     
     /**
      * Check user authentication
-     * 
+     *
      * @param bool
      */
     public function isAuth(): bool

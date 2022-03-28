@@ -39,10 +39,9 @@ final class UserReader
      */
     private UserReaderRepository $reader;
 
-
     /**
      * The constructor
-     * 
+     *
      * @param UserReaderRepository $reader - User repository
      */
     public function __construct(UserReaderRepository $reader)
@@ -52,9 +51,9 @@ final class UserReader
 
     /**
      * Get user by username
-     * 
+     *
      * @param string $username - Name of an user
-     * 
+     *
      * @return User
      */
     public function getByUsername(string $username): User

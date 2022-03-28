@@ -36,10 +36,10 @@ class HtmlErrorRenderer implements ErrorRendererInterface
 {
     /**
      * The invoker
-     * 
+     *
      * @param Throwable $exception,
      * @param bool $displayErrorDetails
-     * 
+     *
      * @return string
      */
     public function __invoke(Throwable $exception, bool $displayErrorDetails): string

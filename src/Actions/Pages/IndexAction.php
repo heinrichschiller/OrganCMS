@@ -29,12 +29,26 @@ declare( strict_types = 1 );
 
 namespace App\Actions\Pages;
 
+use App\Domain\Donation\Donation;
+use App\Domain\Donation\Service\DonationReader;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\ViewInterface;
 
 final class IndexAction
 {
+    /**
+     * @Injection
+     * @var Donation
+     */
+    private Donation $donation;
+
+    /**
+     * @Injection
+     * @var DonationReader
+     */
+    private DonationReader $reader;
+
     /**
      * @Injection
      * @var ViewInterface
@@ -44,10 +58,14 @@ final class IndexAction
     /**
      * The constructor
      *
+     * @param Donation $donation
+     * @param DonationReader $reader
      * @param ViewInterface $view
      */
-    public function __construct(ViewInterface $view)
+    public function __construct(Donation $donation, DonationReader $reader, ViewInterface $view)
     {
+        $this->donation = $donation;
+        $this->reader = $reader;
         $this->view = $view;
     }
 
@@ -62,7 +80,13 @@ final class IndexAction
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
-        $response = $this->view->render($response, 'index', []);
+        $this->donation = $this->reader->read();
+
+        $data = [
+            'donation' => $this->donation
+        ];
+
+        $response = $this->view->render($response, 'index', $data);
 
         return $response;
     }

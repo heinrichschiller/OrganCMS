@@ -63,7 +63,7 @@ final class PDOFactory
 
     /**
      * Create a PDO database connection
-     * 
+     *
      * @return PDO
      */
     public function create(): PDO
@@ -75,9 +75,7 @@ final class PDOFactory
         );
 
         try {
-
             return new PDO($dsn);
-            
         } catch (PDOException $e) {
             $this->logger->error($e->getMessage());
         }

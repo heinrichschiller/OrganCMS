@@ -129,4 +129,17 @@ return [
         'type' => $_ENV['DATABASE_TYPE'],
         'dbname' => ROOT_DIR . $_ENV['DATABASE_NAME']
     ],
+
+    /*
+     *----------------------------------------------------------------------------
+     * Settings for file upload
+     *----------------------------------------------------------------------------
+     *
+     * See, app/containers.php, FileUploader-Container
+     * and app/Domain/Donation/Service/FileUploader.php
+     *
+     */
+    'file_upload' => [
+        'upload_directory' => ROOT_DIR . $_ENV['UPLOAD_DIRECTORY']
+    ],
 ];

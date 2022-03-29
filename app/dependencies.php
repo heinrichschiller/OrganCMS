@@ -27,6 +27,9 @@
 
 declare(strict_types=1);
 
+use App\Domain\Donation\Repository\DonationReaderRepository;
+use App\Domain\Donation\Donation;
+use App\Domain\Donation\Repository\DonationUpdaterRepository;
 use App\Domain\User\Repository\UserAuthRepository;
 use App\Domain\User\Repository\UserReaderRepository;
 use App\Domain\User\Repository\UserUpdaterRepository;
@@ -63,6 +66,22 @@ return function(ContainerBuilder $builder)
                 $container->get(PDOFactory::class),
                 $container->get(User::class)
             );
-        }
+        },
+
+        DonationReaderRepository::class => function(ContainerInterface $container): DonationReaderRepository
+        {
+            return new DonationReaderRepository(
+                $container->get(PDOFactory::class),
+                $container->get(Donation::class)
+            );
+        },
+
+        DonationUpdaterRepository::class => function(ContainerInterface $container): DonationUpdaterRepository
+        {
+            return new DonationUpdaterRepository(
+                $container->get(PDOFactory::class),
+                $container->get(Donation::class)
+            );
+        },
     ]);
 };

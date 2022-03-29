@@ -27,6 +27,7 @@
 
 declare(strict_types=1);
 
+use App\Domain\Donation\Service\FileUploader;
 use App\Factory\PDOFactory;
 use DI\ContainerBuilder;
 use Monolog\Handler\StreamHandler;
@@ -135,6 +136,13 @@ return function(ContainerBuilder $builder)
             $pdo = new PDOFactory($logger, $options);
 
             return $pdo->create();
+        },
+
+        FileUploader::class => function(ContainerInterface $container): FileUploader
+        {
+            $uploadDir = $container->get('settings')['file_upload']['upload_directory'];
+
+            return new FileUploader($uploadDir);
         }
     ]);
 };

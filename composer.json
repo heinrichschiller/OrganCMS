@@ -26,7 +26,8 @@
         "phpunit/phpunit": "^9.5.11",
         "symfony/var-dumper": "^6.0.1",
         "phpstan/phpstan": "^1.2.0",
-        "squizlabs/php_codesniffer": "^3.6"
+        "squizlabs/php_codesniffer": "^3.6",
+        "selective/test-traits": "dev-master"
     },
     "autoload": {
         "psr-4": {
@@ -40,9 +41,16 @@
     },
     "scripts": {
         "serve": "php -S localhost:8080 -t public",
-        "phpstan": "phpstan analyse",
-        "phpunit": "phpunit",
-        "phpcs": "phpcs --standard=phpcs.xml",
-        "phpcbf": "phpcbf --standard=phpcs.xml"
+        "test:phpstan": "phpstan analyse",
+        "test:phpunit": "phpunit --configuration phpunit.xml --colors=always",
+        "test:phpcs": "phpcs --standard=phpcs.xml",
+        "test:phpcbf": "phpcbf --standard=phpcs.xml",
+        "test:all" : [
+            "@test:phpstan",
+            "@test:phpunit",
+            "@test:phpcs",
+            "@test:phpcbf"
+        ],
+        "test:coverage": "phpdbg -qqr vendor/bin/phpunit --configuration phpunit.xml --colors=always --coverage-html code-coverage"
     }
 }

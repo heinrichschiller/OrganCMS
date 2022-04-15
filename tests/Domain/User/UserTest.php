@@ -39,11 +39,17 @@ class UserTest extends TestCase
         $this->user = new User;
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testUserIdIsEmptyByDefault(): void
     {
         $this->assertEmpty($this->user->getId());
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testUserHasId(): void
     {
         $this->user->setId(1);
@@ -51,11 +57,17 @@ class UserTest extends TestCase
         $this->assertEquals(1, $this->user->getId());
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testFirstNameIsEmptyByDefault(): void
     {
         $this->assertEmpty($this->user->getFirstName());
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testUserHasFirstName(): void
     {
         $this->user->setFirstName('heinrich');
@@ -63,6 +75,9 @@ class UserTest extends TestCase
         $this->assertEquals('Heinrich', $this->user->getFirstName());
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testFirstNameDoesNotStartOrEndWithAnWhitespace(): void
     {
         $this->user->setFirstName(' heinrich ');
@@ -70,6 +85,9 @@ class UserTest extends TestCase
         $this->assertEquals('Heinrich', $this->user->getFirstName());
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testFirstNameDoesStartWithUppercase(): void
     {
         $this->user->setFirstName('heinrich');
@@ -77,11 +95,17 @@ class UserTest extends TestCase
         $this->assertEquals('Heinrich', $this->user->getFirstName());
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testGivenNameIsEmptyByDefault(): void
     {
         $this->assertEmpty($this->user->getGivenName());
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testUserHasGivenName(): void
     {
         $this->user->setGivenName('Schiller');
@@ -89,6 +113,9 @@ class UserTest extends TestCase
         $this->assertEquals('Schiller', $this->user->getGivenName());
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testGivenNameDoesNotStartOrEndWithAnWhitespace(): void
     {
         $this->user->setGivenName(' Schiller ');
@@ -96,6 +123,9 @@ class UserTest extends TestCase
         $this->assertEquals('Schiller', $this->user->getGivenName());
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testGivenNameDoesStartWithUppercase(): void
     {
         $this->user->setGivenName(' schiller ');
@@ -103,11 +133,17 @@ class UserTest extends TestCase
         $this->assertEquals('Schiller', $this->user->getGivenName());
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testUsernameIsEmptyByDefault(): void
     {
         $this->assertEmpty($this->user->getUsername());
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testUserHasUsername(): void
     {
         $this->user->setUsername('heinrich');
@@ -115,6 +151,9 @@ class UserTest extends TestCase
         $this->assertEquals('heinrich', $this->user->getUsername());
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testUsernameDoesNotStartOrEndWithAnWhitespace(): void
     {
         $this->user->setUsername(' heinrich ');
@@ -122,11 +161,17 @@ class UserTest extends TestCase
         $this->assertEquals('heinrich', $this->user->getUsername());
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testUserEmailIsEmptyByDefault(): void
     {
         $this->assertEmpty($this->user->getEmail());
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testUserHasEmail(): void
     {
         $this->user->setEmail('max.musterman@email.com');
@@ -134,6 +179,9 @@ class UserTest extends TestCase
         $this->assertEquals('max.musterman@email.com', $this->user->getEmail());
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testEmailDoesNotStartOrEndWithAnWhitespace(): void
     {
         $this->user->setEmail(' max.musterman@email.com ');
@@ -141,11 +189,17 @@ class UserTest extends TestCase
         $this->assertEquals('max.musterman@email.com', $this->user->getEmail());
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testUserPasswordIsEmptyByDefault(): void
     {
         $this->assertEmpty($this->user->getPassword());
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testUserHasPassword(): void
     {
         $this->user->setPassword('secret');
@@ -153,6 +207,9 @@ class UserTest extends TestCase
         $this->assertEquals('secret', $this->user->getPassword());
     }
 
+    /**
+     * @covers App\Domain\User\User
+     */
     public function testPasswordDoesNotStartOrEndWithAnWhitespace(): void
     {
         $this->user->setPassword(' secret ');

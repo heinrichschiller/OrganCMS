@@ -29,34 +29,34 @@ declare(strict_types=1);
 
 namespace App\Domain\Donation\Service;
 
-use App\Domain\Donation\Donation;
-use App\Domain\Donation\Repository\DonationReaderRepository;
+use App\Domain\Donation\DonationBoard;
+use App\Domain\Donation\Repository\DonationBoardReaderRepository;
 
-final class DonationReader
+final class DonationBoardReader
 {
     /**
      * @Injection
-     * @var DonationReaderRepository
+     * @var DonationBoardReaderRepository
      */
-    private DonationReaderRepository $reader;
+    private DonationBoardReaderRepository $repository;
 
     /**
      * The constructor
-     * 
-     * @param DonationReaderRepository
+     *
+     * @param DonationBoardReaderRepository
      */
-    public function __construct(DonationReaderRepository $reader)
+    public function __construct(DonationBoardReaderRepository $repository)
     {
-        $this->reader = $reader;
+        $this->repository = $repository;
     }
 
     /**
      * Read donation status
-     * 
-     * @return Donation
+     *
+     * @return DonationBoard
      */
-    public function read(): Donation
+    public function read(): DonationBoard
     {
-        return $this->reader->read();
+        return $this->repository->read();
     }
 }

@@ -29,7 +29,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Donation\Repository;
 
-use App\Domain\Donation\Donation;
+use App\Domain\Donation\DonationBoard;
 use PDO;
 
 final class DonationUpdaterRepository
@@ -44,15 +44,15 @@ final class DonationUpdaterRepository
      * @Injection
      * @var Donation
      */
-    private Donation $donation;
+    private DonationBoard $donation;
 
     /**
      * The constructor
      * 
      * @param PDO $pdo
-     * @param Donation $donation
+     * @param DonationBoard $donation
      */
-    public function __construct(PDO $pdo, Donation $donation)
+    public function __construct(PDO $pdo, DonationBoard $donation)
     {
         $this->pdo = $pdo;
         $this->donation = $donation;

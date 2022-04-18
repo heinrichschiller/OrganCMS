@@ -29,8 +29,8 @@ declare( strict_types = 1 );
 
 namespace App\Actions\Pages;
 
-use App\Domain\Donation\Donation;
-use App\Domain\Donation\Service\DonationReader;
+use App\Domain\Donation\DonationBoard;
+use App\Domain\Donation\Service\DonationBoardReader;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\ViewInterface;
@@ -39,15 +39,15 @@ final class IndexAction
 {
     /**
      * @Injection
-     * @var Donation
+     * @var DonationBoard
      */
-    private Donation $donation;
+    private DonationBoard $donation;
 
     /**
      * @Injection
-     * @var DonationReader
+     * @var DonationBoardReader
      */
-    private DonationReader $reader;
+    private DonationBoardReader $reader;
 
     /**
      * @Injection
@@ -58,11 +58,11 @@ final class IndexAction
     /**
      * The constructor
      *
-     * @param Donation $donation
-     * @param DonationReader $reader
+     * @param DonationBoard $donation
+     * @param DonationBoardReader $reader
      * @param ViewInterface $view
      */
-    public function __construct(Donation $donation, DonationReader $reader, ViewInterface $view)
+    public function __construct(DonationBoard $donation, DonationBoardReader $reader, ViewInterface $view)
     {
         $this->donation = $donation;
         $this->reader = $reader;

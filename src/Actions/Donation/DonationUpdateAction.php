@@ -99,8 +99,10 @@ final class DonationUpdateAction
         $flash = $this->session->getFlash();
         $flash->clear();
 
+        $flash->add('success', 'Daten erfolgreich aktualisiert.');
+
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();
-        $url = $routeParser->urlFor('users');
+        $url = $routeParser->urlFor('donation');
 
         return $response
             ->withStatus(302)

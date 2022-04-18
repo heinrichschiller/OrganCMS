@@ -27,9 +27,12 @@
 
 declare(strict_types=1);
 
-use App\Domain\Donation\Repository\DonationReaderRepository;
-use App\Domain\Donation\Donation;
+use App\Domain\Donation\DonationBoard;
+use App\Domain\Donation\Repository\DonationBoardReaderRepository;
 use App\Domain\Donation\Repository\DonationUpdaterRepository;
+use App\Domain\Donation\Repository\RegisterFinderRepository;
+use App\Domain\Donation\Repository\SoundFinderRepository;
+use App\Domain\Donation\Repository\WorkFinderRepository;
 use App\Domain\User\Repository\UserAuthRepository;
 use App\Domain\User\Repository\UserReaderRepository;
 use App\Domain\User\Repository\UserUpdaterRepository;
@@ -68,11 +71,11 @@ return function(ContainerBuilder $builder)
             );
         },
 
-        DonationReaderRepository::class => function(ContainerInterface $container): DonationReaderRepository
+        DonationBoardReaderRepository::class => function(ContainerInterface $container): DonationBoardReaderRepository
         {
-            return new DonationReaderRepository(
+            return new DonationBoardReaderRepository(
                 $container->get(PDOFactory::class),
-                $container->get(Donation::class)
+                $container->get(DonationBoard::class)
             );
         },
 
@@ -80,8 +83,29 @@ return function(ContainerBuilder $builder)
         {
             return new DonationUpdaterRepository(
                 $container->get(PDOFactory::class),
-                $container->get(Donation::class)
+                $container->get(DonationBoard::class)
             );
         },
+
+        WorkFinderRepository::class => function(ContainerInterface $container): WorkFinderRepository
+        {
+            return new WorkFinderRepository(
+                $container->get(PDOFactory::class)
+            );
+        },
+
+        RegisterFinderRepository::class => function(ContainerInterface $container): RegisterFinderRepository
+        {
+            return new RegisterFinderRepository(
+                $container->get(PDOFactory::class)
+            );
+        },
+
+        SoundFinderRepository::class => function(ContainerInterface $container): SoundFinderRepository
+        {
+            return new SoundFinderRepository(
+                $container->get(PDOFactory::class)
+            );
+        }
     ]);
 };

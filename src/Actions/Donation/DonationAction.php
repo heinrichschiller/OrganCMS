@@ -29,7 +29,7 @@ declare(strict_types=1);
 
 namespace App\Actions\Donation;
 
-use App\Domain\Donation\Service\DonationReader;
+use App\Domain\Donation\Service\DonationBoardReader;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\ViewInterface;
@@ -40,7 +40,7 @@ final class DonationAction
      * @Injection
      * @var DonationReader
      */
-    private DonationReader $reader;
+    private DonationBoardReader $reader;
 
     /**
      * @Injection
@@ -51,10 +51,10 @@ final class DonationAction
     /**
      * The constructor
      * 
-     * @param DonationReader $reader
+     * @param DonationBoardReader $reader
      * @param ViewInterface $view
      */
-    public function __construct(DonationReader $reader, ViewInterface $view)
+    public function __construct(DonationBoardReader $reader, ViewInterface $view)
     {
         $this->reader = $reader;
         $this->view = $view;

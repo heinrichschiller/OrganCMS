@@ -78,9 +78,22 @@ $dotenv->load();
 
 $builder = new ContainerBuilder;
 
+/*
+ *----------------------------------------------------------------------------
+ * Slim skeleton containers
+ *----------------------------------------------------------------------------
+ *
+ */
 (require ROOT_DIR . 'app/containers.php')($builder);
 
-(require ROOT_DIR . 'app/dependencies.php')($builder);
+/*
+ *----------------------------------------------------------------------------
+ * User containers
+ *----------------------------------------------------------------------------
+ *
+ */
+(require ROOT_DIR . 'src/Containers/containers.php')($builder);
+(require ROOT_DIR . 'src/Containers/dependencies.php')($builder);
 
 $container = $builder->build();
 

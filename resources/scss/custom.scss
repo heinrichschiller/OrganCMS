@@ -88,7 +88,7 @@ a.btn-jumbotron:hover {
 .gallery img:hover {
     transform: scale(1.04);
     //width: 350px;
-    box-shadow: 0px 0px 4px 4px#e2cd9f;
+    box-shadow: 0px 0px 4px 4px #e2cd9f;
 }
 
 .featurette-heading {
@@ -190,3 +190,6 @@ a.btn-jumbotron:hover {
 @import "../../node_modules/bootstrap/scss/carousel";
 @import "../../node_modules/bootstrap/scss/spinners";
 @import "../../node_modules/bootstrap/scss/print";
+
+// 4. Style for SimpleLightBox
+@import '../../node_modules/simplelightbox/src/simple-lightbox.scss';

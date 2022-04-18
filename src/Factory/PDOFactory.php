@@ -29,6 +29,7 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
+use Exception;
 use Monolog\Logger;
 use PDO;
 use PDOException;
@@ -78,6 +79,7 @@ final class PDOFactory
             return new PDO($dsn);
         } catch (PDOException $e) {
             $this->logger->error($e->getMessage());
+            throw new Exception($e->getMessage());
         }
     }
 }

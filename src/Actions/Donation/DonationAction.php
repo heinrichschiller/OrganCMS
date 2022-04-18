@@ -77,7 +77,7 @@ final class DonationAction
             'donation' => $donation
         ];
 
-        $response = $this->view->render($response, 'donation', $data);
+        $response = $this->view->render($response, 'donation-board', $data);
 
         return $response;
     }

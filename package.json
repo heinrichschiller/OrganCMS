@@ -2,7 +2,8 @@
   "dependencies": {
     "bootstrap": "4",
     "jquery": "^1.9.1",
-    "popper.js": "1.16"
+    "popper.js": "1.16",
+    "simplelightbox": "^2.10.3"
   },
   "name": "OrganCMS",
   "version": "1.0.0",

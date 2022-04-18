@@ -3,7 +3,7 @@
 /**
  * MIT License
  *
- * Copyright (c) 2020 - 2021 Heinrich Schiller
+ * Copyright (c) 2022 Heinrich Schiller
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,8 +28,6 @@
 declare(strict_types=1);
 
 use Slim\App;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
 
 /*
  *----------------------------------------------------------------------------
@@ -42,14 +40,7 @@ use Psr\Http\Message\ResponseInterface as Response;
  */
 return function(App $app)
 {
-    $app->get('/', function(Request $request, Response $response, array $args = []): Response
-    {
-        $data = ['message' => 'Welcome to Slim PHP micro framework!'];
-
-        $response->getBody()->write(json_encode($data));
-
-        return $response
-            ->withHeader('Content-Type', 'application/json')
-            ->withStatus(200);
-    });
+    $app->get('/api/v1/work', \App\Actions\Donation\WorkFinderAction::class);
+    $app->get('/api/v1/register', \App\Actions\Donation\RegisterFinderAction::class);
+    $app->get('/api/v1/sound', \App\Actions\Donation\SoundFinderAction::class);
 };

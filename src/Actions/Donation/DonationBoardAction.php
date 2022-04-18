@@ -35,7 +35,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\ViewInterface;
 
-final class DonationAction
+final class DonationBoardAction
 {
     /**
      * @Injection

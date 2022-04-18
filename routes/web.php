@@ -48,7 +48,7 @@ return function(App $app)
         $group->post('/user/update', \App\Actions\User\UserUpdateAction::class)->setName('users');
         $group->get('/logout', \App\Actions\Auth\LogoutAction::class)->setName('logout');
 
-        $group->get('/donation', \App\Actions\Donation\DonationAction::class)->setName('donation');
+        $group->get('/donation', \App\Actions\Donation\DonationBoardAction::class)->setName('donation');
         $group->post('/donation/update', \App\Actions\Donation\DonationUpdateAction::class)->setName('users');
 
     })->add(UserAuthMiddleware::class);

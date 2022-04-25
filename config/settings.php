@@ -142,4 +142,21 @@ return [
     'file_upload' => [
         'upload_directory' => ROOT_DIR . $_ENV['UPLOAD_DIRECTORY']
     ],
+
+    /*
+     *----------------------------------------------------------------------------
+     * Settings for PHPMailer
+     *----------------------------------------------------------------------------
+     *
+     * For more information, see:
+     * https://github.com/PHPMailer/PHPMailer
+    */
+    'mailer' => [
+        'host' => $_ENV['PHPMAILER_HOST'],
+        'smtpAuth' => $_ENV['PHPMAILER_SMTP_AUTH'],
+        'username' => $_ENV['PHPMAILER_USERNAME'],
+        'password' => $_ENV['PHPMAILER_PASSWORD'],
+        'smtpSecure' => $_ENV['PHPMAILER_SMTP_SECURE'],
+        'port'  => $_ENV['PHPMAILER_PORT']
+    ],
 ];

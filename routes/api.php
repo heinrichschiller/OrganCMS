@@ -41,6 +41,6 @@ use Slim\App;
 return function(App $app)
 {
     $app->get('/api/v1/work', \App\Actions\Donation\WorkFinderAction::class);
-    $app->get('/api/v1/register', \App\Actions\Donation\RegisterFinderAction::class);
-    $app->get('/api/v1/sound', \App\Actions\Donation\SoundFinderAction::class);
+    $app->get('/api/v1/register/{register}', \App\Actions\Donation\RegisterFinderAction::class);
+    $app->get('/api/v1/sound/{work}/{register}', \App\Actions\Donation\SoundFinderAction::class);
 };

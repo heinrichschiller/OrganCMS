@@ -27,10 +27,11 @@ final class RegisterFinder
     /**
      * Find all organ register.
      * 
+     * @param string $register
      * @return array<Register>
      */
-    public function findAll(): array
+    public function findAll(string $register): array
     {
-        return $this->repository->findAll();
+        return $this->repository->findAll($register);
     }
 }

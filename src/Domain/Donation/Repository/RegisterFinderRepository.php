@@ -55,7 +55,7 @@ final class RegisterFinderRepository
      * 
      * @return array<Register>
      */
-    public function findAll(): array
+    public function findAll(string $register): array
     {
         $sql = <<<SQL
             SELECT rw.id
@@ -63,11 +63,15 @@ final class RegisterFinderRepository
             FROM register_work as rw
             LEFT JOIN register as r ON r.id = rw.register_id
             LEFT JOIN work as w ON w.id = rw.work_id
-            WHERE w.name = 'Oberwerk'
+            WHERE w.name = :register
         SQL;
 
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':register', $register);
+        $stmt->execute();
+
         $items = [];
-        foreach ($this->pdo->query($sql, PDO::FETCH_ASSOC) as $row) {
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $items[] = new Register(...$row);
         }
 

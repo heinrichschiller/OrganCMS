@@ -95,12 +95,9 @@ final class LoginSubmitAction
             $this->session->regenerateId();
 
             $this->session->set('user', $user);
-            $flash->add('success', 'Login successfully');
 
             $urlFor ='users';
         } else {
-            $flash->add('error', 'Login failed!');
-
             $urlFor = 'login';
         }
 

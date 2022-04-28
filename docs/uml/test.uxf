@@ -1,0 +1,48 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>70</x><y>86</y><w>200</w><h>140</h></coordinates><panel_attributes>DonationFormular
+--
+- oneTimeDonation: string
+- organWhistleSound: string
+- organWhistleRegister: string
+- organWhistleWork: string
+- nameOfGiftRecipient: string
+- approval: bool
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>520</x><y>216</y><w>200</w><h>100</h></coordinates><panel_attributes>DonationCreator
+--
+- mailer: Mailer
+- formular: DonationFormular
+- donor: Donor
+--
++ create
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>260</x><y>146</y><w>280</w><h>150</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+
+m1=1
+m2=1</panel_attributes><additional_attributes>260;120;150;120;150;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>70</x><y>290</y><w>200</w><h>170</h></coordinates><panel_attributes>Donor
+--
+- firstName: string
+- givenName: string
+- street: string
+- zipCode: string
+- email: string
+- phone: string
+--
++ getFirstName
++ setFirstName
++ getGivenName
++ setGivenName
++ getStreet
++ setStreet
++ getZipCode
++ setZipCode
++ getEmail
++ setEmail
++ getPhone
++ setPhone</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>260</x><y>270</y><w>280</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+
+m1=1
+m2=1</panel_attributes><additional_attributes>260;10;150;10;150;100;10;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>760</x><y>50</y><w>200</w><h>110</h></coordinates><panel_attributes>DonationNotification
+--
+- formular: DonationFormular
+- donor: Donor
+- mailPieces: array
+--</panel_attributes><additional_attributes></additional_attributes></element></diagram>

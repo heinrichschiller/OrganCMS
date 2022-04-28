@@ -219,4 +219,15 @@ class DonorTest extends TestCase
 
         $this->assertEquals('0123456789', $this->donor->getPhoneNumber());
     }
+
+    /**
+     * @covers App\Domain\Donation\Donor
+     */
+    public function testGetFullName(): void
+    {
+        $this->donor->setFirstName('heinrich');
+        $this->donor->setGivenName('schiller');
+
+        $this->assertSame('Heinrich Schiller', $this->donor->getFullName());
+    }
 }

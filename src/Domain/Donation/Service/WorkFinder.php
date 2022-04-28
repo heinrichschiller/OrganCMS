@@ -41,7 +41,7 @@ final class WorkFinder
 
     /**
      * The constructor.
-     * 
+     *
      * @param WorkFinderRepository $repository
      */
     public function __construct(WorkFinderRepository $repository)

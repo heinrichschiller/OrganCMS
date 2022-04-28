@@ -43,7 +43,7 @@ class WorkFinderAction
 
     /**
      * The constructor.
-     * 
+     *
      * @param WorkFinder $finder Work finder service
      */
     public function __construct(WorkFinder $finder)
@@ -53,14 +53,15 @@ class WorkFinderAction
 
     /**
      * The invoker.
-     * 
+     *
      * @param Request $request
      * @param Response $response
      * @param array<mixed> $args
-     * 
+     *
      * @return Response
      */
-    public function __invoke(Request $request, Response $response, array $args = []): Response {
+    public function __invoke(Request $request, Response $response, array $args = []): Response
+    {
         $data = $this->finder->findAll();
 
         $response

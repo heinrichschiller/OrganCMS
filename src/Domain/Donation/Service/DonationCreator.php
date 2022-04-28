@@ -18,10 +18,7 @@ final class DonationCreator
 
     private Validator $validator;
 
-    public function __construct(LoggerInterface $logger
-        , Mailer $mailer
-        , Validator $validator
-    )
+    public function __construct(LoggerInterface $logger, Mailer $mailer, Validator $validator)
     {
         $this->logger = $logger;
         $this->mailer = $mailer;
@@ -47,9 +44,9 @@ final class DonationCreator
 
         $errors = $this->validator->validate($formData);
 
-        if($errors) {
-            foreach($errors as $error) {
-                foreach($error as $value) {
+        if ($errors) {
+            foreach ($errors as $error) {
+                foreach ($error as $value) {
                     echo "<p>$value</p>";
                 }
             }

@@ -41,7 +41,7 @@ final class SoundFinder
 
     /**
      * The constructor.
-     * 
+     *
      * @param SoundFinderRepository $repository
      */
     public function __construct(SoundFinderRepository $repository)
@@ -51,15 +51,15 @@ final class SoundFinder
 
     /**
      * Find all sounds by work and register name
-     * 
+     *
      * @param string $work      Organ work
      * @param string $register  Organ register
-     * 
+     *
      * @return array<Sound>     List of organ sounds
      */
     public function findAllBy(string $work, string $register): array
     {
-        // workaround: 
+        // workaround:
         $register = str_replace('-', '/', $register);
 
         return $this->repository->findAllBy($work, $register);

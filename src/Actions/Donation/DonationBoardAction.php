@@ -90,7 +90,7 @@ final class DonationBoardAction
 
         $flash = $this->session->getFlash();
 
-        if($flash->has('success')) {
+        if ($flash->has('success')) {
             $isSuccess = true;
             $message = $flash->get('success')[0];
         }

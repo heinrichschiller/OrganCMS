@@ -58,7 +58,7 @@ class DonationFormular
 
     /**
      * Get one time donation amount
-     * 
+     *
      * @return bool
      */
     public function getOneTimeDonationAmount(): float
@@ -68,7 +68,7 @@ class DonationFormular
 
     /**
      * Set one time donation amount
-     * 
+     *
      * @return bool
      */
     public function setOneTimeDonationAmount(float $amount): void
@@ -79,7 +79,7 @@ class DonationFormular
 
     /**
      * Get wish pipe
-     * 
+     *
      * @return bool
      */
     public function isWishPipe(): bool
@@ -89,7 +89,7 @@ class DonationFormular
 
     /**
      * Set wish pipe
-     * 
+     *
      * @param string $wishPipe
      */
     public function setWishPipe(bool $isWishPipe): void
@@ -99,7 +99,7 @@ class DonationFormular
 
     /**
      * Get whistle sound
-     * 
+     *
      * @return string
      */
     public function getSound(): string
@@ -109,7 +109,7 @@ class DonationFormular
 
     /**
      * Set whistle sound
-     * 
+     *
      * @param string $ound
      */
     public function setSound(string $sound): void
@@ -119,7 +119,7 @@ class DonationFormular
 
     /**
      * Get whistle register
-     * 
+     *
      * @return string
      */
     public function getRegister(): string
@@ -129,7 +129,7 @@ class DonationFormular
 
     /**
      * Set whistle register
-     * 
+     *
      * @param string
      */
     public function setRegister(string $register): void
@@ -139,7 +139,7 @@ class DonationFormular
 
     /**
      * Get whistle word
-     * 
+     *
      * @return string
      */
     public function getWork(): string
@@ -149,7 +149,7 @@ class DonationFormular
 
     /**
      * Set whistle work
-     * 
+     *
      * @param null|string $work
      */
     public function setWork(string $work): void
@@ -159,7 +159,7 @@ class DonationFormular
 
     /**
      * Is an alternative for donor
-     * 
+     *
      * @return bool
      */
     public function isAlternativeForDonor(): bool
@@ -169,7 +169,7 @@ class DonationFormular
 
     /**
      * Set alternative for donor
-     * 
+     *
      * @param bool $isAlternativeForDonor
      */
     public function setAlternativeForDonor(bool $isAlternativeForDonor): void
@@ -179,7 +179,7 @@ class DonationFormular
 
     /**
      * Is a gift
-     * 
+     *
      * @return bool
      */
     public function isGift(): bool
@@ -189,7 +189,7 @@ class DonationFormular
 
     /**
      * Set gift
-     * 
+     *
      * @param bool $isGift
      */
     public function setGift(bool $isGift): void
@@ -199,7 +199,7 @@ class DonationFormular
 
     /**
      * Get name of the gift recipient
-     * 
+     *
      * @return string
      */
     public function getNameOfGiftRecipient(): string
@@ -209,7 +209,7 @@ class DonationFormular
 
     /**
      * Set name of the gift recipient
-     * 
+     *
      * @param string $names
      */
     public function setNamesOfGiftRecipients(array $names): void
@@ -219,7 +219,7 @@ class DonationFormular
 
     /**
      * Is a donation receipt
-     * 
+     *
      * @var bool
      */
     public function isDonationCertificate(): bool
@@ -229,7 +229,7 @@ class DonationFormular
 
     /**
      * Set donation receipt
-     * 
+     *
      * @param bool $isDonationReceipt
      */
     public function setDonationCertificate(bool $certificate): void
@@ -239,7 +239,7 @@ class DonationFormular
 
     /**
      * Donor agrees with the donation
-     * 
+     *
      * @return bool
      */
     public function hasAgreed(): bool
@@ -249,7 +249,7 @@ class DonationFormular
 
     /**
      * Set Agree
-     * 
+     *
      * @param bool $isAgree
      */
     public function setConsent(bool $consent): void

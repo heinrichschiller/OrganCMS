@@ -43,7 +43,7 @@ final class RegisterFinderAction
 
     /**
      * The constructor.
-     * 
+     *
      * @param RegisterFinder $finder
      */
     public function __construct(RegisterFinder $finder)
@@ -53,11 +53,11 @@ final class RegisterFinderAction
 
     /**
      * The invoker.
-     * 
+     *
      * @param Request $request
      * @param Response $response
      * @param array<mixed> $args
-     * 
+     *
      * @return Response
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response

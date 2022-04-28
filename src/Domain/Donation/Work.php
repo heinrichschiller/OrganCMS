@@ -8,12 +8,13 @@ final class Work
 {
     /**
      * The constructor
-     * 
+     *
      * @param readonly int $id
      * @param readonly string $name
      */
     public function __construct(
         public readonly int $id,
         public readonly string $name
-    ) {}
+    ) {
+    }
 }

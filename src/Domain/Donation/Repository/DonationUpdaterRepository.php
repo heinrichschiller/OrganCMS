@@ -48,7 +48,7 @@ final class DonationUpdaterRepository
 
     /**
      * The constructor
-     * 
+     *
      * @param PDO $pdo
      * @param DonationBoard $donation
      */
@@ -60,7 +60,7 @@ final class DonationUpdaterRepository
 
     /**
      * Update donation status
-     * 
+     *
      * @param string $total
      * @param string $date
      * @param string $user

@@ -43,7 +43,7 @@ class Donor
 
     /**
      * Get first name
-     * 
+     *
      * @return string
      */
     public function getFirstName(): string
@@ -53,7 +53,7 @@ class Donor
 
     /**
      * Set first name
-     * 
+     *
      * @param string $firstName
      */
     public function setFirstName(string $firstName): void
@@ -63,7 +63,7 @@ class Donor
 
     /**
      * Get given name
-     * 
+     *
      * @return string
      */
     public function getGivenName(): string
@@ -73,7 +73,7 @@ class Donor
 
     /**
      * Set given name
-     * 
+     *
      * @param string
      */
     public function setGivenName(string $givenName): void
@@ -83,7 +83,7 @@ class Donor
 
     /**
      * Get street
-     * 
+     *
      * @return string
      */
     public function getStreet(): string
@@ -93,7 +93,7 @@ class Donor
 
     /**
      * Set street
-     * 
+     *
      * @param string
      */
     public function setStreet(string $street): void
@@ -113,7 +113,7 @@ class Donor
     
     /**
      * Get zip code
-     * 
+     *
      * @return string
      */
     public function getZipCode(): string
@@ -123,7 +123,7 @@ class Donor
 
     /**
      * Set zip code
-     * 
+     *
      * @param string $zipCode
      */
     public function setZipCode(string $zipCode): void
@@ -133,7 +133,7 @@ class Donor
 
     /**
      * Get email adress
-     * 
+     *
      * @return string
      */
     public function getEmailAdress(): string
@@ -143,7 +143,7 @@ class Donor
 
     /**
      * Set email adress
-     * 
+     *
      * @param string $emailAdress
      */
     public function setEmailAdress(string $emailAdress): void
@@ -153,7 +153,7 @@ class Donor
 
     /**
      * Get phone number
-     * 
+     *
      * @return string
      */
     public function getPhoneNumber(): string
@@ -163,7 +163,7 @@ class Donor
 
     /**
      * Set phone number
-     * 
+     *
      * @return string
      */
     public function setPhoneNumber(string $phoneNumber): void
@@ -173,7 +173,7 @@ class Donor
 
     /**
      * Get full name
-     * 
+     *
      * @return string
      */
     public function getFullName(): string

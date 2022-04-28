@@ -57,6 +57,8 @@ return function(App $app)
 
     $app->get('/login', \App\Actions\Auth\LoginAction::class)->setName('login');
     $app->post('/login', \App\Actions\Auth\LoginSubmitAction::class);
-    
+
+    // $app->post('/send', \App\Actions\Donation\CreateAction::class);
+
     $app->get('/{page}', \App\Actions\Pages\PagesAction::class);    
 };

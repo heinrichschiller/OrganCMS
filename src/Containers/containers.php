@@ -34,6 +34,7 @@ use Odan\Session\Middleware\SessionMiddleware;
 use Odan\Session\PhpSession;
 use Odan\Session\SessionInterface;
 use PDO;
+use PHPMailer\PHPMailer\PHPMailer;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Log\LoggerInterface;
@@ -91,6 +92,24 @@ return function(ContainerBuilder $builder)
             $uploadDir = $container->get('settings')['file_upload']['upload_directory'];
 
             return new FileUploader($uploadDir);
-        }
+        },
+
+        PHPMailer::class => function(ContainerInterface $container): PHPMailer
+        {
+            $settings = $container->get('settings')['mailer'];
+
+            $mailer = new PHPMailer(true);
+
+            $mailer->isSMTP();
+            $mailer->Host       = $settings['host'];
+            $mailer->SMTPAuth   = $settings['smtpAuth'];
+            $mailer->Username   = $settings['username'];
+            $mailer->Password   = $settings['password'];
+            $mailer->SMTPSecure = $settings['smtpSecure'];
+            $mailer->Port       = $settings['port'];
+            $mailer->CharSet    = "UTF-8";
+
+            return $mailer;
+        },
     ]);
 };

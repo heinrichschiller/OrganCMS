@@ -43,7 +43,7 @@ final class FileUploader
 
     /**
      * The constructor
-     * 
+     *
      * @param string $targetDirectory
      */
     public function __construct(string $targetDirectory)
@@ -53,7 +53,7 @@ final class FileUploader
 
     /**
      * Upload files
-     * 
+     *
      * @param array $uploadedFiles  List of uploaded files
      */
     public function upload(array $uploadedFiles = []): string
@@ -72,7 +72,7 @@ final class FileUploader
 
     /**
      * Get target directory
-     * 
+     *
      * @return string
      */
     public function getTargetDirectory(): string
@@ -82,7 +82,7 @@ final class FileUploader
 
     /**
      * Get a list of uploaded document names
-     * 
+     *
      * @return string
      */
     private function getUploadedDocuments(): string

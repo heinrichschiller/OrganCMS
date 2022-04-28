@@ -67,8 +67,8 @@ final class Donation
             . 'Lutherkirche zu Plauen mit einer Spende unterstützen?</h3>';
 
             $text = '<p>Ja, ich/wir möchte(n) den Neubau der Orgel in der '
-                . 'Lutherkirche zu Plauen mit einer einmaligen Spende unterstützen. Den Betrag von ' 
-            . $this->formular->getOneTimeDonationAmount() 
+                . 'Lutherkirche zu Plauen mit einer einmaligen Spende unterstützen. Den Betrag von '
+            . $this->formular->getOneTimeDonationAmount()
             . ' € werde(n) ich/wir auf das Konto der '
             . 'Ev.-Luth. Lutherkirche Plauen, Zahlungsgrund: Orgel überweisen.</p>';
 
@@ -81,8 +81,8 @@ final class Donation
     {
         $text = '';
 
-        if ( $this->formular->isWishPipe() ) {
-            $text = '<p>Ich/wir haben keine Wunschorgelpfeife. Bitte weisen Sie' 
+        if ($this->formular->isWishPipe()) {
+            $text = '<p>Ich/wir haben keine Wunschorgelpfeife. Bitte weisen Sie'
                 . ' mir/uns eine Pfeife zu, die dem angegebenen Betrag entspricht.</p>';
 
             $this->mailPieces[] = $text;
@@ -91,12 +91,12 @@ final class Donation
 
     public function getAlternativePipeOption(): void
     {
-        if ( $this->formular->isAlternativeForDonor() ) {
-            $text = '<p>Ich/wir haben keine Wunschorgelpfeife. Bitte weisen Sie' 
+        if ($this->formular->isAlternativeForDonor()) {
+            $text = '<p>Ich/wir haben keine Wunschorgelpfeife. Bitte weisen Sie'
                 . ' mir/uns eine Pfeife zu, die dem angekreuzten Betrag entspricht.</p>';
 
             $this->mailPieces[] = $text;
-        } 
+        }
     }
 
     public function getDonor(): Donor

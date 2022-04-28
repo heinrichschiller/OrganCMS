@@ -41,7 +41,7 @@ final class DonationUpdater
 
     /**
      * The constructor
-     * 
+     *
      * @param DonationUpdaterRepository $repository
      */
     public function __construct(DonationUpdaterRepository $repository)
@@ -51,7 +51,7 @@ final class DonationUpdater
 
     /**
      * Update donation status
-     * 
+     *
      * @param string $total The total amount of donations
      * @param string $date  Month date
      * @param string $user  User who last update

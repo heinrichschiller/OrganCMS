@@ -42,28 +42,24 @@ use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
-return function(ContainerBuilder $builder)
-{
+return function (ContainerBuilder $builder) {
     $builder->addDefinitions([
 
-        UserReaderRepository::class => function(ContainerInterface $container): UserReaderRepository
-        {
+        UserReaderRepository::class => function (ContainerInterface $container): UserReaderRepository {
             return new UserReaderRepository(
                 $container->get(PDOFactory::class),
                 $container->get(User::class)
             );
         },
 
-        UserAuthRepository::class => function(ContainerInterface $container): UserAuthRepository
-        {
+        UserAuthRepository::class => function (ContainerInterface $container): UserAuthRepository {
             return new UserAuthRepository(
                 $container->get(PDOFactory::class),
                 $container->get(User::class)
             );
-        },   
+        },
         
-        UserUpdaterRepository::class => function(ContainerInterface $container): UserUpdaterRepository
-        {
+        UserUpdaterRepository::class => function (ContainerInterface $container): UserUpdaterRepository {
             return new UserUpdaterRepository(
                 $container->get(LoggerInterface::class),
                 $container->get(PDOFactory::class),
@@ -71,38 +67,33 @@ return function(ContainerBuilder $builder)
             );
         },
 
-        DonationBoardReaderRepository::class => function(ContainerInterface $container): DonationBoardReaderRepository
-        {
+        DonationBoardReaderRepository::class => function (ContainerInterface $container): DonationBoardReaderRepository {
             return new DonationBoardReaderRepository(
                 $container->get(PDOFactory::class),
                 $container->get(DonationBoard::class)
             );
         },
 
-        DonationUpdaterRepository::class => function(ContainerInterface $container): DonationUpdaterRepository
-        {
+        DonationUpdaterRepository::class => function (ContainerInterface $container): DonationUpdaterRepository {
             return new DonationUpdaterRepository(
                 $container->get(PDOFactory::class),
                 $container->get(DonationBoard::class)
             );
         },
 
-        WorkFinderRepository::class => function(ContainerInterface $container): WorkFinderRepository
-        {
+        WorkFinderRepository::class => function (ContainerInterface $container): WorkFinderRepository {
             return new WorkFinderRepository(
                 $container->get(PDOFactory::class)
             );
         },
 
-        RegisterFinderRepository::class => function(ContainerInterface $container): RegisterFinderRepository
-        {
+        RegisterFinderRepository::class => function (ContainerInterface $container): RegisterFinderRepository {
             return new RegisterFinderRepository(
                 $container->get(PDOFactory::class)
             );
         },
 
-        SoundFinderRepository::class => function(ContainerInterface $container): SoundFinderRepository
-        {
+        SoundFinderRepository::class => function (ContainerInterface $container): SoundFinderRepository {
             return new SoundFinderRepository(
                 $container->get(PDOFactory::class)
             );

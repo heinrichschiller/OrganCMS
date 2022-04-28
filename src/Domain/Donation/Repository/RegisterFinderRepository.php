@@ -42,7 +42,7 @@ final class RegisterFinderRepository
 
     /**
      * The constructor.
-     * 
+     *
      * @param PDO $pdo
      */
     public function __construct(PDO $pdo)
@@ -52,7 +52,7 @@ final class RegisterFinderRepository
 
     /**
      * Find all register
-     * 
+     *
      * @return array<Register>
      */
     public function findAll(string $register): array
@@ -71,7 +71,7 @@ final class RegisterFinderRepository
         $stmt->execute();
 
         $items = [];
-        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $items[] = new Register(...$row);
         }
 

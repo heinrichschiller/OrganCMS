@@ -42,7 +42,7 @@ final class SoundFinderRepository
 
     /**
      * The constructor.
-     * 
+     *
      * @param PDO $pdo
      */
     public function __construct(PDO $pdo)
@@ -52,10 +52,10 @@ final class SoundFinderRepository
 
     /**
      * Find all sounds by work name and register name
-     * 
+     *
      * @param string $work
      * @param string $register
-     * 
+     *
      * @return array<Sound> $items
      */
     public function findAllBy(string $work, string $register): array
@@ -81,7 +81,7 @@ final class SoundFinderRepository
         $stmt->execute();
 
         $items  = [];
-        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $items[] = $row;
         }
 

@@ -16,7 +16,7 @@ final class RegisterFinder
 
     /**
      * The constructor.
-     * 
+     *
      * @param RegisterFinderRepository $repository
      */
     public function __construct(RegisterFinderRepository $repository)
@@ -26,7 +26,7 @@ final class RegisterFinder
 
     /**
      * Find all organ register.
-     * 
+     *
      * @param string $register
      * @return array<Register>
      */

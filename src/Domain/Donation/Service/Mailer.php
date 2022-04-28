@@ -18,7 +18,7 @@ final class Mailer
 
     /**
      * The constructor.
-     * 
+     *
      * @param PHPMailer $mailer
      */
     public function __construct(PHPMailer $mailer)
@@ -44,12 +44,11 @@ final class Mailer
         // $this->mailer->isHTML(true);
         // $this->mailer->Body = $mailContent;
 
-        if($this->mailer->send()){
+        if ($this->mailer->send()) {
             echo 'Vielen Dank für ihre Spende! Sie bekommen in kürze eine Email.';
-        }else{
+        } else {
             echo 'Message could not be sent.';
             echo 'Mailer Error: ' . $this->mailer->ErrorInfo;
         }
-
     }
 }

@@ -42,7 +42,7 @@ class WorkFinderRepository
 
     /**
      * The constructor
-     * 
+     *
      * @param PDO $pdo
      * @param Work $work
      */
@@ -53,7 +53,7 @@ class WorkFinderRepository
 
     /**
      * Find all organ works.
-     * 
+     *
      * @return array<Work>
      */
     public function findAll(): array

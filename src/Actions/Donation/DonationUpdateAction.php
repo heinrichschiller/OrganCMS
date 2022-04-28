@@ -58,7 +58,7 @@ final class DonationUpdateAction
 
     /**
      * The constructor
-     * 
+     *
      * @param DonationUpdater $updater
      * @param SessionInterface $session
      * @param FileUploader $uploader
@@ -75,11 +75,11 @@ final class DonationUpdateAction
 
     /**
      * The invoker
-     * 
+     *
      * @param Request $request
-     * @param Response $response 
+     * @param Response $response
      * @param array<mixed> $args
-     * 
+     *
      * @return Response
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response

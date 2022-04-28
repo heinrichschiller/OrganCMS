@@ -8,7 +8,7 @@ final class Sound
 {
     /**
      * The constructor
-     * 
+     *
      * @param readonly int $id
      * @param readonly string $name
      * @param readonly int $price
@@ -17,5 +17,6 @@ final class Sound
         public readonly int $id,
         public readonly string $name,
         public readonly int $price
-    ) {}
+    ) {
+    }
 }

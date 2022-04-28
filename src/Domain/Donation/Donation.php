@@ -4,378 +4,103 @@ declare(strict_types=1);
 
 namespace App\Domain\Donation;
 
-class Donation
+final class Donation
 {
-    /**
-     * @var bool
-     */
-    private bool   $isOneTimeDonation = false;
+    private string $donationAmountOption = '';
+    private string $wishPipeOption = '';
+    private string $alternativePipeOption = '';
+    private string $pipeSponsorshipOption = '';
+    private string $giftOption = '';
+    private string $certificateOption = '';
+    private string $agreementOption = '';
+    private array $mailPieces = [];
 
-    /**
-     * @var float
-     */
-    private float  $oneTimeDonationSum = 0.0;
+    private DonationFormular $formular;
+    private Donor $donor;
 
-    /**
-     * @var bool
-     */
-    private bool   $isSponsorship = false;
-
-    /**
-     * @var float
-     */
-    private float  $sponsorshipSum = 0.0;
-
-    /**
-     * @var string
-     */
-    private string $wishPipe = '';
-
-    /**
-     * @var string
-     */
-    private string $whistleSound = '';
-
-    /**
-     * @var string
-     */
-    private string $whistleRegister = '';
-
-    /**
-     * @var string
-     */
-    private string $whistleWork = '';
-
-    /**
-     * @var bool
-     */
-    private bool   $isDonorWish = false;
-
-    /**
-     * @var bool
-     */
-    private bool   $isAlternativeForDonor = false;
-
-    /**
-     * @var bool
-     */
-    private bool   $isGift = false;
-
-    /**
-     * @var string
-     */
-    private string $nameOfGiftRecipient = '';
-
-    /**
-     * @var bool
-     */
-    private bool   $isBankTransfer = false;
-
-    /**
-     * @var bool
-     */
-    private bool   $isDonationReceipt = false;
-
-    /**
-     * @var bool
-     */
-    private bool   $isAgree = false;
-
-    /**
-     * Get one time donation
-     * 
-     * @return bool
-     */
-    public function getOneTimeDonation(): bool
+    public function __construct(DonationFormular $formular, Donor $donor)
     {
-        return $this->isOneTimeDonation;
+        $this->formular = $formular;
+        $this->donor = $donor;
     }
 
-    /**
-     * Set one time donation
-     * 
-     * @param bool $isOneTimeDonation
-     */
-    public function setOneTimeDonation(bool $isOneTimeDonation): void
+    public function create(): array
     {
-        $this->isOneTimeDonation = $isOneTimeDonation;
+        $this->getHeader();
+        $this->getDonationAmountOption();
+        $this->getWishPipeOption();
+        $this->getAlternativePipeOption();
+        $this->getFooter();
+
+        return $this->mailPieces;
     }
 
-    /**
-     * Get one time donation sum
-     * 
-     * @return bool
-     */
-    public function getOneTimeDonationSum(): float
+    public function getHeader(): void
     {
-        return $this->oneTimeDonationSum;
+        $text = '<p>Sehr geehrte/r Herr/Frau '
+            . $this->donor->getFullName()
+            . ',</p><p>vielen Dank für ihre großzügige Spende.</p>'
+            .'<p>Das ist eine automatisch generierte Antwort und wir werden uns mit ihnen bald in Verbindung setzen.</p>'
+            .'<p>Weiter können Sie ihre Eingaben nochmal einsehen und prüfen.</p><hr>';
+        
+        $this->mailPieces[] = $text;
     }
 
-    /**
-     * Set one time donation sum
-     * 
-     * @return bool
-     */
-    public function setOneTimeDonationSum(float $sum): void
+    public function getFooter(): void
     {
-        $this->oneTimeDonationSum = $sum;
+        $text = '<hr>'
+            . '<p>Sollte ihnen ein Fehler unterlaufen sein, können wir das natürlich nachträglich korrigieren.</p>'
+            . '<br>'
+            . '<p>Mit freundliche Grüßen</p>'
+            . '<p>Orgelfreunde Plauen</p>';
+
+        $this->mailPieces[] = $text;
     }
 
-    /**
-     * Get sponsorship
-     * 
-     * @return bool
-     */
-    public function getSponsorship(): bool
+    public function getDonationAmountOption(): void
     {
-        return $this->isSponsorship;
+        $title = '';
+        $text = '';
+
+        if ($this->formular->getOneTimeDonationAmount()) {
+            $title = '<h3>Sie möchten den Neubau der Orgel in der '
+            . 'Lutherkirche zu Plauen mit einer Spende unterstützen?</h3>';
+
+            $text = '<p>Ja, ich/wir möchte(n) den Neubau der Orgel in der '
+                . 'Lutherkirche zu Plauen mit einer einmaligen Spende unterstützen. Den Betrag von ' 
+            . $this->formular->getOneTimeDonationAmount() 
+            . ' € werde(n) ich/wir auf das Konto der '
+            . 'Ev.-Luth. Lutherkirche Plauen, Zahlungsgrund: Orgel überweisen.</p>';
+
+            $this->mailPieces[] = $title;
+            $this->mailPieces[] = $text;
+        }
     }
 
-    /**
-     * Set sponsorship
-     * 
-     * @param bool
-     */
-    public function setSponsorship(bool $isSponsorship):void
+    public function getWishPipeOption(): void
     {
-        $this->isSponsorship = $isSponsorship;
+        $text = '';
+
+        if ( $this->formular->isWishPipe() ) {
+            $text = '<p>Ich/wir haben keine Wunschorgelpfeife. Bitte weisen Sie' 
+                . ' mir/uns eine Pfeife zu, die dem angegebenen Betrag entspricht.</p>';
+
+            $this->mailPieces[] = $text;
+        }
     }
 
-    /**
-     * Get sponsorship sum
-     * 
-     * @return float
-     */
-    public function getSponsorshipSum(): float
+    public function getAlternativePipeOption(): void
     {
-        return $this->sponsorshipSum;
+        if ( $this->formular->isAlternativeForDonor() ) {
+            $text = '<p>Ich/wir haben keine Wunschorgelpfeife. Bitte weisen Sie' 
+                . ' mir/uns eine Pfeife zu, die dem angekreuzten Betrag entspricht.</p>';
+
+            $this->mailPieces[] = $text;
+        } 
     }
 
-    /**
-     * Set sponsorship sum
-     * 
-     * @param float $sponsorshipSum
-     */
-    public function setSponsorshipSum(float $sponsorshipSum): void
+    public function getDonor(): Donor
     {
-        $this->sponsorshipSum = $sponsorshipSum;
-    }
-
-    /**
-     * Get wish pipe
-     * 
-     * @return string
-     */
-    public function getWishPipe(): string
-    {
-        return $this->wishPipe;
-    }
-
-    /**
-     * Set wish pipe
-     * 
-     * @param string $wishPipe
-     */
-    public function setWishPipe(string $wishPipe): void
-    {
-        $this->wishPipe = $wishPipe;
-    }
-
-    /**
-     * Get whistle sound
-     * 
-     * @return string
-     */
-    public function getWhistleSound(): string
-    {
-        return $this->whistleSound;
-    }
-
-    /**
-     * Set whistle sound
-     * 
-     * @param string $whistleSound
-     */
-    public function setWhistleSound(string $whistleSound): void
-    {
-        $this->whistleSound = $whistleSound;
-    }
-
-    /**
-     * Get whistle register
-     * 
-     * @return string
-     */
-    public function getWhistleRegister(): string
-    {
-        return $this->whistleRegister;
-    }
-
-    /**
-     * Set whistle register
-     * 
-     * @param string
-     */
-    public function setWhistleRegister(string $whistleRegister): void
-    {
-        $this->whistleRegister = $whistleRegister;
-    }
-
-    /**
-     * Get whistle word
-     * 
-     * @return string
-     */
-    public function getWhistleWork(): string
-    {
-        return $this->whistleWork;
-    }
-
-    /**
-     * Set whistle work
-     * 
-     * @param string $whistleWork
-     */
-    public function setWhistleWork(string $whistleWork): void
-    {
-        $this->whistleWork = $whistleWork;
-    }
-
-    /**
-     * Is a donor wish pipe
-     * 
-     * @return bool
-     */
-    public function isDonorWish(): bool
-    {
-        return $this->isDonorWish;
-    }
-
-    /**
-     * Set donor wish
-     * 
-     * @param bool $isDonorWish
-     */
-    public function setDonorWish(bool $isDonorWish): void
-    {
-        $this->isDonorWish = $isDonorWish;
-    }
-
-    /**
-     * Is an alternative for donor
-     * 
-     * @return bool
-     */
-    public function isAlternativeForDonor(): bool
-    {
-        return $this->isAlternativeForDonor;
-    }
-
-    /**
-     * Set alternative for donor
-     * 
-     * @param bool $isAlternativeForDonor
-     */
-    public function setAlternativeForDonor(bool $isAlternativeForDonor): void
-    {
-        $this->isAlternativeForDonor = $isAlternativeForDonor;
-    }
-
-    /**
-     * Is a gift
-     * 
-     * @return bool
-     */
-    public function isGift(): bool
-    {
-        return $this->isGift;
-    }
-
-    /**
-     * Set gift
-     * 
-     * @param bool $isGift
-     */
-    public function setGift(bool $isGift): void
-    {
-        $this->isGift = $isGift;
-    }
-
-    /**
-     * Get name of the gift recipient
-     * 
-     * @return string
-     */
-    public function getNameOfGiftRecipient(): string
-    {
-        return $this->nameOfGiftRecipient;
-    }
-
-    /**
-     * Set name of the gift recipient
-     * 
-     * @param string $nameOfGiftRecipient
-     */
-    public function setNameOfGiftRecipient(string $nameOfGiftRecipient): void
-    {
-        $this->nameOfGiftRecipient = $nameOfGiftRecipient;
-    }
-
-    /**
-     * Is a bank transfer
-     */
-    public function isBankTransfer(): bool
-    {
-        return $this->isBankTransfer;
-    }
-
-    /**
-     * Set bank transfer
-     * 
-     * @param bool $isBankTransfer
-     */
-    public function setBankTransfer(bool $isBankTransfer): void
-    {
-        $this->isBankTransfer = $isBankTransfer;
-    }
-
-    /**
-     * Is a donation receipt
-     * 
-     * @var bool
-     */
-    public function isDonationReceipt(): bool
-    {
-        return $this->isDonationReceipt;
-    }
-
-    /**
-     * Set donation receipt
-     * 
-     * @param bool $isDonationReceipt
-     */
-    public function setDonationReceipt(bool $isDonationReceipt): void
-    {
-        $this->isDonationReceipt = $isDonationReceipt;
-    }
-
-    /**
-     * Donor agrees with the donation
-     * 
-     * @return bool
-     */
-    public function isAgree(): bool
-    {
-        return $this->isAgree;
-    }
-
-    /**
-     * Set Agree
-     * 
-     * @param bool $isAgree
-     */
-    public function setAgree(bool $isAgree): void
-    {
-        $this->isAgree = $isAgree;
+        return $this->donor;
     }
 }

@@ -10,7 +10,7 @@ class SoundTest extends TestCase
     /** @covers App\Domain\Donation\Sound */
     public function testSoundTest(): void
     {
-        $sound = new Sound(1, 'name');
+        $sound = new Sound(1, 'name', 500);
 
         $this->assertInstanceOf(Sound::class, $sound);
     }

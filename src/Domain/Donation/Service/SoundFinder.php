@@ -59,6 +59,9 @@ final class SoundFinder
      */
     public function findAllBy(string $work, string $register): array
     {
+        // workaround: 
+        $register = str_replace('-', '/', $register);
+
         return $this->repository->findAllBy($work, $register);
     }
 }

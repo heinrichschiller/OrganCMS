@@ -63,6 +63,7 @@ final class SoundFinderRepository
         $sql = <<<SQL
             SELECT s.id
                 , s.name
+                , o.price
                 FROM organpipes o
                 LEFT JOIN register_sound rs ON rs.id = o.id
                 LEFT JOIN register r ON r.id = rs.register_id  

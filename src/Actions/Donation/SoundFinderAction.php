@@ -44,8 +44,10 @@ final class SoundFinderAction
 
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
+        $work = $args['work'];
+        $register = $args['register'];
 
-        $data = $this->finder->findAllBy('Hauptwerk', "Bordun 16'");
+        $data = $this->finder->findAllBy($work, $register);
 
         $response
             ->getBody()

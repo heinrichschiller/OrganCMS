@@ -11,9 +11,11 @@ final class Sound
      * 
      * @param readonly int $id
      * @param readonly string $name
+     * @param readonly int $price
      */
     public function __construct(
         public readonly int $id,
-        public readonly string $name
+        public readonly string $name,
+        public readonly int $price
     ) {}
 }

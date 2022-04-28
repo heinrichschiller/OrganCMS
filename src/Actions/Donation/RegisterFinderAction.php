@@ -62,7 +62,9 @@ final class RegisterFinderAction
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
-        $data = $this->finder->findAll();
+        $register = $args['register'];
+
+        $data = $this->finder->findAll($register);
 
         $response
             ->getBody()

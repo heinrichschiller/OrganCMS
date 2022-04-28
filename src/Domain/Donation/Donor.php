@@ -22,6 +22,11 @@ class Donor
     private string $street = '';
 
     /**
+     * @var string city
+     */
+    private string $city = '';
+
+    /**
      * @var string
      */
     private string $zipCode = '';
@@ -96,6 +101,16 @@ class Donor
         $this->street = ucfirst(trim($street));
     }
 
+    public function getCity(): string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): void
+    {
+        $this->city = $city;
+    }
+    
     /**
      * Get zip code
      * 
@@ -154,5 +169,15 @@ class Donor
     public function setPhoneNumber(string $phoneNumber): void
     {
         $this->phoneNumber = trim($phoneNumber);
+    }
+
+    /**
+     * Get full name
+     * 
+     * @return string
+     */
+    public function getFullName(): string
+    {
+        return $this->firstName . ' ' . $this->givenName;
     }
 }

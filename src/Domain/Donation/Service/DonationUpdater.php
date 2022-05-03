@@ -33,15 +33,6 @@ final class DonationUpdater
      */
     public function update(string $total, string $date, string $user): void
     {
-        $date = $this->formateDate($date);
-
         $this->repository->update($total, $date, $user);
-    }
-
-    private function formateDate(string $date): string
-    {
-        $datePieces = explode('-', $date);
-
-        return sprintf('%s.%s.%s', $datePieces[2], $datePieces[1], $datePieces[0]);
     }
 }

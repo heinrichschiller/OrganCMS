@@ -1,27 +1,32 @@
-<nav class="navbar navbar-expand-xl navbar-dark bg-primary">
-    <div class="d-flex flex-grow-1">
-      <span class="w-100 d-lg-none d-block"><!-- hidden spacer to center brand on mobile --></span>
-      <a class="navbar-brand" href="/">
-        <img class="navbar-logo"
-          src="assets/svg/organ-logo-black.svg" 
-          width="28" 
-          alt="Logo der Orgelfreunde Plauen." />
-      </a>
-      <div class="w-100 text-right">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-    </div>
-    <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar">
-      <ul class="navbar-nav ml-auto flex-nowrap">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a href="/" class="navbar-brand">
+      <img
+        class="navbar-logo"
+        src="assets/svg/organ-logo-black.svg"
+        width="28"
+        alt="Logo der Orgelfreunde Plauen."
+      />
+    </a>
+    <button 
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav d-flex ms-auto">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" 
             href="#" 
             id="navbarDropdown1" 
             role="button" 
-            data-toggle="dropdown" 
-            aria-haspopup="true" 
+            data-bs-toggle="dropdown" 
             aria-expanded="false"
           >
             Spenden/Pfeifenpatenschaften
@@ -65,8 +70,7 @@
           <a class="nav-link dropdown-toggle" 
             href="#" id="navbarDropdown2" 
             role="button" 
-            data-toggle="dropdown" 
-            aria-haspopup="true" 
+            data-bs-toggle="dropdown" 
             aria-expanded="false"
           >
             Medien
@@ -81,8 +85,7 @@
             href="#" 
             id="navbarDropdown3" 
             role="button" 
-            data-toggle="dropdown" 
-            aria-haspopup="true" 
+            data-bs-toggle="dropdown" 
             aria-expanded="false"
           >
             Links
@@ -115,4 +118,5 @@
         </li>
       </ul>
     </div>
+  </div>
 </nav>

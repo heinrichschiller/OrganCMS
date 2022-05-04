@@ -14,7 +14,8 @@ a.btn-jumbotron:hover {
 
 .card:hover {
     transform: scale(1.04);
-    box-shadow: 0px 0px 4px 4px #e2cd9f;
+    box-shadow: inset 8em 0em 4em #e2cd9f,
+        0px 0px 4px 4px #e2cd9f;
 }
 
 .foil {

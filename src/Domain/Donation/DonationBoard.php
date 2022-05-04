@@ -86,4 +86,15 @@ final class DonationBoard
 
         $this->user = $user;
     }
+
+    /**
+     * Get german date
+     * @return string
+     */
+    public function getGermanDate(): string
+    {
+        $datePieces = explode('-', $this->date);
+
+        return sprintf('%s.%s.%s', $datePieces[2], $datePieces[1], $datePieces[0]);
+    }
 }

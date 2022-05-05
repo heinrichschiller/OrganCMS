@@ -35,5 +35,6 @@ return function(App $app)
 
     // $app->post('/send', \App\Actions\Donation\CreateAction::class);
 
+    $app->get('/veranstaltungen.html', \App\Actions\Events\EventAction::class);
     $app->get('/{page}', \App\Actions\Pages\PagesAction::class);    
 };

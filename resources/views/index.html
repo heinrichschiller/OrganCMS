@@ -6,16 +6,24 @@
 
     {{> navigation }}
 
-  <div class="jumbotron jumbotron-fluid">
-      <div class="jumbotron-content d-flex align-items-center "></div>
-  </div>
+  <div class="jumbotron jumbotron-fluid text-center position-relative mb-5">
+    <div class="foil d-flex justify-content-center">
+      <div class="jumbotron-content d-flex align-items-center ">
+        <div>
+          <h1 class="h1">Willkommen beim Jahrhundertprojekt Orgel 2022 <br> der Lutherkirche Plauen!!</h1>
+          <div class="container-sm">
+            <p>Wir machen uns für die neue Orgel der Lutherkirche stark: Orgelfreunde Lutherkirche Plauen</p>
+          </div>
+          <hr class="jumbotron-divider my-4">
 
-  <div class="text-center mb-5 text-primary">
-    <h1 class="display-5">Willkommen beim Jahrhundertprojekt Orgel 2022 <br> der Lutherkirche Plauen!!</h1>
+          {{# donation }}
+          <h5>Aktueller Spendenstand vom {{ getGermanDate }} beträgt {{ getTotal }} €</h5>
+          {{/ donation }}
 
-    {{# donation }}
-    <h2>Aktueller Spendenstand vom {{ getGermanDate }} beträgt {{ getTotal }} €</h2>
-    {{/ donation }}
+          <a class="btn btn-jumbotron btn-lg mt-4" href="unsere-orgel.html" role="button">Weiter</a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="cards pt-5 mb-3">
@@ -84,7 +92,7 @@
             <div class="card text-light bg-primary">
               <div class="card-header">Neuigkeiten</div>
               <img
-                src="assets/img/in-progress.jpg"
+                src="assets/img/orgelakte-card-mobile.jpg"
                 class="img-fluid"
                 alt="Bild vom Gutachten von Juli 1925."
               />
@@ -93,21 +101,14 @@
         </div>
 
         <div class="col-md-4  mb-3">
-          <a 
-            href="https://www.lutherkirche-plauen.de" 
-            class="text-secondary text-decoration-none" 
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            <div class="card text-light bg-primary">
-              <div class="card-header">Lutherkirche Plauen</div>
-              <img
-                src="assets/img/luther-kirche-haupteingang.jpg"
-                class="img-fluid"
-                alt="Bild vom Haupteingang zur Lutherkirche Plauen."
-              />
-            </div>
-          </a>
+          <div class="card text-light bg-primary">
+            <div class="card-header">Unsere Orgel</div>
+            <img
+              src="assets/img/orgel-prospekt-card-mobile.jpg"
+              class="card-img-top img-fluid"
+              alt="Bild vom Gutachten von Juli 1925."
+            />
+          </div>
         </div>
         
       </div>
@@ -317,7 +318,7 @@
           <div>
             <a
               class="btn btn-secondary"
-              href="https://www.lutherkirche-plauen.de"
+              href="https://www.lutherkirche-plauen.de/"
               target="blanc"
               rel="noreferrer noopener"
               role="button"

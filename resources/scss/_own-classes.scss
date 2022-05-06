@@ -112,6 +112,13 @@ a.btn-jumbotron:hover {
     }
 }
 
+.story {
+    background-color: antiquewhite;
+    background-image: url('/assets/svg/organ-dekor.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 @media screen and (max-width: 375px) {
     .pr-sm-0 {
         padding-right: 0px !important;

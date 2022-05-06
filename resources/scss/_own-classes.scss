@@ -1,10 +1,20 @@
+a.btn-jumbotron {
+    color: ghostwhite;
+    border: 2px solid ghostwhite;
+}
+
+a.btn-jumbotron:hover {
+    background-color: ghostwhite;
+    color: black;
+}
+
 .card {
     transition: 0.3s;
 }
 
 .card:hover {
     transform: scale(1.04);
-    box-shadow: inset 8em 0em 1em #e2cd9f,
+    box-shadow: inset 8em 0em 4em #e2cd9f,
         0px 0px 4px 4px #e2cd9f;
 }
 
@@ -40,7 +50,7 @@
 }
 
 .news-corner {
-    background-image: url('/assets/svg/organ-stil.svg');
+    background-image: url("https://www.lutherorgel-plauen.de/assets/svg/organ-stil.svg");
 }
 
 .gallery img {
@@ -62,7 +72,7 @@
 }
 
 .mainpage-gallery {
-    background-image: url('/assets/svg/Orgel-stil.svg');
+    background-image: url(https://www.lutherorgel-plauen.de/assets/svg/Orgel-stil.svg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -100,13 +110,6 @@
     p {
         margin-left: 1.7em;
     }
-}
-
-.story {
-    background-color: antiquewhite;
-    background-image: url('/assets/svg/organ-dekor.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 @media screen and (max-width: 375px) {

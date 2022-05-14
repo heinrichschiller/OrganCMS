@@ -8,7 +8,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\ViewInterface;
 
-final class EventAction
+final class IndexAction
 {
     /**
      * @Injection
@@ -37,7 +37,7 @@ final class EventAction
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
-        $response = $this->view->render($response, 'veranstaltungen', []);
+        $response = $this->view->render($response, 'event/index', []);
         
         return $response;
     }

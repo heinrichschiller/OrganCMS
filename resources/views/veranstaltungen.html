@@ -3,10 +3,38 @@
   {{> navigation }}
 
   <div class="container-xl">
-    <h1>Veranstaltungen</h1>
+    <h1 class="display-1 mt-5">Veranstaltungen</h1>
   </div>
 
-  <div class="container-xl" style="height: 40vh;">
-    <h2>Hier kommen demnächst unsere Veranstaltungen wieder rein.</h2>
+  <div class="container-xl">
+
+    {{# events }}
+
+    <div>
+      <hr class="featurete-divider mt-5 mb-5">
+    </div>
+
+    <div class="card mb-5">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="/assets/img/placeholder.jpg" class="img-fluid" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ getTitle }}</h5>
+            <p class="card-text">{{{ getDesc }}}</p>
+            <p class="card-text">
+              <small class="text-muted">{{ getEventDateFormated }} Uhr</small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{/ events }}
+
   </div>
+  
+  
+
 {{> footer }}

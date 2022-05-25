@@ -8,7 +8,6 @@ use DI\ContainerBuilder;
 use Odan\Session\Middleware\SessionMiddleware;
 use Odan\Session\PhpSession;
 use Odan\Session\SessionInterface;
-use PDO;
 use PHPMailer\PHPMailer\PHPMailer;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;

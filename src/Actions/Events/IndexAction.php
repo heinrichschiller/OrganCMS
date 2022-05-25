@@ -4,12 +4,19 @@ declare(strict_types=1);
 
 namespace App\Actions\Events;
 
+use App\Domain\Event\Service\EventFinder;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\ViewInterface;
 
 final class IndexAction
 {
+    /**
+     * @Injection
+     * @var EventFinder
+     */
+    private EventFinder $finder;
+
     /**
      * @Injection
      * @var ViewInterface
@@ -19,10 +26,12 @@ final class IndexAction
     /**
      * The constructor.
      * 
+     * @param EventFinder $finder   EventFinder service
      * @param ViewInterface $view   Mustache template engine
      */
-    public function __construct(ViewInterface $view)
+    public function __construct(EventFinder $finder, ViewInterface $view)
     {
+        $this->finder = $finder;
         $this->view = $view;
     }
 
@@ -37,7 +46,13 @@ final class IndexAction
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
-        $response = $this->view->render($response, 'event/index', []);
+        $events = $this->finder->findAll();
+
+        $data = [
+            'events' => $events
+        ];
+
+        $response = $this->view->render($response, 'event/index', $data);
         
         return $response;
     }

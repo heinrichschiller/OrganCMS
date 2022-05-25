@@ -119,6 +119,10 @@ a.btn-jumbotron:hover {
     background-size: cover;
 }
 
+.clickable-row {
+    cursor: pointer;
+}
+
 @media screen and (max-width: 375px) {
     .pr-sm-0 {
         padding-right: 0px !important;

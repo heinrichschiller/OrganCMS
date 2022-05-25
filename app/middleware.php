@@ -16,11 +16,6 @@ return function(App $app)
      */
     $app->addBodyParsingMiddleware();
 
-    $errorMiddleware = $app->addErrorMiddleware(true, true, true);
-
-    $errorHandler = $errorMiddleware->getDefaultErrorHandler();
-    $errorHandler->registerErrorRenderer('text/html', HtmlErrorRenderer::class);
-
     /*
      *----------------------------------------------------------------------------
      * Start Odan session
@@ -42,5 +37,8 @@ return function(App $app)
      */
     $app->add(ErrorMiddleware::class);
 
-    
+    $errorMiddleware = $app->addErrorMiddleware(true, true, true);
+
+    $errorHandler = $errorMiddleware->getDefaultErrorHandler();
+    $errorHandler->registerErrorRenderer('text/html', HtmlErrorRenderer::class);
 };

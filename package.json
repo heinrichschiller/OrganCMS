@@ -3,7 +3,8 @@
     "@popperjs/core": "^2.11.5",
     "bootstrap": "^5.1.3",
     "bootstrap-icons": "^1.8.1",
-    "simplelightbox": "^2.10.3"
+    "simplelightbox": "^2.10.3",
+    "tinymce": "^6"
   },
   "name": "OrganCMS",
   "version": "1.0.0",

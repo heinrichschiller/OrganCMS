@@ -204,7 +204,7 @@ class DonationFormular
      */
     public function getNameOfGiftRecipient(): string
     {
-        return $this->nameOfGiftRecipient;
+        return $this->namesOfGiftRecipients;
     }
 
     /**
@@ -224,7 +224,7 @@ class DonationFormular
      */
     public function isDonationCertificate(): bool
     {
-        return $this->isDonationCertificate();
+        return $this->isDonationCertificate;
     }
 
     /**

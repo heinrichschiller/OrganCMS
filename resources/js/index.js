@@ -18,14 +18,14 @@ tinymce.init({
 
 let clickableRows = document.querySelectorAll('.clickable-row')
 
-let i = 0
-clickableRows.forEach(elm => {
-    clickableRows[i].addEventListener('click', () => {
-        let href = elm.getAttribute('data-href')
-
-        if (href) {
-            window.location = href
-        }
+if (null !== clickableRows) {
+    clickableRows.forEach(elm => {
+        elm.addEventListener('click', () => {
+            let href = elm.getAttribute('data-href')
+    
+            if (href) {
+                window.location.href = href
+            }
+        })
     })
-    i++
-})
+}

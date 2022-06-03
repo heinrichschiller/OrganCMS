@@ -24,7 +24,7 @@ final class EventCreator
 
     /**
      * The contstructor.
-     * 
+     *
      * @param EventCreatorRepository $repository
      * @param Validator $validator  CakePHP validator
      */
@@ -36,8 +36,8 @@ final class EventCreator
 
     /**
      * Validate data
-     * 
-     * @param <array>mixed $formData    
+     *
+     * @param <array>mixed $formData
      */
     public function validate(array $formData): void
     {
@@ -50,7 +50,7 @@ final class EventCreator
         $errors = $this->validator->validate($formData);
 
         if ($errors) {
-            foreach($errors as $error) {
+            foreach ($errors as $error) {
                 foreach ($error as $value) {
                     echo "<p>$value</p>";
                 }
@@ -62,7 +62,7 @@ final class EventCreator
 
     /**
      * Create an event entry
-     * 
+     *
      * @param array<mixed> $formData
      */
     public function create(array $formData): void

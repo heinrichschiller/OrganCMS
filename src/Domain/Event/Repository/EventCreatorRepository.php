@@ -61,7 +61,7 @@ final class EventCreatorRepository
         $stmt->bindParam(':event_date', $event->getEventDate());
         $stmt->bindParam(':created_at', date('Y-m-d'));
         $stmt->bindParam(':published', $event->isPublished());
-        $stmt->bindParam(':publishedOn', $event->getPublishedOn());
+        $stmt->bindParam(':published_on', $event->getPublishedOn());
         
 
         $stmt->execute();

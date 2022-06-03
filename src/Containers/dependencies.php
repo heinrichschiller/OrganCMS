@@ -8,6 +8,9 @@ use App\Domain\Donation\Repository\DonationUpdaterRepository;
 use App\Domain\Donation\Repository\RegisterFinderRepository;
 use App\Domain\Donation\Repository\SoundFinderRepository;
 use App\Domain\Donation\Repository\WorkFinderRepository;
+use App\Domain\Event\Repository\EventCreatorRepository;
+use App\Domain\Event\Repository\EventFinderRepository;
+use App\Domain\Event\Repository\EventUpdaterRepository;
 use App\Domain\User\Repository\UserAuthRepository;
 use App\Domain\User\Repository\UserReaderRepository;
 use App\Domain\User\Repository\UserUpdaterRepository;
@@ -70,6 +73,25 @@ return function (ContainerBuilder $builder) {
 
         SoundFinderRepository::class => function (ContainerInterface $container): SoundFinderRepository {
             return new SoundFinderRepository(
+                $container->get(PDOFactory::class)
+            );
+        },
+
+        EventCreatorRepository::class => function (ContainerInterface $container): EventCreatorRepository {
+            return new EventCreatorRepository(
+                $container->get(PDOFactory::class)
+            );
+        },
+
+        EventFinderRepository::class => function (ContainerInterface $container): EventFinderRepository {
+            return new EventFinderRepository(
+                $container->get(PDOFactory::class)
+            );
+        },
+
+        EventUpdaterRepository::class => function(ContainerInterface $container): EventUpdaterRepository
+        {
+            return new EventUpdaterRepository(
                 $container->get(PDOFactory::class)
             );
         }

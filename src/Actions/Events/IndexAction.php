@@ -32,17 +32,16 @@ final class IndexAction
 
     /**
      * The constructor.
-     * 
+     *
      * @param EventFinder $finder
-     * @param SessionInterface $session 
+     * @param SessionInterface $session
      * @param ViewInterface $view
      */
     public function __construct(
         EventFinder $finder,
         SessionInterface $session,
         ViewInterface $view
-    )
-    {
+    ) {
         $this->finder = $finder;
         $this->session = $session;
         $this->view = $view;
@@ -50,11 +49,11 @@ final class IndexAction
 
     /**
      * The invoker.
-     * 
+     *
      * @param Request $request
      * @param Response $response
      * @param array<mixed> $args
-     * 
+     *
      * @return Response
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response
@@ -64,7 +63,7 @@ final class IndexAction
 
         $flash = $this->session->getFlash();
 
-        if($flash->has('success')) {
+        if ($flash->has('success')) {
             $isSuccess = true;
             $message = $flash->get('success')[0];
         }

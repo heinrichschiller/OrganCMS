@@ -25,7 +25,7 @@ final class PublicEventAction
 
     /**
      * The constructor.
-     * 
+     *
      * @param EventFinder $finder   EventFinder service
      * @param ViewInterface $view   Template engine
      */
@@ -38,11 +38,11 @@ final class PublicEventAction
 
     /**
      * The invoker
-     * 
+     *
      * @param Request $request
      * @param Response $response
      * @param array<mixed> $args
-     * 
+     *
      * @return Response
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response

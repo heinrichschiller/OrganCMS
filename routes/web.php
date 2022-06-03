@@ -25,7 +25,9 @@ return function(App $app)
     $app->group('/events', function(RouteCollectorProxy $group) {
         $group->get('/', \App\Actions\Events\IndexAction::class)->setName('events');
         $group->get('/new', \App\Actions\Events\NewEventAction::class)->setName('events');
+        $group->get('/update/{id}', \App\Actions\Events\ReadAction::class);
         $group->post('/create', \App\Actions\Events\CreateAction::class);
+        $group->post('/update', \App\Actions\Events\UpdateAction::class);
     })->add(UserAuthMiddleware::class);
 
     $app->group('/users', function(RouteCollectorProxy $group) {

@@ -26,7 +26,7 @@ final class CreateAction
 
     /**
      * The constructor.
-     * 
+     *
      * @param EventCreator $creator Event creator service
      * @param SessionInterface $session
      */
@@ -38,11 +38,11 @@ final class CreateAction
 
     /**
      * The invoker.
-     * 
+     *
      * @param Request $request
      * @param Response $response
      * @param array<mixed> $args
-     * 
+     *
      * @return Response
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response

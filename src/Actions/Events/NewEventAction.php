@@ -18,7 +18,7 @@ final class NewEventAction
 
     /**
      * The constructor.
-     * 
+     *
      * @param ViewInterface $view   Mustache template engine
      */
     public function __construct(ViewInterface $view)
@@ -28,11 +28,11 @@ final class NewEventAction
 
     /**
      * The invoker.
-     * 
+     *
      * @param Request $request
      * @param Response $response
      * @param array<mixed> $args
-     * 
+     *
      * @return Response
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response

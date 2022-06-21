@@ -42,6 +42,7 @@ final class EventFinderRepository
                 published,
                 published_on
                 FROM events
+                    ORDER BY event_date ASC
         SQL;
 
         $stmt = $this->pdo->query($sql);
@@ -82,6 +83,7 @@ final class EventFinderRepository
                 published_on
                 FROM events
                 WHERE published = 1
+                    ORDER BY event_date ASC
         SQL;
 
         $stmt = $this->pdo->query($sql);

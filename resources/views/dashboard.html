@@ -1,9 +1,28 @@
 {{> admin-header }}
 
-    {{> admin-navigation }}
+  {{> admin-navigation }}
 
-    <div class="container-xl bg-light p-5 h-100">
-        <h1>Dashboard</h1>
+  <div class="container-xl bg-light p-5 h-100">
+    <h1>Dashboard</h1>
+
+    <div>
+      <hr class="featurete-divider">
     </div>
+
+    <div class="fs-3 fw-light mb-5">Willkommen, {{ user }}!</div>
+
+    {{# donation }}
+    <div class="row">
+      <div class="col-8 fs-3 fw-light">Aktueller Spendenstand vom {{ getGermanDate }} beträgt {{ getTotal }} €</div>
+      <div class="col-2 fs-3 fw-light">Ziel: 650.000 €</div>
+      <div class="col-2 fs-3 fw-light text-danger">Diff: 79.953,76 €</div>
+    </div>
+    {{/ donation }}
+
+    <div class="row">
+      <div class="col-4 fs-3 fw-light ">Kommende Veranstaltung:</div>
+    </div>
+    
+  </div>
 
 {{> admin-footer}}

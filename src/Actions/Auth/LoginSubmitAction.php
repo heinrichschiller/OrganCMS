@@ -59,9 +59,6 @@ final class LoginSubmitAction
             $user = $this->auth->getUsername();
         }
 
-        $flash = $this->session->getFlash();
-        $flash->clear();
-
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();
 
         if ($user) {
@@ -73,6 +70,10 @@ final class LoginSubmitAction
 
             $urlFor ='users';
         } else {
+            $flash = $this->session->getFlash();
+            $flash->clear();
+            $flash->add('failure', 'Unbekanntes Login oder Passwort.');
+
             $urlFor = 'login';
         }
 

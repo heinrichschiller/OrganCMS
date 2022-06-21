@@ -60,7 +60,10 @@ final class UserAuthRepository
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if (null !== $credentials && password_verify($credentials, $result['password'])) {
+        if (null !== $credentials 
+            && false !== $result 
+            && password_verify($credentials, $result['password'])
+        ) {
             $this->user->setUsername($result['username']);
 
             $this->isAuth = true;

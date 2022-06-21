@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions\User;
 
+use App\Domain\Donation\Service\DonationBoardReader;
 use Odan\Session\SessionInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -11,6 +12,12 @@ use Slim\Views\ViewInterface;
 
 final class UserAction
 {
+    /**
+     * @Injection
+     * @var DonationBoardReader
+     */
+    private DonationBoardReader $reader;
+
     /**
      * @Injection
      * @var SessionInterface
@@ -29,8 +36,9 @@ final class UserAction
      * @param SessionInterface $session
      * @param ViewInterface $view
      */
-    public function __construct(SessionInterface $session, ViewInterface $view)
+    public function __construct(DonationBoardReader $reader, SessionInterface $session, ViewInterface $view)
     {
+        $this->reader = $reader;
         $this->session = $session;
         $this->view = $view;
     }
@@ -48,7 +56,14 @@ final class UserAction
     {
         $username = $this->session->get('user');
 
-        $response = $this->view->render($response, 'dashboard', []);
+        $donation = $this->reader->read();
+
+        $data = [
+            'user' => $username,
+            'donation' => $donation
+        ];
+
+        $response = $this->view->render($response, 'dashboard', $data);
 
         return $response;
     }

@@ -8,16 +8,6 @@ a.btn-jumbotron:hover {
     color: black;
 }
 
-.card {
-    transition: 0.3s;
-}
-
-.card:hover {
-    transform: scale(1.04);
-    box-shadow: inset 8em 0em 1em #e2cd9f,
-        0px 0px 4px 4px #e2cd9f;
-}
-
 .foil {
     background-color: #343a40;
     position: absolute;

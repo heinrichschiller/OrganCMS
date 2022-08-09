@@ -9,15 +9,58 @@
       <hr class="featurete-divider">
     </div>
 
-    <div class="fs-3 fw-light mb-5">Willkommen, {{ user }}!</div>
+    <div class="fs-3 fw-light mt-2 mb-5">Willkommen, {{ user }}!</div>
 
     {{# donation }}
-    <div class="row">
-      <div class="col-8 fs-3 fw-light">Aktueller Spendenstand vom {{ getGermanDate }} beträgt {{ getTotal }} €</div>
-      <div class="col-2 fs-3 fw-light">Ziel: 650.000 €</div>
-      <div class="col-2 fs-3 fw-light text-danger">Diff: 79.953,76 €</div>
+    <div class="row h-100">
+      <div class="col-4">
+        <div class="card text-center">
+          <div class="card-header bg-primary text-light fs-4 fw-light">
+            Spendenstand vom {{ getGermanDate }}
+          </div>
+          <div class="card-body fs-5">
+            <p>{{ getTotal }} €</p>
+            <p>100.000,00 €</p>
+          </div>
+          <div class="card-footer bg-primary text-light fs-4 fw-light">
+            Ziel: 650.000 €
+          </div>
+        </div>
+      </div>
+      {{/ donation }}
+
+      <div class="col-4">
+        <div class="card text-center">
+          <div class="card-header bg-primary text-light fs-4 fw-light">
+            Aufteilung
+          </div>
+          <div class="card-body fs-5">
+            <p>Private Spender: 284.496,75 €</p>
+            <p>Zuwendungen: 290.000,00 €</p>
+          </div>
+          <div class="card-footer bg-primary text-light fs-4 fw-light">
+            Gesamt: 650.000 €
+          </div>
+        </div>
+      </div>
+      
+      {{# event }}
+      <div class="col-4 h-100">
+        <div class="card text-center">
+          <div class="card-header bg-primary text-light fs-4 fw-light">
+            Kommende Veranstaltung
+          </div>
+          <div class="card-body fs-5">
+            <p>{{ getTitle }}</p>
+          </div>
+          <div class="card-footer bg-primary text-light fs-4 fw-light">
+            {{ getEventDateFormated }}
+          </div>
+        </div>
+      </div>
+      {{/ event }}
     </div>
-    {{/ donation }}
+    
 
     <div class="row">
       <div class="col-4 fs-3 fw-light ">Kommende Veranstaltung:</div>

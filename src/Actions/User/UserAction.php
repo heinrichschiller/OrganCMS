@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Actions\User;
 
 use App\Domain\Donation\Service\DonationBoardReader;
+use App\Domain\Event\Service\EventFinder;
 use Odan\Session\SessionInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -17,6 +18,12 @@ final class UserAction
      * @var DonationBoardReader
      */
     private DonationBoardReader $reader;
+
+    /**
+     * @Injection
+     * @var EventFinder
+     */
+    private EventFinder $finder;
 
     /**
      * @Injection
@@ -36,9 +43,14 @@ final class UserAction
      * @param SessionInterface $session
      * @param ViewInterface $view
      */
-    public function __construct(DonationBoardReader $reader, SessionInterface $session, ViewInterface $view)
-    {
+    public function __construct(
+        DonationBoardReader $reader,
+        EventFinder $finder,
+        SessionInterface $session, 
+        ViewInterface $view
+    ) {
         $this->reader = $reader;
+        $this->finder = $finder;
         $this->session = $session;
         $this->view = $view;
     }
@@ -57,10 +69,12 @@ final class UserAction
         $username = $this->session->get('user');
 
         $donation = $this->reader->read();
+        $event = $this->finder->findPublishedEvents();
 
         $data = [
             'user' => $username,
-            'donation' => $donation
+            'donation' => $donation,
+            'event' => $event[0]
         ];
 
         $response = $this->view->render($response, 'dashboard', $data);

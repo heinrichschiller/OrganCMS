@@ -1,7 +1,9 @@
 .vscode/
+.yarn/
 
 composer.lock
 memory
+.yarnrc.yml
 
 /code-coverage/
 /node_modules/

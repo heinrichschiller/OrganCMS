@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/schil/Coding/Projects/OrganCMS/data/donations-dev.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1471"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,8:maincategory"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="register-work">SELECT rw.id
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/schil/Coding/Projects/OrganCMS/data/donations.db" readonly="0" foreign_keys="" case_sensitive_like="" temp_store="" wal_autocheckpoint="" synchronous=""/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1405"/><column_width id="4" width="0"/></tab_structure><tab_browse><current_table name="0,0:"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="register-work">SELECT rw.id
 	, r.name as register
 FROM register_work as rw
 LEFT JOIN register as r ON r.id = rw.register_id
@@ -43,12 +43,12 @@ LEFT JOIN sponsorship ss ON ss.id = o.sponsorship_id
 WHERE w.name = 'Hauptwerk' AND r.name = &quot;Bordun 16'&quot; AND ss.name IS NOT &quot;vergeben&quot;
  	AND w.name= 'Hauptwerk' AND r.name = &quot;Bordun 16'&quot; AND ss.name IS NOT &quot;reserviert&quot;
 
-</sql><sql name="SQL 8">UPDATE events
-    SET title = 'Nacht der Muse(e)n',
-        place = 'Plauen',
-        description = '&lt;p&gt;Orgelbau leicht erkl&amp;auml;rt anhand eines Orgelbaukastens.&lt;/p&gt;
-    &lt;p&gt;Ab 19 Uhr im Lutherhaus.&lt;/p&gt;',
-        event_date = '2022-06-24T19:26',
-        published = true,
-        published_on = '2022-06-24T19:26'
-        WHERE id = 18</sql><current_tab id="6"/></tab_sql></sqlb_project>
+</sql><sql name="SQL 8">UPDATE events
+    SET title = 'Nacht der Muse(e)n',
+        place = 'Plauen',
+        description = '&lt;p&gt;Orgelbau leicht erkl&amp;auml;rt anhand eines Orgelbaukastens.&lt;/p&gt;
+    &lt;p&gt;Ab 19 Uhr im Lutherhaus.&lt;/p&gt;',
+        event_date = '2022-06-24T19:26',
+        published = true,
+        published_on = '2022-06-24T19:26'
+        WHERE id = 18</sql><sql name="SQL 9"></sql><current_tab id="7"/></tab_sql></sqlb_project>

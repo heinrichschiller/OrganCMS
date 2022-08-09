@@ -13,6 +13,7 @@
   "author": "heinrichschiller <heinrich@heinrich-schiller.de>",
   "license": "MIT",
   "devDependencies": {
+    "sass": "^1.53.0",
     "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2"
   },

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/schil/Coding/Projects/OrganCMS/data/donations.db" readonly="0" foreign_keys="" case_sensitive_like="" temp_store="" wal_autocheckpoint="" synchronous=""/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1405"/><column_width id="4" width="0"/></tab_structure><tab_browse><current_table name="0,0:"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="register-work">SELECT rw.id
-	, r.name as register
+	, r.name as register
+	, w.name as werk
 FROM register_work as rw
 LEFT JOIN register as r ON r.id = rw.register_id
 LEFT JOIN work as w ON w.id = rw.work_id
-WHERE w.name = 'Hauptwerk'</sql><sql name="master-table">SELECT
+--WHERE w.name = 'Hauptwerk'</sql><sql name="master-table">SELECT
 	o.id,
 	r.name AS Register,
 	t.name AS Typ,
@@ -51,4 +52,4 @@ WHERE w.name = 'Hauptwerk' AND r.name = &quot;Bordun 16'&quot; AND ss.name IS NO
         event_date = '2022-06-24T19:26',
         published = true,
         published_on = '2022-06-24T19:26'
-        WHERE id = 18</sql><sql name="SQL 9"></sql><current_tab id="7"/></tab_sql></sqlb_project>
+        WHERE id = 18</sql><sql name="SQL 9"></sql><current_tab id="1"/></tab_sql></sqlb_project>

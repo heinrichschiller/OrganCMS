@@ -1,7 +1,11 @@
-// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "../../node_modules/bootstrap/scss/mixins/banner";
+@include bsBanner("");
+
+// scss-docs-start import-stack
+// Configuration
 @import "../../node_modules/bootstrap/scss/functions";
 
-// 2. Include any default variable overrides here
+// Include any default variable overrides here
 @import "overrides";
 
 @import "own-classes";
@@ -9,13 +13,12 @@
 @import "navbar";
 @import "footer";
 
-// overides-end
-
-// 3. Include remainder of required Bootstrap stylesheets
 @import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/maps";
 @import "../../node_modules/bootstrap/scss/mixins";
 @import "../../node_modules/bootstrap/scss/utilities";
 
+// Layout & components
 @import "../../node_modules/bootstrap/scss/root";
 @import "../../node_modules/bootstrap/scss/reboot";
 @import "../../node_modules/bootstrap/scss/type";
@@ -48,10 +51,10 @@
 @import "../../node_modules/bootstrap/scss/offcanvas";
 @import "../../node_modules/bootstrap/scss/placeholders";
 
-// 4. Helpers
+// Helpers
 @import "../../node_modules/bootstrap/scss/helpers";
 
-// 5. Utilities
+// Utilities
 @import "../../node_modules/bootstrap/scss/utilities/api";
 
 // 6. Style for SimpleLightBox

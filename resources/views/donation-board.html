@@ -4,7 +4,7 @@
 
   {{# donation }}
 
-  <div class="container-xl bg-light p-5 h-100">
+  <div class="container-xl bg-light p-md-5 h-100">
     <div>
       {{# isSuccess }}
       <div class="alert alert-success" role="alert">
@@ -23,7 +23,7 @@
       <form action="/donation/update" method="post" enctype="multipart/form-data">
           
           <div class="row">
-            <div class="col-6">
+            <div class="col-sm-12 col-md-6">
               <div class="mb-3">
                 <label for="total">Spendenstand in €:</label>
                 <input 
@@ -37,7 +37,7 @@
               </div>
             </div>
 
-            <div class="col-6">
+            <div class="col-sm-12 col-md-6">
               <div class="mb-3">
                 <label for="date">Datum:</label>
                 <input 
@@ -57,7 +57,7 @@
         </div>
 
         <div class="row">
-          <div class="col-6">
+          <div class="col-sm-12 col-md-6 mb-3">
             <div>
               <label for="documents" class="form-label">Dokumente hochladen:</label>
               <input 
@@ -69,7 +69,7 @@
               >
             </div>
           </div>
-          <div class="col-6">
+          <div class="col-sm-12 col-md-6">
             <div class="form-group">
               <label for="uploaded-files">Hochgeladene dokumente:</label>
               <ul>

@@ -1,99 +1,58 @@
 {{> admin-header }}
 
-  {{> admin-navigation }}
+  <div class="min-vh-100 pt-5">
+    {{> admin-navigation }}
 
-  {{# donation }}
-
-  <div class="container-xl bg-light p-md-5 h-100">
-    <div>
+    <div class="container-xl mt-3">
       {{# isSuccess }}
-      <div class="alert alert-success" role="alert">
-        {{ message }}
-      </div>
+        <div class="alert alert-success" role="alert">
+          {{ message }}
+        </div>
       {{/ isSuccess }}
 
-      <h1>Spendenstand</h1>
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button 
+            class="nav-link active w-50" 
+            id="nav-donation-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-donation"
+            type="button"
+            role="tab"
+            aria-controls="nav-donation"
+            aria-selected="true"
+          >
+            <span class="display-5">Spende</span>
+          </button>
+          <button 
+            class="nav-link w-50" 
+            id="nav-history-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-history"
+            type="button"
+            role="tab"
+            aria-controls="nav-history"
+            aria-selected="true"
+          >
+            <span class="display-5">Archiv</span>
+          </button>
+        </div>
+      </nav>
+      <div class="tab-content" id="nab-tabContent">
+        <div class="tab-pane fade show active pt-5" id="nav-donation" role="tabpanel" aria-labelledby="nav-donation-tab" tabindex="0">
 
-      <div class="h3">Letzte aktualisierung von: {{ getUser }}</div>
+          {{# donation }}
+            {{> donation-input }}
+          {{/ donation }}
 
-      <div>
-        <hr class="featurete-divider">
+        </div>
+        <div class="tab-pane fade pt-5" id="nav-history" role="tabpanel" aria-labelledby="nav-history-tab" tabindex="0">
+
+          {{# donation }}  
+            {{> donation-history }}
+          {{/ donation }}
+
+        </div>
       </div>
-    
-      <form action="/donation/update" method="post" enctype="multipart/form-data">
-          
-          <div class="row">
-            <div class="col-sm-12 col-md-6">
-              <div class="mb-3">
-                <label for="total">Spendenstand in €:</label>
-                <input 
-                  type="text"
-                  class="form-control"
-                  name="total"
-                  value="{{ getTotal }}"
-                  id="total"
-                  required
-                >
-              </div>
-            </div>
-
-            <div class="col-sm-12 col-md-6">
-              <div class="mb-3">
-                <label for="date">Datum:</label>
-                <input 
-                  type="date"
-                  class="form-control"
-                  name="date"
-                  value="{{ getDate }}"
-                  id="date"
-                  required
-                >
-              </div>
-            </div>
-        </div>
-          
-        <div>
-          <hr class="featurete-divider">
-        </div>
-
-        <div class="row">
-          <div class="col-sm-12 col-md-6 mb-3">
-            <div>
-              <label for="documents" class="form-label">Dokumente hochladen:</label>
-              <input 
-                type="file" 
-                name="documents[]"
-                multiple="multiple"
-                class="form-control" 
-                id="documents"
-              >
-            </div>
-          </div>
-          <div class="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label for="uploaded-files">Hochgeladene dokumente:</label>
-              <ul>
-                <li>Cras justo odio</li>
-                <li>Dapibus ac facilisis in</li>
-                <li>Morbi leo risus</li>
-                <li>Porta ac consectetur ac</li>
-                <li>Vestibulum at eros</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-          
-        <div>
-          <hr class="featurete-divider">
-        </div>
-
-        <div>
-          <button class="btn btn-primary">Speichern</button>
-        </div>
-      </form>
     </div>
   </div>
-    
-  {{/ donation }}
-
-{{> admin-footer}}

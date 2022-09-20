@@ -20,6 +20,7 @@ return function(App $app)
     $app->group('/donation', function(RouteCollectorProxy $group) {
         $group->get('/', \App\Actions\Donation\DonationBoardAction::class)->setName('donation');
         $group->post('/update', \App\Actions\Donation\DonationUpdateAction::class)->setName('donation');
+        $group->get('/supporter', \App\Actions\Donation\SupporterAction::class);
     })->add(UserAuthMiddleware::class);
 
     $app->group('/events', function(RouteCollectorProxy $group) {

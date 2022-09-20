@@ -54,7 +54,7 @@ final class EventCreatorRepository
         SQL;
 
         $stmt = $this->pdo->prepare($sql);
-
+// dd($event);
         $stmt->bindParam(':title', $event->getTitle());
         $stmt->bindParam(':place', $event->getPlace());
         $stmt->bindParam(':desc', $event->getDesc());

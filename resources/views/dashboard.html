@@ -1,71 +1,73 @@
 {{> admin-header }}
 
-  {{> admin-navigation }}
+  
+  <div class="min-vh-100 pt-5">
+    {{> admin-navigation}}
 
-  <div class="container-xl bg-light p-md-5 h-100">
-    <h1>Dashboard</h1>
+    <div class="container-xl mt-3">
+      <h1>Dashboard</h1>
 
-    <div>
-      <hr class="featurete-divider">
+      <div>
+        <hr class="featurete-divider">
+      </div>
+
+      {{> dashboard-modules }}
+
     </div>
 
-    <div class="fs-3 fw-light mt-2 mb-5">Willkommen, {{ user }}!</div>
+    <div class="container-xl mt-3 mt-xl-5">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Spendenstand</h5>
 
-    {{# donation }}
-    <div class="row h-100">
-      <div class="col-sm-4 mb-3">
-        <div class="card text-center">
-          <div class="card-header bg-primary text-light fs-4 fw-light">
-            Spendenstand vom {{ getGermanDate }}
+              {{# donation }}
+              <h6 class="card-subtitle mb-2 text-muted">Von {{ getGermanDate }}</h6>
+              <p class="card-text">Die aktuelle Spendensumme aller Spenden, welche ab dem Jahr 2018 gesammelt wurden, beträgt zusammengefasst {{ getTotal }} €.</p>
+              <a href="#" class="card-link">Neuer Spendenstand</a>
+              <a href="#" class="card-link">Archiv</a>
+              {{/ donation }}
+
+            </div>
           </div>
-          <div class="card-body fs-5">
-            <p>{{ getTotal }} €</p>
-            <p>100.000,00 €</p>
-          </div>
-          <div class="card-footer bg-primary text-light fs-4 fw-light">
-            Ziel: 650.000 €
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">pcalehodler</div>
           </div>
         </div>
       </div>
-      {{/ donation }}
+    </div>
 
-      <div class="col-sm-4 mb-3">
-        <div class="card text-center">
-          <div class="card-header bg-primary text-light fs-4 fw-light">
-            Aufteilung
+    <div class="container-xl mt-3 mt-xl-5">
+      <div class="row">
+        <div class="col-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Veranstaltungen</h5>
+
+              {{# donation }}
+              <h6 class="card-subtitle mb-2 text-muted">Von {{ getGermanDate }}</h6>
+              <p class="card-text">Die aktuelle Spendensumme aller Spenden, welche ab dem Jahr 2018 gesammelt wurden, beträgt zusammengefasst {{ getTotal }} €.</p>
+              <a href="/donation/" class="card-link">Neuer Spendenstand</a>
+              <a href="#" class="card-link">Archiv</a>
+              {{/ donation }}
+              
+            </div>
           </div>
-          <div class="card-body fs-5">
-            <p>Private Spender: 284.496,75 €</p>
-            <p>Zuwendungen: 290.000,00 €</p>
+        </div>
+        <div class="col-4">
+          <div class="card">
+            <div class="card-body">2</div>
           </div>
-          <div class="card-footer bg-primary text-light fs-4 fw-light">
-            Gesamt: 650.000 €
+        </div>
+        <div class="col-4">
+          <div class="card">
+            <div class="card-body">3</div>
           </div>
         </div>
       </div>
-      
-      {{# event }}
-      <div class="col-sm-4 mb-3 h-100">
-        <div class="card text-center">
-          <div class="card-header bg-primary text-light fs-4 fw-light">
-            Kommende Veranstaltung
-          </div>
-          <div class="card-body fs-5">
-            <p>{{ getTitle }}</p>
-          </div>
-          <div class="card-footer bg-primary text-light fs-4 fw-light">
-            {{ getEventDateFormated }}
-          </div>
-        </div>
-      </div>
-      {{/ event }}
     </div>
-    
-
-    <div class="row">
-      <div class="col-4 fs-3 fw-light ">Kommende Veranstaltung:</div>
-    </div>
-    
   </div>
-
-{{> admin-footer}}
+    

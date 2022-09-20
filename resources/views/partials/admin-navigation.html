@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-xl navbar-dark bg-primary">
+<nav class="navbar navbar-expand-xl navbar-dark bg-primary fixed-top">
   <div class="container-fluid">
     <span class="navbar-brand ">
       OrgelCMS
@@ -19,22 +19,35 @@
         <li class="nav-item active">
           <a class="nav-link" href="/users/">Dashboard</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/donation/">Spendenstand</a>
+        <li class="nav-item dropdown">
+          <a 
+            href="#" 
+            class="nav-link dropdown-toggle" 
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Spenden
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="/donation/">Spendenstand</a></li>
+            <li><a class="dropdown-item"href="/donation/supporter">Unterstützer</a></li>
+          </ul>
         </li>
         <li class="nav-item dropdown">
           <a 
             href="#" 
             class="nav-link dropdown-toggle" 
-            id="navbarDropdonwMenuLink"
+            id="navbarDropdownMenuLink"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
             Veranstaltungen
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDowpdownMenuLink">
-            <li><a href="/events/" class="dropdown-item">Veranstaltungen</a></li>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a href="/events/" class="dropdown-item">Öffentliche</a></li>
             <li><a href="#" class="dropdown-item">Orgelfreunde</a></li>
           </ul>
         </li>

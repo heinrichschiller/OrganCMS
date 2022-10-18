@@ -31,6 +31,10 @@ return function(App $app)
         $group->post('/update', \App\Actions\Events\UpdateAction::class);
     })->add(UserAuthMiddleware::class);
 
+    $app->group('/news', function(RouteCollectorProxy $group) {
+        $group->get('/', \App\Actions\News\IndexAction::class);
+    });
+
     $app->group('/users', function(RouteCollectorProxy $group) {
         $group->get('/', \App\Actions\User\UserAction::class)->setName('users');
         $group->get('/user', \App\Actions\User\AboutAction::class)->setName('users');

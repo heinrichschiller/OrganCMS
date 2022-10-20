@@ -14,55 +14,52 @@
 
       <form method="post" action="/users/user/update">
 
-        <div>
+        <div class="form-group">
+          <label for="firstName">Benutzername:</label>
+          <input 
+            type="text"
+            class="form-control"
+            name="username"
+            value="{{ getUsername }}"
+            id="username"
+            readonly
+          >
+        </div>
   
-          <div class="form-group">
-            <label for="firstName">Benutzername:</label>
-            <input 
-              type="text"
-              class="form-control"
-              name="username"
-              value="{{ getUsername }}"
-              id="username"
-              readonly
-            >
-          </div>
+        <div class="my-5">
+          <hr class="featurete-divider">
+        </div>
   
-          <div class="my-5">
-            <hr class="featurete-divider">
-          </div>
-  
-          <div class="row">
-  
-            <div class="col-sm-12 col-md-6 mb-3">
-              <div class="form-group">
-                <label for="password">Passwort:</label>
-                <input 
-                  type="password"
-                  class="form-control"
-                  name="firstPassword" 
-                  id="password"
-                  minlength="8"
-                  required
-                >
-              </div>
+        <div class="row">
+
+          <div class="col-sm-12 col-md-6 mb-3">
+            <div class="form-group">
+              <label for="password">Passwort:</label>
+              <input 
+                type="password"
+                class="form-control"
+                name="firstPassword" 
+                id="password"
+                minlength="8"
+                required
+              >
             </div>
-  
-            <div class="col-sm-12 col-md-6">
-              <div class="form-group">
-                <label for="repeatPassword">Passwort wiederholen:</label>
-                <input 
-                  type="password"
-                  class="form-control"
-                  name="repeatPassword"
-                  id="repeatPassword"
-                  minlength="8"
-                  required
-                >
-              </div>
-            </div>
-  
           </div>
+  
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="repeatPassword">Passwort wiederholen:</label>
+              <input 
+                type="password"
+                class="form-control"
+                name="repeatPassword"
+                id="repeatPassword"
+                minlength="8"
+                required
+              >
+            </div>
+          </div>
+
         </div>
   
         <div class="mt-3">

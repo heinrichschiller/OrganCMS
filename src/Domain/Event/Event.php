@@ -31,7 +31,7 @@ final class Event
     /**
      * @var string
      */
-    private string $eventDate;
+    private string $eventDate = '';
 
     /**
      * @var bool

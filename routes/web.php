@@ -31,24 +31,30 @@ return function(App $app)
         $group->post('/update', \App\Actions\Events\UpdateAction::class);
     })->add(UserAuthMiddleware::class);
 
-    $app->group('/news', function(RouteCollectorProxy $group) {
-        $group->get('/', \App\Actions\News\IndexAction::class);
-    });
+    $app->group('/posts', function(RouteCollectorProxy $group) {
+        $group->get('/', \App\Actions\Post\IndexAction::class)->setName('posts');
+        $group->get('/new', \App\Actions\Post\NewPostAction::class);
+        $group->post('/create', \App\Actions\Post\CreateAction::class);
+        $group->post('/update', \App\Actions\Post\UpdateAction::class);
+        $group->get('/edit/{id}', \App\Actions\Post\ReadAction::class)->setName('read-post');
+    })->add(UserAuthMiddleware::class);
 
     $app->group('/users', function(RouteCollectorProxy $group) {
         $group->get('/', \App\Actions\User\UserAction::class)->setName('users');
         $group->get('/user', \App\Actions\User\AboutAction::class)->setName('users');
         $group->post('/user/update', \App\Actions\User\UserUpdateAction::class)->setName('users');
-        $group->get('/logout', \App\Actions\Auth\LogoutAction::class)->setName('logout');
+        $group->get('/logout', \App\Actions\Auth\LogoutAction::class)->setName('organcms');
     })->add(UserAuthMiddleware::class);
 
     $app->get('/', \App\Actions\Pages\IndexAction::class);
 
-    $app->get('/login', \App\Actions\Auth\LoginAction::class)->setName('login');
-    $app->post('/login', \App\Actions\Auth\LoginSubmitAction::class);
+    $app->get('/organcms', \App\Actions\Auth\LoginAction::class)->setName('organcms');
+    $app->post('/organcms', \App\Actions\Auth\LoginSubmitAction::class);
 
     // $app->post('/send', \App\Actions\Donation\CreateAction::class);
 
+    $app->get('/neuigkeiten', \App\Actions\Post\ReadPublicPostsAction::class);
+    $app->get('/blog/{id}/{slug}', \App\Actions\Post\ReadSinglePublicPostAction::class);
     $app->get('/veranstaltungen.html', \App\Actions\Events\PublicEventAction::class);
     $app->get('/{page}', \App\Actions\Pages\PagesAction::class);    
 };

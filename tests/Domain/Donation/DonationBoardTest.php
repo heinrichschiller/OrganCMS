@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Tests\Domain\Donation;
+
 use App\Domain\Donation\DonationBoard;
 use PHPUnit\Framework\TestCase;
 
@@ -104,5 +106,15 @@ final class DonationBoardTest extends TestCase
         $this->donation->setUser(' heinrich ');
 
         $this->assertEquals('heinrich', $this->donation->getUser());
+    }
+
+    /**
+     * @covers App\Domain\Donation\DonationBoard
+     */
+    public function testConvertToGermanDate(): void
+    {
+        $this->donation->setDate('22-10-28');
+
+        $this->assertEquals('28.10.22', $this->donation->getGermanDate());
     }
 }

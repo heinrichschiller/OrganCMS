@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Tests\Domain\Donation;
+
 use App\Domain\Donation\Donor;
 use PHPUnit\Framework\TestCase;
 

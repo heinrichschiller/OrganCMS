@@ -1,0 +1,32 @@
+{{> header }}
+
+  <div class="container-fluid min-vh-100 p-0">
+    {{> navigation }}
+
+    <div class="container-xl">
+      <h1 class="display-1 mt-5">Neuigkeiten</h1>
+    </div>
+
+    <div class="container-xl">
+      <div class="row">
+
+        {{# post }}
+        <div class="col-6">
+          <a href="/blog/{{ getId }}/{{ getSlug }}" class="link-dark text-decoration-none">
+            <div class="card mt-5 bg-light">
+              <div class="card-body mt-5">
+                <h2 class="display-3 mb-5">{{ getTitle }}</h2>
+                <p>{{ getFirstSentense() }}</p>
+              </div>
+            </div>
+            <span class="ms-3 fw-bold">{{ getPublishedAt }}</span>
+          </a>
+        </div>
+        {{/ post }}
+
+      </div>
+    </div>
+
+  </div>
+  
+{{> footer }}

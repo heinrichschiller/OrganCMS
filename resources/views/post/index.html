@@ -41,8 +41,12 @@
           </thead>
           <tbody>
             {{# posts }}
-            <tr class="clickable-row" data-href="/posts/update/{{ getId }}">
-              <th scope="row"></th>
+            <tr>
+              <th scope="row">
+                <a href="/posts/edit/{{ getId }}">
+                  Bearbeiten
+                </a> 
+              </th>
               <td>{{ getTitle }}</td>
               <td>{{ getCreatedAt }}</td>
               <td>{{ getUpdatedAt }}</td>

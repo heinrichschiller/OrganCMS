@@ -27,9 +27,9 @@ final class PostCreatorRepository
             ) 
             VALUES 
             (
-                : title, : slug, : content, : author, : on_mainpage, 
-                : published_at, : is_published, : created_at, 
-                : updated_at
+                :title, :slug, :content, :author, :on_mainpage, 
+                :published_at, :is_published, :created_at, 
+                :updated_at
             )
         SQL;
 

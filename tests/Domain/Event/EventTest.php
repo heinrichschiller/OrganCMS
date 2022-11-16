@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Tests\Domain\Event;
+
 use App\Domain\Event\Event;
 use PHPUnit\Framework\TestCase;
 

@@ -32,7 +32,7 @@ final class ReadAction
 
     /**
      * The contstructor.
-     * 
+     *
      * @param EventFinder $finder
      * @param ViewInterface $view
      */
@@ -45,11 +45,11 @@ final class ReadAction
 
     /**
      * The invoker.
-     * 
+     *
      * @param Request $request
      * @param Response $response
      * @param array<mixed>
-     * 
+     *
      * @return Response
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response

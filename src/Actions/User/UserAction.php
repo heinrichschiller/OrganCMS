@@ -46,7 +46,7 @@ final class UserAction
     public function __construct(
         DonationBoardReader $reader,
         EventFinder $finder,
-        SessionInterface $session, 
+        SessionInterface $session,
         ViewInterface $view
     ) {
         $this->reader = $reader;

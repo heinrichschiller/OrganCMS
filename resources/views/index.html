@@ -1,521 +1,543 @@
 {{> header }}
 
-  <body class="lead">
     <!-- Back to top button -->
     <a href="#banner-content" id="back__to__top" class="back-to-top"></a>
 
     {{> navigation }}
 
-  <div class="jumbotron jumbotron-fluid text-center position-relative mb-5">
-    <div class="foil d-flex justify-content-center">
-      <div class="jumbotron-content d-flex align-items-center ">
-        <div>
-          <h1 class="h1">Willkommen beim Jahrhundertprojekt Orgel 2022 <br> der Lutherkirche Plauen!!</h1>
-          <div class="container-sm">
-            <p>Wir machen uns für die neue Orgel der Lutherkirche stark: Orgelfreunde Lutherkirche Plauen</p>
+    <div class="jumbotron jumbotron-fluid text-center position-relative mb-5">
+      <div class="foil d-flex justify-content-center">
+        <div class="jumbotron-content d-flex align-items-center ">
+          <div>
+            <h1 class="h1">Willkommen beim Jahrhundertprojekt Orgel 2022 <br> der Lutherkirche Plauen!!</h1>
+            <div class="container-sm">
+              <p>Wir machen uns für die neue Orgel der Lutherkirche stark: Orgelfreunde Lutherkirche Plauen</p>
+            </div>
+            <hr class="jumbotron-divider my-4">
+
+            {{# donation }}
+            <h5>Aktueller Spendenstand vom {{ getGermanDate }} beträgt {{ getTotal }} €</h5>
+            {{/ donation }}
+
+            <a class="btn btn-jumbotron btn-lg mt-4" href="unsere-orgel.html" role="button">Weiter</a>
           </div>
-          <hr class="jumbotron-divider my-4">
-
-          {{# donation }}
-          <h5>Aktueller Spendenstand vom {{ getGermanDate }} beträgt {{ getTotal }} €</h5>
-          {{/ donation }}
-
-          <a class="btn btn-jumbotron btn-lg mt-4" href="unsere-orgel.html" role="button">Weiter</a>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="cards pt-md-3 pt-xl-5 mb-3">
-    <div class="container-xl">
-      <div class="row">
-        <div class="col-md-6 col-xl-4 mb-3">
-          <a href="unsere-orgel.html" class="text-secondary text-decoration-none">
-            <div class="card text-light bg-primary">
-              <div class="card-header">Unsere Orgel</div>
-              <img
-                src="assets/img/orgel-prospekt-card-mobile.jpg"
-                class="card-img-bottom img-fluid"
-                alt="Bild vom Gutachten von Juli 1925."
-              />
-            </div>
-          </a>
+    <div class="cards pt-md-3 pt-xl-5 mb-3">
+      <div class="container-xl">
+        <div class="row">
+          <div class="col-md-6 col-xl-4 mb-3">
+            <a href="unsere-orgel.html" class="text-secondary text-decoration-none">
+              <div class="card text-light bg-primary">
+                <div class="card-header">Unsere Orgel</div>
+                <img
+                  src="assets/img/orgel-prospekt-card-mobile.jpg"
+                  class="card-img-bottom img-fluid"
+                  alt="Bild vom Gutachten von Juli 1925."
+                />
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-xl-4 mb-3">
+            <a href="orgelakte.html" class="text-secondary text-decoration-none">
+              <div class="card text-light bg-primary">
+                <div class="card-header">Die Geschichte unserer Orgel</div>
+                <img
+                  src="assets/img/orgelakte-card-mobile.jpg"
+                  class="img-fluid"
+                  alt="Bild vom Gutachten von Juli 1925."
+                />
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-xl-4 mb-3">
+            <a href="orgelfreunde.html" class="text-secondary text-decoration-none">
+              <div class="card text-light bg-primary">
+                <div class="card-header">Die Orgelfreunde</div>
+                <img
+                  src="assets/img/orgelfreunde-card-mobile.jpg"
+                  class="img-fluid"
+                  alt="Ein Bild der Orgelfreunde Plauen."
+                />
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-xl-4 mb-3">
+            <a href="veranstaltungen.html" class="text-secondary text-decoration-none">
+              <div class="card text-light bg-primary">
+                <div class="card-header">Veranstaltungen</div>
+                <img
+                  src="assets/img/events-bazaar.jpg"
+                  class="img-fluid"
+                  alt="Frontansicht den Lutherorgel."
+                />
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-xl-4 mb-3">
+            <a href="/neuigkeiten" class="text-secondary text-decoration-none">
+              <div class="card text-light bg-primary">
+                <div class="card-header">Neuigkeiten</div>
+                <img
+                  src="assets/img/in-progress.jpg"
+                  class="img-fluid"
+                  alt="Bild vom Gutachten von Juli 1925."
+                />
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-xl-4 mb-3">
+            <a 
+              href="https://www.lutherkirche-plauen.de" 
+              class="text-secondary text-decoration-none" 
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <div class="card text-light bg-primary">
+                <div class="card-header">Lutherkirche Plauen</div>
+                <img
+                  src="assets/img/luther-kirche-haupteingang.jpg"
+                  class="img-fluid"
+                  alt="Bild vom Haupteingang zur Lutherkirche Plauen."
+                />
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    {{# post }}
+    <section class="information mt-5 mb-5 bg-primary text-light">
+      <div class="container-xl">
+
+        <div class="container-xl mt-5 mb-5">
+          <hr class="featurete-divider">
+        </div>
+        
+        <div class="mb-5">
+          <h1>{{ getTitle }}</h1>
+        </div>
+        
+        <div>
+          {{{ getContent }}}
         </div>
 
-        <div class="col-md-6 col-xl-4 mb-3">
-          <a href="orgelakte.html" class="text-secondary text-decoration-none">
-            <div class="card text-light bg-primary">
-              <div class="card-header">Die Geschichte unserer Orgel</div>
-              <img
-                src="assets/img/orgelakte-card-mobile.jpg"
-                class="img-fluid"
-                alt="Bild vom Gutachten von Juli 1925."
-              />
-            </div>
-          </a>
+        <div class="container-xl mt-5 mb-5">
+          <hr class="featurete-divider">
         </div>
+      </div>
+    </section>
+    {{/ post }}
 
-        <div class="col-md-6 col-xl-4 mb-3">
-          <a href="orgelfreunde.html" class="text-secondary text-decoration-none">
-            <div class="card text-light bg-primary">
-              <div class="card-header">Die Orgelfreunde</div>
-              <img
-                src="assets/img/orgelfreunde-card-mobile.jpg"
-                class="img-fluid"
-                alt="Ein Bild der Orgelfreunde Plauen."
-              />
-            </div>
-          </a>
-        </div>
+    <div class="introduction pt-lg-5 pt-sm-2 pb-lg-5 pb-sm-2">
+      <div class="container-xl">
+        <h2 class="text-muted">Faszination Orgel</h2>
+        <p>
+          Orgeln gehören zu unserer Kulturlandschaft und sind aus dem geistlichen 
+          und weltlichen Musikleben nicht wegzudenken. Wer hat nicht die berühmte 
+          d-Moll-Toccata von Johann Sebastian Bach im Ohr?
+        </p>
 
-        <div class="col-md-6 col-xl-4 mb-3">
-          <a href="veranstaltungen.html" class="text-secondary text-decoration-none">
-            <div class="card text-light bg-primary">
-              <div class="card-header">Veranstaltungen</div>
-              <img
-                src="assets/img/events-bazaar.jpg"
-                class="img-fluid"
-                alt="Frontansicht den Lutherorgel."
-              />
-            </div>
-          </a>
-        </div>
+        <p>
+          Mozart hat die Orgel einmal als den „König der Instrumente“ bezeichnet. 
+          Viele verschiedenen Pfeifenreihen (Register) geben ihr einen unverwechselbaren 
+          und vielfältigen Klang. Laut und leise, weich und kräftig, säuselnd und schnarrend…
+        </p>
 
-        <div class="col-md-6 col-xl-4 mb-3">
-          <!-- <a href="#" class="text-secondary text-decoration-none"> -->
-            <div class="card text-light bg-primary">
-              <div class="card-header">Neuigkeiten</div>
-              <img
-                src="assets/img/in-progress.jpg"
-                class="img-fluid"
-                alt="Bild vom Gutachten von Juli 1925."
-              />
-            </div>
-          <!-- </a> -->
-        </div>
-
-        <div class="col-md-6 col-xl-4 mb-3">
-          <a 
-            href="https://www.lutherkirche-plauen.de" 
-            class="text-secondary text-decoration-none" 
+        <p>
+          Wie bedeutend gerade die deutsche Orgelbautradition und die deutsche
+          Orgellandschaft sind,
+          <a
+            href="https://www.unesco.de/kultur-und-natur/immaterielles-kulturerbe/immaterielles-kulturerbe-weltweit/orgelbau-und-orgelmusik"
             target="_blank"
             rel="noreferrer noopener"
           >
-            <div class="card text-light bg-primary">
-              <div class="card-header">Lutherkirche Plauen</div>
-              <img
-                src="assets/img/luther-kirche-haupteingang.jpg"
-                class="img-fluid"
-                alt="Bild vom Haupteingang zur Lutherkirche Plauen."
-              />
-            </div>
-          </a>
-        </div>
+            zeigt die Aufnahme in das immaterielle Weltkulturerbe der UNESCO.</a
+          >
+        </p>
+        <p>
+          Die bisherige Orgel in der Lutherkirche Plauen hatte eine bewegte Geschichte. 
+          Nun war sie leider verschlissen und nicht erhaltenswert.
+        </p>
 
+        <p>
+          Deshalb haben wir Großes vor: wir möchten der Lutherkirche zum 300.
+          und der Stadt Plauen zum 900. Geburtstag etwas Bleibendes schenken –
+          eine neue Orgel.
+        </p>
       </div>
     </div>
-  </div>
 
-  <div class="introduction pt-lg-5 pt-sm-2 pb-lg-5 pb-sm-2">
     <div class="container-xl">
-      <h2 class="text-muted">Faszination Orgel</h2>
-      <p>
-        Orgeln gehören zu unserer Kulturlandschaft und sind aus dem geistlichen 
-        und weltlichen Musikleben nicht wegzudenken. Wer hat nicht die berühmte 
-        d-Moll-Toccata von Johann Sebastian Bach im Ohr?
-      </p>
-
-      <p>
-        Mozart hat die Orgel einmal als den „König der Instrumente“ bezeichnet. 
-        Viele verschiedenen Pfeifenreihen (Register) geben ihr einen unverwechselbaren 
-        und vielfältigen Klang. Laut und leise, weich und kräftig, säuselnd und schnarrend…
-      </p>
-
-      <p>
-        Wie bedeutend gerade die deutsche Orgelbautradition und die deutsche
-        Orgellandschaft sind,
-        <a
-          href="https://www.unesco.de/kultur-und-natur/immaterielles-kulturerbe/immaterielles-kulturerbe-weltweit/orgelbau-und-orgelmusik"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          zeigt die Aufnahme in das immaterielle Weltkulturerbe der UNESCO.</a
-        >
-      </p>
-      <p>
-        Die bisherige Orgel in der Lutherkirche Plauen hatte eine bewegte Geschichte. 
-        Nun war sie leider verschlissen und nicht erhaltenswert.
-      </p>
-
-      <p>
-        Deshalb haben wir Großes vor: wir möchten der Lutherkirche zum 300.
-        und der Stadt Plauen zum 900. Geburtstag etwas Bleibendes schenken –
-        eine neue Orgel.
-      </p>
+      <hr class="featurete-divider">
     </div>
-  </div>
 
-  <div class="container-xl">
-    <hr class="featurete-divider">
-  </div>
-
-  <div class="pt-lg-5 pt-sm-2 pb-lg-5 pb-sm-2">
-    <div class="container-xl">
-      <div class="row flex-md-row-reverse flex-lg-row-reverse align-items-center">
-        <div class="col-md-5">
-          <img
-            src="assets/img/Orgelprospekt.jpg"
-            class="img-fluid shadow-lg p-3 mb-5 bg-white rounded"
-            alt="Orgelprospekt"
-          />
-        </div>
-        <div class="col-md-7 pe-lg-5 pe-sm-1">
-          <h2 class="text-muted mb-4">Vom Orgelprospekt ...</h2>
-          <p>
-            Den <strong>Orgelprospekt</strong> das "Gesicht" der Orgel, hat
-            1834 der Leipziger Orgelbauer Johann Gottlob Mende geschaffen. Von
-            dem Werk, das dahinter stand, ist fast nichts mehr vorhanden.
-          </p>
-          <p>
-            Der denkmalgeschützte Orgelprospekt bleibt erhalten und bekommt 
-            weitestgehend seine ursprüngliche Gestalt zurück.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container-xl">
-    <hr class="featurete-divider">
-  </div>
-
-  <div class="pt-lg-5 pt-sm-2 pb-lg-5 pb-sm-2">
-    <div class="container-xl">
-      <div class="row align-items-center">
-        <div class="col-md-5">
-          <img
-            src="assets/img/Orgelpfeifen.jpg"
-            class="img-fluid shadow-lg p-3 mb-1 bg-white rounded"
-            alt="Orgelprospekt"
-          />
-        </div>
-        <div class="col-md-7 ps-lg-5 ps-sm-1">
-          <h2 class="text-muted" id="element">... zum Orgelprojekt</h2>
-          <p>
-            2018 wagten wir die Entscheidung: Orgelneubau! Ihr waren viele 
-            Überlegungen, Untersuchungen, Kostenangebote usw. vorausgegangen.
-          </p>
-          <p>
-            Auch dann folgten noch viele Überlegungen, wie die neue Orgel 
-            gestaltet werden soll. Erst zweimanualig angedacht, können wir nun, 
-            nach großzügiger Unterstützung durch die Ostdeutsche Sparkassenstiftung 
-            und die Sparkasse Vogtland und der Landeskirche Sachsen den Traum einer 
-            dreimanualigen Orgel verwirklichen.
-          </p>
-          <p>
-            Die neue Orgel wird im Haupt- und Oberwerk die ursprüngliche Mende-Orgel 
-            „kopieren“, im Schwellwerk werden romantische Register dazu kommen, so 
-            dass sowohl Barock- als auch romantische und moderne Musik auf der Orgel 
-            stilecht wiedergegeben werden können.
-          </p>
-          <p>
-            Moderne Spielhilfen (Setzerkombination, Koppeln, Suboktavkoppeln, Floating) 
-            ermöglichen leichte und klanglich vielfältige Bedienung.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="story">
-    <div class="pb-1">
+    <div class="pt-lg-5 pt-sm-2 pb-lg-5 pb-sm-2">
       <div class="container-xl">
-        <div class="row flex-row-reverse align-items-center">
-          <div class="col-md-4">
+        <div class="row flex-md-row-reverse flex-lg-row-reverse align-items-center">
+          <div class="col-md-5">
             <img
-              src="assets/img/restaurierte-pfeifen.jpg"
-              class="img-fluid shadow-lg p-3 mb-1 bg-white rounded mt-md-2 mt-lg-5"
-              alt="Orgelprospekt"
-            />
-          </div>
-          <div class="col-md-8 pe-lg-5 pe-sm-1">
-            <h2 class="text-muted">Was ist bereits realisiert?</h2>
-            <p>
-              Nach dem vollständigen Ausbau der bisherigen Orgel im Februar 2021 
-              wurden die meisten Arbeiten erst einmal in der Werkstatt des 
-              Vogtländischen Orgelbaus Wolf getätigt. So wurden die Pfeifen, 
-              die wiederverwendet werden, gereinigt und restauriert. 
-              Neue Register sind bereits entstanden.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="pb-1">
-      <div class="container-xl">
-        <div class="row flex-row-reverse align-items-center">
-          <div class="col-md-8 ps-lg-5 ps-sm-1">
-            <p>
-              Der Prospekt wurde 55 cm nach vorn, an den ursprünglichen Platz, 
-              gezogen, fehlende Füllungen gefertigt. Der Prospekt wird zur Zeit 
-              durch die Fa. Brasche restauriert. Ebenfalls am Ort wird der große 
-              Balg restauriert.
-            </p>
-          </div>
-          <div class="col-md-4">
-            <img
-              src="assets/img/prospekt-vorgeschoben.jpg"
-              class="img-fluid shadow-lg p-3 mb-1 bg-white rounded"
-              alt="Orgelprospekt"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="pb-1">
-      <div class="container-xl">
-        <div class="row flex-row-reverse align-items-center">
-          <div class="col-md-4">
-            <img
-              src="assets/img/arbeitseinsatz.jpg"
+              src="assets/img/Orgelprospekt.jpg"
               class="img-fluid shadow-lg p-3 mb-5 bg-white rounded"
               alt="Orgelprospekt"
             />
           </div>
-          <div class="col-md-8 pe-lg-5 pe-sm-1">
+          <div class="col-md-7 pe-lg-5 pe-sm-1">
+            <h2 class="text-muted mb-4">Vom Orgelprospekt ...</h2>
             <p>
-              Viele Hintergrundarbeiten sind ebenfalls in den letzten Monaten 
-              geschehen: Elektrik-, Heizungs, Maurer- und Malerarbeiten in den 
-              Orgelräumen; dank fleißiger Ehrenamtlichen wurden Abbruch- und 
-              Fußbodenarbeiten geleistet.
+              Den <strong>Orgelprospekt</strong> das "Gesicht" der Orgel, hat
+              1834 der Leipziger Orgelbauer Johann Gottlob Mende geschaffen. Von
+              dem Werk, das dahinter stand, ist fast nichts mehr vorhanden.
+            </p>
+            <p>
+              Der denkmalgeschützte Orgelprospekt bleibt erhalten und bekommt 
+              weitestgehend seine ursprüngliche Gestalt zurück.
             </p>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="pt-5 pb-5">
     <div class="container-xl">
-      <div class="row align-items-center">
-        <div class="col-md-5">
-          <img
-            src="assets/img/luther-kirche.jpg"
-            class="img-fluid shadow-lg p-3 mb-5 bg-white rounded"
-            alt="Orgelprospekt"
-          />
+      <hr class="featurete-divider">
+    </div>
+
+    <div class="pt-lg-5 pt-sm-2 pb-lg-5 pb-sm-2">
+      <div class="container-xl">
+        <div class="row align-items-center">
+          <div class="col-md-5">
+            <img
+              src="assets/img/Orgelpfeifen.jpg"
+              class="img-fluid shadow-lg p-3 mb-1 bg-white rounded"
+              alt="Orgelprospekt"
+            />
+          </div>
+          <div class="col-md-7 ps-lg-5 ps-sm-1">
+            <h2 class="text-muted" id="element">... zum Orgelprojekt</h2>
+            <p>
+              2018 wagten wir die Entscheidung: Orgelneubau! Ihr waren viele 
+              Überlegungen, Untersuchungen, Kostenangebote usw. vorausgegangen.
+            </p>
+            <p>
+              Auch dann folgten noch viele Überlegungen, wie die neue Orgel 
+              gestaltet werden soll. Erst zweimanualig angedacht, können wir nun, 
+              nach großzügiger Unterstützung durch die Ostdeutsche Sparkassenstiftung 
+              und die Sparkasse Vogtland und der Landeskirche Sachsen den Traum einer 
+              dreimanualigen Orgel verwirklichen.
+            </p>
+            <p>
+              Die neue Orgel wird im Haupt- und Oberwerk die ursprüngliche Mende-Orgel 
+              „kopieren“, im Schwellwerk werden romantische Register dazu kommen, so 
+              dass sowohl Barock- als auch romantische und moderne Musik auf der Orgel 
+              stilecht wiedergegeben werden können.
+            </p>
+            <p>
+              Moderne Spielhilfen (Setzerkombination, Koppeln, Suboktavkoppeln, Floating) 
+              ermöglichen leichte und klanglich vielfältige Bedienung.
+            </p>
+          </div>
         </div>
-        <div class="col-md-7 ps-lg-5 ps-sm-1">
-          <h2>Lutherkirche Plauen</h2>
-          <p>
-            Die Lutherkirche als markantes Bauwerk im Zentrum Plauens besteht
-            im Jahr 2022 dreihundert Jahre. Eine neue Orgel wäre ein würdiges
-            Geschenk zum Jubiläum. Damit hätte die Gemeinde ein zuverlässiges
-            Instrument, dass den Gesang zum Gotteslob trägt und das sich auch
-            für Konzerte in der akustisch hervorragenden Lutherkirche eignet.
-          </p>
-          <div>
-            <a
-              class="btn btn-secondary"
-              href="https://www.lutherkirche-plauen.de/"
-              target="blanc"
-              rel="noreferrer noopener"
-              role="button"
-            >
-              zur Lutherkirche Plauen »
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="pb-1">
+        <div class="container-xl">
+          <div class="row flex-row-reverse align-items-center">
+            <div class="col-md-4">
+              <img
+                src="assets/img/restaurierte-pfeifen.jpg"
+                class="img-fluid shadow-lg p-3 mb-1 bg-white rounded mt-md-2 mt-lg-5"
+                alt="Orgelprospekt"
+              />
+            </div>
+            <div class="col-md-8 pe-lg-5 pe-sm-1">
+              <h2 class="text-muted">Was ist bereits realisiert?</h2>
+              <p>
+                Nach dem vollständigen Ausbau der bisherigen Orgel im Februar 2021 
+                wurden die meisten Arbeiten erst einmal in der Werkstatt des 
+                Vogtländischen Orgelbaus Wolf getätigt. So wurden die Pfeifen, 
+                die wiederverwendet werden, gereinigt und restauriert. 
+                Neue Register sind bereits entstanden.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pb-1">
+        <div class="container-xl">
+          <div class="row flex-row-reverse align-items-center">
+            <div class="col-md-8 ps-lg-5 ps-sm-1">
+              <p>
+                Der Prospekt wurde 55 cm nach vorn, an den ursprünglichen Platz, 
+                gezogen, fehlende Füllungen gefertigt. Der Prospekt wird zur Zeit 
+                durch die Fa. Brasche restauriert. Ebenfalls am Ort wird der große 
+                Balg restauriert.
+              </p>
+            </div>
+            <div class="col-md-4">
+              <img
+                src="assets/img/prospekt-vorgeschoben.jpg"
+                class="img-fluid shadow-lg p-3 mb-1 bg-white rounded"
+                alt="Orgelprospekt"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pb-1">
+        <div class="container-xl">
+          <div class="row flex-row-reverse align-items-center">
+            <div class="col-md-4">
+              <img
+                src="assets/img/arbeitseinsatz.jpg"
+                class="img-fluid shadow-lg p-3 mb-5 bg-white rounded"
+                alt="Orgelprospekt"
+              />
+            </div>
+            <div class="col-md-8 pe-lg-5 pe-sm-1">
+              <p>
+                Viele Hintergrundarbeiten sind ebenfalls in den letzten Monaten 
+                geschehen: Elektrik-, Heizungs, Maurer- und Malerarbeiten in den 
+                Orgelräumen; dank fleißiger Ehrenamtlichen wurden Abbruch- und 
+                Fußbodenarbeiten geleistet.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-5 pb-5">
+      <div class="container-xl">
+        <div class="row align-items-center">
+          <div class="col-md-5">
+            <img
+              src="assets/img/luther-kirche.jpg"
+              class="img-fluid shadow-lg p-3 mb-5 bg-white rounded"
+              alt="Orgelprospekt"
+            />
+          </div>
+          <div class="col-md-7 ps-lg-5 ps-sm-1">
+            <h2>Lutherkirche Plauen</h2>
+            <p>
+              Die Lutherkirche als markantes Bauwerk im Zentrum Plauens besteht
+              im Jahr 2022 dreihundert Jahre. Eine neue Orgel wäre ein würdiges
+              Geschenk zum Jubiläum. Damit hätte die Gemeinde ein zuverlässiges
+              Instrument, dass den Gesang zum Gotteslob trägt und das sich auch
+              für Konzerte in der akustisch hervorragenden Lutherkirche eignet.
+            </p>
+            <div>
+              <a
+                class="btn btn-secondary"
+                href="https://www.lutherkirche-plauen.de/"
+                target="blanc"
+                rel="noreferrer noopener"
+                role="button"
+              >
+                zur Lutherkirche Plauen »
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mainpage-gallery pt-5 pb-5 bg-secondary">
+      <div class="container-xl">
+        <div>
+          <h2 class="text-center text-light font-weight-light pb-3">Aus der Bildergalerie</h2>
+        </div>
+        <div class="row">
+          <div class="col-md-4 gallery">
+            <a href="assets/img/gallery/IMG_9297.JPG" title="">
+              <figure>
+                <picture>
+                    <img src="assets/img/gallery/IMG_9297_small.JPG" 
+                      class="img-fluid" 
+                      alt=""
+                    >
+                </picture>
+                <figcaption></figcaption>
+              </figure>
+            </a>
+          </div>
+          <div class="col-md-4 gallery">
+            <a href="assets/img/gallery/IMG-20210324-WA0002.jpg" title="">
+              <figure>
+                <picture>
+                    <img src="assets/img/gallery/IMG-20210324_small.jpg" 
+                      class="img-fluid" 
+                      alt=""
+                    >
+                </picture>
+                <figcaption></figcaption>
+              </figure>
+            </a>
+          </div>
+          <div class="col-md-4 gallery">
+            <a href="assets/img/gallery/IMG_9282.JPG" title="">
+              <figure>
+                <picture>
+                    <img src="assets/img/gallery/IMG_9282_small.JPG" 
+                      class="img-fluid" 
+                      alt=""
+                    >
+                </picture>
+                <figcaption></figcaption>
+              </figure>
             </a>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-4 gallery">
+            <a href="assets/img/gallery/IMG_8563.JPG" title="">
+              <figure>
+                <picture>
+                    <img src="assets/img/gallery/IMG_8563_small.JPG" 
+                      class="img-fluid" 
+                      alt=""
+                    >
+                </picture>
+                <figcaption></figcaption>
+              </figure>
+            </a>
+          </div>
+          <div class="col-md-4 gallery">
+            <a href="assets/img/gallery/IMG_8579.JPG" title="">
+              <figure>
+                <picture>
+                    <img src="assets/img/gallery/IMG_8579_small.JPG" 
+                      class="img-fluid" 
+                      alt=""
+                    >
+                </picture>
+                <figcaption></figcaption>
+              </figure>
+            </a>
+          </div>
+          <div class="col-md-4 gallery">
+            <a href="assets/img/gallery/IMG_8596.JPG" title="">
+              <figure>
+                <picture>
+                    <img src="assets/img/gallery/IMG_8596_small.JPG" 
+                      class="img-fluid" 
+                      alt=""
+                    >
+                </picture>
+                <figcaption></figcaption>
+              </figure>
+            </a>
+          </div>
+        </div>
+        <div class="text-center">
+          <a href="gallerie.html" class="btn btn-light mt-2">Zur Galerie »</a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="mainpage-gallery pt-5 pb-5 bg-secondary">
+    <div class="donation-info pt-5 pb-5">
+      <div class="container-xl">
+        <p class="lead">
+          Mit ihrer <strong>Spende</strong> können Sie dazu beitragen, dass
+          Plauen mit der Lutherkirchen-Orgel ein attraktives Kleinod bekommt.
+          Jeder Spender bekommt eine Urkunde. Auch bieten wir die Möglichkeit
+          von Pfeifenpatenschaften. Sind Sie dabei? Schaffen Sie mit uns Werte,
+          die bleiben!
+        </p>
+        <p>Bitte spenden Sie!</p>
+        <p>
+          Wir würden uns über jede Spende, groß oder klein, freuen und stellen
+          Ihnen gern eine Spendenquittung aus, wenn Sie das wünschen. (Bitte
+          Name und Adresse angeben.)
+        </p>
+        <p>
+          Unser Ziel ist, eine neue Orgel zum 300. Kirchweihfest 2022
+          einzuweihen. Je eher und je mehr Sie spenden desto sicherer werden wir
+          dies erreichen.
+        </p>
+
+        <h3 class="mt-4 mb-2 font-weight-light">
+          Unterstützen Sie den Orgelneubau als Unternehmen oder Institution:
+        </h3>
+        <p>
+          Gerade als Unternehmen können Sie mit einem Engagement für den
+          Orgelneubau der Lutherkirche entscheidende Zeichen setzen. Sie
+          bekennen sich dadurch zur Stadt Plauen und zur Region, zum Orgelbau,
+          zur Bedeutung von Orgelmusik und zu dem Gemeinschaftserlebnis, das
+          unsere Orgel ermöglicht.
+        </p>
+
+        <h2 class="mt-4 mb-4 font-weight-light">
+          Unternehmen, die uns unterstützen
+        </h2>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div>
+              <p class="company">
+                Wohlfühl-Zahnarztpraxis Dr. Frank Oefler
+              </p>
+            </div>
+            <div>
+              <p class="company">HTS- Bau GmbH</p>
+            </div>
+            <div>
+              <p class="company">Klima-Service Fronz</p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div>
+              <p class="company">vbk technology GmbH Auerbach</p>
+            </div>
+            <div>
+              <p class="company">MAN Truck & Bus Service Plauen</p>
+            </div>
+            <div>
+              <p class="company">Praxis Dr. Thomas Rein</p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div>
+              <p class="company">Stadtwerke Erdgas Plauen GmbH</p>
+            </div>
+            <div>
+              <p class="company">Bestattungen „KARIN“ Werner</p>
+            </div>
+            <div>
+              <p class="company">
+                Maler Plauen Einkaufs- und Verwaltungs e.G.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="text-center">
+          <button type="button" class="btn btn-primary btn-round mt-5" data-toggle="modal" data-target=".bd-example-modal-lg">Spenden</button>
+        </div> -->
+
+      </div>
+    </div>
+
     <div class="container-xl">
-      <div>
-        <h2 class="text-center text-light font-weight-light pb-3">Aus der Bildergalerie</h2>
-      </div>
-      <div class="row">
-        <div class="col-md-4 gallery">
-          <a href="assets/img/gallery/IMG_9297.JPG" title="">
-            <figure>
-              <picture>
-                  <img src="assets/img/gallery/IMG_9297_small.JPG" 
-                    class="img-fluid" 
-                    alt=""
-                  >
-              </picture>
-              <figcaption></figcaption>
-            </figure>
-          </a>
-        </div>
-        <div class="col-md-4 gallery">
-          <a href="assets/img/gallery/IMG-20210324-WA0002.jpg" title="">
-            <figure>
-              <picture>
-                  <img src="assets/img/gallery/IMG-20210324_small.jpg" 
-                    class="img-fluid" 
-                    alt=""
-                  >
-              </picture>
-              <figcaption></figcaption>
-            </figure>
-          </a>
-        </div>
-        <div class="col-md-4 gallery">
-          <a href="assets/img/gallery/IMG_9282.JPG" title="">
-            <figure>
-              <picture>
-                  <img src="assets/img/gallery/IMG_9282_small.JPG" 
-                    class="img-fluid" 
-                    alt=""
-                  >
-              </picture>
-              <figcaption></figcaption>
-            </figure>
-          </a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 gallery">
-          <a href="assets/img/gallery/IMG_8563.JPG" title="">
-            <figure>
-              <picture>
-                  <img src="assets/img/gallery/IMG_8563_small.JPG" 
-                    class="img-fluid" 
-                    alt=""
-                  >
-              </picture>
-              <figcaption></figcaption>
-            </figure>
-          </a>
-        </div>
-        <div class="col-md-4 gallery">
-          <a href="assets/img/gallery/IMG_8579.JPG" title="">
-            <figure>
-              <picture>
-                  <img src="assets/img/gallery/IMG_8579_small.JPG" 
-                    class="img-fluid" 
-                    alt=""
-                  >
-              </picture>
-              <figcaption></figcaption>
-            </figure>
-          </a>
-        </div>
-        <div class="col-md-4 gallery">
-          <a href="assets/img/gallery/IMG_8596.JPG" title="">
-            <figure>
-              <picture>
-                  <img src="assets/img/gallery/IMG_8596_small.JPG" 
-                    class="img-fluid" 
-                    alt=""
-                  >
-              </picture>
-              <figcaption></figcaption>
-            </figure>
-          </a>
-        </div>
-      </div>
-      <div class="text-center">
-        <a href="gallerie.html" class="btn btn-light mt-2">Zur Galerie »</a>
-      </div>
+      <p class="featurette-heading mb-5">
+        {{# donation }}
+        Aktueller Spendenstand vom {{ getGermanDate }} beträgt {{ getTotal }} €
+        {{/ donation }}
+      </p>
     </div>
-  </div>
 
-  <div class="donation-info pt-5 pb-5">
-    <div class="container-xl">
-      <p class="lead">
-        Mit ihrer <strong>Spende</strong> können Sie dazu beitragen, dass
-        Plauen mit der Lutherkirchen-Orgel ein attraktives Kleinod bekommt.
-        Jeder Spender bekommt eine Urkunde. Auch bieten wir die Möglichkeit
-        von Pfeifenpatenschaften. Sind Sie dabei? Schaffen Sie mit uns Werte,
-        die bleiben!
-      </p>
-      <p>Bitte spenden Sie!</p>
-      <p>
-        Wir würden uns über jede Spende, groß oder klein, freuen und stellen
-        Ihnen gern eine Spendenquittung aus, wenn Sie das wünschen. (Bitte
-        Name und Adresse angeben.)
-      </p>
-      <p>
-        Unser Ziel ist, eine neue Orgel zum 300. Kirchweihfest 2022
-        einzuweihen. Je eher und je mehr Sie spenden desto sicherer werden wir
-        dies erreichen.
-      </p>
-
-      <h3 class="mt-4 mb-2 font-weight-light">
-        Unterstützen Sie den Orgelneubau als Unternehmen oder Institution:
-      </h3>
-      <p>
-        Gerade als Unternehmen können Sie mit einem Engagement für den
-        Orgelneubau der Lutherkirche entscheidende Zeichen setzen. Sie
-        bekennen sich dadurch zur Stadt Plauen und zur Region, zum Orgelbau,
-        zur Bedeutung von Orgelmusik und zu dem Gemeinschaftserlebnis, das
-        unsere Orgel ermöglicht.
-      </p>
-
-      <h2 class="mt-4 mb-4 font-weight-light">
-        Unternehmen, die uns unterstützen
-      </h2>
-
-      <div class="row">
-        <div class="col-md-4">
-          <div>
-            <p class="company">
-              Wohlfühl-Zahnarztpraxis Dr. Frank Oefler
-            </p>
-          </div>
-          <div>
-            <p class="company">HTS- Bau GmbH</p>
-          </div>
-          <div>
-            <p class="company">Klima-Service Fronz</p>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div>
-            <p class="company">vbk technology GmbH Auerbach</p>
-          </div>
-          <div>
-            <p class="company">MAN Truck & Bus Service Plauen</p>
-          </div>
-          <div>
-            <p class="company">Praxis Dr. Thomas Rein</p>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div>
-            <p class="company">Stadtwerke Erdgas Plauen GmbH</p>
-          </div>
-          <div>
-            <p class="company">Bestattungen „KARIN“ Werner</p>
-          </div>
-          <div>
-            <p class="company">
-              Maler Plauen Einkaufs- und Verwaltungs e.G.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- <div class="text-center">
-        <button type="button" class="btn btn-primary btn-round mt-5" data-toggle="modal" data-target=".bd-example-modal-lg">Spenden</button>
-      </div> -->
-
-    </div>
-  </div>
-
-  <div class="container-xl">
-    <p class="featurette-heading mb-5">
-      {{# donation }}
-      Aktueller Spendenstand vom {{ getGermanDate }} beträgt {{ getTotal }} €
-      {{/ donation }}
-    </p>
-  </div>
-
-{{> footer }}
+  {{> footer }}

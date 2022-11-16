@@ -41,7 +41,7 @@ final class LogoutAction
         $this->session->destroy();
 
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();
-        $url = $routeParser->urlFor('logout');
+        $url = $routeParser->urlFor('organcms');
 
         return $response
             ->withStatus(302)

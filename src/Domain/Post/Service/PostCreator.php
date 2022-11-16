@@ -52,7 +52,7 @@ final class PostCreator
         $text = str_replace(['\'', '"'], "", $text);
         $text = str_replace(' ', '-', $text);
 
-        return $text;
+        return strtolower($text);
     }
 
     private function validate(array $formData)

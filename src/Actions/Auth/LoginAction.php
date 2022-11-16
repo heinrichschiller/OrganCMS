@@ -60,7 +60,7 @@ final class LoginAction
             'message' => $message
         ];
 
-        $response = $this->view->render($response, 'login', $data);
+        $response = $this->view->render($response, 'auth/login', $data);
 
         return $response;
     }

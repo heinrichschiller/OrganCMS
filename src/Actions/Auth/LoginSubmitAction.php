@@ -74,7 +74,7 @@ final class LoginSubmitAction
             $flash->clear();
             $flash->add('failure', 'Unbekanntes Login oder Passwort.');
 
-            $urlFor = 'login';
+            $urlFor = 'organcms';
         }
 
         $url = $routeParser->urlFor($urlFor);

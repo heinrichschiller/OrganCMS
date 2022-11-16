@@ -11,6 +11,9 @@ use App\Domain\Donation\Repository\WorkFinderRepository;
 use App\Domain\Event\Repository\EventCreatorRepository;
 use App\Domain\Event\Repository\EventFinderRepository;
 use App\Domain\Event\Repository\EventUpdaterRepository;
+use App\Domain\Post\Repository\PostCreatorRepository;
+use App\Domain\Post\Repository\PostFinderRepository;
+use App\Domain\Post\Repository\PostUpdaterRepository;
 use App\Domain\User\Repository\UserAuthRepository;
 use App\Domain\User\Repository\UserReaderRepository;
 use App\Domain\User\Repository\UserUpdaterRepository;
@@ -89,11 +92,28 @@ return function (ContainerBuilder $builder) {
             );
         },
 
-        EventUpdaterRepository::class => function(ContainerInterface $container): EventUpdaterRepository
-        {
+        EventUpdaterRepository::class => function (ContainerInterface $container): EventUpdaterRepository {
             return new EventUpdaterRepository(
                 $container->get(PDOFactory::class)
             );
-        }
+        },
+
+        PostCreatorRepository::class => function (ContainerInterface $container): PostCreatorRepository {
+            return new PostCreatorRepository(
+                $container->get(PDOFactory::class)
+            );
+        },
+
+        PostFinderRepository::class => function (ContainerInterface $container): PostFinderRepository {
+            return new PostFinderRepository(
+                $container->get(PDOFactory::class)
+            );
+        },
+
+        PostUpdaterRepository::class => function (ContainerInterface $container): PostUpdaterRepository {
+            return new PostUpdaterRepository(
+                $container->get(PDOFactory::class)
+            );
+        },
     ]);
 };

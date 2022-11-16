@@ -17,7 +17,7 @@ final class EventFinderRepository
 
     /**
      * The constructor.
-     * 
+     *
      * @param PDO $pdo
      */
     public function __construct(PDO $pdo)
@@ -27,7 +27,7 @@ final class EventFinderRepository
 
     /**
      * Find all events
-     * 
+     *
      * @return array<Event>
      */
     public function findAll(): array
@@ -67,7 +67,7 @@ final class EventFinderRepository
 
     /**
      * Find all published events
-     * 
+     *
      * @return array<Event>
      */
     public function findPublishedEvents(): array
@@ -108,9 +108,9 @@ final class EventFinderRepository
 
     /**
      * Find an event by event id.
-     * 
+     *
      * @param int $id   Event id
-     * 
+     *
      * @return Event
      */
     public function whereId(int $id): Event

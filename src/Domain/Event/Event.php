@@ -50,7 +50,7 @@ final class Event
 
     /**
      * Get id.
-     * 
+     *
      * @return int
      */
     public function getId(): int
@@ -60,7 +60,7 @@ final class Event
 
     /**
      * Set id.
-     * 
+     *
      * @param int $id
      */
     public function setId(int $id): void
@@ -70,7 +70,7 @@ final class Event
 
     /**
      * Get title.
-     * 
+     *
      * @return string
      */
     public function getTitle(): string
@@ -80,7 +80,7 @@ final class Event
 
     /**
      * Set title.
-     * 
+     *
      * @param string $title
      */
     public function setTitle(string $title): void
@@ -92,7 +92,7 @@ final class Event
 
     /**
      * Get place.
-     * 
+     *
      * @return string
      */
     public function getPlace(): string
@@ -102,7 +102,7 @@ final class Event
 
     /**
      * Set place.
-     * 
+     *
      * @param string $place
      */
     public function setPlace(string $place): void
@@ -114,7 +114,7 @@ final class Event
 
     /**
      * Get description.
-     * 
+     *
      * @return string
      */
     public function getDesc(): string
@@ -124,7 +124,7 @@ final class Event
 
     /**
      * Set description.
-     * 
+     *
      * @param string $desc
      */
     public function setDesc(string $desc): void
@@ -134,7 +134,7 @@ final class Event
 
     /**
      * Get event date.
-     * 
+     *
      * @return string
      */
     public function getEventDate(): string
@@ -144,7 +144,7 @@ final class Event
 
     /**
      * Get formated event date.
-     * 
+     *
      * @return string
      */
     public function getEventDateFormated(): string
@@ -156,7 +156,7 @@ final class Event
 
     /**
      * Set event date.
-     * 
+     *
      * @param string $date
      */
     public function setEventDate(string $date): void
@@ -166,7 +166,7 @@ final class Event
 
     /**
      * Event is published.
-     * 
+     *
      * @return bool
      */
     public function isPublished(): bool
@@ -176,7 +176,7 @@ final class Event
 
     /**
      * Set published status.
-     * 
+     *
      * @param bool $published
      */
     public function setPublished(bool $published): void
@@ -186,7 +186,7 @@ final class Event
 
     /**
      * Get the date of the published event.
-     * 
+     *
      * @return string
      */
     public function getPublishedOn(): string
@@ -196,7 +196,7 @@ final class Event
 
     /**
      * Set date of the published event.
-     * 
+     *
      * @param string $currentDate
      */
     public function setPublishedOn(string $currentDate): void
@@ -206,7 +206,7 @@ final class Event
 
     /**
      * Get the date when an event was created.
-     * 
+     *
      * @return string
      */
     public function getCreatedAt(): string
@@ -216,7 +216,7 @@ final class Event
 
     /**
      * Get the formated date when an event was created.
-     * 
+     *
      * @return string
      */
     public function getCreatedAtFormated(): string
@@ -228,7 +228,7 @@ final class Event
 
     /**
      * Set created date
-     * 
+     *
      * @param string $date
      */
     public function setCreatedAt(string $date): void

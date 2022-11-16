@@ -17,7 +17,7 @@ final class EventUpdaterRepository
 
     /**
      * The constructor.
-     * 
+     *
      * @param PDO $pdo
      */
     public function __construct(PDO $pdo)
@@ -27,7 +27,7 @@ final class EventUpdaterRepository
 
     /**
      * Update event data
-     * 
+     *
      * @param array<mixed> $formData The form data
      */
     public function update(Event $event): void

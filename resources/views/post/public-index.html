@@ -11,12 +11,11 @@
       <div class="row">
 
         {{# post }}
-        <div class="col-6">
+        <div class="col-md-12">
           <a href="/blog/{{ getId }}/{{ getSlug }}" class="link-dark text-decoration-none">
-            <div class="card mt-5 bg-light">
-              <div class="card-body mt-5">
-                <h2 class="display-3 mb-5">{{ getTitle }}</h2>
-                <p>{{ getFirstSentense() }}</p>
+            <div class="card mt-5 bg-light border border-3 border-primary border-bottom-0 border-end-0 border-start-0 shadow rounded">
+              <div class="card-body">
+                <h2 class="h2">{{ getTitle }}</h2>
               </div>
             </div>
             <span class="ms-3 fw-bold">{{ getPublishedAt }}</span>

@@ -53,7 +53,7 @@ final class PublicEventAction
             'events' => $events
         ];
 
-        $response = $this->view->render($response, 'veranstaltungen', $data);
+        $response = $this->view->render($response, 'event/public-events.html', $data);
         
         return $response;
     }

@@ -51,10 +51,9 @@ return function(App $app)
     $app->get('/organcms', \App\Actions\Auth\LoginAction::class)->setName('organcms');
     $app->post('/organcms', \App\Actions\Auth\LoginSubmitAction::class);
 
-    // $app->post('/send', \App\Actions\Donation\CreateAction::class);
-
     $app->get('/neuigkeiten', \App\Actions\Post\ReadPublicPostsAction::class);
     $app->get('/blog/{id}/{slug}', \App\Actions\Post\ReadSinglePublicPostAction::class);
     $app->get('/veranstaltungen.html', \App\Actions\Events\PublicEventAction::class);
+    $app->get('/impressum.html', \App\Actions\Imprint\PublicImprintAction::class);
     $app->get('/{page}', \App\Actions\Pages\PagesAction::class);    
 };

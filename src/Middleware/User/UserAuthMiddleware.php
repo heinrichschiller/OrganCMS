@@ -56,7 +56,7 @@ final class UserAuthMiddleware implements MiddlewareInterface
 
         // User is not logged in. Redirect to login page
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();
-        $url = $routeParser->urlFor('login');
+        $url = $routeParser->urlFor('organcms');
 
         return $this->responseFactory
             ->createResponse()

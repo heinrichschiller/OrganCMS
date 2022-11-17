@@ -43,7 +43,7 @@ return function(App $app)
         $group->get('/', \App\Actions\User\UserAction::class)->setName('users');
         $group->get('/user', \App\Actions\User\AboutAction::class)->setName('users');
         $group->post('/user/update', \App\Actions\User\UserUpdateAction::class)->setName('users');
-        $group->get('/logout', \App\Actions\Auth\LogoutAction::class)->setName('organcms');
+        $group->get('/logout', \App\Actions\Auth\LogoutAction::class)->setName('logout');
     })->add(UserAuthMiddleware::class);
 
     $app->get('/', \App\Actions\Pages\IndexAction::class);

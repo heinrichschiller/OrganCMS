@@ -15,10 +15,15 @@
 
 @media screen and (min-width: 1200px) {
     .jumbotron {
-        background-image: url('/assets/img/banner-main-2021.jpg');
+        background-image: url('/assets/img/banner-front.jpg');
         background-size: cover;
         height: 94vh;
     }
+}
+
+.jumbotron-content {
+    background-color: ghostwhite;
+    opacity: 0.6;
 }
 
 .jumbotron-divider {

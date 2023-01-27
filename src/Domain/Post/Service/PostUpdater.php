@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
 final class PostUpdater
 {
     private PostUpdaterRepository $repository;
+    private Validator $validator;
 
     public function __construct(PostUpdaterRepository $repository, Validator $validator)
     {

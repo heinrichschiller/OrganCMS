@@ -1,0 +1,45 @@
+{{> admin-header }}
+
+  <div class="min-vh-100 pt-5">
+    {{> admin-navigation }}
+
+    <div class="container-xl mt-3">
+      <h1>Unterstützer bearbeiten</h1>
+
+    <div>
+      <hr class="featurete-divider">
+    </div>
+
+    {{# supporter}}
+    <form action="/supporter/update/{{ getId }}" method="post">
+      <div class="mb-3">
+        <label for="supporterName" class="form-label">Name:</label>
+        <input type="text" 
+          name="title" 
+          value="{{ getName }}"
+          class="form-control" 
+          id="supporterName" 
+          required
+        >
+      </div>
+
+      <div class="form-check form-switch">
+        <label for="publish" class="form-check-label">Veröffentlichen. Wenn nicht aktiviert, wird der Beitrag nicht öffentlich angezeigt.
+          Dies ist nützlich wenn sie ein Beitrag noch Bearbeiten, Speichern aber noch nicht veröffentlichen wollen.
+        </label>
+        <input class="form-check-input" type="checkbox" name="publish" role="switch" id="publish">
+      </div>
+      
+      <div>
+        <hr class="featurete-divider">
+      </div>
+
+      <button class="btn btn-primary" type="submit">Speichern</button>
+      <a href="/supporter/delete/{{ getId }}" class="btn btn-warning">Löschen</a>
+    </form>
+    {{/ supporter }}
+
+    </div>
+  </div>
+
+{{> admin-footer }}

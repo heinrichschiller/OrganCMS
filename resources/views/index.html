@@ -483,47 +483,19 @@
           Unternehmen, die uns unterstützen
         </h2>
 
+        
         <div class="row">
+          {{# supporter }}
           <div class="col-md-4">
             <div>
               <p class="company">
-                Wohlfühl-Zahnarztpraxis Dr. Frank Oefler
-              </p>
-            </div>
-            <div>
-              <p class="company">HTS- Bau GmbH</p>
-            </div>
-            <div>
-              <p class="company">Klima-Service Fronz</p>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div>
-              <p class="company">vbk technology GmbH Auerbach</p>
-            </div>
-            <div>
-              <p class="company">MAN Truck & Bus Service Plauen</p>
-            </div>
-            <div>
-              <p class="company">Praxis Dr. Thomas Rein</p>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div>
-              <p class="company">Stadtwerke Erdgas Plauen GmbH</p>
-            </div>
-            <div>
-              <p class="company">Bestattungen „KARIN“ Werner</p>
-            </div>
-            <div>
-              <p class="company">
-                Maler Plauen Einkaufs- und Verwaltungs e.G.
+                {{ getName }}
               </p>
             </div>
           </div>
+          {{/ supporter}}
         </div>
+        
 
         <!-- <div class="text-center">
           <button type="button" class="btn btn-primary btn-round mt-5" data-toggle="modal" data-target=".bd-example-modal-lg">Spenden</button>

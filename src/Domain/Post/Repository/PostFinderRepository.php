@@ -115,6 +115,7 @@ final class PostFinderRepository
                 , updated_at
                 FROM posts
                 WHERE is_published = 'on'
+                ORDER BY published_at DESC
         SQL;
 
         $stmt = $this->pdo->query($sql);

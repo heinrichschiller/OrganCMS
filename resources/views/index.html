@@ -6,22 +6,18 @@
     {{> navigation }}
 
     <div class="jumbotron jumbotron-fluid text-center position-relative mb-5">
-      <div class="foil d-flex justify-content-center">
-        <div class="jumbotron-content d-flex align-items-center ">
-          <div>
-            <h1 class="h1">Willkommen beim Jahrhundertprojekt Orgel 2022 <br> der Lutherkirche Plauen!!</h1>
-            <div class="container-sm">
-              <p>Wir machen uns für die neue Orgel der Lutherkirche stark: Orgelfreunde Lutherkirche Plauen</p>
-            </div>
-            <hr class="jumbotron-divider my-4">
-
-            {{# donation }}
-            <h5>Aktueller Spendenstand vom {{ getGermanDate }} beträgt {{ getTotal }} €</h5>
-            {{/ donation }}
-
-            <a class="btn btn-jumbotron btn-lg mt-4" href="unsere-orgel.html" role="button">Weiter</a>
-          </div>
+      <div class="jumbotron-content position-absolute top-50 start-50 translate-middle p-5">
+        <h1 class="h1">Willkommen beim Jahrhundertprojekt Orgel 2022 <br> der Lutherkirche Plauen!!</h1>
+        <div class="container-sm">
+          <p>Wir machen uns für die neue Orgel der Lutherkirche stark: Orgelfreunde Lutherkirche Plauen</p>
         </div>
+        <hr class="jumbotron-divider my-4">
+
+        {{# donation }}
+        <h5>Aktueller Spendenstand vom {{ getGermanDate }} beträgt {{ getTotal }} €</h5>
+        {{/ donation }}
+
+        <a class="btn btn-dark btn-lg mt-4" href="unsere-orgel.html" role="button">Weiter</a>
       </div>
     </div>
 

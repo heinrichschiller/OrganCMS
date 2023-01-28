@@ -1,0 +1,9 @@
+os: linux
+dist: focal
+
+language: php
+php:
+  - 8.1
+
+install:
+  - composer install -n

@@ -11,11 +11,11 @@
     </div>
 
     {{# supporter}}
-    <form action="/supporter/update/{{ getId }}" method="post">
+    <form action="/supporter/update" method="post">
       <div class="mb-3">
         <label for="supporterName" class="form-label">Name:</label>
         <input type="text" 
-          name="title" 
+          name="name" 
           value="{{ getName }}"
           class="form-control" 
           id="supporterName" 
@@ -36,6 +36,8 @@
 
       <button class="btn btn-primary" type="submit">Speichern</button>
       <a href="/supporter/delete/{{ getId }}" class="btn btn-warning">Löschen</a>
+
+      <input type="hidden" name="id" value="{{ getId }}">
     </form>
     {{/ supporter }}
 

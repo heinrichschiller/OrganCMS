@@ -1,9 +1,0 @@
-parameters:
-    bootstrapFiles:
-        - app/constants.php
-        - bootstrap/app.php
-    level: 0
-    paths:
-        - app
-        - bootstrap
-        - src

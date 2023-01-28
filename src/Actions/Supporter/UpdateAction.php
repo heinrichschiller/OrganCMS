@@ -26,7 +26,7 @@ final class UpdateAction
 
     /**
      * The constructor.
-     * 
+     *
      * @param SessionInterface $sesson Odan session
      * @param SupporterUpdater $updater Supporter updater service
      */

@@ -24,7 +24,7 @@ final class SupporterCreator
 
     /**
      * The constructor.
-     * 
+     *
      * @param SupporterCreatorRepository $repository Supporter creator repository
      * @param Validator $validator CakePHP validator
      */
@@ -36,7 +36,7 @@ final class SupporterCreator
 
     /**
      * Insert a new supporter into the database.
-     * 
+     *
      * @param array<mixed> $formData The form data.
      */
     public function insert(array $formData)
@@ -63,7 +63,7 @@ final class SupporterCreator
 
     /**
      * Validate $formData
-     * 
+     *
      * @param array<mixed> $formData The form data.
      */
     private function validate(array $formData)

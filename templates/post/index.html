@@ -1,0 +1,71 @@
+{{> admin-header }}
+
+  <div class="min-vh-100 pt-5">
+    {{> admin-navigation }}
+
+    <div class="container-xl mt-3">
+      {{# isSuccess }}
+      <div class="alert alert-success" role="alert">
+        {{ message }}
+      </div>
+      {{/ isSuccess }}
+
+      <div class="row">
+        <div class="col-8">
+          <h1>Neuigkeiten</h1>
+        </div>
+        <div class="col-4">
+          <a href="/posts/new" 
+            class="btn btn-primary float-end" 
+            data-bs-toggle="tooltip"
+            data-bs-placement="left"
+            title="Neue Nachricht erstellen."
+          >
+            Neu
+          </a>
+        </div>
+      </div>
+
+      <div class="table-responsive-sm">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Titel</th>
+              <th scope="col">Erstellt am:</th>
+              <th scope="col">Aktualisiert am:</th>
+              <th scope="col">Veröffentlicht?</th>
+              <th scope="col">Veröffentlicht am:</th>
+              <th scope="col">Hauptseite</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{# posts }}
+            <tr>
+              <th scope="row">
+                <a href="/posts/edit/{{ getId }}">
+                  Bearbeiten
+                </a> 
+              </th>
+              <td>{{ getTitle }}</td>
+              <td>{{ getCreatedAt }}</td>
+              <td>{{ getUpdatedAt }}</td>
+              <td>
+                {{# isPublished }}ja{{/ isPublished }}
+                {{^ isPublished }}nein{{/ isPublished }}
+              </td>
+              <td>{{ getPublishedAt }}</td>
+              <td>
+                {{# onMainpage }}ja{{/ onMainpage }}
+                {{^ onMainpage }}nein{{/ onMainpage }}
+              </td>
+            </tr>
+            {{/ posts }}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+{{> admin-footer }}

@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-xl navbar-dark bg-primary fixed-top">
+  <div class="container-fluid">
+    <span class="navbar-brand ">
+      OrgelCMS
+    </span>
+    <button 
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#myNavbar"
+      aria-controls="myNavbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/users/">Dashboard</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a 
+            href="#" 
+            class="nav-link dropdown-toggle" 
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Spenden
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="/donation/">Spendenstand</a></li>
+            <li><a class="dropdown-item"href="/supporter/">Unterstützer</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a 
+            href="#" 
+            class="nav-link dropdown-toggle" 
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Veranstaltungen
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a href="/events/" class="dropdown-item">Öffentliche</a></li>
+            <li><a href="#" class="dropdown-item">Orgelfreunde</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/posts/">Neuigkeiten</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/user">Benutzer</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/logout">Abmelden</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

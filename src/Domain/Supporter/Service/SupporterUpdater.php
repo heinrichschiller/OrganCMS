@@ -23,7 +23,7 @@ final class SupporterUpdater
 
     /**
      * The constructor.
-     * 
+     *
      * @param SupporterUpdaterRepository $updater Supporter updater repository
      * @param Validator $validator CakePHP validator
      */
@@ -35,9 +35,9 @@ final class SupporterUpdater
 
     /**
      * Update supporter entry.
-     * 
+     *
      * @param array<mixed> $formData The form data
-     * 
+     *
      * @return void
      */
     public function update(array $formData): void
@@ -57,9 +57,9 @@ final class SupporterUpdater
 
     /**
      * Validate the form data.
-     * 
+     *
      * @param array<mixed> $formData The form data.
-     * 
+     *
      * @return void
      */
     public function validate(array $formData): void

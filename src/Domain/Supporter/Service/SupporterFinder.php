@@ -18,7 +18,7 @@ final class SupporterFinder
 
     /**
      * The constructor.
-     * 
+     *
      * @param SupporterFinderRepository $repository Supporter finder repository
      */
     public function __construct(SupporterFinderRepository $repository)
@@ -28,7 +28,7 @@ final class SupporterFinder
 
     /**
      * Find all supporter.
-     * 
+     *
      * @return SupporterCollection
      */
     public function findAll(): SupporterCollection
@@ -38,9 +38,9 @@ final class SupporterFinder
 
     /**
      * Find a supporter by id.
-     * 
+     *
      * @param int $id Id of the supporter.
-     * 
+     *
      * @return Supporter
      */
     public function findById(int $id): Supporter

@@ -30,7 +30,7 @@ final class IndexReader
 
     /**
      * The contstructor.
-     * 
+     *
      * @param DonationBoardReaderRepository $reader Donation board reader repository
      * @param PostFinderRepository $postRepository Post finder repository
      * @param SupporterFinderRepository $supporterRepository Supporter finder repository
@@ -47,7 +47,7 @@ final class IndexReader
 
     /**
      * Read all informations for the index page
-     * 
+     *
      * @return array<mixed>
      */
     public function read()

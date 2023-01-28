@@ -16,7 +16,7 @@ final class SupporterUpdaterRepository
 
     /**
      * The constructor.
-     * 
+     *
      * @param PDO $pdo PDO connection.
      */
     public function __construct(PDO $pdo)

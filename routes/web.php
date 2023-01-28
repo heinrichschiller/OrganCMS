@@ -20,7 +20,6 @@ return function(App $app)
     $app->group('/donation', function(RouteCollectorProxy $group) {
         $group->get('/', \App\Actions\Donation\DonationBoardAction::class)->setName('donation');
         $group->post('/update', \App\Actions\Donation\DonationUpdateAction::class)->setName('donation');
-        $group->get('/supporter', \App\Actions\Donation\SupporterAction::class);
     })->add(UserAuthMiddleware::class);
 
     $app->group('/events', function(RouteCollectorProxy $group) {
@@ -38,6 +37,15 @@ return function(App $app)
         $group->post('/update', \App\Actions\Post\UpdateAction::class);
         $group->get('/edit/{id}', \App\Actions\Post\ReadAction::class)->setName('read-post');
     })->add(UserAuthMiddleware::class);
+
+    $app->group('/supporter', function(RouteCollectorProxy $group) {
+        $group->get('/', \App\Actions\Supporter\IndexAction::class)->setName('supporter');
+        $group->get('/new', \App\Actions\Supporter\NewSupporterAction::class);
+        $group->get('/edit/{id}', \App\Actions\Supporter\ReadAction::class);
+        $group->get('/delete/{id}', \App\Actions\Supporter\DeleteAction::class);
+        $group->post('/create', \App\Actions\Supporter\CreateAction::class);
+        $group->post('/update', \App\Actions\Supporter\UpdateAction::class);
+    });
 
     $app->group('/users', function(RouteCollectorProxy $group) {
         $group->get('/', \App\Actions\User\UserAction::class)->setName('users');

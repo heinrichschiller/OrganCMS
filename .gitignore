@@ -1,7 +1,13 @@
 .vscode/
 
 composer.lock
+memory
+package-lock.json
 
+/code-coverage/
+/node_modules/
+/public/assets/
+/var/caches/mustache/*
 /var/caches/phpunit/*
 !/var/caches/phpunit/README.md
 /vendor/

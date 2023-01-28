@@ -1,0 +1,72 @@
+{{> admin-header }}
+
+  <div class="min-vh-100 pt-5">
+    {{> admin-navigation}}
+
+    <div class="container-xl mt-3">
+      <h1>Dashboard</h1>
+
+      <div>
+        <hr class="featurete-divider">
+      </div>
+
+      {{> dashboard-modules }}
+
+    </div>
+
+    <div class="container-xl mt-3 mt-xl-5">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Spendenstand</h5>
+
+              {{# donation }}
+              <h6 class="card-subtitle mb-2 text-muted">Von {{ getGermanDate }}</h6>
+              <p class="card-text">Die aktuelle Spendensumme aller Spenden, welche ab dem Jahr 2018 gesammelt wurden, beträgt zusammengefasst {{ getTotal }} €.</p>
+              <a href="#" class="card-link">Neuer Spendenstand</a>
+              <a href="#" class="card-link">Archiv</a>
+              {{/ donation }}
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">pcalehodler</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-xl mt-3 mt-xl-5">
+      <div class="row">
+        <div class="col-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Veranstaltungen</h5>
+
+              {{# donation }}
+              <h6 class="card-subtitle mb-2 text-muted">Von {{ getGermanDate }}</h6>
+              <p class="card-text">Die aktuelle Spendensumme aller Spenden, welche ab dem Jahr 2018 gesammelt wurden, beträgt zusammengefasst {{ getTotal }} €.</p>
+              <a href="/donation/" class="card-link">Neuer Spendenstand</a>
+              <a href="#" class="card-link">Archiv</a>
+              {{/ donation }}
+              
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="card">
+            <div class="card-body">2</div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="card">
+            <div class="card-body">3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    

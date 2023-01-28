@@ -1,0 +1,74 @@
+<form action="/donation/update" method="post" enctype="multipart/form-data">
+          
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <div class="mb-3">
+        <label for="total">Spendenstand in €:</label>
+        <input 
+          type="text"
+          class="form-control"
+          name="total"
+          value="{{ getTotal }}"
+          id="total"
+          required
+        >
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6">
+      <div class="mb-3">
+        <label for="date">Datum:</label>
+        <input 
+          type="date"
+          class="form-control"
+          name="date"
+          value="{{ getDate }}"
+          id="date"
+          required
+        >
+      </div>
+    </div>
+  </div>
+  
+  <div>
+    <hr class="featurete-divider">
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-6 mb-3">
+      <div>
+        <label for="documents" class="form-label">Dokumente hochladen:</label>
+        <input 
+          type="file" 
+          name="documents[]"
+          multiple="multiple"
+          class="form-control" 
+          id="documents"
+        >
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <div class="form-group">
+        <label for="uploaded-files">Hochgeladene dokumente:</label>
+        <ul>
+          <li>Cras justo odio</li>
+          <li>Dapibus ac facilisis in</li>
+          <li>Morbi leo risus</li>
+          <li>Porta ac consectetur ac</li>
+          <li>Vestibulum at eros</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="h5">Letzte aktualisierung von: {{ getUser }}</div>
+
+  <div>
+    <hr class="featurete-divider">
+  </div>
+
+  <div>
+    <button class="btn btn-primary">Speichern</button>
+  </div>
+  
+</form>

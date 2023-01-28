@@ -4,6 +4,12 @@
     {{> admin-navigation }}
 
     <div class="container-xl mt-3">
+      {{# isSuccess }}
+      <div class="alert alert-success" role="alert">
+        {{ message }}
+      </div>
+      {{/ isSuccess }}
+      
       <div class="row">
         <div class="col-8">
           <h1>Unterstützer</h1>

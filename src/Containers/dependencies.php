@@ -14,6 +14,10 @@ use App\Domain\Event\Repository\EventUpdaterRepository;
 use App\Domain\Post\Repository\PostCreatorRepository;
 use App\Domain\Post\Repository\PostFinderRepository;
 use App\Domain\Post\Repository\PostUpdaterRepository;
+use App\Domain\Supporter\Repository\SupporterCreatorRepository;
+use App\Domain\Supporter\Repository\SupporterDeleterRepository;
+use App\Domain\Supporter\Repository\SupporterFinderRepository;
+use App\Domain\Supporter\Repository\SupporterUpdaterRepository;
 use App\Domain\User\Repository\UserAuthRepository;
 use App\Domain\User\Repository\UserReaderRepository;
 use App\Domain\User\Repository\UserUpdaterRepository;
@@ -112,6 +116,30 @@ return function (ContainerBuilder $builder) {
 
         PostUpdaterRepository::class => function (ContainerInterface $container): PostUpdaterRepository {
             return new PostUpdaterRepository(
+                $container->get(PDOFactory::class)
+            );
+        },
+
+        SupporterCreatorRepository::class => function (ContainerInterface $container): SupporterCreatorRepository {
+            return new SupporterCreatorRepository(
+                $container->get(PDOFactory::class)
+            );
+        },
+
+        SupporterFinderRepository::class => function (ContainerInterface $container): SupporterFinderRepository {
+            return new SupporterFinderRepository(
+                $container->get(PDOFactory::class)
+            );
+        },
+
+        SupporterUpdaterRepository::class => function (ContainerInterface $container): SupporterUpdaterRepository {
+            return new SupporterUpdaterRepository(
+                $container->get(PDOFactory::class)
+            );
+        },
+
+        SupporterDeleterRepository::class => function (ContainerInterface $container): SupporterDeleterRepository {
+            return new SupporterDeleterRepository(
                 $container->get(PDOFactory::class)
             );
         },

@@ -18,6 +18,25 @@ $settings['error'] = [
     'log_error_details' => true,
 ];
 
-$settings['db'] = [];
+$settings['mustache'] = [
+    'cache' => __DIR__ . '/../var/caches/mustache',
+    'charset' => 'UTF-8',
+    'escape' => function (string $var) {
+        return htmlspecialchars($var, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    },
+    'loader' => new Mustache_Loader_FilesystemLoader(
+        __DIR__ . '/../templates/',
+        ['extension' => '.html']
+    ),
+    'partials_loader' => new Mustache_Loader_FilesystemLoader(
+        __DIR__ . '/../templates/partials',
+        ['extension' => '.html']
+    )
+];
+
+$settings['db'] = [
+    'driver' => 'pdo_sqlite',
+    'path' => __DIR__ . '/../data/donations.db',
+];
 
 return $settings;

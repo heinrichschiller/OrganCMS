@@ -10,4 +10,5 @@ package-lock.json
 /var/caches/mustache/*
 /var/caches/phpunit/*
 !/var/caches/phpunit/README.md
+/var/logs/
 /vendor/

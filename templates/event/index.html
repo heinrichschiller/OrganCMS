@@ -4,18 +4,14 @@
     {{> admin-navigation }}
 
     <div class="container-xl mt-3">
-      {{# isSuccess }}
-      <div class="alert alert-success" role="alert">
-        {{ message }}
-      </div>
-      {{/ isSuccess }}
+      {{> flash}}
 
       <div class="row">
         <div class="col-8">
           <h1>Öffentliche Veranstaltungen</h1>
         </div>
         <div class="col-4">
-          <a href="/events/new" 
+          <a href="/event/new" 
             class="btn btn-primary float-end" 
             data-bs-toggle="tooltip"
             data-bs-placement="left"
@@ -40,8 +36,10 @@
           </thead>
           <tbody>
             {{# events }}
-            <tr class="clickable-row" data-href="/events/update/{{ getId }}">
-              <th scope="row"></th>
+            <tr>
+              <th scope="row">
+                <a href="/event/read/{{ getId }}">Bearbeiten</a>
+              </th>
               <td>{{ getEventDateFormated }}</td>
               <td>{{ getTitle }}</td>
               <td>{{ getCreatedAtFormated }}</td>

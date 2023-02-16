@@ -18,7 +18,7 @@
       <hr class="featurete-divider">
     </div>
 
-    <form action="/events/update" method="post" enctype="multipart/form-data">
+    <form action="/event/update" method="post" enctype="multipart/form-data">
       <div class="mb-3">
         <label for="eventTitle" class="form-label">Event-Titel:</label>
         <input type="text" 
@@ -98,7 +98,9 @@
       <input type="hidden" name="id" value="{{ getId }}">
 
       <button class="btn btn-primary" type="submit">Speichern</button>
+      <a href="/event/delete/{{ getId }}" class="btn btn-warning">Löschen</a>
     </form>
+    
   </div>
 
   {{/ event }}

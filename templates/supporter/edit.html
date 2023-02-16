@@ -18,7 +18,8 @@
           name="name" 
           value="{{ getName }}"
           class="form-control" 
-          id="supporterName" 
+          id="supporterName"
+          autofocus
           required
         >
       </div>
@@ -27,7 +28,12 @@
         <label for="publish" class="form-check-label">Veröffentlichen. Wenn nicht aktiviert, wird der Beitrag nicht öffentlich angezeigt.
           Dies ist nützlich wenn sie ein Beitrag noch Bearbeiten, Speichern aber noch nicht veröffentlichen wollen.
         </label>
+        {{# isPublished }}
+        <input class="form-check-input" type="checkbox" name="publish" role="switch" id="publish" checked>
+        {{/ isPublished }}
+        {{^ isPublished }}
         <input class="form-check-input" type="checkbox" name="publish" role="switch" id="publish">
+        {{/ isPublished }}
       </div>
       
       <div>
@@ -38,6 +44,8 @@
       <a href="/supporter/delete/{{ getId }}" class="btn btn-warning">Löschen</a>
 
       <input type="hidden" name="id" value="{{ getId }}">
+      <input type="hidden" name="published_at" value="{{ getPublishedAt }}">
+      <input type="hidden" name="created_at" value="{{ getCreatedAt }}">
     </form>
     {{/ supporter }}
 

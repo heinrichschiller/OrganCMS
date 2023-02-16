@@ -10,13 +10,14 @@
       <hr class="featurete-divider">
     </div>
 
-    <form action="/events/create" method="post" enctype="multipart/form-data">
+    <form action="/event/create" method="post" enctype="multipart/form-data">
       <div class="mb-3">
         <label for="eventTitle" class="form-label">Event-Titel:</label>
         <input type="text" 
           name="title" 
           class="form-control" 
-          id="eventTitle" 
+          id="eventTitle"
+          autofocus
           required
         >
       </div>

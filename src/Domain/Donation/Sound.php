@@ -7,16 +7,16 @@ namespace App\Domain\Donation;
 final class Sound
 {
     /**
-     * The constructor
+     * The constructor.
      *
-     * @param readonly int $id
-     * @param readonly string $name
-     * @param readonly int $price
+     * @param int|null $id
+     * @param string|null $name
+     * @param int|null $price
      */
     public function __construct(
-        public readonly int $id,
-        public readonly string $name,
-        public readonly int $price
+        public readonly ?int $id = null,
+        public readonly ?string $name = null,
+        public readonly ?int $price = null
     ) {
     }
 }

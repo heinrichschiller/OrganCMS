@@ -7,18 +7,28 @@ namespace App\Domain\Home\Service;
 use App\Domain\Donation\Service\DonationDetailsReader;
 use App\Domain\Post\Service\PostFinder;
 use App\Domain\Supporter\Service\SupporterFinder;
+use App\Factory\LoggerFactory;
+use Error;
+use Exception;
+use Psr\Log\LoggerInterface;
 
 final class HomeReader
 {
     /**
      * @Injection
-     * @var DonationBoardReaderRepository
+     * @var LoggerInterface
+     */
+    private LoggerInterface $logger;
+
+    /**
+     * @Injection
+     * @var DonationDetailsReader
      */
     private DonationDetailsReader $reader;
 
     /**
      * @Injection
-     * @var PostFinderRepository
+     * @var PostFinder
      */
     private PostFinder $postFinder;
 
@@ -31,15 +41,18 @@ final class HomeReader
     /**
      * The contstructor.
      *
+     * @param LoggerFactory $loggerFactory Monolog logger factory
      * @param DonationDetailsReader $reader Donation board reader service
      * @param PostFinder $postFinder Post finder service
-     * @param SupporterFinderRepository $supporterRepository Supporter finder repository
+     * @param SupporterFinder $supporterFinder Supporter finder service
      */
     public function __construct(
+        LoggerFactory $loggerFactory,
         DonationDetailsReader $reader,
         PostFinder $postFinder,
         SupporterFinder $supporterFinder
     ) {
+        $this->logger = $loggerFactory->addFileHandler('error.log')->createLogger();
         $this->reader = $reader;
         $this->postFinder = $postFinder;
         $this->supporterFinder = $supporterFinder;
@@ -52,14 +65,24 @@ final class HomeReader
      */
     public function read(): array
     {
-        $donation = $this->reader->read();
-        $publishedPost = $this->postFinder->findMainpagePost();
-        $supporter = $this->supporterFinder->findAllPublicSupporter();
-
-        return [
-            'donation' => $donation,
-            'post' => $publishedPost,
-            'supporter' => $supporter
-        ];
+        try {
+            $donation = $this->reader->read();
+            $publishedPost = $this->postFinder->findMainpagePost();
+            $supporter = $this->supporterFinder->findAllPublicSupporter();
+    
+            return [
+                'donation' => $donation,
+                'post' => $publishedPost,
+                'supporter' => $supporter
+            ];
+        } catch (Exception $e) {
+            $this->logger->error(sprintf("SupportFinder->reader(): %s", $e->getMessage()));
+            
+            return [];
+        } catch (Error $e) {
+            $this->logger->error(sprintf("SupportFinder->reader(): %s", $e->getMessage()));
+            
+            return [];
+        }
     }
 }

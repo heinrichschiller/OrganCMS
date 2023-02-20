@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
+use Odan\Session\Middleware\SessionStartMiddleware;
 use Slim\App;
+use Slim\Middleware\ErrorMiddleware;
 
 /*
  *----------------------------------------------------------------------------
@@ -25,9 +27,15 @@ return function (App $app) {
      *----------------------------------------------------------------------------
      * Parse json, form data and xml
      *----------------------------------------------------------------------------
-     *
      */
     $app->addBodyParsingMiddleware();
+
+    /*
+     *----------------------------------------------------------------------------
+     * Add odan session
+     *----------------------------------------------------------------------------
+     */
+    $app->add(SessionStartMiddleware::class);
 
     /*
      *----------------------------------------------------------------------------
@@ -41,5 +49,5 @@ return function (App $app) {
      * Catch exceptions and errors
      *----------------------------------------------------------------------------
      */
-    $app->addErrorMiddleware(true, true, true);
+    $app->add(ErrorMiddleware::class);
 };

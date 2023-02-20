@@ -18,6 +18,14 @@ $settings['error'] = [
     'log_error_details' => true,
 ];
 
+$settings['logger'] = [
+    // 'name' => 'OrganCMS',
+    'path' => __DIR__ . '/../var/logs/',
+    // 'filename' => 'OrganCMS.log',
+    'level' => \Monolog\Level::Debug,
+    'file_permission' => 0775,
+];
+
 $settings['mustache'] = [
     'cache' => __DIR__ . '/../var/caches/mustache',
     'charset' => 'UTF-8',
@@ -37,6 +45,22 @@ $settings['mustache'] = [
 $settings['db'] = [
     'driver' => 'pdo_sqlite',
     'path' => __DIR__ . '/../data/donations.db',
+];
+
+$settings['session'] = [
+    'name' => 'organcms',
+    'lifetime' => 7200,
+    'path' => null,
+    'domain' => null,
+    'secure' => false,
+    'httponly' => true,
+    'cache_limiter' => 'nocache',
+];
+
+$settings['file_upload'] = [
+    'dirs' => [
+        'files_directory' => __DIR__ . '/../public/assets/files',
+    ]
 ];
 
 return $settings;

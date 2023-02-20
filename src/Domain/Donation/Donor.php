@@ -74,7 +74,7 @@ class Donor
     /**
      * Set given name
      *
-     * @param string
+     * @param string $givenName
      */
     public function setGivenName(string $givenName): void
     {
@@ -94,7 +94,7 @@ class Donor
     /**
      * Set street
      *
-     * @param string
+     * @param string $street
      */
     public function setStreet(string $street): void
     {
@@ -164,7 +164,7 @@ class Donor
     /**
      * Set phone number
      *
-     * @return string
+     * @param string $phoneNumber
      */
     public function setPhoneNumber(string $phoneNumber): void
     {

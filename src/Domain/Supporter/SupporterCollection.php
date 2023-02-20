@@ -14,7 +14,7 @@ use Traversable;
 final class SupporterCollection implements IteratorAggregate
 {
     /**
-     * @var Supporter[]
+     * @var array<Supporter>
      */
     private array $list = [];
 
@@ -23,9 +23,9 @@ final class SupporterCollection implements IteratorAggregate
      *
      * @param Supporter $supporter Supporter.
      */
-    public function add(Supporter $post): void
+    public function add(Supporter $supporter): void
     {
-        $this->list[] = $post;
+        $this->list[] = $supporter;
     }
 
     /**

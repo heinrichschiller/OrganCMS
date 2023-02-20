@@ -11,7 +11,7 @@ final class Supporter
      *
      * @param int $id Supporter id.
      * @param string $name Supporter name.
-     * @param bool isPublished Is supporter published.
+     * @param bool $isPublished Is supporter published.
      * @param string $publishedAt
      * @param string $createdAt
      * @param string|null $updatedAt

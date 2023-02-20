@@ -46,7 +46,7 @@ final class SupporterFinder
     public function findAll(): SupporterCollection|null
     {
         try {
-            $supporterList = $this->repository->findAll();
+            $supporterList = (array) $this->repository->findAll();
 
             if (!empty($supporterList)) {
                 $collection = new SupporterCollection;
@@ -74,7 +74,7 @@ final class SupporterFinder
         } catch (Error $e) {
             $this->logger->error(sprintf("SupportFinder->delete(): %s", $e->getMessage()));
 
-            return false;
+            return null;
         }
     }
 
@@ -86,7 +86,7 @@ final class SupporterFinder
     public function findAllPublicSupporter(): SupporterCollection|null
     {
         try {
-            $supporterList = $this->repository->findAllPublicSupporter();
+            $supporterList = (array) $this->repository->findAllPublicSupporter();
 
             if (!empty($supporterList)) {
                 $collection = new SupporterCollection;
@@ -105,10 +105,15 @@ final class SupporterFinder
         
                 return $collection;
             }
-    
+
             return null;
         } catch (Exception $e) {
             $this->logger->error(sprintf("SupportFinder->findAllPublicSupporter(): %s", $e->getMessage()));
+
+            return null;
+        } catch (Error $e) {
+            $this->logger->error(sprintf("SupportFinder->findAllPublicSupporter(): %s", $e->getMessage()));
+            
             return null;
         }
     }
@@ -123,7 +128,7 @@ final class SupporterFinder
     public function findById(int $id): Supporter|null
     {
         try {
-            $supporterItem = $this->repository->findById($id);
+            $supporterItem = (array) $this->repository->findById($id);
 
             if (!empty($supporterItem)) {
                 $supporter = new Supporter(
@@ -141,7 +146,8 @@ final class SupporterFinder
             return null;
         } catch (Exception $e) {
             $this->logger->error(sprintf("SupportFinder->findById(): %s", $e->getMessage()));
-            return 0;
+            
+            return null;
         }
     }
 }

@@ -39,7 +39,7 @@ final class UserAuthRepository
     /**
      * Authenticate user
      *
-     * @param string $identify      User identifier (username, email, etc)
+     * @param string $identity      User identifier (username, email, etc)
      * @param string $credentials   User password
      */
     public function authenticate(string $identity, string $credentials): void

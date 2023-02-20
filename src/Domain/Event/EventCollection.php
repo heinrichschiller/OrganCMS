@@ -14,14 +14,14 @@ use Traversable;
 final class EventCollection implements IteratorAggregate
 {
     /**
-     * @var Post[]
+     * @var array<Event>
      */
     private array $list = [];
 
     /**
-     * Add a new Post to collection.
+     * Add a new event to collection.
      *
-     * @param Post $post The news post.
+     * @param Event $event Event entry.
      */
     public function add(Event $event): void
     {

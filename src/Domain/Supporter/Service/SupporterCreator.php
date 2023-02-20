@@ -22,7 +22,7 @@ final class SupporterCreator
 
     /**
      * @Injection
-     * @var SupporterCreatorRepositor
+     * @var SupporterCreatorRepository
      */
     private SupporterCreatorRepository $repository;
 
@@ -67,9 +67,9 @@ final class SupporterCreator
         $updatedAt = '';
 
         $supporter = new Supporter(
-            0,
-            $title,
-            $isPublished,
+            null,
+            $formData['title'],
+            (bool) $isPublished,
             $publishedAt,
             $createdAt,
             $updatedAt

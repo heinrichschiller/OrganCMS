@@ -9,7 +9,7 @@ class DonationFormular
     /**
      * @var float
      */
-    private float  $oneTimeDonationAmount = 0.0;
+    private float $oneTimeDonationAmount = 0.0;
 
     /**
      * @var bool
@@ -42,7 +42,7 @@ class DonationFormular
     private bool $isGift = false;
 
     /**
-     * @var string
+     * @var array
      */
     private array $namesOfGiftRecipients = [];
 
@@ -59,7 +59,7 @@ class DonationFormular
     /**
      * Get one time donation amount
      *
-     * @return bool
+     * @return float
      */
     public function getOneTimeDonationAmount(): float
     {
@@ -69,7 +69,7 @@ class DonationFormular
     /**
      * Set one time donation amount
      *
-     * @return bool
+     * @return void
      */
     public function setOneTimeDonationAmount(float $amount): void
     {
@@ -90,7 +90,7 @@ class DonationFormular
     /**
      * Set wish pipe
      *
-     * @param string $wishPipe
+     * @param bool $isWishPipe
      */
     public function setWishPipe(bool $isWishPipe): void
     {
@@ -110,7 +110,7 @@ class DonationFormular
     /**
      * Set whistle sound
      *
-     * @param string $ound
+     * @param string $sound
      */
     public function setSound(string $sound): void
     {
@@ -130,7 +130,7 @@ class DonationFormular
     /**
      * Set whistle register
      *
-     * @param string
+     * @param string $register
      */
     public function setRegister(string $register): void
     {
@@ -150,7 +150,7 @@ class DonationFormular
     /**
      * Set whistle work
      *
-     * @param null|string $work
+     * @param string $work
      */
     public function setWork(string $work): void
     {
@@ -210,7 +210,7 @@ class DonationFormular
     /**
      * Set name of the gift recipient
      *
-     * @param string $names
+     * @param array $names
      */
     public function setNamesOfGiftRecipients(array $names): void
     {
@@ -220,7 +220,7 @@ class DonationFormular
     /**
      * Is a donation receipt
      *
-     * @var bool
+     * @return bool
      */
     public function isDonationCertificate(): bool
     {
@@ -230,7 +230,7 @@ class DonationFormular
     /**
      * Set donation receipt
      *
-     * @param bool $isDonationReceipt
+     * @param bool $certificate
      */
     public function setDonationCertificate(bool $certificate): void
     {
@@ -250,7 +250,7 @@ class DonationFormular
     /**
      * Set Agree
      *
-     * @param bool $isAgree
+     * @param bool $consent
      */
     public function setConsent(bool $consent): void
     {

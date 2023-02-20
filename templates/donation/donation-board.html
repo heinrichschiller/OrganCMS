@@ -4,11 +4,7 @@
     {{> admin-navigation }}
 
     <div class="container-xl mt-3">
-      {{# isSuccess }}
-        <div class="alert alert-success" role="alert">
-          {{ message }}
-        </div>
-      {{/ isSuccess }}
+      {{> flash }}
 
       <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">

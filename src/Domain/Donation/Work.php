@@ -9,12 +9,12 @@ final class Work
     /**
      * The constructor
      *
-     * @param readonly int $id
-     * @param readonly string $name Work name
+     * @param int|null $id
+     * @param string|null $name Work name
      */
     public function __construct(
-        public readonly int $id,
-        public readonly string $name
+        public readonly ?int $id = null,
+        public readonly ?string $name = null
     ) {
     }
 }

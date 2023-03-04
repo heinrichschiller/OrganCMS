@@ -8,6 +8,7 @@ use Slim\Routing\RouteCollectorProxy;
 
 return function (App $app) {
     $app->get('/', \App\Action\Home\HomeAction::class);
+    $app->get('/blog/{id}/{slug}.html', \App\Action\Post\ReadSinglePublicPostAction::class);
     $app->get('/datenschutzerklaerung.html', \App\Action\Dsgvo\DsgvoAction::class);
     $app->get('/gallerie.html', \App\Action\Gallery\GalleryAction::class);
     $app->get('/impressum.html', \App\Action\Imprint\ImprintAction::class);

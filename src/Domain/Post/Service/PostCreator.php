@@ -65,6 +65,7 @@ final class PostCreator
         $content = $formData['content'];
         $author = '';
         $onMainpage = (bool) isset($formData['on_mainpage']) ?: false;
+        $publishedAt = !empty($formData['published_at']) ? date('Y-m-d H:i:s') : '';
         $publish = (bool) isset($formData['publish']) ?: false;
         $createdAt = date('Y-m-d H:i:s');
 
@@ -75,7 +76,7 @@ final class PostCreator
             $content,
             $author,
             $onMainpage,
-            '',                        // published date
+            $publishedAt,
             $publish,
             $createdAt,
             ''                         // updated at
@@ -105,8 +106,9 @@ final class PostCreator
      */
     private function slug(string $title): string
     {
-        $text = str_replace(['\'', '"'], "", $title);
+        $text = str_replace(['\'', '"', '?', '!'], '', $title);
         $text = str_replace(' ', '-', $text);
+        $text = $text . '.html';
 
         return strtolower($text);
     }

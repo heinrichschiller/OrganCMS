@@ -19,7 +19,7 @@ final class Supporter
     public function __construct(
         private ?int $id = null,
         private ?string $name = null,
-        private ?bool $isPublished = null,
+        private bool $isPublished = false,
         private ?string $publishedAt = null,
         private ?string $createdAt = null,
         private ?string $updatedAt = null,
@@ -30,9 +30,9 @@ final class Supporter
     /**
      * Get supporter id.
      *
-     * @return int $id Supporter id.
+     * @return int|null $id Supporter id.
      */
-    public function getId(): int
+    public function getId(): int|null
     {
         return $this->id;
     }
@@ -40,9 +40,9 @@ final class Supporter
     /**
      * Get supporter name
      *
-     * @return string $name Supporter name.
+     * @return string|null $name Supporter name.
      */
-    public function getName(): string
+    public function getName(): string|null
     {
         return $this->name;
     }
@@ -50,11 +50,13 @@ final class Supporter
     /**
      * Set supporter name
      *
-     * @param string $name Supporter name.
+     * @param string|null $name Supporter name.
      */
-    private function setName(string $name): void
+    private function setName(string|null $name): void
     {
-        $name = trim($name, " \n\r\t\v\0");
+        if (null !== $name) {
+            $name = trim($name, " \n\r\t\v\0");
+        }
 
         $this->name = $name;
     }
@@ -72,9 +74,9 @@ final class Supporter
     /**
      * Get published date.
      *
-     * @return string $publishedAt Published date
+     * @return string|null $publishedAt Published date
      */
-    public function getPublishedAt(): string
+    public function getPublishedAt(): string|null
     {
         return $this->publishedAt;
     }
@@ -82,9 +84,9 @@ final class Supporter
     /**
      * Get created date.
      *
-     * @return string $createdAt Get created date
+     * @return string|null $createdAt Get created date
      */
-    public function getCreatedAt(): string
+    public function getCreatedAt(): string|null
     {
         return $this->createdAt;
     }

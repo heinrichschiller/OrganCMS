@@ -66,13 +66,17 @@ final class HomeReader
     public function read(): array
     {
         try {
+            $limit = 3;
+
             $donation = $this->reader->read();
             $publishedPost = $this->postFinder->findMainpagePost();
+            $mainpagePosts = $this->postFinder->findAllMainpagePosts($limit);
             $supporter = $this->supporterFinder->findAllPublicSupporter();
     
             return [
                 'donation' => $donation,
                 'post' => $publishedPost,
+                'mainpagepost' => $mainpagePosts,
                 'supporter' => $supporter
             ];
         } catch (Exception $e) {

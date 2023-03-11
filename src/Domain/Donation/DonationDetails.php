@@ -14,9 +14,9 @@ final class DonationDetails
      * @param string $user Author
      */
     public function __construct(
-        private string $total,
-        private string $date,
-        private string $user
+        private ?string $total = null,
+        private ?string $date = null,
+        private ?string $user = null
     ) {
         $this->setTotal($total);
         $this->setDate($date);
@@ -26,9 +26,9 @@ final class DonationDetails
     /**
      * Get total sum
      *
-     * @return string
+     * @return string|null
      */
-    public function getTotal(): string
+    public function getTotal(): string|null
     {
         return $this->total;
     }
@@ -36,21 +36,23 @@ final class DonationDetails
     /**
      * Set total sum
      *
-     * @param string $total
+     * @param string $total|null
      */
-    public function setTotal(string $total): void
+    private function setTotal(string|null $total): void
     {
-        $total = trim($total, " \n\r\t\v\0");
+        if (null !== $total) {
+            $total = trim($total, " \n\r\t\v\0");
+        }
 
         $this->total = $total;
     }
 
     /**
-     * Get date
+     * Get date.
      *
-     * @return string
+     * @return string|null
      */
-    public function getDate(): string
+    public function getDate(): string|null
     {
         return $this->date;
     }
@@ -58,11 +60,13 @@ final class DonationDetails
     /**
      * Set date
      *
-     * @param string $date
+     * @param string|null $date
      */
-    public function setDate(string $date): void
+    private function setDate(string|null $date): void
     {
-        $date = trim($date, " \n\r\t\v\0");
+        if (null !== $date) {
+            $date = trim($date, " \n\r\t\v\0");
+        }
         
         $this->date = $date;
     }
@@ -70,27 +74,30 @@ final class DonationDetails
     /**
      * Get user
      *
-     * @return string $user
+     * @return string|null $user
      */
-    public function getUser(): string
+    public function getUser(): string|null
     {
         return $this->user;
     }
 
     /**
-     * Set user
+     * Set user.
      *
-     * @param string $user
+     * @param string|null $user
      */
-    public function setUser(string $user): void
+    private function setUser(string|null $user): void
     {
-        $user = trim($user, " \n\r\t\v\0");
+        if (null !== $user) {
+            $user = trim($user, " \n\r\t\v\0");
+        }
 
         $this->user = $user;
     }
 
     /**
-     * Get german date
+     * Get german date.
+     *
      * @return string
      */
     public function getGermanDate(): string

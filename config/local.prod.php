@@ -1,7 +1,7 @@
 <?php
 
 return function (array $settings): array {
-    $settings['db']['database'] = 'slim_skeleton';
+    $settings['db']['path'] = __DIR__ . '/../data/donations.db';
 
     return $settings;
 };

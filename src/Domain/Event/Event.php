@@ -45,9 +45,9 @@ final class Event
     /**
      * Get id.
      *
-     * @return int
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): int|null
     {
         return $this->id;
     }
@@ -57,7 +57,7 @@ final class Event
      *
      * @param int|null $id
      */
-    public function setId(int|null $id): void
+    private function setId(int|null $id): void
     {
         $this->id = $id;
     }
@@ -65,9 +65,9 @@ final class Event
     /**
      * Get title.
      *
-     * @return string
+     * @return string|null
      */
-    public function getTitle(): string
+    public function getTitle(): string|null
     {
         return $this->title;
     }
@@ -75,21 +75,24 @@ final class Event
     /**
      * Set title.
      *
-     * @param string $title
+     * @param string|null $title
      */
-    public function setTitle(string $title): void
+    private function setTitle(string|null $title): void
     {
-        $title = trim($title, " \n\r\t\v\0");
-
-        $this->title = ucfirst($title);
+        if (null !== $title) {
+            $title = trim($title, " \n\r\t\v\0");
+            $title = ucfirst($title);
+        }
+        
+        $this->title = $title;
     }
 
     /**
      * Get place.
      *
-     * @return string
+     * @return string|null
      */
-    public function getPlace(): string
+    public function getPlace(): string|null
     {
         return $this->place;
     }
@@ -97,21 +100,24 @@ final class Event
     /**
      * Set place.
      *
-     * @param string $place
+     * @param string|null $place
      */
-    public function setPlace(string $place): void
+    private function setPlace(string|null $place): void
     {
-        $place = trim($place);
-
-        $this->place = ucfirst($place);
+        if (null !== $place) {
+            $place = trim($place);
+            $place = ucfirst($place);
+        }
+        
+        $this->place = $place;
     }
 
     /**
      * Get description.
      *
-     * @return string
+     * @return string|null
      */
-    public function getDesc(): string
+    public function getDesc(): string|null
     {
         return $this->desc;
     }
@@ -119,9 +125,9 @@ final class Event
     /**
      * Set description.
      *
-     * @param string $desc
+     * @param string|null $desc
      */
-    public function setDesc(string $desc): void
+    private function setDesc(string|null $desc): void
     {
         $this->desc = $desc;
     }
@@ -129,9 +135,9 @@ final class Event
     /**
      * Get event date.
      *
-     * @return string
+     * @return string|null
      */
-    public function getEventDate(): string
+    public function getEventDate(): string|null
     {
         return $this->eventDate;
     }
@@ -151,9 +157,9 @@ final class Event
     /**
      * Set event date.
      *
-     * @param string $date
+     * @param string|null $date
      */
-    public function setEventDate(string $date): void
+    private function setEventDate(string|null $date): void
     {
         $this->eventDate = $date;
     }
@@ -161,9 +167,9 @@ final class Event
     /**
      * Event is published.
      *
-     * @return bool
+     * @return bool|null
      */
-    public function isPublished(): bool
+    public function isPublished(): bool|null
     {
         return $this->isPublished;
     }
@@ -171,9 +177,9 @@ final class Event
     /**
      * Set published status.
      *
-     * @param bool $published
+     * @param bool|null $published
      */
-    public function setIsPublished(bool $published): void
+    private function setIsPublished(bool|null $published): void
     {
         $this->isPublished = $published;
     }
@@ -191,9 +197,9 @@ final class Event
     /**
      * Set date of the published event.
      *
-     * @param string $currentDate
+     * @param string|null $currentDate
      */
-    public function setPublishedOn(string $currentDate): void
+    private function setPublishedOn(string|null $currentDate): void
     {
         $this->publishedOn = $currentDate;
     }
@@ -201,9 +207,9 @@ final class Event
     /**
      * Get the date when an event was created.
      *
-     * @return string
+     * @return string|null
      */
-    public function getCreatedAt(): string
+    public function getCreatedAt(): string|null
     {
         return $this->createdAt = '';
     }
@@ -211,9 +217,9 @@ final class Event
     /**
      * Get the formated date when an event was created.
      *
-     * @return string
+     * @return string|null
      */
-    public function getCreatedAtFormated(): string
+    public function getCreatedAtFormated(): string|null
     {
         $date = new DateTime($this->createdAt);
 
@@ -225,7 +231,7 @@ final class Event
      *
      * @param string|null $date
      */
-    public function setCreatedAt(string|null $date): void
+    private function setCreatedAt(string|null $date): void
     {
         $this->createdAt = $date;
     }
@@ -233,9 +239,9 @@ final class Event
     /**
      * Get the date when an event was created.
      *
-     * @return string
+     * @return string|null
      */
-    public function getUpdatedAt(): string
+    public function getUpdatedAt(): string|null
     {
         return $this->createdAt = '';
     }
@@ -255,9 +261,9 @@ final class Event
     /**
      * Set created date
      *
-     * @param string $date
+     * @param string|null $date
      */
-    public function setUpdatedAt(string $date): void
+    private function setUpdatedAt(string|null $date): void
     {
         $this->createdAt = $date;
     }

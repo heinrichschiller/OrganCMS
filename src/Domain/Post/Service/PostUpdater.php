@@ -75,10 +75,12 @@ final class PostUpdater
             $formData['is_published'] = '';
         }
 
+        $slug = $this->slug($formData['title']);
+
         $post = new Post(
             (int) $formData['id'],
             $formData['title'],
-            $formData['slug'],
+            $slug,
             $formData['content'],
             $formData['author'],
             (bool) $formData['on_mainpage'],
@@ -101,6 +103,22 @@ final class PostUpdater
             
             return false;
         }
+    }
+
+    /**
+     * Create a slug by a post title.
+     *
+     * @param string $title Post title
+     *
+     * @return string
+     */
+    private function slug(string $title): string
+    {
+        $text = str_replace(['\'', '"', '?', '!'], '', $title);
+        $text = str_replace(' ', '-', $text);
+        $text = $text . '.html';
+
+        return strtolower($text);
     }
 
     /**

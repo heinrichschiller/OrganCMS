@@ -13,9 +13,9 @@ final class Post
      * @param string|null $title Post title.
      * @param string|null $slug Post slug.
      * @param string|null $content Post content.
-     * @param bool|null $onMainpage Show this Post on Mainpage.
+     * @param bool $onMainpage Show this Post on Mainpage.
      * @param string|null $publishedAt Post published date.
-     * @param bool|null $isPublished Post is published or not.
+     * @param bool $isPublished Post is published or not.
      * @param string|null $author Author.
      * @param string|null $createdAt Post creation date.
      * @param string|null $updatedAt Post update date.
@@ -29,8 +29,8 @@ final class Post
         private ?bool $onMainpage = null,
         private ?string $publishedAt = null,
         private ?bool $isPublished = null,
-        private ?string $createdAt = '',
-        private ?string $updatedAt = ''
+        private ?string $createdAt = null,
+        private ?string $updatedAt = null
     ) {
         $this->setTitle($title);
     }
@@ -38,9 +38,9 @@ final class Post
     /**
      * Get id.
      *
-     * @return int
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): int|null
     {
         return $this->id;
     }
@@ -48,9 +48,9 @@ final class Post
     /**
      * Get title.
      *
-     * @return string
+     * @return string|null
      */
-    public function getTitle(): string
+    public function getTitle(): string|null
     {
         return $this->title;
     }
@@ -58,56 +58,94 @@ final class Post
     /**
      * Set title.
      *
-     * @param string $title Post title.
+     * @param string|null $title Post title.
      */
-    private function setTitle(string $title): void
+    private function setTitle(string|null $title): void
     {
-        $title = trim($title, " \n\r\t\v\0");
+        if (null !== $title) {
+            $title = trim($title, " \n\r\t\v\0");
+            $title = ucfirst($title);
+        }
 
-        $this->title = ucfirst($title);
+        $this->title = $title;
     }
 
     /**
      * Get slug.
      *
-     * @return string
+     * @return string|null
      */
-    public function getSlug(): string
+    public function getSlug(): string|null
     {
         return $this->slug;
     }
 
-    public function getContent(): string
+    /**
+     * Get content.
+     *
+     * @return string|null
+     */
+    public function getContent(): string|null
     {
         return $this->content;
     }
 
-    public function getAuthor(): string
+    /**
+     * Get author.
+     *
+     * @return string|null
+     */
+    public function getAuthor(): string|null
     {
         return $this->author;
     }
 
+    /**
+     * On mainpage.
+     *
+     * @return bool
+     */
     public function onMainpage(): bool
     {
         return $this->onMainpage;
     }
 
-    public function getPublishedAt(): string
+    /**
+     * Get published at.
+     *
+     * @return string|null
+     */
+    public function getPublishedAt(): string|null
     {
         return $this->publishedAt;
     }
 
+    /**
+     * Is published.
+     *
+     * @return bool
+     */
     public function isPublished(): bool
     {
         return $this->isPublished;
     }
 
-    public function getCreatedAt(): string
+    /**
+     * Get created at.
+     *
+     * @return string|null
+     */
+    public function getCreatedAt(): string|null
     {
         return $this->createdAt;
     }
 
-    public function getUpdatedAt(): string
+    /**
+     * Get updated at.
+     *
+     * @return string|null
+     */
+    public function getUpdatedAt(): string|null
     {
         return $this->updatedAt;
     }

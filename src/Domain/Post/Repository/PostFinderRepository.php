@@ -100,6 +100,39 @@ final class PostFinderRepository
     }
 
     /**
+     * Find all public posts
+     *
+     * @param int $limit
+     *
+     * @return array
+     */
+    public function findAllMainpagePosts(int $limit): array
+    {
+        $result = $this->connection
+            ->createQueryBuilder()
+            ->select(
+                'id',
+                'title',
+                'slug',
+                'content',
+                'author',
+                'on_mainpage',
+                'published_at',
+                'is_published',
+                'created_at',
+                'updated_at'
+            )
+            ->from('posts')
+            ->where("is_published = 'on'")
+            ->orderBy('published_at', 'DESC')
+            ->setMaxResults($limit)
+            ->executeQuery()
+            ->fetchAllAssociative() ?: [];
+
+        return $result;
+    }
+
+    /**
      * Find a post that is showing on mainpage
      *
      * @return array

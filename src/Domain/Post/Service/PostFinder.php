@@ -205,4 +205,43 @@ final class PostFinder
             return false;
         }
     }
+
+    public function findAllMainpagePosts(int $limit): PostCollection
+    {
+        try {
+            $postList = (array) $this->repository->findAllMainpagePosts($limit);
+
+            if (!empty($postList)) {
+                $collection = new PostCollection;
+                foreach ($postList as $postItem) {
+                    $post = new Post(
+                        (int) $postItem['id'],
+                        $postItem['title'],
+                        $postItem['slug'],
+                        $postItem['content'],
+                        $postItem['author'],
+                        (bool) $postItem['on_mainpage'],
+                        $postItem['published_at'],
+                        (bool) $postItem['is_published'],
+                        $postItem['created_at'],
+                        $postItem['updated_at']
+                    );
+
+                    $collection->add($post);
+                }
+
+                return $collection;
+            }
+
+            return null;
+        } catch (Exception $e) {
+            $this->logger->error(sprintf("PostFinder->findAllPublicPosts(): %s", $e->getMessage()));
+
+            return null;
+        } catch (Error $e) {
+            $this->logger->error(sprintf("SupportFinder->delete(): %s", $e->getMessage()));
+            
+            return false;
+        }
+    }
 }

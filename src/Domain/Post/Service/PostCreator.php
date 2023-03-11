@@ -107,6 +107,11 @@ final class PostCreator
     private function slug(string $title): string
     {
         $text = str_replace(['\'', '"', '?', '!'], '', $title);
+
+        $text = str_replace('ä', 'ae', $title);
+        $text = str_replace('ö', 'oe', $title);
+        $text = str_replace('ü', 'ue', $title);
+
         $text = str_replace(' ', '-', $text);
         $text = $text . '.html';
 

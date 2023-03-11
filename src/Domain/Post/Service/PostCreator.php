@@ -65,7 +65,7 @@ final class PostCreator
         $content = $formData['content'];
         $author = '';
         $onMainpage = (bool) isset($formData['on_mainpage']) ?: false;
-        $publishedAt = !empty($formData['published_at']) ? date('Y-m-d H:i:s') : '';
+        $publishedAt = isset($formData['published_at']) ? date('Y-m-d H:i:s') : '';
         $publish = (bool) isset($formData['publish']) ?: false;
         $createdAt = date('Y-m-d H:i:s');
 

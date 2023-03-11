@@ -33,21 +33,21 @@ final class User
     }
 
     /**
-     * Get user id
+     * Get user id.
      *
-     * @return int
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): int|null
     {
         return $this->id;
     }
 
     /**
-     * Set user id
+     * Set user id.
      *
-     * @param int $id
+     * @param int|null $id
      */
-    private function setId(int $id): void
+    private function setId(int|null $id): void
     {
         $this->id = $id;
     }
@@ -55,9 +55,9 @@ final class User
     /**
      * Get first name of an user
      *
-     * @return string
+     * @return string|null
      */
-    public function getFirstName(): string
+    public function getFirstName(): string|null
     {
         return $this->firstName;
     }
@@ -65,22 +65,24 @@ final class User
     /**
      * Set first name of an user
      *
-     * @param string $firstName
+     * @param string|null $firstName
      */
-    private function setFirstName(string $firstName): void
+    private function setFirstName(string|null $firstName): void
     {
-        $firstName = trim($firstName, " \n\r\t\v\0");
-        $firstName = ucfirst($firstName);
-
+        if (null !== $firstName) {
+            $firstName = trim($firstName, " \n\r\t\v\0");
+            $firstName = ucfirst($firstName);
+        }
+        
         $this->firstName = $firstName;
     }
 
     /**
      * Get given name of an user
      *
-     * @return string
+     * @return string|null
      */
-    public function getGivenName(): string
+    public function getGivenName(): string|null
     {
         return $this->givenName;
     }
@@ -88,22 +90,24 @@ final class User
     /**
      * Set given name of an user
      *
-     * @param string $givenName
+     * @param string|null $givenName
      */
-    private function setGivenName(string $givenName): void
+    private function setGivenName(string|null $givenName): void
     {
-        $givenName = trim($givenName, " \n\r\t\v\0");
-        $givenName = ucfirst($givenName);
-
+        if (null !== $givenName) {
+            $givenName = trim($givenName, " \n\r\t\v\0");
+            $givenName = ucfirst($givenName);
+        }
+        
         $this->givenName = $givenName;
     }
 
     /**
      * Get username of an user
      *
-     * @return string
+     * @return string|null
      */
-    public function getUsername(): string
+    public function getUsername(): string|null
     {
         return $this->username;
     }
@@ -111,19 +115,23 @@ final class User
     /**
      * Set username of an user
      *
-     * @param string $username
+     * @param string|null $username
      */
-    private function setUsername(string $username): void
+    private function setUsername(string|null $username): void
     {
-        $this->username = trim($username, " \n\r\t\v\0");
+        if (null !== $username) {
+            $username = trim($username, " \n\r\t\v\0");
+        }
+
+        $this->username = $username;
     }
 
     /**
      * Get email adress of an user
      *
-     * @return string
+     * @return string|null
      */
-    public function getEmail(): string
+    public function getEmail(): string|null
     {
         return $this->email;
     }
@@ -131,19 +139,22 @@ final class User
     /**
      * Set email adress of an user
      *
-     * @param string $email
+     * @param string|null $email
      */
-    private function setEmail(string $email): void
+    private function setEmail(string|null $email): void
     {
-        $this->email = trim($email, " \n\r\t\v\0");
+        if (null !== $email) {
+            $email = trim($email, " \n\r\t\v\0");
+        }
+        $this->email = $email;
     }
 
     /**
      * Get password of an user
      *
-     * @return string
+     * @return string|null
      */
-    public function getPassword(): string
+    public function getPassword(): string|null
     {
         return $this->password;
     }
@@ -151,10 +162,13 @@ final class User
     /**
      * Set password of an user
      *
-     * @param string $password
+     * @param string|null $password
      */
-    private function setPassword(string $password): void
+    private function setPassword(string|null $password): void
     {
-        $this->password = trim($password, " \n\r\t\v\0");
+        if (null !== $password) {
+            $password = trim($password, " \n\r\t\v\0");
+        }
+        $this->password = $password;
     }
 }

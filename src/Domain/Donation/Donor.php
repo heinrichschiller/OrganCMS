@@ -6,47 +6,26 @@ namespace App\Domain\Donation;
 
 class Donor
 {
-    /**
-     * @var string
-     */
-    private string $firstName = '';
+    public function __construct(
+        private ?string $firstName = null,
+        private ?string $givenName = null,
+        private ?string $street = null,
+        private ?string $city = null,
+        private ?string $zipCode = null,
+        private ?string $emailAdress = null,
+        private ?string $phoneNumber = null
+    )
+    {
+        $this->setFirstName($firstName);
+        $this->setGivenName($givenName);
+        $this->setStreet($street);
+        $this->setCity($city);
+        $this->setZipCode($zipCode);
+        $this->setEmailAdress($emailAdress);
+        $this->setPhoneNumber($phoneNumber);
+    }
 
-    /**
-     * @var string
-     */
-    private string $givenName = '';
-
-    /**
-     * @var string
-     */
-    private string $street = '';
-
-    /**
-     * @var string city
-     */
-    private string $city = '';
-
-    /**
-     * @var string
-     */
-    private string $zipCode = '';
-
-    /**
-     * @var string
-     */
-    private string $emailAdress = '';
-
-    /**
-     * @var string
-     */
-    private string $phoneNumber = '';
-
-    /**
-     * Get first name
-     *
-     * @return string
-     */
-    public function getFirstName(): string
+    public function getFirstName(): string|null
     {
         return $this->firstName;
     }
@@ -54,19 +33,24 @@ class Donor
     /**
      * Set first name
      *
-     * @param string $firstName
+     * @param string|null $firstName
      */
-    public function setFirstName(string $firstName): void
+    private function setFirstName(string|null $firstName): void
     {
-        $this->firstName = ucfirst(trim($firstName));
+        if (null !== $firstName) {
+            $firstName = trim($firstName);
+            $firstName = ucfirst($firstName);
+        }
+
+        $this->firstName = $firstName;
     }
 
     /**
      * Get given name
      *
-     * @return string
+     * @return string|null
      */
-    public function getGivenName(): string
+    public function getGivenName(): string|null
     {
         return $this->givenName;
     }
@@ -74,19 +58,24 @@ class Donor
     /**
      * Set given name
      *
-     * @param string $givenName
+     * @param string|null $givenName
      */
-    public function setGivenName(string $givenName): void
+    private function setGivenName(string|null $givenName): void
     {
-        $this->givenName = ucfirst(trim($givenName));
+        if (null !== $givenName) {
+            $givenName = trim($givenName);
+            $givenName = ucfirst($givenName);
+        }
+
+        $this->givenName = $givenName;
     }
 
     /**
      * Get street
      *
-     * @return string
+     * @return string|null
      */
-    public function getStreet(): string
+    public function getStreet(): string|null
     {
         return $this->street;
     }
@@ -94,19 +83,24 @@ class Donor
     /**
      * Set street
      *
-     * @param string $street
+     * @param string|null $street
      */
-    public function setStreet(string $street): void
+    private function setStreet(string|null $street): void
     {
-        $this->street = ucfirst(trim($street));
+        if (null !== $street) {
+            $street = trim($street);
+            $street = ucfirst($street);
+        }
+
+        $this->street = $street;
     }
 
-    public function getCity(): string
+    public function getCity(): string|null
     {
         return $this->city;
     }
 
-    public function setCity(string $city): void
+    private function setCity(string|null $city): void
     {
         $this->city = $city;
     }
@@ -114,9 +108,9 @@ class Donor
     /**
      * Get zip code
      *
-     * @return string
+     * @return string|null
      */
-    public function getZipCode(): string
+    public function getZipCode(): string|null
     {
         return $this->zipCode;
     }
@@ -124,19 +118,23 @@ class Donor
     /**
      * Set zip code
      *
-     * @param string $zipCode
+     * @param string|null $zipCode
      */
-    public function setZipCode(string $zipCode): void
+    private function setZipCode(string|null $zipCode): void
     {
-        $this->zipCode = trim($zipCode);
+        if (null !== $zipCode) {
+            $zipCode = trim($zipCode);
+        }
+
+        $this->zipCode = $zipCode;
     }
 
     /**
      * Get email adress
      *
-     * @return string
+     * @return string|bull
      */
-    public function getEmailAdress(): string
+    public function getEmailAdress(): string|null
     {
         return $this->emailAdress;
     }
@@ -144,19 +142,23 @@ class Donor
     /**
      * Set email adress
      *
-     * @param string $emailAdress
+     * @param string|null $emailAdress
      */
-    public function setEmailAdress(string $emailAdress): void
+    private function setEmailAdress(string|null $emailAdress): void
     {
-        $this->emailAdress = trim($emailAdress);
+        if (null !== $emailAdress) {
+            $emailAdress = trim($emailAdress);
+        }
+
+        $this->emailAdress = $emailAdress;
     }
 
     /**
      * Get phone number
      *
-     * @return string
+     * @return string|null
      */
-    public function getPhoneNumber(): string
+    public function getPhoneNumber(): string|null
     {
         return $this->phoneNumber;
     }
@@ -164,11 +166,15 @@ class Donor
     /**
      * Set phone number
      *
-     * @param string $phoneNumber
+     * @param string|null $phoneNumber
      */
-    public function setPhoneNumber(string $phoneNumber): void
+    private function setPhoneNumber(string|null $phoneNumber): void
     {
-        $this->phoneNumber = trim($phoneNumber);
+        if (null !== $phoneNumber) {
+            $phoneNumber = trim($phoneNumber);
+        }
+
+        $this->phoneNumber = $phoneNumber;
     }
 
     /**

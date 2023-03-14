@@ -71,8 +71,8 @@ final class PostUpdater
         }
 
         // workaround, sqlite column expects a string and not null
-        if (null === $formData['is_published']) {
-            $formData['is_published'] = '';
+        if (isset($formData['is_published'])) {
+            $formData['is_published'] = '1';
         }
 
         $slug = $this->slug($formData['title']);

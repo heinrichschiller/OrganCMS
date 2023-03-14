@@ -14,6 +14,7 @@ return function (App $app) {
     $app->get('/impressum.html', \App\Action\Imprint\ImprintAction::class);
     $app->get('/neuigkeiten.html', \App\Action\Post\PublicPostAction::class);
     $app->get('/orgelfreunde.html', \App\Action\OrganFriend\OrganFriendAction::class);
+    $app->get('/unsere-orgel.html', \App\Action\OurOrgan\OurOrganAction::class);
     $app->get('/veranstaltungen.html', \App\Action\Event\PublicEventAction::class);
     $app->get('/videos.html', \App\Action\Movie\MovieAction::class);
 

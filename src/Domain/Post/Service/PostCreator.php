@@ -63,7 +63,7 @@ final class PostCreator
         $title = $formData['title'];
         $slug = $this->slug($title);
         $content = $formData['content'];
-        $author = '';
+        $author = $formData['author'];
         $onMainpage = (bool) isset($formData['on_mainpage']) ?: false;
         $publishedAt = isset($formData['published_at']) ? date('Y-m-d H:i:s') : '';
         $publish = (bool) isset($formData['publish']) ?: false;

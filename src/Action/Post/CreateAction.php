@@ -49,6 +49,7 @@ final class CreateAction
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
         $formData = (array) $request->getParsedBody();
+        $formData['author'] = $this->session->get('user');
 
         $isCreated = $this->creator->create($formData);
 

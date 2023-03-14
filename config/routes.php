@@ -13,6 +13,7 @@ return function (App $app) {
     $app->get('/gallerie.html', \App\Action\Gallery\GalleryAction::class);
     $app->get('/impressum.html', \App\Action\Imprint\ImprintAction::class);
     $app->get('/neuigkeiten.html', \App\Action\Post\PublicPostAction::class);
+    $app->get('/orgelakte.html', \App\Action\OrganAct\OrganActAction::class);
     $app->get('/orgelfreunde.html', \App\Action\OrganFriend\OrganFriendAction::class);
     $app->get('/unsere-orgel.html', \App\Action\OurOrgan\OurOrganAction::class);
     $app->get('/veranstaltungen.html', \App\Action\Event\PublicEventAction::class);

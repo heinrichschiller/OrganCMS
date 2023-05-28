@@ -52,6 +52,37 @@ final class EventFinderRepository
     }
 
     /**
+     * Find all mainpage events
+     * 
+     * @param int $limit
+     *
+     * @return array
+     */
+    public function findAllMainpageEvents(int $limit): array
+    {
+        $result = $this->connection
+            ->createQueryBuilder()
+            ->select(
+                'id',
+                'title',
+                'place',
+                'description',
+                'event_date',
+                'published',
+                'published_on',
+                'created_at'
+            )
+            ->from('events')
+            ->where('published = 1')
+            ->orderBy('event_date', 'ASC')
+            ->setMaxResults($limit)
+            ->executeQuery()
+            ->fetchAllAssociative() ?: [];
+        
+        return $result;
+    }
+
+    /**
      * Find all published events
      *
      * @return array

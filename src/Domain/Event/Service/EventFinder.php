@@ -78,6 +78,50 @@ final class EventFinder
     }
 
     /**
+     * Find all mainpage events.
+     *
+     * @param int $limit
+     * 
+     * @return EventCollection|null Collection with all published events.
+     */
+    public function findAllMainpageEvents(int $limit): EventCollection|null
+    {
+        try {
+            $eventList = $this->repository->findAllMainpageEvents($limit);
+
+            if (!empty($eventList)) {
+                $collection = new EventCollection;
+                foreach ($eventList as $eventItem) {
+                    $event = new Event(
+                        (int) $eventItem['id'],
+                        $eventItem['title'],
+                        $eventItem['place'],
+                        $eventItem['description'],
+                        $eventItem['event_date'],
+                        (bool) $eventItem['published'],
+                        $eventItem['published_on'],
+                        $eventItem['created_at']
+                    );
+
+                    $collection->add($event);
+                }
+
+                return $collection;
+            }
+
+            return null;
+        } catch (Exception $e) {
+            $this->logger->error(sprintf("EventFinder->findPublishedEvents(): %s", $e->getMessage()));
+
+            return null;
+        } catch (Error $e) {
+            $this->logger->error(sprintf("EventFinder->findPublishedEvents(): %s", $e->getMessage()));
+
+            return null;
+        }
+    }
+
+    /**
      * Find all published events.
      *
      * @return EventCollection|null Collection with all published events.

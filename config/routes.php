@@ -49,6 +49,10 @@ return function (App $app) {
         $group->get('/delete/{id}', \App\Action\Post\DeleteAction::class)->setName('read-post');
     })->add(UserAuthMiddleware::class);
 
+    $app->group('/settings', function (RouteCollectorProxy $group) {
+        $group->get('/general', \App\Action\Settings\GeneralAction::class);
+    })->add(UserAuthMiddleware::class);
+
     $app->group('/supporter', function (RouteCollectorProxy $group) {
         $group->get('/', \App\Action\Supporter\SupporterAction::class)->setName('supporter');
         $group->get('/new', \App\Action\Supporter\NewSupporterAction::class);

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Home\Service;
 
 use App\Domain\Donation\Service\DonationDetailsReader;
+use App\Domain\Event\Service\EventFinder;
 use App\Domain\Post\Service\PostFinder;
 use App\Domain\Supporter\Service\SupporterFinder;
 use App\Factory\LoggerFactory;
@@ -28,6 +29,12 @@ final class HomeReader
 
     /**
      * @Injection
+     * @var EventFinder
+     */
+    private EventFinder $eventFinder;
+
+    /**
+     * @Injection
      * @var PostFinder
      */
     private PostFinder $postFinder;
@@ -43,17 +50,20 @@ final class HomeReader
      *
      * @param LoggerFactory $loggerFactory Monolog logger factory
      * @param DonationDetailsReader $reader Donation board reader service
+     * @param EventFinder $eventFinder Event finder service
      * @param PostFinder $postFinder Post finder service
      * @param SupporterFinder $supporterFinder Supporter finder service
      */
     public function __construct(
         LoggerFactory $loggerFactory,
         DonationDetailsReader $reader,
+        EventFinder $eventFinder,
         PostFinder $postFinder,
         SupporterFinder $supporterFinder
     ) {
         $this->logger = $loggerFactory->addFileHandler('error.log')->createLogger();
         $this->reader = $reader;
+        $this->eventFinder = $eventFinder;
         $this->postFinder = $postFinder;
         $this->supporterFinder = $supporterFinder;
     }
@@ -69,12 +79,14 @@ final class HomeReader
             $limit = 3;
 
             $donation = $this->reader->read();
+            $mainpageEvents = $this->eventFinder->findAllMainpageEvents($limit);
             $publishedPost = $this->postFinder->findMainpagePost();
             $mainpagePosts = $this->postFinder->findAllMainpagePosts($limit);
             $supporter = $this->supporterFinder->findAllPublicSupporter();
-    
+
             return [
                 'donation' => $donation,
+                'mainpageevents' => $mainpageEvents,
                 'post' => $publishedPost,
                 'mainpagepost' => $mainpagePosts,
                 'supporter' => $supporter

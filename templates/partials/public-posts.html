@@ -3,30 +3,28 @@
     <div class="col-md-6 mb-3">
       <div class="card">
         <div class="card-header text-light bg-primary">Veranstaltungen</div>
-        <!-- <div class="table-responsive-sm">
+        <div class="table-responsive-sm">
           <table class="table table-sm">
-            <thead>
-            <tr>
-              <th scope="col">Titel</th>
-              <th scope="col">Veröffentlicht am:</th>
-            </tr>
-            </thead>
             <tbody>
-            {{# post }}
+            {{# mainpageevents }}
             <tr>
-              <td>{{ getTitle }}</td>
-              <td>{{ getPublishedAt }}</td>
+              <td>
+                <a href="/veranstaltungen.html">{{ getTitle }}</a>
+              </td>
+              <td>{{ getEventDateFormated }}</td>
             </tr>
-            {{/ post }}
+            {{/ mainpageevents }}
             </tbody>
           </table>
-        </div> -->
+        </div>
 
+        {{^ mainpageevents }}
         <div class="h5">
           Momentan finden keine weiteren Veranstaltungen statt.
         </div>
         <div>Das heißt aber nicht das es in Zukunft keine Veranstaltungen mehr geben wird. Es wird sie geben und wir freuen uns drauf.</div>
         <div>Wir hoffen auf ihr Verständnis.</div>
+        {{/ mainpageevents }}
       </div>
     </div>
     <div class="col-md-6 mb-3">
@@ -38,7 +36,8 @@
             {{# mainpagepost }}
             <tr>
               <td>
-                <a href="/blog/{{ getId }}/{{ getSlug }}">{{ getTitle }}</a></td>
+                <a href="/blog/{{ getId }}/{{ getSlug }}">{{ getTitle }}</a>
+              </td>
               <td>{{ getPublishedAt }}</td>
             </tr>
             {{/ mainpagepost }}

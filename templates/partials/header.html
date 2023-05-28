@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
   <head>
+    {{# header }}
     <meta charset="UTF-8" />
     <meta name="theme-color" content="#b34041" />
     <meta
@@ -11,8 +12,11 @@
     <title>Orgelfreunde Plauen in Vogtland</title>
 
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <link rel="stylesheet" href="assets/css/custom.css">
-    <link rel="stylesheet" href="assets/css/userChrome.css">
+    <link rel="stylesheet" href="{{ css }}">
+
+    <script src="{{ js }}" defer></script>
+
+    {{/ header }}
 
     <!-- SEO -->
     <script type="application/ld+json">
@@ -31,8 +35,6 @@
         "name": "Orgelfreunde Lutherkirche Plauen"
       }
     </script>
-
-    <script src="assets/js/bundle.js" defer></script>
   </head>
 
   <body class="lead">

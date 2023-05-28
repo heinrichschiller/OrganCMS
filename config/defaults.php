@@ -8,6 +8,18 @@ date_default_timezone_set('Europe/Berlin');
 
 $settings = [];
 
+// url
+$url = 'https://www.lutherorgel-plauen.de';
+
+// website
+$settings['html_header'] = [
+    'css' => $url . '/assets/css/custom.css',
+    'js' => $url . '/assets/js/bundle.js',
+    'url' => $url,
+];
+
+$settings['html_footer'] = [];
+
 // Error handler
 $settings['error'] = [
     // Should be set to false for the production environment

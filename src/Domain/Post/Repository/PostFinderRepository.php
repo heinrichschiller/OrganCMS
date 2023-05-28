@@ -8,13 +8,29 @@ use Doctrine\DBAL\Connection;
 
 final class PostFinderRepository
 {
+    /**
+     * @Injection
+     * @var Connection;
+     */
     private Connection $connection;
 
+    /**
+     * The constructor.
+     * 
+     * @param Connection $connection Doctrine DBAL connection.
+     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
     }
 
+    /**
+     * Find a post by id.
+     * 
+     * @param int $id Post id.
+     * 
+     * @return array
+     */
     public function findById(int $id): array
     {
         $result = $this->connection
@@ -123,7 +139,7 @@ final class PostFinderRepository
                 'updated_at'
             )
             ->from('posts')
-            ->where("is_published = 'on'")
+            ->where("is_published = '1'")
             ->orderBy('published_at', 'DESC')
             ->setMaxResults($limit)
             ->executeQuery()

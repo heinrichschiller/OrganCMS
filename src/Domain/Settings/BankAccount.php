@@ -8,8 +8,7 @@ final class BankAccount
 {
     public function __construct(
         private ?string $recipient = null,
-    )
-    {
+    ) {
         $this->setRecipient($recipient);
     }
 

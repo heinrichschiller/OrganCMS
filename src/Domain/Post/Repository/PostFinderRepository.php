@@ -16,7 +16,7 @@ final class PostFinderRepository
 
     /**
      * The constructor.
-     * 
+     *
      * @param Connection $connection Doctrine DBAL connection.
      */
     public function __construct(Connection $connection)
@@ -26,9 +26,9 @@ final class PostFinderRepository
 
     /**
      * Find a post by id.
-     * 
+     *
      * @param int $id Post id.
-     * 
+     *
      * @return array
      */
     public function findById(int $id): array

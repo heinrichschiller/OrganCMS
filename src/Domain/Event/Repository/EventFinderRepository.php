@@ -53,7 +53,7 @@ final class EventFinderRepository
 
     /**
      * Find all mainpage events
-     * 
+     *
      * @param int $limit
      *
      * @return array

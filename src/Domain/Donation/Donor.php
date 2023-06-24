@@ -14,8 +14,7 @@ class Donor
         private ?string $zipCode = null,
         private ?string $emailAdress = null,
         private ?string $phoneNumber = null
-    )
-    {
+    ) {
         $this->setFirstName($firstName);
         $this->setGivenName($givenName);
         $this->setStreet($street);

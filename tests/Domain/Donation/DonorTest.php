@@ -161,7 +161,7 @@ class DonorTest extends TestCase
             'Heinrich',
             'Schiller',
             'Kaiserstr. 53',
-            'Plauen', 
+            'Plauen',
             '08523'
         );
 
@@ -177,7 +177,7 @@ class DonorTest extends TestCase
             'Heinrich',
             'Schiller',
             'Kaiserstr. 53',
-            'Plauen', 
+            'Plauen',
             ' 08523 '
         );
 

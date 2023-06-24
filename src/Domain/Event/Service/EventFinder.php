@@ -81,7 +81,7 @@ final class EventFinder
      * Find all mainpage events.
      *
      * @param int $limit
-     * 
+     *
      * @return EventCollection|null Collection with all published events.
      */
     public function findAllMainpageEvents(int $limit): EventCollection|null

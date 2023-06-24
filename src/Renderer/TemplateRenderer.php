@@ -26,7 +26,7 @@ final class TemplateRenderer
     /**
      * The constructor.
      *
-     * @param Config $config 
+     * @param Config $config
      * @param Mustache_Engine $mustache Mustache Render Engine
      */
     public function __construct(Config $config, Mustache_Engine $mustache)
@@ -54,10 +54,10 @@ final class TemplateRenderer
             'footer' => $configFooter
         ];
 
-        if(!empty($data)) {
-            foreach($data as $key => $value) {
+        if (!empty($data)) {
+            foreach ($data as $key => $value) {
                 $renderData[$key] = $data[$key];
-            } 
+            }
         }
 
         $response->getBody()->write(

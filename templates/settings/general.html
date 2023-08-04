@@ -1,4 +1,4 @@
-{{> admin-header }}
+{{> header }}
 
   <div class="min-vh-100 pt-5">
     {{> admin-navigation }}
@@ -68,8 +68,18 @@
                 id="given_name"
               >
             </div>
-            <div class="col-md-4">
-              <label for="given_name">PLZ und Ort:</label>
+            <div class="col-md-2">
+              <label for="given_name">PLZ:</label>
+              <input 
+                type="text"
+                class="form-control"
+                name="given_name"
+                value="{{ getGivenName }}"
+                id="given_name"
+              >
+            </div>
+            <div class="col-md-2">
+              <label for="given_name">Ort:</label>
               <input 
                 type="text"
                 class="form-control"

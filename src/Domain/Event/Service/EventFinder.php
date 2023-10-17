@@ -29,6 +29,7 @@ final class EventFinder
     /**
      * The constructor.
      *
+     * @param LoggerFactory $loggerFactory
      * @param EventFinderRepository $repository
      */
     public function __construct(LoggerFactory $loggerFactory, EventFinderRepository $repository)
@@ -45,7 +46,7 @@ final class EventFinder
     public function findAll(): EventCollection|null
     {
         try {
-            $eventList = $this->repository->findAll();
+            $eventList = (array) $this->repository->findAll();
 
             if (!empty($eventList)) {
                 $collection = new EventCollection;
@@ -87,7 +88,7 @@ final class EventFinder
     public function findAllMainpageEvents(int $limit): EventCollection|null
     {
         try {
-            $eventList = $this->repository->findAllMainpageEvents($limit);
+            $eventList = (array) $this->repository->findAllMainpageEvents($limit);
 
             if (!empty($eventList)) {
                 $collection = new EventCollection;
@@ -129,7 +130,7 @@ final class EventFinder
     public function findPublishedEvents(): EventCollection|null
     {
         try {
-            $eventList = $this->repository->findPublishedEvents();
+            $eventList = (array) $this->repository->findPublishedEvents();
 
             if (!empty($eventList)) {
                 $collection = new EventCollection;
@@ -173,7 +174,7 @@ final class EventFinder
     public function findById(int $id): Event|null
     {
         try {
-            $eventItem = $this->repository->findById($id);
+            $eventItem = (array) $this->repository->findById($id);
 
             if (!empty($eventItem)) {
                 $event = new Event(

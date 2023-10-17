@@ -52,7 +52,7 @@ final class PostUpdater
     /**
      * Update post entry.
      *
-     * @param array<mixed> $formData The form data
+     * @param array<string> $formData The form data
      *
      * @return bool
      */
@@ -60,19 +60,24 @@ final class PostUpdater
     {
         $this->validate($formData);
 
-        // workaround, sqlite column expects a string and not null
         if (!isset($formData['author'])) {
             $formData['author'] = 'heinrich';
         }
 
-        // workaround, sqlite column expects a string and not null
-        if (null === $formData['on_mainpage']) {
+        if (!isset($formData['on_mainpage'])) {
             $formData['on_mainpage'] = '';
         }
 
-        // workaround, sqlite column expects a string and not null
-        if (isset($formData['is_published'])) {
+        if (!isset($formData['is_published'])) {
+            $formData['is_published'] = '';
+        }
+
+        if ('on' === $formData['is_published']) {
             $formData['is_published'] = '1';
+        }
+
+        if (null === $formData['is_published']) {
+            $formData['is_published'] = '';
         }
 
         $slug = $this->slug($formData['title']);
@@ -81,6 +86,7 @@ final class PostUpdater
             (int) $formData['id'],
             $formData['title'],
             $slug,
+            $formData['intro'],
             $formData['content'],
             $formData['author'],
             (bool) $formData['on_mainpage'],

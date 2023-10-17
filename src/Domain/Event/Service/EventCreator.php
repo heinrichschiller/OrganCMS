@@ -69,7 +69,7 @@ final class EventCreator
         $createdAt = (string) date('Y-m-d H:i:s');
 
         $event = new Event(
-            0,
+            null,
             $formData['title'],
             $formData['place'],
             $formData['desc'],

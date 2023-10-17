@@ -35,6 +35,7 @@ final class SupporterUpdater
     /**
      * The constructor.
      *
+     * @param LoggerFactory $loggerFactory Monolog logger factory.
      * @param SupporterUpdaterRepository $updater Supporter updater repository
      * @param Validator $validator CakePHP validator
      */
@@ -51,25 +52,25 @@ final class SupporterUpdater
     /**
      * Update supporter entry.
      *
-     * @param array<mixed> $formData The form data
+     * @param array<string> $formData The form data
      *
      * @return bool
      */
     public function update(array $formData): bool
     {
-        $this->validator->validate($formData);
-
         if (!isset($formData['publish'])) {
             $formData['publish'] = '';
         }
 
         if ('on' === $formData['publish']) {
-            $formData['publish'] = 1;
+            $formData['publish'] = '1';
         }
 
         if (null === $formData['publish']) {
             $formData['publish'] = '';
         }
+
+        $this->validator->validate($formData);
 
         $supporter = new Supporter(
             (int) $formData['id'],

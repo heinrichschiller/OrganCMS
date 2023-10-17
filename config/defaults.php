@@ -9,16 +9,18 @@ date_default_timezone_set('Europe/Berlin');
 $settings = [];
 
 // url
-$url = 'https://www.lutherorgel-plauen.de';
+$url = 'https://127.0.0.1:8000';
 
 // website
 $settings['html_header'] = [
-    'css' => $url . '/assets/css/custom.css',
-    'js' => $url . '/assets/js/bundle.js',
+    'css' => $url . '/assets/css/main.css',
+    'userjs' => $url . '/assets/js/main.bundle.js',
     'url' => $url,
 ];
 
-$settings['html_footer'] = [];
+$settings['html_footer'] = [
+    'tinymcejs' => $url . '/assets/js/tinymce.bundle.js',
+];
 
 // Error handler
 $settings['error'] = [
@@ -56,7 +58,6 @@ $settings['mustache'] = [
 
 $settings['db'] = [
     'driver' => 'pdo_sqlite',
-    'path' => __DIR__ . '/../data/donations.db',
 ];
 
 $settings['session'] = [

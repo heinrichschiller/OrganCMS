@@ -55,6 +55,7 @@ final class PostFinder
                     $postItem['id'],
                     $postItem['title'],
                     $postItem['slug'],
+                    $postItem['intro'],
                     $postItem['content'],
                     $postItem['author'],
                     (bool) $postItem['on_mainpage'],
@@ -96,6 +97,7 @@ final class PostFinder
                         $postItem['id'],
                         $postItem['title'],
                         $postItem['slug'],
+                        $postItem['intro'],
                         $postItem['content'],
                         $postItem['author'],
                         (bool) $postItem['on_mainpage'],
@@ -131,7 +133,7 @@ final class PostFinder
     public function findAllPublicPosts(): PostCollection|null
     {
         try {
-            $postList = (array) $this->repository->findAllPublicPosts();
+            $postList = $this->repository->findAllPublicPosts();
 
             if (!empty($postList)) {
                 $collection = new PostCollection;
@@ -140,6 +142,7 @@ final class PostFinder
                         (int) $postItem['id'],
                         $postItem['title'],
                         $postItem['slug'],
+                        $postItem['intro'],
                         $postItem['content'],
                         $postItem['author'],
                         (bool) $postItem['on_mainpage'],
@@ -218,6 +221,7 @@ final class PostFinder
                         (int) $postItem['id'],
                         $postItem['title'],
                         $postItem['slug'],
+                        $postItem['intro'],
                         $postItem['content'],
                         $postItem['author'],
                         (bool) $postItem['on_mainpage'],

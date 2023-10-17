@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Post;
 
+use SebastianBergmann\Type\NullType;
+
 final class Post
 {
     /**
@@ -12,6 +14,7 @@ final class Post
      * @param int|null $id Post id.
      * @param string|null $title Post title.
      * @param string|null $slug Post slug.
+     * @param string|null $intro Post intro.
      * @param string|null $content Post content.
      * @param bool $onMainpage Show this Post on Mainpage.
      * @param string|null $publishedAt Post published date.
@@ -24,6 +27,7 @@ final class Post
         private ?int $id = null,
         private ?string $title = null,
         private ?string $slug = null,
+        private ?string $intro = null,
         private ?string $content = null,
         private ?string $author = null,
         private ?bool $onMainpage = null,
@@ -80,6 +84,16 @@ final class Post
         return $this->slug;
     }
 
+    /**
+     * Get intro.
+     * 
+     * @return string|null
+     */
+    public function getIntro(): string|null
+    {
+        return $this->intro;
+    }
+    
     /**
      * Get content.
      *

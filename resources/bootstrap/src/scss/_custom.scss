@@ -1,0 +1,33 @@
+
+$primary: #2D2424 !default;
+$secondary: #5C3D2E !default;
+$success: #B85C38 !default;
+$light: #E0C097 !default;
+
+.jumbotron {
+  background-image: url('https://127.0.0.1:8000/assets/img/banner-left.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.hero {
+  min-height: 100vh;
+  background-color: #E0C097;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-list,
+.story-intro,
+.story-part-one,
+.story-part-two,
+.story-result,
+.story-finish {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 1rem 0rem;;
+}

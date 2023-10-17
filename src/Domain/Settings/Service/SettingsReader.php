@@ -21,12 +21,12 @@ final class SettingsReader
 
     public function read(): array
     {
-        // $websiteConfig = $this->config->get('html_header');
+        $websiteConfig = $this->config->get('html_header');
 
-        // $data = [
-        //     'website' => $websiteConfig,
-        // ];
+        $data = [
+            'website' => $websiteConfig,
+        ];
 
-        // return $data;
+        return $data;
     }
 }

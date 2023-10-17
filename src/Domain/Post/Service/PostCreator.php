@@ -62,6 +62,7 @@ final class PostCreator
 
         $title = $formData['title'];
         $slug = $this->slug($title);
+        $intro = $formData['intro'];
         $content = $formData['content'];
         $author = $formData['author'];
         $onMainpage = (bool) isset($formData['on_mainpage']) ?: false;
@@ -73,6 +74,7 @@ final class PostCreator
             0,                         // i don't use this id
             $title,
             $slug,
+            $intro,
             $content,
             $author,
             $onMainpage,

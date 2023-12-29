@@ -5,6 +5,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Set timezone to Europe/Berlin
 ENV TZ="Europe/Berlin"
+ENV APP_ENV="dev"
 
 # Install Apache, PHP and Git and set the working directory
 RUN apt-get update && \
@@ -71,7 +72,7 @@ COPY . /var/www/html
 
 # 
 RUN chown www-data.www-data -R data
-RUN chown www-data.www-data -R var
+RUN chown www-data.www-data -R var/www/html
 RUN chown www-data.www-data -R public/assets
 
 # Remove ubuntu index.html

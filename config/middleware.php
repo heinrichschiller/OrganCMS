@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Odan\Session\Middleware\SessionStartMiddleware;
+use Selective\BasePath\BasePathMiddleware;
 use Slim\App;
 use Slim\Middleware\ErrorMiddleware;
 
@@ -27,9 +28,10 @@ return function (App $app) {
      *----------------------------------------------------------------------------
      * Parse json, form data and xml
      *----------------------------------------------------------------------------
+     *
      */
     $app->addBodyParsingMiddleware();
-
+    
     /*
      *----------------------------------------------------------------------------
      * Add odan session
@@ -43,6 +45,13 @@ return function (App $app) {
      *----------------------------------------------------------------------------
      */
     $app->addRoutingMiddleware();
+
+    /*
+     *----------------------------------------------------------------------------
+     * Add the Selective BasePathMiddleware
+     *----------------------------------------------------------------------------
+     */
+    $app->add(BasePathMiddleware::class);
 
     /*
      *----------------------------------------------------------------------------

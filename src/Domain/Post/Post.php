@@ -86,7 +86,7 @@ final class Post
 
     /**
      * Get intro.
-     * 
+     *
      * @return string|null
      */
     public function getIntro(): string|null

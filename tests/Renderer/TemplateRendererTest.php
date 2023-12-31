@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Renderer;
 
 use App\Renderer\TemplateRenderer;
+use App\Support\Config;
 use Mustache_Engine;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
@@ -12,10 +13,12 @@ use Psr\Http\Message\StreamInterface;
 
 class TemplateRendererTest extends TestCase
 {
+    private Config $config;
     private Mustache_Engine $engine;
 
     public function setUp(): void
     {
+        $this->config = new Config([]);
         $this->engine = new Mustache_Engine();
     }
 
@@ -24,7 +27,7 @@ class TemplateRendererTest extends TestCase
      */
     public function testRender(): void
     {
-        $renderer = new TemplateRenderer($this->engine);
+        $renderer = new TemplateRenderer($this->config, $this->engine);
 
         $data = [
             'title' => 'Hello, World!',

@@ -6,6 +6,12 @@ return function (array $settings): array {
     ini_set('display_errors', '1');
     ini_set('display_startup_errors', '1');
 
+    $settings['error']['display_error_details'] = true;
+    $settings['logger']['level'] = \Monolog\Level::Debug;
+
+    // Database
+    $settings['db']['path'] = __DIR__ . '/../data/donations.db';
+
     // url
     $url = 'https://127.0.0.1:8000';
 
@@ -19,12 +25,6 @@ return function (array $settings): array {
     $settings['html_footer'] = [
         'tinymcejs' => $url . '/assets/js/tinymce.bundle.js',
     ];
-
-    $settings['error']['display_error_details'] = true;
-    $settings['logger']['level'] = \Monolog\Level::Debug;
-
-    // Database
-    $settings['db']['path'] = __DIR__ . '/../data/donations.db';
-
+    
     return $settings;
 };

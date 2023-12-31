@@ -3,5 +3,6 @@ parameters:
         - config/bootstrap.php
     level: 0
     paths:
+        - bin
+        - config
         - src
-        - tests

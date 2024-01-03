@@ -43,7 +43,7 @@ $settings['db'] = [
 ];
 
 // url
-$url = 'http://127.0.0.1:8000';
+$url = 'https://www.lutherorgel-plauen.de/';
 
 // website
 $settings['html_header'] = [

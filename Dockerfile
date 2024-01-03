@@ -70,10 +70,7 @@ RUN sed -ri -e 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.c
 # Copy the index.php file to the working directory
 COPY . /var/www/html
 
-# 
-RUN chown www-data.www-data -R data
-RUN chown www-data.www-data -R var/www/html
-RUN chown www-data.www-data -R public/assets
+RUN chown www-data.www-data -R /var/www/html
 
 # Remove ubuntu index.html
 RUN rm /var/www/html/index.html

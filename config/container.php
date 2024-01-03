@@ -8,6 +8,7 @@ use App\Support\Config;
 use Doctrine\DBAL\Configuration as DoctrineConfiguration;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Odan\Session\PhpSession;
 use Odan\Session\SessionInterface;
 use Odan\Session\SessionManagerInterface;
@@ -133,7 +134,7 @@ return [
         return new PhpSession($options);
     },
 
-    // ResponseFactoryInterface::class => function (ContainerInterface $container) {
-    //     return $container->get(App::class)->getResponseFactory();
-    // },
+    ResponseFactoryInterface::class => function (ContainerInterface $container) {
+        return $container->get(Psr17Factory::class);
+    },
 ];

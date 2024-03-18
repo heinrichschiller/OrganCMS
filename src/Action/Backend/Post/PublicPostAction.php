@@ -4,12 +4,19 @@ declare(strict_types=1);
 
 namespace App\Action\Post;
 
+use App\Domain\Post\Service\PostFinder;
 use App\Renderer\TemplateRenderer;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-final class NewPostAction
+final class PublicPostAction
 {
+    /**
+     * @Injection
+     * @var PostFinder
+     */
+    private PostFinder $finder;
+
     /**
      * @Injection
      * @var TemplateRenderer
@@ -19,15 +26,17 @@ final class NewPostAction
     /**
      * The constructor.
      *
-     * @param TemplateRenderer $renderer Template renderer.
+     * @param PostFinder $finder Post finder service
+     * @param TemplateRenderer $renderer Template renderer
      */
-    public function __construct(TemplateRenderer $renderer)
+    public function __construct(PostFinder $finder, TemplateRenderer $renderer)
     {
+        $this->finder = $finder;
         $this->renderer = $renderer;
     }
 
     /**
-     * The invoker
+     * The invoker.
      *
      * @param Request $request Representation of an incoming, server-side HTTP request.
      * @param Response $response Representation of an outgoing, server-side response.
@@ -37,7 +46,13 @@ final class NewPostAction
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
-        $response = $this->renderer->render($response, 'post/create', []);
+        $postItems = $this->finder->findAllPublicPosts();
+
+        $data = [
+            'post' => $postItems
+        ];
+
+        $response = $this->renderer->render($response, 'frontend/post/index.html', $data);
 
         return $response;
     }

@@ -4,8 +4,10 @@ composer.lock
 memory
 package-lock.json
 
-/resources/bootstrap/dist/
-/resources/bootstrap/node_modules/
+/resources/bootstrap/backend/dist/
+/resources/bootstrap/backend/node_modules/
+/resources/bootstrap/frontend/dist/
+/resources/bootstrap/frontend/node_modules/
 /code-coverage/
 /node_modules/
 /public/assets/

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Post;
+namespace App\Action\Backend\Post;
 
 use App\Domain\Post\Service\PostFinder;
 use App\Renderer\TemplateRenderer;
@@ -10,19 +10,19 @@ use Odan\Session\SessionInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-final class ReadAction
+final class PostAction
 {
-    /**
-     * @Injection
-     * @var SessionInterface
-     */
-    private SessionInterface $session;
-
     /**
      * @Injection
      * @var PostFinder
      */
     private PostFinder $finder;
+
+    /**
+     * @Injection
+     * @var SessionInterface
+     */
+    private SessionInterface $session;
 
     /**
      * @Injection
@@ -33,19 +33,22 @@ final class ReadAction
     /**
      * The constructor.
      *
-     * @param SessionInterface $session Odan session interface.
      * @param PostFinder $finder Post finder service
-     * @param TemplateRenderer $renderer Template renderer
+     * @param SessionInterface $session Odan session interface
+     * @param TemplateRenderer $renderer
      */
-    public function __construct(SessionInterface $session, PostFinder $finder, TemplateRenderer $renderer)
-    {
-        $this->session = $session;
+    public function __construct(
+        PostFinder $finder,
+        SessionInterface $session,
+        TemplateRenderer $renderer
+    ) {
         $this->finder = $finder;
+        $this->session = $session;
         $this->renderer = $renderer;
     }
 
     /**
-     * The invoker.
+     * The invoker
      *
      * @param Request $request Representation of an incoming, server-side HTTP request.
      * @param Response $response Representation of an outgoing, server-side response.
@@ -55,7 +58,7 @@ final class ReadAction
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
-        $isSuccess = '';
+        $isSuccess = false;
         $isError = false;
         $message = '';
 
@@ -73,18 +76,16 @@ final class ReadAction
 
         $flash->clear();
 
-        $id = (int) $args['id'];
-
-        $post = $this->finder->findById($id);
+        $postItems = $this->finder->findAll();
 
         $data = [
-            'post' => $post,
+            'posts' => $postItems,
             'isSuccess' => $isSuccess,
             'isError' => $isError,
             'message' => $message
         ];
 
-        $response = $this->renderer->render($response, 'post/edit', $data);
+        $response = $this->renderer->render($response, 'backend/post/index', $data);
 
         return $response;
     }

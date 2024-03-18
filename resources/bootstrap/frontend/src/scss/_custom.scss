@@ -1,8 +1,8 @@
 
-$primary: #2E4374 !default; // #2D2424 !default;
-$secondary: #4B527E !default; // #5C3D2E !default;
-$success: #7C81AD !default; // #B85C38 !default;
-$light: #E5C3A6 !default; // #E0C097 !default;
+$primary: #FFEDDB;// #2E4374 !default; // #2D2424 !default;
+$secondary: #EDCDBB; // #4B527E !default; // #5C3D2E !default;
+$success: #E3B7A0; // #7C81AD !default; // #B85C38 !default;
+$light: #BF9270; // #E5C3A6 !default; // #E0C097 !default;
 
 /* open-sans-regular - latin */
 @font-face {
@@ -41,7 +41,7 @@ body {
 
 .hero {
   min-height: 100vh;
-  background-color: #E0C097;
+  background-color: $secondary;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,6 +102,14 @@ body {
 
 .contact-data {
   text-align: center;
+}
+
+.highlight {
+  background-color: $secondary;
+  color: $primary;
+  padding: 0.5rem 1rem;
+  border-bottom-left-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
 }
 
 @media (max-width: 450px) { 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Donation;
+namespace App\Action\Backend\Donation;
 
 use App\Domain\Donation\Service\DonationDetailsReader;
 use App\Renderer\TemplateRenderer;
@@ -85,7 +85,7 @@ final class DonationDetailsAction
             'message' => $message
         ];
 
-        $response = $this->renderer->render($response, 'donation/donation-board', $data);
+        $response = $this->renderer->render($response, 'backend/donation/donation-board', $data);
 
         return $response;
     }

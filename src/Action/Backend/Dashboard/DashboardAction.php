@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Dashboard;
+namespace App\Action\Backend\Dashboard;
 
 use App\Domain\Dashboard\Service\DashboardReader;
 use App\Renderer\TemplateRenderer;
@@ -48,7 +48,7 @@ final class DashboardAction
     {
         $data = $this->reader->read();
 
-        $response = $this->renderer->render($response, 'dashboard/dashboard', $data);
+        $response = $this->renderer->render($response, 'backend/dashboard/dashboard', $data);
 
         return $response;
     }

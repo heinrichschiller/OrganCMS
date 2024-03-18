@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Event;
+namespace App\Action\Backend\Event;
 
 use App\Renderer\TemplateRenderer;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -37,7 +37,7 @@ final class NewEventAction
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
-        $response = $this->renderer->render($response, 'event/create', []);
+        $response = $this->renderer->render($response, 'backend/event/create', []);
         
         return $response;
     }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Event;
+namespace App\Action\Backend\Event;
 
 use App\Domain\Event\Service\EventFinder;
 use App\Renderer\TemplateRenderer;
@@ -10,7 +10,7 @@ use Odan\Session\SessionInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-final class EventAction
+final class ReadAction
 {
     /**
      * @Injection
@@ -31,11 +31,11 @@ final class EventAction
     private TemplateRenderer $renderer;
 
     /**
-     * The constructor.
+     * The contstructor.
      *
-     * @param EventFinder $finder Event finder service.
-     * @param SessionInterface $session Odan session interface.
-     * @param TemplateRenderer $renderer Template renderer.
+     * @param EventFinder $finder Event finder service
+     * @param SessionInterface $session Odan session
+     * @param TemplateRenderer $renderer
      */
     public function __construct(
         EventFinder $finder,
@@ -58,8 +58,7 @@ final class EventAction
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
-        $isSuccess = false;
-        $isError = false;
+        $isSuccess = '';
         $message = '';
 
         $flash = $this->session->getFlash();
@@ -68,25 +67,21 @@ final class EventAction
             $isSuccess = true;
             $message = $flash->get('success')[0];
         }
-
-        if ($flash->has('error')) {
-            $isError = true;
-            $message = $flash->get('error')[0];
-        }
-
+        
         $flash->clear();
 
-        $events = $this->finder->findAll();
+        $id = (int) $args['id'];
+
+        $event = $this->finder->findById($id);
 
         $data = [
-            'events' => $events,
+            'event' => $event,
             'isSuccess' => $isSuccess,
-            'isError' => $isError,
             'message' => $message
         ];
 
-        $response = $this->renderer->render($response, 'event/index', $data);
-        
+        $response = $this->renderer->render($response, 'backend/event/edit', $data);
+
         return $response;
     }
 }

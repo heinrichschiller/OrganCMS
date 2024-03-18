@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Auth;
+namespace App\Action\Backend\Auth;
 
 use App\Domain\User\Service\Authenticator;
 use Odan\Session\SessionInterface;

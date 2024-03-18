@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Auth;
+namespace App\Action\Backend\Auth;
 
 use Odan\Session\SessionInterface;
 use Fig\Http\Message\StatusCodeInterface;

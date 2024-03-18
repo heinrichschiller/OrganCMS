@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Action\Auth;
+namespace App\Action\Backend\Auth;
 
 use App\Renderer\TemplateRenderer;
 use Odan\Session\SessionInterface;
@@ -61,7 +61,7 @@ final class LoginAction
             'message' => $message
         ];
 
-        $response = $this->renderer->render($response, 'auth/login', $data);
+        $response = $this->renderer->render($response, 'backend/auth/login', $data);
 
         return $response;
     }

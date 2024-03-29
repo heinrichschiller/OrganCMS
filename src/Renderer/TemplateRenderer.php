@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Renderer;
 
 use Mustache_Engine;
-use App\Support\Config;
 use Psr\Http\Message\ResponseInterface as Response;
+use Selective\Config\Configuration;
 
 /**
  * TemplateRenderer used the Mustache render enginge for rendering html templates.
@@ -15,7 +15,7 @@ use Psr\Http\Message\ResponseInterface as Response;
  */
 final class TemplateRenderer
 {
-    private Config $config;
+    private Configuration $config;
 
     /**
      * @Injection
@@ -29,7 +29,7 @@ final class TemplateRenderer
      * @param Config $config
      * @param Mustache_Engine $mustache Mustache Render Engine
      */
-    public function __construct(Config $config, Mustache_Engine $mustache)
+    public function __construct(Configuration $config, Mustache_Engine $mustache)
     {
         $this->config = $config;
         $this->mustache = $mustache;
@@ -46,8 +46,8 @@ final class TemplateRenderer
      */
     public function render(Response $response, string $template, array $data = []): Response
     {
-        $configHeader = $this->config->get('html_header');
-        $configFooter = $this->config->get('html_footer');
+        $configHeader = $this->config->getArray('html_header');
+        $configFooter = $this->config->getArray('html_footer');
 
         $renderData = [
             'header' => $configHeader,

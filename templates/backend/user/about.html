@@ -1,4 +1,4 @@
-{{> header }}
+{{> backend-header }}
 
   <div class="min-vh-100 pt-5">
   {{> admin-navigation }}
@@ -20,7 +20,7 @@
                     <label for="firstName">Vorname:</label>
                     <input 
                         type="text"
-                        class="form-control"
+                        class="form-control bg-success"
                         name="first_name"
                         value="{{ getFirstName }}"
                         id="first_name"
@@ -31,7 +31,7 @@
                     <label for="given_name">Nachname:</label>
                     <input 
                         type="text"
-                        class="form-control"
+                        class="form-control bg-success"
                         name="given_name"
                         value="{{ getGivenName }}"
                         id="given_name"
@@ -45,7 +45,7 @@
             <label for="email">Email</label>
             <input 
                 type="email"
-                class="form-control"
+                class="form-control bg-success"
                 name="email"
                 value="{{ getEmail }}"
                 id="email"
@@ -61,7 +61,7 @@
           <label for="username">Benutzername:</label>
           <input 
             type="text"
-            class="form-control"
+            class="form-control bg-success"
             name="username"
             value="{{ getUsername }}"
             id="username"
@@ -77,7 +77,7 @@
               <label for="password">Passwort:</label>
               <input 
                 type="password"
-                class="form-control"
+                class="form-control bg-success"
                 name="firstPassword" 
                 id="password"
                 minlength="8"
@@ -91,7 +91,7 @@
               <label for="repeatPassword">Passwort wiederholen:</label>
               <input 
                 type="password"
-                class="form-control"
+                class="form-control bg-success
                 name="repeatPassword"
                 id="repeatPassword"
                 minlength="8"

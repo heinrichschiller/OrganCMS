@@ -1,24 +1,22 @@
-{{> header }}
+{{> backend-header }}
 
   <div class="min-vh-100 pt-5">
     {{> admin-navigation }}
 
     <div class="container-xl mt-3">
-      <h1>Unterstützer bearbeiten</h1>
+      <h1>Neuer Unterstützer</h1>
 
     <div>
       <hr class="featurete-divider">
     </div>
 
-    {{# supporter}}
-    <form action="/supporter/update" method="post">
+    <form action="/supporter/create" method="post" enctype="multipart/form-data">
       <div class="mb-3">
-        <label for="supporterName" class="form-label">Name:</label>
+        <label for="eventTitle" class="form-label">Titel:</label>
         <input type="text" 
-          name="name" 
-          value="{{ getName }}"
+          name="title" 
           class="form-control" 
-          id="supporterName"
+          id="eventTitle" 
           autofocus
           required
         >
@@ -28,12 +26,7 @@
         <label for="publish" class="form-check-label">Veröffentlichen. Wenn nicht aktiviert, wird der Beitrag nicht öffentlich angezeigt.
           Dies ist nützlich wenn sie ein Beitrag noch Bearbeiten, Speichern aber noch nicht veröffentlichen wollen.
         </label>
-        {{# isPublished }}
-        <input class="form-check-input" type="checkbox" name="publish" role="switch" id="publish" checked>
-        {{/ isPublished }}
-        {{^ isPublished }}
         <input class="form-check-input" type="checkbox" name="publish" role="switch" id="publish">
-        {{/ isPublished }}
       </div>
       
       <div>
@@ -41,14 +34,7 @@
       </div>
 
       <button class="btn btn-primary" type="submit">Speichern</button>
-      <a href="/supporter/delete/{{ getId }}" class="btn btn-warning">Löschen</a>
-
-      <input type="hidden" name="id" value="{{ getId }}">
-      <input type="hidden" name="published_at" value="{{ getPublishedAt }}">
-      <input type="hidden" name="created_at" value="{{ getCreatedAt }}">
     </form>
-    {{/ supporter }}
-
     </div>
   </div>
 

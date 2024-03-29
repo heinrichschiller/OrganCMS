@@ -1,12 +1,12 @@
 {{> header }}
 
-  <div class="container-fluid min-vh-100 p-0">
+  <div class="container-fluid min-vh-100 p-0 bg-primary">
     {{> navigation }}
 
     
     <div class="container-xl">
       <div style="height: 5em;"></div>
-      <h1 class="display-1 mt-5">Blog</h1>
+      <h1 class="display-3 my-5 text-light">Blog</h1>
     </div>
 
     <div class="container-xl">
@@ -15,13 +15,13 @@
         {{# post }}
         <div class="col-md-6">
           <a href="/blog/{{ getId }}/{{ getSlug }}" class="link-dark text-decoration-none">
-            <div class="card mt-5 bg-light border border-3 border-primary border-bottom-0 border-end-0 border-start-0 shadow rounded">
+            <div class="card mt-5 bg-success border border-3 border-primary border-bottom-0 border-end-0 border-start-0 shadow rounded text-primary">
               <div class="card-body">
-                <h2 class="h5">{{ getTitle }}</h2>
+                <h2 class="h5 text-light">{{ getTitle }}</h2>
                 <div class="intro">{{{ getIntro }}}</div>
               </div>
             </div>
-            <span class="ms-3 fw-bold">{{ getPublishedAt }}</span>
+            <span class="ms-3 fw-bold highlight">{{ getPublishedAt }} - Autor: {{ getAuthor }}</span>
           </a>
         </div>
         {{/ post }}

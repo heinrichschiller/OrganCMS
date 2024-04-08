@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Post;
 
-use SebastianBergmann\Type\NullType;
+use DateTime;
 
 final class Post
 {
@@ -131,7 +131,9 @@ final class Post
      */
     public function getPublishedAt(): string|null
     {
-        return $this->publishedAt;
+        $date = new DateTime($this->publishedAt);
+
+        return $date->format('d.m.Y');
     }
 
     /**

@@ -7,6 +7,7 @@ namespace App\Domain\Post\Service;
 use App\Domain\Post\Post;
 use App\Domain\Post\Repository\PostUpdaterRepository;
 use App\Factory\LoggerFactory;
+use App\Support\Slug;
 use Cake\Validation\Validator;
 use Error;
 use Exception;
@@ -120,11 +121,11 @@ final class PostUpdater
      */
     private function slug(string $title): string
     {
-        $text = str_replace(['\'', '"', '?', '!'], '', $title);
-        $text = str_replace(' ', '-', $text);
-        $text = $text . '.html';
+        $slug = new Slug('german');
 
-        return strtolower($text);
+        $slugify = $slug->slugify($title);
+
+        return $slugify . '.html';
     }
 
     /**

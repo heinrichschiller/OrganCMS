@@ -2,7 +2,7 @@
 
 declare (strict_types=1);
 
-namespace App\Action\Gallery;
+namespace App\Action\Frontend\Gallery;
 
 use App\Renderer\TemplateRenderer;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -37,7 +37,7 @@ final class GalleryAction
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
-        $response = $this->renderer->render($response, 'gallery/gallery.html', []);
+        $response = $this->renderer->render($response, 'frontend/gallery/gallery.html', []);
 
         return $response;
     }

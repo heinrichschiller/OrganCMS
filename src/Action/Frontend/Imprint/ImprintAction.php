@@ -2,7 +2,7 @@
 
 declare (strict_types=1);
 
-namespace App\Action\Imprint;
+namespace App\Action\Frontend\Imprint;
 
 use App\Renderer\TemplateRenderer;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -37,7 +37,7 @@ final class ImprintAction
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
-        $response = $this->renderer->render($response, 'imprint/imprint.html', []);
+        $response = $this->renderer->render($response, 'frontend/imprint/imprint.html', []);
 
         return $response;
     }

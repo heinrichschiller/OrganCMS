@@ -2,7 +2,7 @@
 
 declare (strict_types=1);
 
-namespace App\Action\Dsgvo;
+namespace App\Action\Frontend\Dsgvo;
 
 use App\Renderer\TemplateRenderer;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -37,7 +37,7 @@ final class DsgvoAction
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
-        $response = $this->renderer->render($response, 'dsgvo/datenschutzerklaerung.html', []);
+        $response = $this->renderer->render($response, 'frontend/dsgvo/datenschutzerklaerung.html', []);
 
         return $response;
     }

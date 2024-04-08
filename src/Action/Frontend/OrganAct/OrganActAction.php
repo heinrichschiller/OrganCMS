@@ -2,7 +2,7 @@
 
 declare (strict_types=1);
 
-namespace App\Action\OrganAct;
+namespace App\Action\Frontend\OrganAct;
 
 use App\Renderer\TemplateRenderer;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -37,7 +37,7 @@ final class OrganActAction
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
-        $response = $this->renderer->render($response, 'organact/organ-act', []);
+        $response = $this->renderer->render($response, 'frontend/organact/organ-act', []);
 
         return $response;
     }

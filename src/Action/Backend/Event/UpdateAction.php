@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Event;
+namespace App\Action\Backend\Event;
 
 use App\Domain\Event\Service\EventUpdater;
 use Fig\Http\Message\StatusCodeInterface;

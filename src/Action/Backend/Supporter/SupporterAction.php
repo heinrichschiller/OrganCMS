@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Supporter;
+namespace App\Action\Backend\Supporter;
 
 use App\Domain\Supporter\Service\SupporterFinder;
 use App\Renderer\TemplateRenderer;
@@ -85,7 +85,7 @@ final class SupporterAction
             'message' => $message
         ];
 
-        $response = $this->renderer->render($response, 'supporter/index', $data);
+        $response = $this->renderer->render($response, 'backend/supporter/index', $data);
 
         return $response;
     }

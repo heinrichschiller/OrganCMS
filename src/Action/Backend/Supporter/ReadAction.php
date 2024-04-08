@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Supporter;
+namespace App\Action\Backend\Supporter;
 
 use App\Domain\Supporter\Service\SupporterFinder;
 use App\Renderer\TemplateRenderer;
@@ -53,7 +53,7 @@ final class ReadAction
             'supporter' => $supporter
         ];
 
-        $response = $this->renderer->render($response, 'supporter/edit', $data);
+        $response = $this->renderer->render($response, 'backend/supporter/edit', $data);
 
         return $response;
     }

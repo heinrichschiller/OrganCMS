@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Supporter;
+namespace App\Action\Backend\Supporter;
 
 use App\Renderer\TemplateRenderer;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -37,7 +37,7 @@ final class NewSupporterAction
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
-        $response = $this->renderer->render($response, 'supporter/create', []);
+        $response = $this->renderer->render($response, 'backend/supporter/create', []);
 
         return $response;
     }

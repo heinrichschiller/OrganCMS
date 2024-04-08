@@ -2,7 +2,7 @@
 
 declare (strict_types=1);
 
-namespace App\Action\Movie;
+namespace App\Action\Frontend\Movie;
 
 use App\Renderer\TemplateRenderer;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -37,7 +37,7 @@ final class MovieAction
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
-        $response = $this->renderer->render($response, 'movies/movies.html', []);
+        $response = $this->renderer->render($response, 'frontend/movies/movies.html', []);
 
         return $response;
     }

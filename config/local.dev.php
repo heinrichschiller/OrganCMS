@@ -13,11 +13,12 @@ return function (array $settings): array {
     $settings['db']['path'] = __DIR__ . '/../data/donations.db';
 
     // url
-    $url = 'https://127.0.0.1:8000';
+    $url = 'http://127.0.0.1:8080';
 
     // website
     $settings['html_header'] = [
-        'css' => $url . '/assets/css/main.css',
+        'frontend_css' => $url . '/assets/css/main.css',
+        'backend_css' => $url . '/assets/css/backend.css',
         'userjs' => $url . '/assets/js/main.bundle.js',
         'url' => $url,
     ];

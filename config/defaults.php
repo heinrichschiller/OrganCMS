@@ -43,11 +43,12 @@ $settings['db'] = [
 ];
 
 // url
-$url = 'https://www.lutherorgel-plauen.de/';
+$url = 'https://www.lutherorgel-plauen.de';
 
 // website
 $settings['html_header'] = [
-    'css' => $url . '/assets/css/main.css',
+    'frontend_css' => $url . '/assets/css/main.css',
+    'backend_css' => $url. '/assets/css/backend.css',
     'userjs' => $url . '/assets/js/main.bundle.js',
     'url' => $url,
 ];

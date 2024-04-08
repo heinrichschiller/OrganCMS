@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\User;
+namespace App\Action\Backend\User;
 
 use App\Domain\User\Service\UserFinder;
 use App\Renderer\TemplateRenderer;
@@ -66,7 +66,7 @@ final class AboutAction
             'user' => $user
         ];
 
-        $response = $this->renderer->render($response, 'user/about', $data);
+        $response = $this->renderer->render($response, 'backend/user/about', $data);
 
         return $response;
     }

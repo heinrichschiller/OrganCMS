@@ -7,6 +7,7 @@ namespace App\Domain\Post\Service;
 use App\Domain\Post\Post;
 use App\Domain\Post\Repository\PostCreatorRepository;
 use App\Factory\LoggerFactory;
+use App\Support\Slug;
 use Cake\Validation\Validator;
 use Error;
 use Exception;
@@ -108,16 +109,11 @@ final class PostCreator
      */
     private function slug(string $title): string
     {
-        $text = str_replace(['\'', '"', '?', '!'], '', $title);
+        $slug = new Slug('german');
 
-        $text = str_replace('ä', 'ae', $title);
-        $text = str_replace('ö', 'oe', $title);
-        $text = str_replace('ü', 'ue', $title);
+        $slugify = $slug->slugify($title);
 
-        $text = str_replace(' ', '-', $text);
-        $text = $text . '.html';
-
-        return strtolower($text);
+        return $slugify . '.html';
     }
 
     /**

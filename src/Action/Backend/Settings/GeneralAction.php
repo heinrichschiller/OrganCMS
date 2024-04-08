@@ -2,7 +2,7 @@
 
 declare (strict_types=1);
 
-namespace App\Action\Settings;
+namespace App\Action\Backend\Settings;
 
 use App\Domain\Settings\Service\SettingsReader;
 use App\Renderer\TemplateRenderer;
@@ -48,7 +48,7 @@ final class GeneralAction
     {
         $data = $this->reader->read();
 
-        $response = $this->renderer->render($response, 'settings/general', $data);
+        $response = $this->renderer->render($response, 'backend/settings/general', $data);
 
         return $response;
     }

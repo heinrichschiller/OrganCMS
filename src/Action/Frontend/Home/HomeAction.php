@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Home;
+namespace App\Action\Frontend\Home;
 
 use App\Domain\Home\Service\HomeReader;
 use App\Renderer\TemplateRenderer;
@@ -48,7 +48,7 @@ final class HomeAction
     {
         $data = $this->reader->read();
 
-        $response = $this->renderer->render($response, 'home/index', $data);
+        $response = $this->renderer->render($response, 'frontend/home/index', $data);
 
         return $response;
     }

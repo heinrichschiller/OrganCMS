@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Post\Repository;
 
-use App\Domain\Post\Post;
+use App\Domain\Post\Data\Post;
 use Doctrine\DBAL\Connection;
 
 final class PostCreatorRepository
@@ -41,7 +41,7 @@ final class PostCreatorRepository
             ->setValue('slug', '?')
             ->setValue('intro', '?')
             ->setValue('content', '?')
-            ->setValue('author', '?')
+            ->setValue('author_id', '?')
             ->setValue('on_mainpage', '?')
             ->setValue('published_at', '?')
             ->setValue('is_published', '?')

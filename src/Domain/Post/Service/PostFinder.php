@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Post\Service;
 
-use App\Domain\Post\Post;
-use App\Domain\Post\PostCollection;
+use App\Domain\Post\Data\PostReaderResult;
+use App\Domain\Post\Data\PostFinderCollection;
 use App\Domain\Post\Repository\PostFinderRepository;
 use App\Factory\LoggerFactory;
 use Error;
@@ -43,21 +43,21 @@ final class PostFinder
      *
      * @param int $id Post id.
      *
-     * @return Post|null
+     * @return PostReaderResult|null
      */
-    public function findById(int $id): Post|null
+    public function findByIdOrFail(int $id): PostReaderResult|null
     {
         try {
-            $postItem = (array) $this->repository->findById($id);
+            $postItem = (array) $this->repository->findByIdOrFail($id);
 
             if (!empty($postItem)) {
-                $post = new Post(
+                $post = new PostReaderResult(
                     $postItem['id'],
                     $postItem['title'],
                     $postItem['slug'],
                     $postItem['intro'],
                     $postItem['content'],
-                    $postItem['author'],
+                    $postItem['author_name'],
                     (bool) $postItem['on_mainpage'],
                     $postItem['published_at'],
                     (bool) $postItem['is_published'],
@@ -85,21 +85,21 @@ final class PostFinder
      *
      * @return PostCollection|null
      */
-    public function findAll(): PostCollection|null
+    public function findAllOrFail(): PostFinderCollection|null
     {
         try {
-            $postList = (array) $this->repository->findAll();
+            $postList = (array) $this->repository->findAllOrFail();
 
             if (!empty($postList)) {
-                $collection = new PostCollection;
+                $collection = new PostFinderCollection;
                 foreach ($postList as $postItem) {
-                    $post = new Post(
+                    $post = new PostReaderResult(
                         $postItem['id'],
                         $postItem['title'],
                         $postItem['slug'],
                         $postItem['intro'],
                         $postItem['content'],
-                        $postItem['author'],
+                        $postItem['author_name'],
                         (bool) $postItem['on_mainpage'],
                         $postItem['published_at'],
                         (bool) $postItem['is_published'],
@@ -130,21 +130,21 @@ final class PostFinder
      *
      * @return PostCollection|null
      */
-    public function findAllPublicPosts(): PostCollection|null
+    public function findAllPublicPosts(): PostFinderCollection|null
     {
         try {
             $postList = $this->repository->findAllPublicPosts();
 
             if (!empty($postList)) {
-                $collection = new PostCollection;
+                $collection = new PostFinderCollection;
                 foreach ($postList as $postItem) {
-                    $post = new Post(
+                    $post = new PostReaderResult(
                         (int) $postItem['id'],
                         $postItem['title'],
                         $postItem['slug'],
                         $postItem['intro'],
                         $postItem['content'],
-                        $postItem['author'],
+                        $postItem['author_name'],
                         (bool) $postItem['on_mainpage'],
                         $postItem['published_at'],
                         (bool) $postItem['is_published'],
@@ -175,16 +175,17 @@ final class PostFinder
      *
      * @return Post|null
      */
-    public function findMainpagePost(): Post|null
+    public function findMainpagePost(): PostReaderResult|null
     {
         try {
             $mainpagePost = (array) $this->repository->findMainpagePost();
 
             if (!empty($mainpagePost)) {
-                $post = new Post(
+                $post = new PostReaderResult(
                     $mainpagePost['id'],
                     $mainpagePost['title'],
                     $mainpagePost['slug'],
+                    $mainpagePost['intro'],
                     $mainpagePost['content'],
                     $mainpagePost['author'],
                     (bool) $mainpagePost['on_mainpage'],
@@ -209,21 +210,21 @@ final class PostFinder
         }
     }
 
-    public function findAllMainpagePosts(int $limit): PostCollection
+    public function findAllMainpagePosts(int $limit): PostFinderCollection
     {
         try {
             $postList = (array) $this->repository->findAllMainpagePosts($limit);
 
             if (!empty($postList)) {
-                $collection = new PostCollection;
+                $collection = new PostFinderCollection;
                 foreach ($postList as $postItem) {
-                    $post = new Post(
+                    $post = new PostReaderResult(
                         (int) $postItem['id'],
                         $postItem['title'],
                         $postItem['slug'],
                         $postItem['intro'],
                         $postItem['content'],
-                        $postItem['author'],
+                        $postItem['author_name'],
                         (bool) $postItem['on_mainpage'],
                         $postItem['published_at'],
                         (bool) $postItem['is_published'],

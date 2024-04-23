@@ -1,10 +1,8 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Domain\Post\Service;
 
-use App\Domain\Post\Post;
+use App\Domain\Post\Data\Post;
 use App\Domain\Post\Repository\PostCreatorRepository;
 use App\Factory\LoggerFactory;
 use App\Support\Slug;
@@ -12,6 +10,7 @@ use Cake\Validation\Validator;
 use Error;
 use Exception;
 use Psr\Log\LoggerInterface;
+use Selective\ArrayReader\ArrayReader;
 
 final class PostCreator
 {
@@ -61,23 +60,25 @@ final class PostCreator
     {
         $this->validate($formData);
 
-        $title = $formData['title'];
+        $reader = new ArrayReader($formData);
+
+        $title = $reader->findString('title');
         $slug = $this->slug($title);
-        $intro = $formData['intro'];
-        $content = $formData['content'];
-        $author = $formData['author'];
-        $onMainpage = (bool) isset($formData['on_mainpage']) ?: false;
-        $publishedAt = isset($formData['published_at']) ? date('Y-m-d H:i:s') : '';
-        $publish = (bool) isset($formData['publish']) ?: false;
+        $intro = $reader->findString('intro');
+        $content = $reader->findString('content');
+        $authorId = $reader->findInt('author_id');
+        $onMainpage = $reader->findBool('on_mainpage', false);
+        $publishedAt = $reader->findChronos('published_at') ? date('Y-m-d H:i:s') : '';
+        $publish = $reader->findBool('publish', false);
         $createdAt = date('Y-m-d H:i:s');
 
         $post = new Post(
-            0,                         // i don't use this id
+            0,                         // placeholder
             $title,
             $slug,
             $intro,
             $content,
-            $author,
+            $authorId,
             $onMainpage,
             $publishedAt,
             $publish,

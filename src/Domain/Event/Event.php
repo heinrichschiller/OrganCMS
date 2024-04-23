@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Event;
 
-use DateTime;
+use DateTimeImmutable;
 
 final class Event
 {
@@ -149,9 +149,21 @@ final class Event
      */
     public function getEventDateFormated(): string
     {
-        $date = new DateTime($this->eventDate);
+        $date = new DateTimeImmutable($this->eventDate);
 
-        return $date->format('d.m.Y H:i');
+        return $date->format('d.m.Y');
+    }
+
+    /**
+     * Get published at.
+     *
+     * @return string|null
+     */
+    public function getEventTime(): string|null
+    {
+        $date = new DateTimeImmutable($this->eventDate);
+
+        return $date->format('H:i');
     }
 
     /**
@@ -195,6 +207,18 @@ final class Event
     }
 
     /**
+     * Get the date of the published event.
+     *
+     * @return string
+     */
+    public function getPublishedOnFormated(): string
+    {
+        $date = new DateTimeImmutable($this->publishedOn);
+
+        return $date->format('d.m.Y');
+    }
+
+    /**
      * Set date of the published event.
      *
      * @param string|null $currentDate
@@ -221,7 +245,7 @@ final class Event
      */
     public function getCreatedAtFormated(): string|null
     {
-        $date = new DateTime($this->createdAt);
+        $date = new DateTimeImmutable($this->createdAt);
 
         return $date->format('d.m.Y');
     }
@@ -253,7 +277,7 @@ final class Event
      */
     public function getUpdatedAtFormated(): string
     {
-        $date = new DateTime($this->createdAt);
+        $date = new DateTimeImmutable($this->createdAt);
 
         return $date->format('d.m.Y');
     }

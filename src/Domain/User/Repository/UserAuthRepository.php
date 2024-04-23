@@ -53,8 +53,8 @@ final class UserAuthRepository
             ->executeQuery()
             ->fetchAssociative() ?: [];
 
-        if (null !== $credentials
-            && false !== $result
+        if ($credentials !== null
+            && $result !== false
             && password_verify($credentials, $result['password'])
         ) {
             $this->user = new User(
@@ -71,13 +71,13 @@ final class UserAuthRepository
     }
 
     /**
-     * Get username
+     * Get user object
      *
-     * @return string
+     * @return User
      */
-    public function getUsername(): string
+    public function getUser(): User
     {
-        return $this->user->getUsername();
+        return $this->user;
     }
     
     /**

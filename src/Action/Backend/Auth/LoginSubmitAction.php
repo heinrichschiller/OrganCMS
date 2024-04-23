@@ -58,7 +58,7 @@ final class LoginSubmitAction
         $this->auth->authenticate($username, $password);
 
         if ($this->auth->isAuth()) {
-            $user = $this->auth->getUsername();
+            $user = $this->auth->getUser();
         }
 
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();

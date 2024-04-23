@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\User\Service;
 
 use App\Domain\User\Repository\UserAuthRepository;
+use App\Domain\User\User;
 
 final class Authenticator
 {
@@ -12,16 +13,16 @@ final class Authenticator
      * @Injection
      * @var UserAuthRepository
      */
-    private UserAuthRepository $reader;
+    private UserAuthRepository $repository;
 
     /**
      * The constructor
      *
-     * @param UserAuthRepository $reader
+     * @param UserAuthRepository $repository
      */
-    public function __construct(UserAuthRepository $reader)
+    public function __construct(UserAuthRepository $repository)
     {
-        $this->reader = $reader;
+        $this->repository = $repository;
     }
 
     /**
@@ -32,17 +33,17 @@ final class Authenticator
      */
     public function authenticate(string $identity, string $credential): void
     {
-        $this->reader->authenticate($identity, $credential);
+        $this->repository->authenticate($identity, $credential);
     }
 
     /**
-     * Get user name
+     * Get user object
      *
-     * @return string
+     * @return User
      */
-    public function getUsername(): string
+    public function getUser(): User
     {
-        return $this->reader->getUsername();
+        return $this->repository->getUser();
     }
     
     /**
@@ -52,6 +53,6 @@ final class Authenticator
      */
     public function isAuth(): bool
     {
-        return $this->reader->isAuth();
+        return $this->repository->isAuth();
     }
 }

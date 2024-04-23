@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Post\Service;
 
-use App\Domain\Post\Post;
+use App\Domain\Post\Data\Post;
 use App\Domain\Post\Repository\PostUpdaterRepository;
 use App\Factory\LoggerFactory;
 use App\Support\Slug;
@@ -12,6 +12,7 @@ use Cake\Validation\Validator;
 use Error;
 use Exception;
 use Psr\Log\LoggerInterface;
+use Selective\ArrayReader\ArrayReader;
 
 final class PostUpdater
 {
@@ -61,40 +62,32 @@ final class PostUpdater
     {
         $this->validate($formData);
 
-        if (!isset($formData['author'])) {
-            $formData['author'] = 'heinrich';
-        }
+        $reader = new ArrayReader($formData);
 
-        if (!isset($formData['on_mainpage'])) {
-            $formData['on_mainpage'] = '';
-        }
-
-        if (!isset($formData['is_published'])) {
-            $formData['is_published'] = '';
-        }
-
-        if ('on' === $formData['is_published']) {
-            $formData['is_published'] = '1';
-        }
-
-        if (null === $formData['is_published']) {
-            $formData['is_published'] = '';
-        }
-
+        $id = $reader->findInt('id');
+        $title = $reader->findString('title');
         $slug = $this->slug($formData['title']);
+        $intro = $reader->findString('intro');
+        $content = $reader->findString('content');
+        $authorId = $reader->findInt('author_id');
+        $onMainpage = $reader->findBool('on_mainpage') ? 1 : 0;
+        $publishedAt = $reader->findString('published_at');
+        $isPublished = $reader->findBool('is_published') ? 1 : 0;
+        $createdAt = $reader->findString('created_at');
+        $updatedAt = date('Y-m-d H:i:s');
 
         $post = new Post(
-            (int) $formData['id'],
-            $formData['title'],
+            $id,
+            $title,
             $slug,
-            $formData['intro'],
-            $formData['content'],
-            $formData['author'],
-            (bool) $formData['on_mainpage'],
-            $formData['published_at'],
-            (bool) $formData['is_published'],
-            $formData['created_at'],
-            $formData['updated_at'],
+            $intro,
+            $content,
+            $authorId,
+            $onMainpage,
+            $publishedAt,
+            $isPublished,
+            $createdAt,
+            $updatedAt
         );
 
         try {

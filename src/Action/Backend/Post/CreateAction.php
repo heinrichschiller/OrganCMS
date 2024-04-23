@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Post;
+namespace App\Action\Backend\Post;
 
 use App\Domain\Post\Service\PostCreator;
 use Fig\Http\Message\StatusCodeInterface;
@@ -48,8 +48,10 @@ final class CreateAction
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
+        $user = $this->session->get('user');
+        
         $formData = (array) $request->getParsedBody();
-        $formData['author'] = $this->session->get('user');
+        $formData['author_id'] = $user->getId();
 
         $isCreated = $this->creator->create($formData);
 

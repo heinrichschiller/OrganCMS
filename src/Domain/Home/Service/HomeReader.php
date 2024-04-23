@@ -76,17 +76,17 @@ final class HomeReader
     public function read(): array
     {
         try {
-            $limit = 3;
+            $limit = 5;
 
             $donation = $this->reader->read();
-            $mainpageEvents = $this->eventFinder->findAllMainpageEvents($limit);
+            $events = $this->eventFinder->findAllMainpageEvents($limit);
             $publishedPost = $this->postFinder->findMainpagePost();
             $mainpagePosts = $this->postFinder->findAllMainpagePosts($limit);
             $supporter = $this->supporterFinder->findAllPublicSupporter();
 
             return [
                 'donation' => $donation,
-                'mainpageevents' => $mainpageEvents,
+                'events' => $events,
                 'post' => $publishedPost,
                 'mainpagepost' => $mainpagePosts,
                 'supporter' => $supporter

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Post\Repository;
 
-use App\Domain\Post\Post;
+use App\Domain\Post\Data\Post;
 use Doctrine\DBAL\Connection;
 
 final class PostUpdaterRepository
@@ -39,9 +39,10 @@ final class PostUpdaterRepository
             ->set('slug', ':slug')
             ->set('intro', ':intro')
             ->set('content', ':content')
-            ->set('author', ':author')
+            ->set('author_id', ':author_id')
             ->set('on_mainpage', ':on_mainpage')
             ->set('published_at', ':published_at')
+            ->set('is_published', ':is_published')
             ->set('created_at', ':created_at')
             ->set('updated_at', ':updated_at')
             ->where('id = :id')
@@ -49,9 +50,10 @@ final class PostUpdaterRepository
             ->setParameter('slug', $post->getSlug())
             ->setParameter('intro', $post->getIntro())
             ->setParameter('content', $post->getContent())
-            ->setParameter('author', $post->getAuthor())
+            ->setParameter('author_id', $post->getAuthorId())
             ->setParameter('on_mainpage', $post->onMainpage())
             ->setParameter('published_at', $post->getPublishedAt())
+            ->setParameter('is_published', $post->isPublished())
             ->setParameter('created_at', $post->getCreatedAt())
             ->setParameter('updated_at', $post->getUpdatedAt())
             ->setParameter('id', $post->getId())

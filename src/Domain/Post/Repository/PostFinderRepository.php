@@ -31,25 +31,26 @@ final class PostFinderRepository
      *
      * @return array
      */
-    public function findById(int $id): array
+    public function findByIdOrFail(int $id): array
     {
         $result = $this->connection
             ->createQueryBuilder()
             ->select(
-                'id',
+                'p.id',
                 'title',
                 'slug',
                 'intro',
                 'content',
-                'author',
+                'author_name',
                 'on_mainpage',
                 'published_at',
                 'is_published',
                 'created_at',
                 'updated_at'
             )
-            ->from('posts')
-            ->where('id = ?')
+            ->from('posts', 'p')
+            ->leftJoin('p', 'authors', 'a')
+            ->where('p.id = ?')
             ->setParameter(0, $id)
             ->executeQuery()
             ->fetchAssociative() ?: [];
@@ -62,24 +63,25 @@ final class PostFinderRepository
      *
      * @return array
      */
-    public function findAll(): array
+    public function findAllOrFail(): array
     {
         $result = $this->connection
             ->createQueryBuilder()
             ->select(
-                'id',
+                'p.id',
                 'title',
                 'slug',
                 'intro',
                 'content',
-                'author',
+                'author_name',
                 'on_mainpage',
                 'published_at',
                 'is_published',
                 'created_at',
                 'updated_at'
             )
-            ->from('posts')
+            ->from('posts', 'p')
+            ->leftJoin('p', 'authors', 'a')
             ->executeQuery()
             ->fetchAllAssociative() ?: [];
         
@@ -97,19 +99,20 @@ final class PostFinderRepository
         $result = $this->connection
             ->createQueryBuilder()
             ->select(
-                'id',
+                'p.id',
                 'title',
                 'slug',
                 'intro',
                 'content',
-                'author',
+                'author_name',
                 'on_mainpage',
                 'published_at',
                 'is_published',
                 'created_at',
                 'updated_at'
             )
-            ->from('posts')
+            ->from('posts', 'p')
+            ->leftJoin('p', 'authors', 'a')
             ->where("is_published = '1'")
             ->orderBy('published_at', 'DESC')
             ->executeQuery()
@@ -130,19 +133,20 @@ final class PostFinderRepository
         $result = $this->connection
             ->createQueryBuilder()
             ->select(
-                'id',
+                'p.id',
                 'title',
                 'slug',
                 'intro',
                 'content',
-                'author',
+                'author_name',
                 'on_mainpage',
                 'published_at',
                 'is_published',
                 'created_at',
                 'updated_at'
             )
-            ->from('posts')
+            ->from('posts', 'p')
+            ->leftJoin('p', 'authors', 'a')
             ->where("is_published = '1'")
             ->orderBy('published_at', 'DESC')
             ->setMaxResults($limit)

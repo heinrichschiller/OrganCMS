@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Post;
+namespace App\Action\Backend\Post;
 
 use App\Domain\Post\Service\PostUpdater;
 use Odan\Session\SessionInterface;

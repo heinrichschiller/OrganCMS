@@ -1,6 +1,6 @@
 {{> header }}
 
-<div class="container-fluid min-vh-100 pb-5 bg-primary text-light">
+<div class="container-fluid min-vh-100 pb-5 bg-primary text-light" style="z-index: 10;">
 
   {{> navigation }}
 
@@ -18,11 +18,14 @@
         {{{ getContent }}}
       </article>
 
-      <div class="ms-3 fs-bold highlight bg-success" style="width: 20rem;">
-        {{ getPublishedAt }}
+      <div class="container-xl fs-bold position-relative">
+        <div class="position-absolute top-0 end-0 highlight bg-success me-5" style="width: 20rem; z-index: 1;">
+          {{ getPublishedAtFormated }} - Autor: {{ getAuthor }}
+        </div>
       </div>
     </div>
     
+    <div class="container-xl my-5"></div>
   {{/ post }}
 </div>
 

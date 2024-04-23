@@ -27,34 +27,6 @@ return [
         return new Configuration(require __DIR__ . '/settings.php');
     },
 
-    App::class => function (ContainerInterface $container) {
-        $app = AppFactory::createFromContainer($container);
-
-        /*
-         *----------------------------------------------------------------------------
-         * Register routes
-         *----------------------------------------------------------------------------
-         *
-         * For more informations see:
-         * https://www.slimframework.com/docs/v4/objects/routing.html
-         *
-         */
-        (require __DIR__ . '/routes.php')($app);
-
-        /*
-         *----------------------------------------------------------------------------
-         * Register middleware
-         *----------------------------------------------------------------------------
-         *
-         * For more informations see:
-         * https://www.slimframework.com/docs/v4/concepts/middleware.html
-         *
-         */
-        (require __DIR__ . '/middleware.php')($app);
-
-        return $app;
-    },
-
     Application::class => function (ContainerInterface $container) {
         $application = new Application();
 
@@ -110,7 +82,7 @@ return [
         $config = $container->get(Configuration::class); //('settings')['db'];
 
         return DriverManager::getConnection(
-            $config->getArray('db'), 
+            $config->getArray('db'),
             $doctrineConfig
         );
     },

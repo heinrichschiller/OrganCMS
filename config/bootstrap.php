@@ -1,46 +1,38 @@
-<?php
+<?php declare(strict_types=1);
 
-declare(strict_types=1);
-
+use DI\Bridge\Slim\Bridge;
 use DI\ContainerBuilder;
-use Slim\App;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-/*
- *----------------------------------------------------------------------------
- * Php version validation
- *----------------------------------------------------------------------------
- *
- * PHP_VERSION_ID is available as of PHP 5.2.7.
- * More about predefined constants, see:
- * https://www.php.net/manual/en/reserved.constants.php
- *
- */
-if (!defined('PHP_VERSION_ID') || 80100 > PHP_VERSION_ID) {
+if (version_compare(phpversion(), '8.2.0', '<')) {
+    $message = 'This Slim-Skeleton is supported from PHP 8.2.0 or higher. Installed PHP version is: ' . phpversion();
+
     if ('cli' == PHP_SAPI) {
-        echo 'This Slim-Skeleton support PHP 8.1 or later.';
+        echo $message;
     } else {
-        echo <<<HTML
-            <div>
-                <p>This Slim-Skeleton supports PHP 8.1 or later.</p>
-            </div>
-        HTML;
-        exit(1);
+        exit($message);
     }
 }
 
-/*
- *----------------------------------------------------------------------------
- * Instantiate PHP-DI ContainerBuilder
- *----------------------------------------------------------------------------
- *
- * The dependency injection container for humans, see:
- * https://php-di.org/
- *
- */
-$container = (new ContainerBuilder())
-    ->addDefinitions(__DIR__ . '/container.php')
-    ->build();
+$containerBuilder = new ContainerBuilder();
+$containerBuilder->addDefinitions(__DIR__ . '/container.php');
 
-return $container->get(App::class);
+// Do not compile the container in a development environment, else all the
+// changes you make to the definitions (attributes, configuration files, etc.)
+// will not be taken into account.
+// https://php-di.org/doc/performances.html#development-environment
+if (isset($_ENV['APP_ENV']) && $_ENV['APP_ENV'] === 'prod'
+    || isset($_SERVER['APP_ENV']) && $_SERVER['APP_ENV'] === 'prod') {
+    $containerBuilder->enableCompilation(__DIR__ . '/../var/caches/php-di');
+}
+
+$container = $containerBuilder->build();
+
+$app = Bridge::create($container);
+
+(require __DIR__ . '/routes.php')($app);
+
+(require __DIR__ . '/middleware.php')($app);
+
+return $app;

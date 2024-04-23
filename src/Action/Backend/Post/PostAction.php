@@ -76,7 +76,7 @@ final class PostAction
 
         $flash->clear();
 
-        $postItems = $this->finder->findAll();
+        $postItems = $this->finder->findAllOrFail();
 
         $data = [
             'posts' => $postItems,

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Post;
+namespace App\Domain\Post\Data;
 
-use DateTime;
+use DateTimeImmutable;
 
 final class Post
 {
@@ -16,10 +16,10 @@ final class Post
      * @param string|null $slug Post slug.
      * @param string|null $intro Post intro.
      * @param string|null $content Post content.
-     * @param bool $onMainpage Show this Post on Mainpage.
+     * @param string|null $authorId Author id.
+     * @param int $onMainpage Show this Post on Mainpage.
      * @param string|null $publishedAt Post published date.
-     * @param bool $isPublished Post is published or not.
-     * @param string|null $author Author.
+     * @param int $isPublished Post is published or not.
      * @param string|null $createdAt Post creation date.
      * @param string|null $updatedAt Post update date.
      */
@@ -29,10 +29,10 @@ final class Post
         private ?string $slug = null,
         private ?string $intro = null,
         private ?string $content = null,
-        private ?string $author = null,
-        private ?bool $onMainpage = null,
+        private ?int $authorId = null,
+        private ?int $onMainpage = null,
         private ?string $publishedAt = null,
-        private ?bool $isPublished = null,
+        private ?int $isPublished = null,
         private ?string $createdAt = null,
         private ?string $updatedAt = null
     ) {
@@ -107,11 +107,11 @@ final class Post
     /**
      * Get author.
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getAuthor(): string|null
+    public function getAuthorId(): int|null
     {
-        return $this->author;
+        return $this->authorId;
     }
 
     /**
@@ -119,7 +119,7 @@ final class Post
      *
      * @return bool
      */
-    public function onMainpage(): bool
+    public function onMainpage(): int
     {
         return $this->onMainpage;
     }
@@ -131,7 +131,17 @@ final class Post
      */
     public function getPublishedAt(): string|null
     {
-        $date = new DateTime($this->publishedAt);
+        return $this->publishedAt;
+    }
+
+    /**
+     * Get published at formated as string.
+     *
+     * @return string|null
+     */
+    public function getPublishedAtFormated(): string|null
+    {
+        $date = new DateTimeImmutable($this->publishedAt);
 
         return $date->format('d.m.Y');
     }
@@ -141,7 +151,7 @@ final class Post
      *
      * @return bool
      */
-    public function isPublished(): bool
+    public function isPublished(): int
     {
         return $this->isPublished;
     }
@@ -157,6 +167,18 @@ final class Post
     }
 
     /**
+     * Get the formated date when an event was created.
+     *
+     * @return string|null
+     */
+    public function getCreatedAtFormated(): string|null
+    {
+        $date = new DateTimeImmutable($this->createdAt);
+
+        return $date->format('d.m.Y');
+    }
+
+    /**
      * Get updated at.
      *
      * @return string|null
@@ -164,5 +186,17 @@ final class Post
     public function getUpdatedAt(): string|null
     {
         return $this->updatedAt;
+    }
+
+        /**
+     * Get the formated date when an event was created.
+     *
+     * @return string
+     */
+    public function getUpdatedAtFormated(): string
+    {
+        $date = new DateTimeImmutable($this->createdAt);
+
+        return $date->format('d.m.Y');
     }
 }

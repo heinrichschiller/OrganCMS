@@ -47,7 +47,7 @@ final class ReadAction
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
         $id = (int) $args['id'];
-        $post = $this->finder->findById($id);
+        $post = $this->finder->findByIdOrFail($id);
 
         $data = [
             'post' => $post

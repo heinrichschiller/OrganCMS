@@ -48,8 +48,7 @@ final class DeleteAction
      */
     public function __invoke(Request $request, Response $response, array $args = []): Response
     {
-        $id = (int) $args['id'];
-
+        $id = (int) $request->getAttribute('id');
         $isDeleted = $this->deleter->delete($id);
 
         $key = 'success';

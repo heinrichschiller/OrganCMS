@@ -31,13 +31,12 @@ final class LogoutAction
     /**
      * The invoker
      *
-     * @param Request $request
-     * @param Response $response
-     * @param array<mixed> $args
+     * @param Request $request Representation of an incoming, server-side HTTP request.
+     * @param Response $response Representation of an outgoing, server-side response.
      *
      * @return Response
      */
-    public function __invoke(Request $request, Response $response, array $args = []): Response
+    public function __invoke(Request $request, Response $response): Response
     {
         $this->session->destroy();
 

@@ -42,11 +42,10 @@ final class UpdateAction
      *
      * @param Request $request
      * @param Response $response
-     * @param array<mixed> $args
      *
      * @return Response
      */
-    public function __invoke(Request $request, Response $response, array $args = []): Response
+    public function __invoke(Request $request, Response $response): Response
     {
         $formData = (array) $request->getParsedBody();
 

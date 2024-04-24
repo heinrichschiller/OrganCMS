@@ -187,7 +187,7 @@ final class PostFinder
                     $mainpagePost['slug'],
                     $mainpagePost['intro'],
                     $mainpagePost['content'],
-                    $mainpagePost['author'],
+                    $mainpagePost['author_name'],
                     (bool) $mainpagePost['on_mainpage'],
                     $mainpagePost['published_at'],
                     (bool) $mainpagePost['is_published'],

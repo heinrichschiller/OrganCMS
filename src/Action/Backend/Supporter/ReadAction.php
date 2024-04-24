@@ -40,13 +40,12 @@ final class ReadAction
      *
      * @param Request $request Representation of an incoming, server-side HTTP request.
      * @param Response $response Representation of an outgoing, server-side response.
-     * @param array<string> $args Get all of the route's parsed arguments.
      *
      * @return Response
      */
-    public function __invoke(Request $request, Response $response, array $args = []): Response
+    public function __invoke(Request $request, Response $response): Response
     {
-        $id = (int) $args['id'];
+        $id = (int) $request->getAttribute('id');
         $supporter  = $this->finder->findById($id);
 
         $data = [

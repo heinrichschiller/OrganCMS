@@ -37,8 +37,11 @@ final class ReadAction
      * @param PostFinder $finder Post finder service
      * @param TemplateRenderer $renderer Template renderer
      */
-    public function __construct(SessionInterface $session, PostFinder $finder, TemplateRenderer $renderer)
-    {
+    public function __construct(
+        SessionInterface $session,
+        PostFinder $finder,
+        TemplateRenderer $renderer
+    ) {
         $this->session = $session;
         $this->finder = $finder;
         $this->renderer = $renderer;
@@ -49,11 +52,10 @@ final class ReadAction
      *
      * @param Request $request Representation of an incoming, server-side HTTP request.
      * @param Response $response Representation of an outgoing, server-side response.
-     * @param array<string> $args Get all of the route's parsed arguments.
      *
      * @return Response
      */
-    public function __invoke(Request $request, Response $response, array $args = []): Response
+    public function __invoke(Request $request, Response $response): Response
     {
         $isSuccess = '';
         $isError = false;
@@ -73,8 +75,7 @@ final class ReadAction
 
         $flash->clear();
 
-        $id = (int) $args['id'];
-
+        $id = (int) $request->getAttribute('id');
         $post = $this->finder->findByIdOrFail($id);
 
         $data = [

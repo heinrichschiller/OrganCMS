@@ -166,19 +166,20 @@ final class PostFinderRepository
         $result = $this->connection
             ->createQueryBuilder()
             ->select(
-                'id',
+                'p.id',
                 'title',
                 'slug',
                 'intro',
                 'content',
-                'author',
+                'author_name',
                 'on_mainpage',
                 'published_at',
                 'is_published',
                 'created_at',
                 'updated_at'
             )
-            ->from('posts')
+            ->from('posts', 'p')
+            ->leftJoin('p', 'authors', 'a')
             ->where("on_mainpage = 'on'")
             ->andWhere("is_published = 'on'")
             ->executeQuery()

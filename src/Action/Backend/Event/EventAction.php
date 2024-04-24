@@ -7,7 +7,6 @@ namespace App\Action\Backend\Event;
 use App\Domain\Event\Service\EventFinder;
 use App\Renderer\TemplateRenderer;
 use Odan\Session\SessionInterface;
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
 final class EventAction
@@ -50,13 +49,11 @@ final class EventAction
     /**
      * The invoker.
      *
-     * @param Request $request Representation of an incoming, server-side HTTP request.
      * @param Response $response Representation of an outgoing, server-side response.
-     * @param array<string> $args Get all of the route's parsed arguments.
      *
      * @return Response
      */
-    public function __invoke(Request $request, Response $response, array $args = []): Response
+    public function __invoke(Response $response): Response
     {
         $isSuccess = false;
         $isError = false;

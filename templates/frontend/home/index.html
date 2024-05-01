@@ -1,0 +1,85 @@
+{{> header }}
+
+{{> navigation }}
+
+<div class="container-fluid">
+  <div class="row p-0 min-vh-100">
+    <div class="col-md-6 p-0">
+      <div class="hero">
+        <div>
+          <div class="text-primary fs-3">Willkommen bei den</div>
+          <div class="display-3 text-light">Orgelfreunde Plauen</div>
+          <a href="#card-list" class="btn btn-primary text-light mt-3">Jetzt entdecken</a>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-6 p-0">
+      <div class="jumbotron"></div>
+    </div>
+  </div>
+</div>
+
+{{> card-list }}
+
+<div class="container-fluid">
+  <div class="row p-0 min-vh-100">
+    <div class="col-md-6 p-0">
+
+      <div class="min-vh-100 bg-primary d-flex flex-column justify-content-center align-items-center">
+        <div class="display-3 text-light">Veranstaltungen</div>
+
+        {{# events }}
+        
+        <div class="link-dark text-decoration-none w-75">
+          <div class="card mt-2 bg-success border border-3 border-primary border-bottom-0 border-end-0 border-start-0 shadow rounded text-primary">
+            <div class="card-body position-relative">
+              <div class="text-primary">
+                <span>{{ getEventDateFormated }} - {{ getTitle }}</span>
+                <span class="position-absolute top-25 end-0 pe-3">{{ getEventTime }} Uhr</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+        {{/ events }}
+
+      </div>
+
+    </div>
+    <div class="col-md-6 p-0">
+      <div class="min-vh-100 bg-secondary d-flex flex-column justify-content-center align-items-center">
+        <div class="display-3 text-primary">Blog</div>
+
+        {{# mainpagepost }}
+        
+        <a href="/blog/{{ getId }}/{{ getSlug }}" class="link-dark text-decoration-none w-75">
+          <div class="card mt-2 bg-primary border border-3 border-light border-bottom-0 border-end-0 border-start-0 shadow rounded text-primary">
+            <div class="card-body position-relative">
+              <div class="text-light">
+                <span>{{ getTitle }}</span>
+                <span class="position-absolute top-25 end-0 pe-3">{{ getPublishedAtFormated }}</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        
+        {{/ mainpagepost }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{{> story-intro }}
+
+{{> story-part-one }}
+
+{{> story-part-two }}
+
+{{> story-result }}
+
+{{> story-finish }}
+
+{{> footer }}

@@ -1,0 +1,32 @@
+{{> header }}
+
+<div class="container-fluid min-vh-100 pb-5 bg-primary text-light" style="z-index: 10;">
+
+  {{> navigation }}
+
+  {{# post }}
+    <div class="container-xl">
+      <div style="height: 5em;"></div>
+      <h1 class="display-3 my-5">{{ getTitle }}</h1>
+    </div>
+
+    <div class="container-xl">
+      <section class="intro">
+        {{{ getIntro }}}
+      </section>
+      <article class="mt-5 p-3 bg-secondary border border-3 border-primary border-bottom-0 border-end-0 border-start-0 shadow rounded text-light">
+        {{{ getContent }}}
+      </article>
+
+      <div class="container-xl fs-bold position-relative">
+        <div class="position-absolute top-0 end-0 highlight bg-success me-5" style="width: 20rem; z-index: 1;">
+          {{ getPublishedAtFormated }} - Autor: {{ getAuthor }}
+        </div>
+      </div>
+    </div>
+    
+    <div class="container-xl my-5"></div>
+  {{/ post }}
+</div>
+
+{{> footer }}

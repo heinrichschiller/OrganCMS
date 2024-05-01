@@ -1,0 +1,24 @@
+<section class="story-finish">
+  <div class="container-lg">
+    <h2 class="mt-4 mb-4 font-weight-light text-light">
+      Neben zahlreichen privaten Spendern haben uns auch örtliche Unternehmen unterstützt.
+    </h2>
+    <div class="row pt-4">
+      {{# supporter }}
+      <div class="col-md-4">
+        <div>
+          <p class="bg-light text-center text-primary py-2 rounded">
+            {{ getName }}
+          </p>
+        </div>
+      </div>
+      {{/ supporter}}
+      <p class="featurette-heading mb-5 mt-4">
+        {{# donation }}
+        Mit allem zusammen haben wir eine Summe von {{ getTotal }} € zusammen getragen.
+        Für eure Spenden und Hilfe möchten wir uns bei ihnen allen bedanken.
+        {{/ donation }}
+      </p>
+    </div>
+  </div>
+</section>

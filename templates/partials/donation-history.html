@@ -1,0 +1,21 @@
+<div class="table-responsive-sm">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Spendensumme</th>
+        <th scope="col">Datum</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{# events }}
+      <tr class="clickable-row" data-href="/events/update/{{ getId }}">
+        <th scope="row"></th>
+        <td>{{ getEventDateFormated }}</td>
+        <td>{{ getTitle }}</td>
+        <td>{{ getCreatedAtFormated }}</td>
+      </tr>
+      {{/ events }}
+    </tbody>
+  </table>
+</div>

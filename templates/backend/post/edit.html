@@ -1,0 +1,95 @@
+{{> backend-header }}
+
+  <div class="min-vh-100 pt-5 pb-5">
+    {{> admin-navigation }}
+
+    <div class="container-xl mt-3">
+
+      {{> flash }}
+
+      <h1>Beitrag bearbeiten</h1>
+
+      <div>
+        <hr class="featurete-divider">
+      </div>
+
+      {{# post }}
+      <form action="/post/update" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="postTitle" class="form-label">Titel:</label>
+          <input type="text" 
+            name="title"
+            value="{{ getTitle }}"
+            class="form-control bg-success text-light" 
+            id="postTitle" 
+            autofocus
+            required
+          >
+        </div>
+
+        <div class="mb-3">
+          <label for="intro-editor" class="form-label">Intro:</label>
+          <textarea name="intro" class="form-control" id="intro-editor" rows="3" maxlength="350">
+            {{ getIntro }}
+          </textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="default-editor" class="form-label">Beschreibung:</label>
+          <textarea 
+            name="content" 
+            class="form-control" 
+            id="default-editor" 
+            rows="10"
+          >
+          {{ getContent }}
+          </textarea>
+        </div>
+
+        <div class="form-check form-switch">
+          <label for="on-mainpage" class="form-check-label">Auf der Hauptseite anzeigen. 
+          </label>
+
+          {{# onMainpage }}
+          <input class="form-check-input" type="checkbox" name="on_mainpage" role="switch" id="on-mainpage" checked>
+          {{/ onMainpage }}
+          {{^ onMainpage }}
+          <input class="form-check-input" type="checkbox" name="on_mainpage" role="switch" id="on-mainpage">
+          {{/ onMainpage }}
+
+        </div>
+
+        <div class="form-check form-switch">
+          <label for="publish" class="form-check-label">Veröffentlichen. Wenn nicht aktiviert, wird der Beitrag nicht öffentlich angezeigt.
+            Dies ist nützlich wenn sie ein Beitrag noch Bearbeiten, Speichern aber noch nicht veröffentlichen wollen.
+          </label>
+
+          {{# isPublished }}
+          <input class="form-check-input" type="checkbox" name="is_published" role="switch" id="publish" checked>
+          {{/ isPublished }}
+          {{^ isPublished }}
+          <input class="form-check-input" type="checkbox" name="is_published" role="switch" id="publish">
+          {{/ isPublished }}
+
+        </div>
+        
+        <div>
+          <hr class="featurete-divider">
+        </div>
+
+        <button class="btn btn-primary" type="submit">Speichern</button>
+        <a href="/post/delete/{{ getId }}" class="btn btn-warning">Löschen</a>
+
+        <input type="hidden" name="id" value="{{ getId }}">
+        <input type="hidden" name="slug" value="{{ getSlug }}">
+        <input type="hidden" name="author_id" value="{{ getAuthorId }}">
+        <input type="hidden" name="published_at" value="{{ getPublishedAt }}">
+        <input type="hidden" name="created_at" value="{{ getCreatedAt }}">
+        <input type="hidden" name="updated_at" value="{{ getUpdatedAt }}">
+      </form>
+      {{/ post }}
+
+    </div>
+  </div>
+
+{{> admin-footer }}

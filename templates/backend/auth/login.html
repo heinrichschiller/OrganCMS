@@ -1,0 +1,52 @@
+{{> header }}
+
+    <div class="container-xl bg-secondary">
+
+      {{# isFailure }}
+      <div class="alert alert-danger w-100 text-center" role="alert">
+        {{ message }}
+      </div>
+      {{/ isFailure }}
+
+      <div class="position-absolute top-50 start-50 translate-middle w-xl-100">
+
+        <div class="d-flex justify-content-center mb-5">
+          <img src="assets/svg/organ-logo-black.svg" alt="Orgelfreunde Logo" class="w-50">
+        </div>
+
+        <form method="post" action="/organcms">
+          <div class="mb-2">
+            
+            <input 
+              type="input" 
+              name="username" 
+              class="form-control" 
+              id="username"
+              placeholder="Login"
+              autofocus
+              required
+            >
+  
+          </div>
+          <div>
+  
+            <input 
+              type="password" 
+              name="password" 
+              class="form-control" 
+              id="loginPassword"
+              placeholder="Passwort"
+              required
+            >
+  
+          </div>
+          <button type="submit" class="btn btn-primary mt-2 w-100">Login</button>
+        </form>
+  
+        <a href="/" class="btn btn-secondary mt-2 w-100">Zurück zur Hauptseite</a>
+      </div>
+      
+
+    </div>
+  </body>
+</html>

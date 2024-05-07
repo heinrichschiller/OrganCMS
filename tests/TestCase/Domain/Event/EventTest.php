@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Domain\Event;
 
-use App\Domain\Event\Event;
+use App\Domain\Event\Data\Event;
 use PHPUnit\Framework\TestCase;
 
 class EventTest extends TestCase

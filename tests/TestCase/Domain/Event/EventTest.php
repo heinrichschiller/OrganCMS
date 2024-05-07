@@ -2,11 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Tests\Domain\Event;
+namespace Tests\TestCase\Domain\Event;
 
 use App\Domain\Event\Data\Event;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(Event::class)]
+#[CoversMethod(Event::class, 'getId')]
+#[CoversMethod(Event::class, 'getTitle')]
+#[CoversMethod(Event::class, 'getPlace')]
+#[CoversMethod(Event::class, 'getDesc')]
+#[CoversMethod(Event::class, 'getEventDate')]
 class EventTest extends TestCase
 {
     public function setUp(): void
@@ -14,9 +22,6 @@ class EventTest extends TestCase
         // do nothing
     }
 
-    /**
-     * @covers App\Domain\Event\Event
-     */
     public function testEventInstance(): void
     {
         $event = new Event;
@@ -24,9 +29,6 @@ class EventTest extends TestCase
         $this->assertInstanceOf(Event::class, $event);
     }
 
-    /**
-     * @covers App\Domain\Event\Event
-     */
     public function testEventIdIsNullByDefault(): void
     {
         $event = new Event;
@@ -34,9 +36,6 @@ class EventTest extends TestCase
         $this->assertNull($event->getId());
     }
 
-    /**
-     * @covers App\Domain\Event\Event
-     */
     public function testEventIdHasInput(): void
     {
         $event = new Event(1);
@@ -44,9 +43,6 @@ class EventTest extends TestCase
         $this->assertEquals(1, $event->getId());
     }
 
-    /**
-     * @covers App\Domain\Event\Event
-     */
     public function testEventTitleIsNullByDefault(): void
     {
         $event = new Event(1);
@@ -54,9 +50,6 @@ class EventTest extends TestCase
         $this->assertNull($event->getTitle());
     }
 
-    /**
-     * @covers App\Domain\Event\Event
-     */
     public function testEventTitleHasInput(): void
     {
         $event = new Event(1, 'Title');
@@ -64,9 +57,6 @@ class EventTest extends TestCase
         $this->assertSame('Title', $event->getTitle());
     }
 
-    /**
-     * @covers App\Domain\Event\Event
-     */
     public function testEventTitleDoesNotStartOrEndWithAnWhitespace(): void
     {
         $event = new Event(1, ' Title ');
@@ -74,9 +64,6 @@ class EventTest extends TestCase
         $this->assertSame('Title', $event->getTitle());
     }
 
-    /**
-     * @covers App\Domain\Event\Event
-     */
     public function testEventTitleDoesStartWithUppercase(): void
     {
         $event = new Event(1, 'title');
@@ -84,9 +71,6 @@ class EventTest extends TestCase
         $this->assertSame('Title', $event->getTitle());
     }
 
-    /**
-     * @covers App\Domain\Event\Event
-     */
     public function testPlaceIsNullByDefault(): void
     {
         $event = new Event(1, 'Title');
@@ -94,9 +78,6 @@ class EventTest extends TestCase
         $this->assertNull($event->getPlace());
     }
 
-    /**
-     * @covers App\Domain\Event\Event
-     */
     public function testPlaceHasInput(): void
     {
         $event = new Event(1, 'Title', 'Plauen');
@@ -104,9 +85,6 @@ class EventTest extends TestCase
         $this->assertSame('Plauen', $event->getPlace());
     }
 
-    /**
-     * @covers App\Domain\Event\Event
-     */
     public function testPlaceDoesNotStartOrEndWithAnWhitespace(): void
     {
         $event = new Event(1, 'Title', ' Plauen ');
@@ -114,9 +92,6 @@ class EventTest extends TestCase
         $this->assertSame('Plauen', $event->getPlace());
     }
 
-    /**
-     * @covers App\Domain\Event\Event
-     */
     public function testPlaceDoesStartWithAnUppercase(): void
     {
         $event = new Event(1, 'Title', 'plauen');
@@ -124,9 +99,6 @@ class EventTest extends TestCase
         $this->assertSame('Plauen', $event->getPlace());
     }
 
-    /**
-     * @covers App\Domain\Event\Event
-     */
     public function testDescIsNullByDefault(): void
     {
         $event = new Event(1, 'Title', 'Plauen');
@@ -134,9 +106,6 @@ class EventTest extends TestCase
         $this->assertNull($event->getDesc());
     }
 
-    /**
-     * @covers App\Domain\Event\Event
-     */
     public function testDescHasInput(): void
     {
         $text = 'A large Description with many text.';
@@ -146,9 +115,6 @@ class EventTest extends TestCase
         $this->assertSame($text, $event->getDesc());
     }
 
-    /**
-     * @covers App\Domain\Event\Event
-     */
     public function testEventDateIsNullByDefault(): void
     {
         $text = 'A large Description with many text.';
@@ -158,9 +124,6 @@ class EventTest extends TestCase
         $this->assertNull($event->getEventDate());
     }
 
-    /**
-     * @covers App\Domain\Event\Event
-     */
     public function testEvenDateHasInput(): void
     {
         $text = 'A large Description with many text.';

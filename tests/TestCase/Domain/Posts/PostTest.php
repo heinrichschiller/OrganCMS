@@ -4,9 +4,16 @@ declare(strict_types=1);
 
 namespace Tests\Post;
 
-use App\Domain\Post\Post;
+use App\Domain\Post\Data\Post;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(Post::class)]
+#[CoversMethod(Post::class, 'getId')]
+#[CoversMethod(Post::class, 'getTitle')]
+#[CoversMethod(Post::class, 'getSlug')]
+#[CoversMethod(Post::class, 'getContent')]
 class PostTest extends TestCase
 {
     public function setUp(): void
@@ -14,9 +21,6 @@ class PostTest extends TestCase
         // do nothing
     }
 
-    /**
-     * @covers App\Domain\Post\Post
-     */
     public function testPostInstance(): void
     {
         $post = new Post;
@@ -24,9 +28,6 @@ class PostTest extends TestCase
         $this->assertInstanceOf(Post::class, $post);
     }
 
-    /**
-     * @covers App\Domain\Post\Post
-     */
     public function testPostIdIsEmptyByDefault(): void
     {
         $post = new Post;
@@ -34,9 +35,6 @@ class PostTest extends TestCase
         $this->assertEmpty($post->getId());
     }
 
-    /**
-     * @covers App\Domain\Post\Post
-     */
     public function testPostIdHasInput(): void
     {
         $post = new Post(1);
@@ -44,9 +42,6 @@ class PostTest extends TestCase
         $this->assertEquals(1, $post->getId());
     }
 
-    /**
-     * @covers App\Domain\Post\Post
-     */
     public function testPostTitleIsEmptyByDefault(): void
     {
         $post = new Post;
@@ -54,9 +49,6 @@ class PostTest extends TestCase
         $this->assertEmpty($post->getTitle());
     }
 
-    /**
-     * @covers App\Domain\Post\Post
-     */
     public function testPostTitleHasInput(): void
     {
         $post = new Post(0, 'Post title');
@@ -64,9 +56,6 @@ class PostTest extends TestCase
         $this->assertEquals('Post title', $post->getTitle());
     }
 
-    /**
-     * @covers App\Domain\Post\Post
-     */
     public function testPostTitleDoesNotStartOrEndWithAnWhitespace(): void
     {
         $post = new Post(0, ' Post title ');
@@ -74,9 +63,6 @@ class PostTest extends TestCase
         $this->assertEquals('Post title', $post->getTitle());
     }
 
-    /**
-     * @covers App\Domain\Post\Post
-     */
     public function testPostTitleDoesStartWithUppercase(): void
     {
         $post = new Post(0, ' post title ');
@@ -84,9 +70,6 @@ class PostTest extends TestCase
         $this->assertEquals('Post title', $post->getTitle());
     }
 
-    /**
-     * @covers App\Domain\Post\Post
-     */
     public function testPostSlugIsNullByDefault(): void
     {
         $post = new Post;
@@ -94,9 +77,6 @@ class PostTest extends TestCase
         $this->assertNull($post->getSlug());
     }
 
-    /**
-     * @covers App\Domain\Post\Post
-     */
     public function testPostContentIsNullByDefault(): void
     {
         $post = new Post;

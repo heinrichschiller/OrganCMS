@@ -7,8 +7,10 @@ namespace Tests\Domain\Supporter;
 use App\Domain\Supporter\Supporter;
 use App\Domain\Supporter\SupporterCollection;
 use ArrayIterator;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(SupporterCollection::class)]
 class SupporterCollectionTest extends TestCase
 {
     public function setUp(): void
@@ -16,9 +18,6 @@ class SupporterCollectionTest extends TestCase
         // nothing here
     }
 
-    /**
-     * @covers App\Domain\Supporter\SupporterCollection
-     */
     public function testSupporterCollectionInstance(): void
     {
         $collection = new SupporterCollection;
@@ -26,9 +25,6 @@ class SupporterCollectionTest extends TestCase
         $this->assertInstanceOf(SupporterCollection::class, $collection);
     }
 
-    /**
-     * @covers App\Domain\Supporter\Supporter
-     */
     public function testSupporterCollectionCanBeIterated():void
     {
         $heinrich = new Supporter(1, 'Heinrich Schiller');

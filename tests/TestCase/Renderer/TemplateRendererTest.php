@@ -5,26 +5,25 @@ declare(strict_types=1);
 namespace Tests\Renderer;
 
 use App\Renderer\TemplateRenderer;
-use App\Support\Config;
+use Selective\Config\Configuration;
 use Mustache_Engine;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
+#[CoversClass(TemplateRenderer::class)]
 class TemplateRendererTest extends TestCase
 {
-    private Config $config;
+    private Configuration $config;
     private Mustache_Engine $engine;
 
     public function setUp(): void
     {
-        $this->config = new Config([]);
+        $this->config = new Configuration([]);
         $this->engine = new Mustache_Engine();
     }
 
-    /**
-     * @covers App\Renderer\TemplateRenderer
-     */
     public function testRender(): void
     {
         $renderer = new TemplateRenderer($this->config, $this->engine);

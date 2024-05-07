@@ -5,8 +5,17 @@ declare (strict_types=1);
 namespace Tests\Domain\User;
 
 use App\Domain\User\User;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(User::class)]
+#[CoversMethod(User::class, 'getId')]
+#[CoversMethod(User::class, 'getFirstName')]
+#[CoversMethod(User::class, 'getGivenName')]
+#[CoversMethod(User::class, 'getUserName')]
+#[CoversMethod(User::class, 'getEmail')]
+#[CoversMethod(User::class, 'getPassword')]
 class UserTest extends TestCase
 {
     public function setUp(): void
@@ -14,9 +23,6 @@ class UserTest extends TestCase
         // do nothing
     }
 
-    /**
-     * @covers App\Domain\Supporter\Supporter
-     */
     public function testUserInstance(): void
     {
         $user = new User;
@@ -24,9 +30,6 @@ class UserTest extends TestCase
         $this->assertInstanceOf(User::class, $user);
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testUserIdIsNullByDefault(): void
     {
         $user = new User(null);
@@ -34,9 +37,6 @@ class UserTest extends TestCase
         $this->assertNull($user->getId());
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testUserHasId(): void
     {
         $user = new User(1);
@@ -44,9 +44,6 @@ class UserTest extends TestCase
         $this->assertEquals(1, $user->getId());
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testFirstNameIsNullByDefault(): void
     {
         $user = new User(1);
@@ -54,9 +51,6 @@ class UserTest extends TestCase
         $this->assertNull($user->getFirstName());
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testUserHasFirstName(): void
     {
         $user = new User(1, 'Heinrich');
@@ -64,9 +58,6 @@ class UserTest extends TestCase
         $this->assertEquals('Heinrich', $user->getFirstName());
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testFirstNameDoesNotStartOrEndWithAnWhitespace(): void
     {
         $user = new User(1, ' Heinrich ');
@@ -74,9 +65,6 @@ class UserTest extends TestCase
         $this->assertEquals('Heinrich', $user->getFirstName());
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testFirstNameDoesStartWithUppercase(): void
     {
         $user = new User(1, ' heinrich ');
@@ -84,9 +72,6 @@ class UserTest extends TestCase
         $this->assertEquals('Heinrich', $user->getFirstName());
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testGivenNameIsNullByDefault(): void
     {
         $user = new User(1, 'Heinrich');
@@ -94,9 +79,6 @@ class UserTest extends TestCase
         $this->assertNull($user->getGivenName());
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testUserHasGivenName(): void
     {
         $user = new User(1, 'Heinrich', 'Schiller');
@@ -104,9 +86,6 @@ class UserTest extends TestCase
         $this->assertEquals('Schiller', $user->getGivenName());
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testGivenNameDoesNotStartOrEndWithAnWhitespace(): void
     {
         $user = new User(1, 'Heinrich', 'Schiller');
@@ -114,9 +93,6 @@ class UserTest extends TestCase
         $this->assertEquals('Schiller', $user->getGivenName());
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testGivenNameDoesStartWithUppercase(): void
     {
         $user = new User(1, 'Heinrich', ' schiller ');
@@ -124,9 +100,6 @@ class UserTest extends TestCase
         $this->assertEquals('Schiller', $user->getGivenName());
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testUsernameIsNullByDefault(): void
     {
         $user = new User(1, 'Heinrich', 'Schiller');
@@ -134,9 +107,6 @@ class UserTest extends TestCase
         $this->assertNull($user->getUsername());
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testUserHasUsername(): void
     {
         $user = new User(1, 'Heinrich', 'Schiller', 'heinrich');
@@ -144,9 +114,6 @@ class UserTest extends TestCase
         $this->assertEquals('heinrich', $user->getUsername());
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testUsernameDoesNotStartOrEndWithAnWhitespace(): void
     {
         $user = new User(1, 'Heinrich', 'Schiller', ' heinrich ');
@@ -154,9 +121,6 @@ class UserTest extends TestCase
         $this->assertEquals('heinrich', $user->getUsername());
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testUserEmailIsNullByDefault(): void
     {
         $user = new User(1, 'Heinrich', 'Schiller', 'heinrich');
@@ -164,9 +128,6 @@ class UserTest extends TestCase
         $this->assertNull($user->getEmail());
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testUserHasEmail(): void
     {
         $user = new User(
@@ -180,9 +141,6 @@ class UserTest extends TestCase
         $this->assertEquals('max.musterman@email.com', $user->getEmail());
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testEmailDoesNotStartOrEndWithAnWhitespace(): void
     {
         $user = new User(
@@ -196,9 +154,6 @@ class UserTest extends TestCase
         $this->assertEquals('max.musterman@email.com', $user->getEmail());
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testUserPasswordIsNullByDefault(): void
     {
         $user = new User(
@@ -212,9 +167,6 @@ class UserTest extends TestCase
         $this->assertNull($user->getPassword());
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testUserHasPassword(): void
     {
         $user = new User(
@@ -229,9 +181,6 @@ class UserTest extends TestCase
         $this->assertEquals('secret', $user->getPassword());
     }
 
-    /**
-     * @covers App\Domain\User\User
-     */
     public function testPasswordDoesNotStartOrEndWithAnWhitespace(): void
     {
         $user = new User(

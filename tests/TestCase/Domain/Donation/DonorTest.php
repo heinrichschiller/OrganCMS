@@ -5,8 +5,18 @@ declare(strict_types=1);
 namespace Tests\Domain\Donation;
 
 use App\Domain\Donation\Donor;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(Donor::class)]
+#[CoversMethod(Donor::class, 'getFirstName')]
+#[CoversMethod(Donor::class, 'getGivenName')]
+#[CoversMethod(Donor::class, 'getStreet')]
+#[CoversMethod(Donor::class, 'getZipCode')]
+#[CoversMethod(Donor::class, 'getEmailAdress')]
+#[CoversMethod(Donor::class, 'getPhoneNumber')]
+#[CoversMethod(Donor::class, 'getFullName')]
 class DonorTest extends TestCase
 {
     public function setUp(): void
@@ -14,17 +24,11 @@ class DonorTest extends TestCase
         // do nothing
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testExistsTheDonorClass(): void
     {
         $this->assertInstanceOf(Donor::class, new Donor);
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testIsFirstNameIsNullByDefault(): void
     {
         $donor = new Donor;
@@ -32,9 +36,6 @@ class DonorTest extends TestCase
         $this->assertNull($donor->getFirstName());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testFirstNameHasInput(): void
     {
         $donor = new Donor('Heinrich');
@@ -42,9 +43,6 @@ class DonorTest extends TestCase
         $this->assertEquals('Heinrich', $donor->getFirstName());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testFirstLetterInFirstNameIsUppercase(): void
     {
         $donor = new Donor('heinrich');
@@ -52,9 +50,6 @@ class DonorTest extends TestCase
         $this->assertEquals('Heinrich', $donor->getFirstName());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testFirstNameDoesNotStartOrEndWithWhitespace(): void
     {
         $donor = new Donor(' heinrich ');
@@ -62,9 +57,6 @@ class DonorTest extends TestCase
         $this->assertEquals('Heinrich', $donor->getFirstName());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testGivenNameIsNullByDefault(): void
     {
         $donor = new Donor('Heinrich');
@@ -72,9 +64,6 @@ class DonorTest extends TestCase
         $this->assertNull($donor->getGivenName());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testGivenNameHasInput(): void
     {
         $donor = new Donor('Heinrich', 'Schiller');
@@ -82,9 +71,6 @@ class DonorTest extends TestCase
         $this->assertEquals('Schiller', $donor->getGivenName());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testFirstLetterInGivenNameIsUppercase(): void
     {
         $donor = new Donor('Heinrich', 'schiller');
@@ -92,9 +78,6 @@ class DonorTest extends TestCase
         $this->assertEquals('Schiller', $donor->getGivenName());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testGivenNameDoesNotStartOrEndWithWhitespace(): void
     {
         $donor = new Donor('Heinrich', ' schiller ');
@@ -102,9 +85,6 @@ class DonorTest extends TestCase
         $this->assertEquals('Schiller', $donor->getGivenName());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testStreetIsNullByDefault(): void
     {
         $donor = new Donor('Heinrich', 'Schiller');
@@ -112,9 +92,6 @@ class DonorTest extends TestCase
         $this->assertNull($donor->getStreet());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testStreetHasInput(): void
     {
         $donor = new Donor('Heinrich', 'Schiller', 'Kaiserstr. 53');
@@ -122,9 +99,6 @@ class DonorTest extends TestCase
         $this->assertEquals('Kaiserstr. 53', $donor->getStreet());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testFirstLetterOfStreetIsUppercase(): void
     {
         $donor = new Donor('Heinrich', 'Schiller', 'kaiserstr. 53');
@@ -132,9 +106,6 @@ class DonorTest extends TestCase
         $this->assertEquals('Kaiserstr. 53', $donor->getStreet());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testStreetDoesNotStartOrEndWithWhitespace(): void
     {
         $donor = new Donor('Heinrich', 'Schiller', ' kaiserstr. 53 ');
@@ -142,9 +113,6 @@ class DonorTest extends TestCase
         $this->assertEquals('Kaiserstr. 53', $donor->getStreet());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testZipCodeIsNullByDefault(): void
     {
         $donor = new Donor('Heinrich', 'Schiller', 'Kaiserstr. 53');
@@ -152,9 +120,6 @@ class DonorTest extends TestCase
         $this->assertNull($donor->getZipCode());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testZipCodeHasInput(): void
     {
         $donor = new Donor(
@@ -168,9 +133,6 @@ class DonorTest extends TestCase
         $this->assertEquals('08523', $donor->getZipCode());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testZipCodeDoesNotStartOrEndWithWhitespace(): void
     {
         $donor = new Donor(
@@ -184,9 +146,6 @@ class DonorTest extends TestCase
         $this->assertEquals('08523', $donor->getZipCode());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testEmailAdressIsNullByDefault(): void
     {
         $donor = new Donor(
@@ -200,9 +159,6 @@ class DonorTest extends TestCase
         $this->assertNull($donor->getEmailAdress());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testEmailAdressHasInput(): void
     {
         $donor = new Donor(
@@ -217,9 +173,6 @@ class DonorTest extends TestCase
         $this->assertEquals('info@heinrich-schiller.de', $donor->getEmailAdress());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testEmailAdressDoesNotStartOrEndWithWhitespace(): void
     {
         $donor = new Donor(
@@ -234,9 +187,6 @@ class DonorTest extends TestCase
         $this->assertEquals('info@heinrich-schiller.de', $donor->getEmailAdress());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testPhoneNumberIsNullByDefault(): void
     {
         $donor = new Donor(
@@ -251,9 +201,6 @@ class DonorTest extends TestCase
         $this->assertNull($donor->getPhoneNumber());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testPhoneNumberHasInput(): void
     {
         $donor = new Donor(
@@ -269,9 +216,6 @@ class DonorTest extends TestCase
         $this->assertEquals('0123456789', $donor->getPhoneNumber());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testPhoneNumberDoesNotStartOrEndWithWhitespace(): void
     {
         $donor = new Donor(
@@ -287,9 +231,6 @@ class DonorTest extends TestCase
         $this->assertEquals('0123456789', $donor->getPhoneNumber());
     }
 
-    /**
-     * @covers App\Domain\Donation\Donor
-     */
     public function testGetFullName(): void
     {
         $donor = new Donor(

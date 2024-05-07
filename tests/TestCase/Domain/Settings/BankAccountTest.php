@@ -5,7 +5,12 @@ declare(strict_types = 1);
 namespace Tests\Domain\Settings;
 
 use App\Domain\Settings\BankAccount;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
+
+#[CoversClass(BankAccount::class)]
+#[CoversMethod(BankAccount::class, 'getRecipient')]
 
 class BankAccountTest extends TestCase
 {
@@ -14,9 +19,6 @@ class BankAccountTest extends TestCase
         // do something ...
     }
 
-    /**
-     * @covers App\Domain\Settings\BankAccount
-     */
     public function testBankAccountInstance(): void
     {
         $bankAccount = new BankAccount;
@@ -24,9 +26,6 @@ class BankAccountTest extends TestCase
         $this->assertInstanceOf(BankAccount::class, $bankAccount);
     }
 
-    /**
-     * @covers App\Domain\Settings\BankAccount
-     */
     public function testRecipientIsNullByDefault(): void
     {
         $bankAccount = new BankAccount;
@@ -34,9 +33,6 @@ class BankAccountTest extends TestCase
         $this->assertNull($bankAccount->getRecipient());
     }
 
-    /**
-     * @covers App\Domain\Settings\BankAccount
-     */
     public function testRecipientHasInput(): void
     {
         $bankAccount = new BankAccount('Ev.Luth.Lutherkirche Plauen');
@@ -44,9 +40,6 @@ class BankAccountTest extends TestCase
         $this->assertSame('Ev.Luth.Lutherkirche Plauen', $bankAccount->getRecipient());
     }
 
-    /**
-     * @covers App\Domain\Settings\BankAccount
-     */
     public function testRecipientDoesNotStartOrEndWithAnWhitespace(): void
     {
         $bankAccount = new BankAccount(' Ev.Luth.Lutherkirche Plauen ');
@@ -54,9 +47,6 @@ class BankAccountTest extends TestCase
         $this->assertSame('Ev.Luth.Lutherkirche Plauen', $bankAccount->getRecipient());
     }
 
-    /**
-     * @covers App\Domain\Settings\BankAccount
-     */
     public function testRecipientStartWithUppercase(): void
     {
         $bankAccount = new BankAccount(' ev.Luth.Lutherkirche Plauen ');

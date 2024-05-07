@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Event\Service;
 
-use App\Domain\Event\Event;
-use App\Domain\Event\EventCollection;
+use App\Domain\Event\Data\Event;
+use App\Domain\Event\Data\EventCollection;
 use App\Domain\Event\Repository\EventFinderRepository;
 use App\Factory\LoggerFactory;
 use Error;

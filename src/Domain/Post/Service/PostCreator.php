@@ -68,10 +68,12 @@ final class PostCreator
         $content = $reader->findString('content');
         $authorId = $reader->findInt('author_id');
         $onMainpage = $reader->findBool('on_mainpage', false);
-        $publishedAt = $reader->findChronos('published_at') ? date('Y-m-d H:i:s') : '';
         $publish = $reader->findBool('publish', false);
         $createdAt = date('Y-m-d H:i:s');
 
+        if ($publish) 
+            $publishedAt = date('Y-m-d H:i:s');
+        
         $post = new Post(
             0,                         // placeholder
             $title,

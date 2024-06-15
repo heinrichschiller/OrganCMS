@@ -70,11 +70,14 @@ final class PostUpdater
         $intro = $reader->findString('intro');
         $content = $reader->findString('content');
         $authorId = $reader->findInt('author_id');
-        $onMainpage = $reader->findBool('on_mainpage') ? 1 : 0;
+        $onMainpage = $reader->findBool('on_mainpage') ? true : false;
         $publishedAt = $reader->findString('published_at');
-        $isPublished = $reader->findBool('is_published') ? 1 : 0;
+        $isPublished = $reader->findBool('is_published') ? true : false;
         $createdAt = $reader->findString('created_at');
         $updatedAt = date('Y-m-d H:i:s');
+
+        if ($isPublished)
+            $publishedAt = date('Y-m-d H:i:s');
 
         $post = new Post(
             $id,

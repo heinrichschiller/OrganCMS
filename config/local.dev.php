@@ -13,7 +13,7 @@ return function (array $settings): array {
     $settings['db']['path'] = __DIR__ . '/../data/donations-test.db';
 
     // url
-    $url = 'http://127.0.0.1:8080';
+    $url = 'http://127.0.0.1:8000';
 
     // website
     $settings['html_header'] = [

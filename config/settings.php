@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-
+$_ENV['APP_ENV'] = 'prod';
 // Detect environment
 $_ENV['APP_ENV'] = $_ENV['APP_ENV'] ?? $_SERVER['APP_ENV'] ?? 'dev';
 

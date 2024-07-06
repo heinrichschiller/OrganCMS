@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Event\Service;
 
-use App\Domain\Event\Event;
+use App\Domain\Event\Data\Event;
 use App\Domain\Event\Repository\EventUpdaterRepository;
 use App\Factory\LoggerFactory;
 use Cake\Validation\Validator;

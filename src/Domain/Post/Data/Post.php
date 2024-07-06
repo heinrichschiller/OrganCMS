@@ -16,10 +16,10 @@ final class Post
      * @param string|null $slug Post slug.
      * @param string|null $intro Post intro.
      * @param string|null $content Post content.
-     * @param string|null $authorId Author id.
-     * @param int $onMainpage Show this Post on Mainpage.
+     * @param int|null $authorId Author id.
+     * @param bool|null $onMainpage Show this Post on Mainpage.
      * @param string|null $publishedAt Post published date.
-     * @param int $isPublished Post is published or not.
+     * @param bool|null $isPublished Post is published or not.
      * @param string|null $createdAt Post creation date.
      * @param string|null $updatedAt Post update date.
      */
@@ -119,7 +119,7 @@ final class Post
      *
      * @return bool
      */
-    public function onMainpage(): int
+    public function onMainpage(): bool|null
     {
         return $this->onMainpage;
     }
@@ -151,7 +151,7 @@ final class Post
      *
      * @return bool
      */
-    public function isPublished(): int
+    public function isPublished(): bool|null
     {
         return $this->isPublished;
     }

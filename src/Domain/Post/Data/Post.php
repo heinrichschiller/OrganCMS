@@ -30,9 +30,9 @@ final class Post
         private ?string $intro = null,
         private ?string $content = null,
         private ?int $authorId = null,
-        private ?int $onMainpage = null,
+        private ?bool $onMainpage = null,
         private ?string $publishedAt = null,
-        private ?int $isPublished = null,
+        private ?bool $isPublished = null,
         private ?string $createdAt = null,
         private ?string $updatedAt = null
     ) {

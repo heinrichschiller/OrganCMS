@@ -25,7 +25,7 @@
         "mustache/mustache": "2.14.2",
         "odan/session": "6.1.0",
         "phpmailer/phpmailer": "6.9.1",
-        "cakephp/validation": "5.0.7",
+        "cakephp/validation": "5.0.9",
         "doctrine/dbal": "4.0.1",
         "symfony/uid": "7.0.3",
         "cocur/slugify": "4.5.1",

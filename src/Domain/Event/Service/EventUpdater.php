@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace App\Domain\Event\Service;
 
 use App\Domain\Event\Data\Event;
-use App\Domain\Event\Repository\EventUpdaterRepository;
+use App\Domain\Event\Repository\EventRepository;
 use App\Factory\LoggerFactory;
-use Cake\Validation\Validator;
+use App\Domain\Event\Service\EventValidator;
+use DomainException;
 use Error;
 use Exception;
 use Psr\Log\LoggerInterface;
+use Selective\ArrayReader\ArrayReader;
 
 final class EventUpdater
 {
@@ -18,7 +20,7 @@ final class EventUpdater
      * @Injection
      * @var EventUpdaterRepository
      */
-    private EventUpdaterRepository $repository;
+    private EventRepository $repository;
 
     /**
      * @Injection
@@ -28,9 +30,9 @@ final class EventUpdater
 
     /**
      * @Injection
-     * @var Validator
+     * @var EventValidator
      */
-    private Validator $validator;
+    private EventValidator $eventValidator;
 
     /**
      * The constructor.
@@ -40,13 +42,13 @@ final class EventUpdater
      * @param Validator $validator  CakePHP validator
      */
     public function __construct(
-        EventUpdaterRepository $repository,
+        EventRepository $repository,
         LoggerFactory $loggerFactory,
-        Validator $validator
+        EventValidator $eventValidator
     ) {
         $this->repository = $repository;
         $this->logger = $loggerFactory->addFileHandler('error.log')->createLogger();
-        $this->validator = $validator;
+        $this->eventValidator = $eventValidator;
     }
 
     /**
@@ -58,27 +60,24 @@ final class EventUpdater
      */
     public function update(array $formData): bool
     {
-        $this->validate($formData);
+        $this->validateEventUpdate($formData);
 
-        if (!isset($formData['publish'])) {
-            $formData['publish'] = '';
-        }
+        $reader = new ArrayReader($formData);
 
-        if ('on' === $formData['publish']) {
-            $formData['publish'] = 1;
-        }
-
-        if (null === $formData['publish']) {
-            $formData['publish'] = '';
-        }
+        $id = $reader->findInt('id');
+        $title = $reader->findString('title');
+        $place = $reader->findString('place');
+        $desc = $reader->findString('desc');
+        $date = $reader->findString('date');
+        $isPublished = $reader->findBool('publish');
         
         $event = new Event(
-            (int) $formData['id'],
-            $formData['title'],
-            $formData['place'],
-            $formData['desc'],
-            $formData['date'],
-            (bool) $formData['publish'],
+            $id,
+            $title,
+            $place,
+            $desc,
+            $date,
+            $isPublished,
             date('Y-m-d H:i:s')
         );
 
@@ -102,24 +101,14 @@ final class EventUpdater
      *
      * @param array<mixed> $formData The form data
      */
-    public function validate(array $formData): void
+    public function validateEventUpdate(array $formData): void
     {
-        $this->validator
-            ->requirePresence('title')
-            ->notEmptyString('title', 'Der Titel darf nicht leer sein.')
-            ->requirePresence('date')
-            ->notEmptyDate('date', 'Das Datum darf nicht leer sein.');
+        $eventId = (int) $formData['id'];
 
-        $errors = $this->validator->validate($formData);
-
-        if ($errors) {
-            foreach ($errors as $error) {
-                foreach ($error as $value) {
-                    echo "<p>$value</p>";
-                }
-            }
-
-            die;
+        if (!$this->repository->existsEventId($eventId)) {
+            throw new DomainException(sprintf('Event nicht gefunden: %s', $eventId));
         }
+
+        $this->eventValidator->validateEvent($formData);
     }
 }

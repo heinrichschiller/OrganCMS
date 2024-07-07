@@ -63,7 +63,7 @@ final class PostUpdater
         $this->validate($formData);
 
         $reader = new ArrayReader($formData);
-
+        
         $id = $reader->findInt('id');
         $title = $reader->findString('title');
         $slug = $this->slug($formData['title']);
@@ -71,10 +71,12 @@ final class PostUpdater
         $content = $reader->findString('content');
         $authorId = $reader->findInt('author_id');
         $onMainpage = $reader->findBool('on_mainpage');
-        $publishedAt = $reader->findString('published_at');
         $isPublished = $reader->findBool('is_published');
         $createdAt = $reader->findString('created_at');
         $updatedAt = date('Y-m-d H:i:s');
+
+        if ($isPublished)
+            $publishedAt = date('Y-m-d H:i:s');
 
         $post = new Post(
             $id,

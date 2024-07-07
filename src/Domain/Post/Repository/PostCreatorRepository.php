@@ -51,7 +51,7 @@ final class PostCreatorRepository
             ->setParameter(1, $post->getSlug())
             ->setParameter(2, $post->getIntro())
             ->setParameter(3, $post->getContent())
-            ->setParameter(4, $post->getAuthor())
+            ->setParameter(4, $post->getAuthorId())
             ->setParameter(5, $post->onMainpage())
             ->setParameter(6, $post->getPublishedAt())
             ->setParameter(7, $post->isPublished())

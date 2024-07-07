@@ -66,7 +66,7 @@ final class CreateAction
         $url = $routeParser->urlFor('events');
 
         return $response
-            ->withStatus(StatusCodeInterface::STATUS_FOUND)
+            ->withStatus(StatusCodeInterface::STATUS_CREATED)
             ->withHeader('Location', $url);
     }
 }

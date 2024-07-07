@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Event\Repository;
 
-use App\Domain\Event\Event;
+use App\Domain\Event\Data\Event;
 use Doctrine\DBAL\Connection;
 
-final class EventCreatorRepository
+final class EventRepository
 {
     /**
      * @var int
@@ -37,7 +37,7 @@ final class EventCreatorRepository
      *
      * @return void
      */
-    public function create(Event $event): void
+    public function createEvent(Event $event): void
     {
         $this->insertEvent($event);
         $this->insertEventCategory();
@@ -88,6 +88,72 @@ final class EventCreatorRepository
             ->setValue('category_id', '?')
             ->setParameter(0, $this->lastInsertId)
             ->setParameter(1, 1)
+            ->executeQuery();
+    }
+
+    /**
+     * Update event data
+     *
+     * @param Event $event Event data object.
+     *
+     * @return void
+     */
+    public function update(Event $event): void
+    {
+        $this->connection
+            ->createQueryBuilder()
+            ->update('events')
+            ->set('title', ':title')
+            ->set('place', ':place')
+            ->set('description', ':description')
+            ->set('event_date', ':event_date')
+            ->set('published', ':published')
+            ->set('published_on', ':published_on')
+            ->where('id = :id')
+            ->setParameter('title', $event->getTitle())
+            ->setParameter('place', $event->getPlace())
+            ->setParameter('description', $event->getDesc())
+            ->setParameter('event_date', $event->getEventDate())
+            ->setParameter('published', $event->isPublished())
+            ->setParameter('published_on', $event->getPublishedOn())
+            ->setParameter('id', $event->getId())
+            ->executeQuery();
+    }
+
+    /**
+     * Exists event id or not.
+     * 
+     * @param int $eventId Event id.
+     * 
+     * @return bool
+     */
+    public function existsEventId(int $eventId): bool
+    {
+        $result = $this->connection
+            ->createQueryBuilder()
+            ->select('id')
+            ->from('events')
+            ->where('id = ?')
+            ->setParameter(0, $eventId)
+            ->executeQuery();
+        
+        return (bool) $result;
+    }
+
+    /**
+     * Delete supporter by id.
+     *
+     * @param int $id Supporter id.
+     *
+     * @return void
+     */
+    public function delete(int $id): void
+    {
+        $this->connection
+            ->createQueryBuilder()
+            ->delete('events')
+            ->where('id = ?')
+            ->setParameter(0, $id)
             ->executeQuery();
     }
 }

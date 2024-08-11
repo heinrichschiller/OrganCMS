@@ -26,7 +26,7 @@
         "odan/session": "6.1.0",
         "phpmailer/phpmailer": "6.9.1",
         "cakephp/validation": "5.0.10",
-        "doctrine/dbal": "4.0.4",
+        "doctrine/dbal": "4.0.5",
         "symfony/uid": "7.1.1",
         "cocur/slugify": "4.5.1",
         "php-di/slim-bridge": "3.4.0"

@@ -3,10 +3,10 @@
 namespace App\Domain\Post\Service;
 
 use App\Domain\Post\Data\Post;
-use App\Domain\Post\Repository\PostCreatorRepository;
+use App\Domain\Post\Repository\PostRepository;
+use App\Domain\Post\Service\PostValidator;
 use App\Factory\LoggerFactory;
 use App\Support\Slug;
-use Cake\Validation\Validator;
 use Error;
 use Exception;
 use Psr\Log\LoggerInterface;
@@ -22,31 +22,31 @@ final class PostCreator
 
     /**
      * @Injection
-     * @var PostCreatorRepository
+     * @var PostRepository
      */
-    private PostCreatorRepository $repository;
+    private PostRepository $repository;
 
     /**
      * @Injection
-     * @var Validator
+     * @var PostValidator
      */
-    private Validator $validator;
+    private PostValidator $postValidator;
 
     /**
      * The constructor.
      *
      * @param LoggerFactory $loggerFactory  Monolog logger
-     * @param PostCreatorRepository $repository Post creator repository
+     * @param PostRepository $repository Post creator repository
      * @param Validator $validator CakePHP validator
      */
     public function __construct(
         LoggerFactory $loggerFactory,
-        PostCreatorRepository $repository,
-        Validator $validator
+        PostRepository $repository,
+        PostValidator $postValidator
     ) {
         $this->logger = $loggerFactory->addFileHandler('error.log')->createLogger();
         $this->repository = $repository;
-        $this->validator = $validator;
+        $this->postValidator = $postValidator;
     }
 
     /**
@@ -58,36 +58,12 @@ final class PostCreator
      */
     public function create(array $formData): bool
     {
-        $this->validate($formData);
+        $this->validatePostCreate($formData);
 
-        $reader = new ArrayReader($formData);
-
-        $title = $reader->findString('title');
-        $slug = $this->slug($title);
-        $intro = $reader->findString('intro');
-        $content = $reader->findString('content');
-        $authorId = $reader->findInt('author_id');
-        $onMainpage = $reader->findBool('on_mainpage', false);
-        $publishedAt = $reader->findChronos('published_at') ? date('Y-m-d H:i:s') : '';
-        $publish = $reader->findBool('publish', false);
-        $createdAt = date('Y-m-d H:i:s');
-
-        $post = new Post(
-            0,                         // placeholder
-            $title,
-            $slug,
-            $intro,
-            $content,
-            $authorId,
-            $onMainpage,
-            $publishedAt,
-            $publish,
-            $createdAt,
-            ''                         // updated at
-        );
+        $post = $this->setPost($formData);
 
         try {
-            $this->repository->create($post);
+            $this->repository->createPost($post);
 
             return true;
         } catch (Exception $e) {
@@ -118,22 +94,50 @@ final class PostCreator
     }
 
     /**
+     * Create a post object from form data.
+     * 
+     * @param array<string> $formData The form data.
+     * 
+     * @return Post
+     */
+    private function setPost(array $formData): Post
+    {
+        $reader = new ArrayReader($formData);
+
+        $title = $reader->findString('title');
+        $slug = $this->slug($title);
+        $intro = $reader->findString('intro');
+        $content = $reader->findString('content');
+        $authorId = $reader->findInt('author_id');
+        $onMainpage = $reader->findBool('on_mainpage', false);
+        $publishedAt = $reader->findChronos('published_at') ? date('Y-m-d H:i:s') : '';
+        $publish = $reader->findBool('publish', false);
+        $createdAt = date('Y-m-d H:i:s');
+
+        $post = new Post(
+            0,                         // placeholder
+            $title,
+            $slug,
+            $intro,
+            $content,
+            $authorId,
+            $onMainpage,
+            $publishedAt,
+            $publish,
+            $createdAt,
+            ''                         // updated at
+        );
+
+        return $post;
+    }
+
+    /**
      * Validate $formData
      *
      * @param array<mixed> $formData The form data.
      */
-    private function validate(array $formData)
+    private function validatePostCreate(array $formData): void
     {
-        $this->validator
-            ->requirePresence('title')
-            ->notEmptyString('title', 'Der Titel darf nicht leer sein.');
-        
-        $errors = $this->validator->validate($formData);
-
-        if ($errors) {
-            foreach ($errors as $error) {
-                dd($error);
-            }
-        }
+        $this->postValidator->validatePost($formData);
     }
 }

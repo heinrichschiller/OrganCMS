@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App\Domain\Post\Service;
 
 use App\Domain\Post\Data\Post;
-use App\Domain\Post\Repository\PostUpdaterRepository;
+use App\Domain\Post\Repository\PostRepository;
+use App\Domain\Post\Service\PostValidator;
 use App\Factory\LoggerFactory;
 use App\Support\Slug;
-use Cake\Validation\Validator;
+use DomainException;
 use Error;
 use Exception;
 use Psr\Log\LoggerInterface;
@@ -24,31 +25,31 @@ final class PostUpdater
 
     /**
      * @Injection
-     * @var PostUpdaterRepository
+     * @var PostRepository
      */
-    private PostUpdaterRepository $repository;
+    private PostRepository $repository;
 
     /**
      * @Injection
-     * @var Validator
+     * @var PostValidator
      */
-    private Validator $validator;
+    private PostValidator $postValidator;
 
     /**
      * The constructor.
      *
      * @param LoggerFactory $loggerFactory Monolog logger factory.
-     * @param PostUpdaterRepository $repository Post updater repository
+     * @param PostRepository $repository Post repository
      * @param Validator $validator CakePHP validator
      */
     public function __construct(
         LoggerFactory $loggerFactory,
-        PostUpdaterRepository $repository,
-        Validator $validator
+        PostRepository $repository,
+        PostValidator $postValidator
     ) {
-        $this->logger = $loggerFactory->addFileHandler('error.log')->createLogger();
+        $this->logger = $loggerFactory->addFileHandler('post_updater.log')->createLogger();
         $this->repository = $repository;
-        $this->validator = $validator;
+        $this->postValidator = $postValidator;
     }
 
     /**
@@ -60,37 +61,9 @@ final class PostUpdater
      */
     public function update(array $formData): bool
     {
-        $this->validate($formData);
+        $this->validatePostUpdate($formData);
 
-        $reader = new ArrayReader($formData);
-        
-        $id = $reader->findInt('id');
-        $title = $reader->findString('title');
-        $slug = $this->slug($formData['title']);
-        $intro = $reader->findString('intro');
-        $content = $reader->findString('content');
-        $authorId = $reader->findInt('author_id');
-        $onMainpage = $reader->findBool('on_mainpage');
-        $isPublished = $reader->findBool('is_published');
-        $createdAt = $reader->findString('created_at');
-        $updatedAt = date('Y-m-d H:i:s');
-
-        if ($isPublished)
-            $publishedAt = date('Y-m-d H:i:s');
-
-        $post = new Post(
-            $id,
-            $title,
-            $slug,
-            $intro,
-            $content,
-            $authorId,
-            $onMainpage,
-            $publishedAt,
-            $isPublished,
-            $createdAt,
-            $updatedAt
-        );
+        $post = $this->setPost($formData);
 
         try {
             $this->repository->update($post);
@@ -124,24 +97,63 @@ final class PostUpdater
     }
 
     /**
-     * Validate the form data.
-     *
-     * @param array<mixed> $formData The form data.
-     *
-     * @return void
+     * Create a post object from form data.
+     * 
+     * @param array<string> $formData The form data.
+     * 
+     * @return Post
      */
-    public function validate(array $formData): void
+    private function setPost(array $formData): Post
     {
-        $this->validator
-            ->requirePresence('title')
-            ->notEmptyString('title', 'Der Titel darf nicht leer sein.');
+        $reader = new ArrayReader($formData);
         
-        $errors = $this->validator->validate($formData);
+        $id = $reader->findInt('id');
+        $title = $reader->findString('title');
+        $intro = $reader->findString('intro');
+        $content = $reader->findString('content');
+        $authorId = $reader->findInt('author_id');
+        $onMainpage = $reader->findBool('on_mainpage');
+        $isPublished = $reader->findBool('is_published');
+        $createdAt = $reader->findString('created_at');
 
-        if ($errors) {
-            foreach ($errors as $error) {
-                dd($error);
-            }
+        $slug = $this->slug($title);
+
+        $publishedAt = '';
+        if ($isPublished)
+            $publishedAt = date('Y-m-d H:i:s');
+
+        $updatedAt = date('Y-m-d H:i:s');
+
+        $post = new Post(
+            $id,
+            $title,
+            $slug,
+            $intro,
+            $content,
+            $authorId,
+            $onMainpage,
+            $publishedAt,
+            $isPublished,
+            $createdAt,
+            $updatedAt
+        );
+
+        return $post;
+    }
+
+    /**
+     * Validate data
+     * 
+     * @param array<string> $formData The form data
+     */
+    public function validatePostUpdate(array $formData): void
+    {
+        $postId = (int) $formData['id'];
+
+        if (!$this->repository->existsPostId($postId)) {
+            throw new DomainException(sprintf('Post nicht gefunden: %s', $postId));
         }
+
+        $this->postValidator->validatePost($formData);
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Event\Service;
 
-use App\Domain\Event\Repository\EventDeleterRepository;
+use App\Domain\Event\Repository\EventRepository;
 use App\Factory\LoggerFactory;
 use Error;
 use Exception;
@@ -20,17 +20,17 @@ final class EventDeleter
 
     /**
      * @Incjection
-     * @var EventDeleterRepository
+     * @var EventRepository
      */
-    private EventDeleterRepository $repository;
+    private EventRepository $repository;
 
     /**
      * The constructor.
      *
      * @param LoggerFactory $loggerFactory Logger factory
-     * @param EventDeleterRepository $repository Supporter deleter repository
+     * @param EventRepository $repository Supporter deleter repository
      */
-    public function __construct(LoggerFactory $loggerFactory, EventDeleterRepository $repository)
+    public function __construct(LoggerFactory $loggerFactory, EventRepository $repository)
     {
         $this->logger = $loggerFactory->addFileHandler('error.log')->createLogger();
         $this->repository = $repository;

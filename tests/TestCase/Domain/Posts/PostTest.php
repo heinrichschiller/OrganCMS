@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Post;
+namespace Tests\Domain\Posts\Post;
 
 use App\Domain\Post\Data\Post;
 use PHPUnit\Framework\Attributes\CoversClass;

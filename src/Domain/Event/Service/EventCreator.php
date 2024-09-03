@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Event\Service;
 
-use App\Domain\Event\Event;
-use App\Domain\Event\Repository\EventCreatorRepository;
+use App\Domain\Event\Data\Event;
+use App\Domain\Event\Repository\EventRepository;
 use App\Factory\LoggerFactory;
 use Cake\Validation\Validator;
 use Error;
@@ -16,9 +16,9 @@ final class EventCreator
 {
     /**
      * @Injection
-     * @var EventCreatorRepository
+     * @var EventRepository
      */
-    private EventCreatorRepository $repository;
+    private EventRepository $repository;
 
     /**
      * @Injection
@@ -35,12 +35,12 @@ final class EventCreator
     /**
      * The contstructor.
      *
-     * @param EventCreatorRepository $repository
+     * @param EventRepository $repository
      * @param LoggerFactory $loggerFactory
      * @param Validator $validator  CakePHP validator
      */
     public function __construct(
-        EventCreatorRepository $repository,
+        EventRepository $repository,
         LoggerFactory $loggerFactory,
         Validator $validator
     ) {
@@ -80,7 +80,7 @@ final class EventCreator
         );
 
         try {
-            $this->repository->create($event);
+            $this->repository->createEvent($event);
 
             return true;
         } catch (Exception $e) {

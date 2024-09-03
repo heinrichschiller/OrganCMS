@@ -13,7 +13,7 @@ use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Uid\Uuid;
 
-final class LoggerFactory
+final class LoggerFactory implements LoggerFactoryInterface
 {
     /**
      * @var string
@@ -42,8 +42,8 @@ final class LoggerFactory
      */
     public function __construct(array $settings)
     {
-        $this->path = (string) $settings['path'];
-        $this->level = $settings['level'];
+        $this->path = (string) $settings['path'] ?? 'vfs://root/logs';
+        $this->level = $settings['level'] ?? Level::Debug;
 
         // This can be used for testing to make the Factory testable
         if (isset($settings['test'])) {
@@ -56,12 +56,12 @@ final class LoggerFactory
      *
      * @param string|null $name Logger file name
      *
-     * @return LoggerInterface
+     * @return LoggerInterface The logger
      */
     public function createLogger(string|null $name = null): LoggerInterface
     {
         if ($this->testLogger) {
-            return $this->testLogger;
+            $this->handler = [$this->testLogger];
         }
 
         $logger = new Logger($name ?: Uuid::v4()->toRfc4122());
@@ -90,10 +90,10 @@ final class LoggerFactory
     }
 
     /**
-     * Add file handler.
+     * Add rotating file logger handler.
      *
-     * @param string $filename  Filename.
-     * @param Level $level Monolog log level.
+     * @param string $filename The filename.
+     * @param Level|null $level Monolog log level.
      *
      * @return self
      */
@@ -119,7 +119,7 @@ final class LoggerFactory
      */
     public function addConsoleHandler(Level $level = null): self
     {
-        $streamHandler = new StreamHandler('php://stdout', $level ?? $this->level);
+        $streamHandler = new StreamHandler('php://output', $level ?? $this->level);
 
         // The last "true" here tells monolog to remove empty arrays
         $streamHandler->setFormatter(new LineFormatter(null, null, false, true));

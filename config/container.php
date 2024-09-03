@@ -79,7 +79,7 @@ return [
 
     Connection::class => function (ContainerInterface $container) {
         $doctrineConfig = new DoctrineConfiguration();
-        $config = $container->get(Configuration::class); //('settings')['db'];
+        $config = $container->get(Configuration::class);
 
         return DriverManager::getConnection(
             $config->getArray('db'),

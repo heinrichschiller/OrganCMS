@@ -4,6 +4,7 @@ composer.lock
 memory
 package-lock.json
 
+/build/
 /data/
 /resources/bootstrap/backend/dist/
 /resources/bootstrap/backend/node_modules/

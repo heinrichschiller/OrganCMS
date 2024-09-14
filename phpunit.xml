@@ -14,15 +14,28 @@
     beStrictAboutCoverageMetadata="true"
 >
   <testsuites>
-    <testsuite name="default">
-      <directory>tests</directory>
+    <testsuite name="Tests">
+      <directory suffix="Test.php">tests/TestCase</directory>
     </testsuite>
   </testsuites>
-  <coverage/>
+  <php>
+      <env name="APP_ENV" value="test"/>
+      <env name="PHPUNIT_TEST_SUITE" value="1"/>
+  </php>
   <source>
     <include>
       <directory suffix=".php">src</directory>
     </include>
+    <exclude>
+      <directory>bin</directory>
+      <directory>build</directory>
+      <directory>data</directory>
+      <directory>docs</directory>
+      <directory>public</directory>
+      <directory>resources</directory>
+      <directory>templates</directory>
+      <directory>var</directory>
+      <directory>vendor</directory>
+    </exclude>
   </source>
 </phpunit>
-

@@ -122,9 +122,9 @@ final class EventRepository
 
     /**
      * Exists event id or not.
-     * 
+     *
      * @param int $eventId Event id.
-     * 
+     *
      * @return bool
      */
     public function existsEventId(int $eventId): bool

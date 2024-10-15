@@ -10,7 +10,7 @@ class PostValidator
 {
     /**
      * Validate data
-     * 
+     *
      * @param array<string> $formData The form data
      */
     public function validatePost(array $formData): void

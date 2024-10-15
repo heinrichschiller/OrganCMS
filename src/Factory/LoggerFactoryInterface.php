@@ -10,16 +10,16 @@ interface LoggerFactoryInterface
 {
     /**
      * Add file handler.
-     * 
+     *
      * @param string $filename Log filename
-     * 
+     *
      * @return self;
      */
     public function addFileHandler(string $filename): self;
 
     /**
      * Create Logger
-     * 
+     *
      * @return LoggerInterface
      */
     public function createLogger(): LoggerInterface;

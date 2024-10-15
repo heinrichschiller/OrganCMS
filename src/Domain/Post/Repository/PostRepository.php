@@ -114,9 +114,9 @@ class PostRepository
 
     /**
      * Exists post id or not.
-     * 
+     *
      * @param int $postId Post id.
-     * 
+     *
      * @return bool
      */
     public function existsPostId(int $postId): bool

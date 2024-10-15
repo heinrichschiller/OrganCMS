@@ -95,9 +95,9 @@ final class PostCreator
 
     /**
      * Create a post object from form data.
-     * 
+     *
      * @param array<string> $formData The form data.
-     * 
+     *
      * @return Post
      */
     private function setPost(array $formData): Post

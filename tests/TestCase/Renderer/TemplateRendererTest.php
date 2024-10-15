@@ -20,7 +20,10 @@ class TemplateRendererTest extends TestCase
 
     public function setUp(): void
     {
-        $this->config = new Configuration([]);
+        $this->config = new Configuration(
+            require __DIR__ . '/../../../config/settings.php'
+        );
+        
         $this->engine = new Mustache_Engine();
     }
 

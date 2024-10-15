@@ -171,4 +171,9 @@ final class User
         }
         $this->password = $password;
     }
+
+    public function getFullName(): string
+    {
+        return sprintf('%s %s', $this->firstName, $this->givenName);
+    }
 }

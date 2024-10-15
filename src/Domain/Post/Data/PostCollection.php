@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Domain\Post\Data;
 
@@ -9,19 +11,19 @@ use Traversable;
 /**
  * @implements IteratorAggregate<int, string>
  */
-final class PostFinderCollection implements IteratorAggregate
+final class PostCollection implements IteratorAggregate
 {
     /**
-     * @var PostReaderResult[]
+     * @var Post[]
      */
     private array $list = [];
 
     /**
      * Add a new Post to collection.
      *
-     * @param PostReaderResult $post The news post.
+     * @param PostR $post The news post.
      */
-    public function add(PostReaderResult $post): void
+    public function add(Post $post): void
     {
         $this->list[] = $post;
     }

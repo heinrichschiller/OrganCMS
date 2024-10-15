@@ -24,7 +24,6 @@
         "selective/config": "1.2.0",
         "mustache/mustache": "2.14.2",
         "odan/session": "6.2.0",
-        "phpmailer/phpmailer": "6.9.1",
         "cakephp/validation": "5.1.0",
         "doctrine/dbal": "4.1.1",
         "symfony/uid": "7.1.4",

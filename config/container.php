@@ -14,10 +14,10 @@ use Odan\Session\SessionManagerInterface;
 use Psr\Container\ContainerInterface;
 use Selective\BasePath\BasePathMiddleware;
 use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ServerRequestFactoryInterface;
 use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Exception\HttpNotFoundException;
-use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputOption;
@@ -108,6 +108,10 @@ return [
     },
 
     ResponseFactoryInterface::class => function (ContainerInterface $container) {
+        return $container->get(Psr17Factory::class);
+    },
+
+    ServerRequestFactoryInterface::class => function (ContainerInterface $container) {
         return $container->get(Psr17Factory::class);
     },
 ];

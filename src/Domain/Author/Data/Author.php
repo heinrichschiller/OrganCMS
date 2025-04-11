@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Data\Author;
+namespace App\Domain\Author\Data;
 
 final class Author
 {
@@ -16,5 +16,35 @@ final class Author
         private ?int $userId = null,
         private ?string $authorName = null
     ) {
+    }
+
+    /**
+     * Get author id.
+     *
+     * @return int Author idl
+     */
+    public function getId(): int|null
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get user id.
+     *
+     * @return int User id.
+     */
+    public function getUserId(): int|null
+    {
+        return $this->userId;
+    }
+
+    /**
+     * Get author name.
+     *
+     * @return string Author name.
+     */
+    public function getAuthorName(): string|null
+    {
+        return $this->authorName;
     }
 }

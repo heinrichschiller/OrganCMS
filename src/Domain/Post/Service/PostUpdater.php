@@ -8,6 +8,7 @@ use App\Domain\Post\Data\Post;
 use App\Domain\Post\Repository\PostRepository;
 use App\Domain\Post\Service\PostValidator;
 use App\Factory\LoggerFactory;
+use App\Factory\LoggerFactoryInterface;
 use App\Support\Slug;
 use DomainException;
 use Error;
@@ -43,7 +44,7 @@ final class PostUpdater
      * @param Validator $validator CakePHP validator
      */
     public function __construct(
-        LoggerFactory $loggerFactory,
+        LoggerFactoryInterface $loggerFactory,
         PostRepository $repository,
         PostValidator $postValidator
     ) {
@@ -98,9 +99,9 @@ final class PostUpdater
 
     /**
      * Create a post object from form data.
-     * 
+     *
      * @param array<string> $formData The form data.
-     * 
+     *
      * @return Post
      */
     private function setPost(array $formData): Post
@@ -119,8 +120,9 @@ final class PostUpdater
         $slug = $this->slug($title);
 
         $publishedAt = '';
-        if ($isPublished)
+        if ($isPublished) {
             $publishedAt = date('Y-m-d H:i:s');
+        }
 
         $updatedAt = date('Y-m-d H:i:s');
 
@@ -143,7 +145,7 @@ final class PostUpdater
 
     /**
      * Validate data
-     * 
+     *
      * @param array<string> $formData The form data
      */
     public function validatePostUpdate(array $formData): void

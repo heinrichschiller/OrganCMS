@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Data\Author;
+namespace App\Domain\Author\Data;
 
+use App\Domain\Author\Data\Author;
 use ArrayIterator;
 use IteratorAggregate;
 use Traversable;

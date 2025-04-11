@@ -14,7 +14,7 @@ final class PostReaderResult
      * @param string|null $slug Post slug.
      * @param string|null $intro Post intro.
      * @param string|null $content Post content.
-     * @param string|null $authorId Author id.
+     * @param int|null $authorId Author id.
      * @param bool $onMainpage Show this Post on Mainpage.
      * @param string|null $publishedAt Post published date.
      * @param bool $isPublished Post is published or not.
@@ -27,7 +27,7 @@ final class PostReaderResult
         private ?string $slug = null,
         private ?string $intro = null,
         private ?string $content = null,
-        private ?string $authorId = null,
+        private ?int $authorId = null,
         private ?bool $onMainpage = null,
         private ?string $publishedAt = null,
         private ?bool $isPublished = null,
@@ -64,7 +64,7 @@ final class PostReaderResult
      */
     private function setTitle(string|null $title): void
     {
-        if (null !== $title) {
+        if ($title !== null) {
             $title = trim($title, " \n\r\t\v\0");
             $title = ucfirst($title);
         }
@@ -105,9 +105,9 @@ final class PostReaderResult
     /**
      * Get author.
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getAuthor(): string|null
+    public function getAuthorId(): int|null
     {
         return $this->authorId;
     }
@@ -139,9 +139,14 @@ final class PostReaderResult
      */
     public function getPublishedAtFormated(): string|null
     {
-        $date = new DateTimeImmutable($this->publishedAt);
+        $date = null;
 
-        return $date->format('d.m.Y');
+        if ($this->publishedAt !== null) {
+            $date = new DateTimeImmutable($this->publishedAt);
+            $date = $date->format('d.m.Y');
+        }
+
+        return $date;
     }
 
     /**
@@ -165,18 +170,6 @@ final class PostReaderResult
     }
 
     /**
-     * Get the formated date when an event was created.
-     *
-     * @return string|null
-     */
-    public function getCreatedAtFormated(): string|null
-    {
-        $date = new DateTimeImmutable($this->createdAt);
-
-        return $date->format('d.m.Y');
-    }
-
-    /**
      * Get updated at.
      *
      * @return string|null
@@ -184,17 +177,5 @@ final class PostReaderResult
     public function getUpdatedAt(): string|null
     {
         return $this->updatedAt;
-    }
-
-        /**
-     * Get the formated date when an event was created.
-     *
-     * @return string
-     */
-    public function getUpdatedAtFormated(): string
-    {
-        $date = new DateTimeImmutable($this->createdAt);
-
-        return $date->format('d.m.Y');
     }
 }

@@ -141,9 +141,14 @@ final class Post
      */
     public function getPublishedAtFormated(): string|null
     {
-        $date = new DateTimeImmutable($this->publishedAt);
+        $date = null;
 
-        return $date->format('d.m.Y');
+        if ($this->publishedAt !== null) {
+            $date = new DateTimeImmutable($this->publishedAt);
+            $date = $date->format('d.m.Y');
+        }
+        
+        return $date;
     }
 
     /**
@@ -173,9 +178,14 @@ final class Post
      */
     public function getCreatedAtFormated(): string|null
     {
-        $date = new DateTimeImmutable($this->createdAt);
+        $date = null;
 
-        return $date->format('d.m.Y');
+        if ($this->getCreatedAt() !== null) {
+            $date = new DateTimeImmutable($this->createdAt);
+            $date = $date->format('d.m.Y');
+        }
+
+        return $date;
     }
 
     /**
@@ -195,8 +205,13 @@ final class Post
      */
     public function getUpdatedAtFormated(): string
     {
-        $date = new DateTimeImmutable($this->createdAt);
+        $date = null;
 
-        return $date->format('d.m.Y');
+        if ($this->updatedAt !== null) {
+            $date = new DateTimeImmutable($this->createdAt);
+            $date = $date->format('d.m.Y');
+        }
+        
+        return $date;
     }
 }

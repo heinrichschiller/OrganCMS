@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Post\Service;
 
-use App\Domain\Post\Repository\PostDeleterRepository;
+use App\Domain\Post\Repository\PostRepository;
 use App\Factory\LoggerFactory;
 use Error;
 use Exception;
@@ -22,14 +22,14 @@ final class PostDeleter
      * @Incjection
      * @var PostDeleterRepository
      */
-    private PostDeleterRepository $repository;
+    private PostRepository $repository;
 
     /**
      * The constructor.
      *
      * @param PostDeleterRepository $repository Supporter deleter repository
      */
-    public function __construct(LoggerFactory $loggerFactory, PostDeleterRepository $repository)
+    public function __construct(LoggerFactory $loggerFactory, PostRepository $repository)
     {
         $this->logger = $loggerFactory->addFileHandler('error.log')->createLogger();
         $this->repository = $repository;

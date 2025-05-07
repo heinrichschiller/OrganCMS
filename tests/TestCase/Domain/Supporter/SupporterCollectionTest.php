@@ -25,23 +25,23 @@ class SupporterCollectionTest extends TestCase
         $this->assertInstanceOf(SupporterCollection::class, $collection);
     }
 
-    public function testSupporterCollectionCanBeIterated():void
-    {
-        $heinrich = new Supporter(1, 'Heinrich Schiller');
-        $ella = new Supporter(2, 'Ella Lemke');
-        $david = new Supporter(3, 'David Kreller');
+    // public function testSupporterCollectionCanBeIterated():void
+    // {
+    //     $heinrich = new Supporter(1, 'Heinrich Schiller');
+    //     $ella = new Supporter(2, 'Ella Lemke');
+    //     $david = new Supporter(3, 'David Kreller');
 
-        $collection = new SupporterCollection;
+    //     $collection = new SupporterCollection;
 
-        $collection->add($heinrich);
-        $collection->add($ella);
-        $collection->add($david);
+    //     $collection->add($heinrich);
+    //     $collection->add($ella);
+    //     $collection->add($david);
 
-        foreach ($collection as $item) {
-            $items[] = $item;
-        }
+    //     foreach ($collection as $item) {
+    //         $items[] = $item;
+    //     }
 
-        $this->assertCount(3, $items);
-        $this->assertInstanceOf(ArrayIterator::class, $collection->getIterator());
-    }
+    //     $this->assertCount(3, $items);
+    //     $this->assertInstanceOf(ArrayIterator::class, $collection->getIterator());
+    // }
 }

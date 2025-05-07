@@ -43,13 +43,13 @@ final class EventFinder
      *
      * @return EventCollection
      */
-    public function findAll(): EventCollection|null
+    public function findAll(): EventCollection
     {
         try {
             $eventList = (array) $this->repository->findAll();
+            $collection = new EventCollection;
 
             if (!empty($eventList)) {
-                $collection = new EventCollection;
                 foreach ($eventList as $eventItem) {
                     $event = new Event(
                         (int) $eventItem['id'],
@@ -64,17 +64,15 @@ final class EventFinder
 
                     $collection->add($event);
                 }
-
-                return $collection;
             }
 
-            return null;
+            return $collection;
         } catch (Exception $e) {
             $this->logger->error(sprintf("EventFinder->findAll(): %s", $e->getMessage()));
-            return null;
+            return new EventCollection;
         } catch (Error $e) {
             $this->logger->error(sprintf("EventFinder->findAll(): %s", $e->getMessage()));
-            return null;
+            return new EventCollection;
         }
     }
 
@@ -83,15 +81,15 @@ final class EventFinder
      *
      * @param int $limit
      *
-     * @return EventCollection|null Collection with all published events.
+     * @return EventCollection Collection with all published events.
      */
-    public function findAllMainpageEvents(int $limit): EventCollection|null
+    public function findAllMainpageEvents(int $limit): EventCollection
     {
         try {
             $eventList = (array) $this->repository->findAllMainpageEvents($limit);
+            $collection = new EventCollection;
 
             if (!empty($eventList)) {
-                $collection = new EventCollection;
                 foreach ($eventList as $eventItem) {
                     $event = new Event(
                         (int) $eventItem['id'],
@@ -106,34 +104,32 @@ final class EventFinder
 
                     $collection->add($event);
                 }
-
-                return $collection;
             }
 
-            return null;
+            return $collection;
         } catch (Exception $e) {
             $this->logger->error(sprintf("EventFinder->findPublishedEvents(): %s", $e->getMessage()));
 
-            return null;
+            return new EventCollection;
         } catch (Error $e) {
             $this->logger->error(sprintf("EventFinder->findPublishedEvents(): %s", $e->getMessage()));
 
-            return null;
+            return new EventCollection;
         }
     }
 
     /**
      * Find all published events.
      *
-     * @return EventCollection|null Collection with all published events.
+     * @return EventCollection Collection with all published events.
      */
-    public function findPublishedEvents(): EventCollection|null
+    public function findPublishedEvents(): EventCollection
     {
         try {
             $eventList = (array) $this->repository->findPublishedEvents();
+            $collection = new EventCollection;
 
             if (!empty($eventList)) {
-                $collection = new EventCollection;
                 foreach ($eventList as $eventItem) {
                     $event = new Event(
                         (int) $eventItem['id'],
@@ -148,19 +144,17 @@ final class EventFinder
 
                     $collection->add($event);
                 }
-
-                return $collection;
             }
 
-            return null;
+            return $collection;
         } catch (Exception $e) {
             $this->logger->error(sprintf("EventFinder->findPublishedEvents(): %s", $e->getMessage()));
 
-            return null;
+            return new EventCollection;
         } catch (Error $e) {
             $this->logger->error(sprintf("EventFinder->findPublishedEvents(): %s", $e->getMessage()));
 
-            return null;
+            return new EventCollection;
         }
     }
 
@@ -169,9 +163,9 @@ final class EventFinder
      *
      * @param int $id Id of an event
      *
-     * @return Event|null
+     * @return Event
      */
-    public function findById(int $id): Event|null
+    public function findById(int $id): Event
     {
         try {
             $eventItem = (array) $this->repository->findById($id);
@@ -187,19 +181,17 @@ final class EventFinder
                     $eventItem['published_on'],
                     $eventItem['created_at']
                 );
-
-                return $event;
             }
 
-            return null;
+            return $event;
         } catch (Exception $e) {
             $this->logger->error(sprintf("EventFinder->findPublishedEvents(): %s", $e->getMessage()));
 
-            return null;
+            return new Event;
         } catch (Error $e) {
             $this->logger->error(sprintf("EventFinder->findPublishedEvents(): %s", $e->getMessage()));
 
-            return null;
+            return new Event;
         }
     }
 }

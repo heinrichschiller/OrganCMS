@@ -29,11 +29,19 @@ class EventTest extends TestCase
         $this->assertInstanceOf(Event::class, $event);
     }
 
-    public function testEventIdIsNullByDefault(): void
+    public function testEventPropertiesAreNullByDefault(): void
     {
         $event = new Event;
 
         $this->assertNull($event->getId());
+        $this->assertNull($event->getTitle());
+        $this->assertNull($event->getPlace());
+        $this->assertNull($event->getDesc());
+        $this->assertNull($event->getEventDate());
+        $this->assertNull($event->isPublished());
+        $this->assertNull($event->getPublishedOn());
+        $this->assertNull($event->getCreatedAt());
+        $this->assertNull($event->getUpdatedAt());
     }
 
     public function testEventIdHasInput(): void
@@ -47,7 +55,7 @@ class EventTest extends TestCase
     {
         $event = new Event(1);
 
-        $this->assertNull($event->getTitle());
+        
     }
 
     public function testEventTitleHasInput(): void

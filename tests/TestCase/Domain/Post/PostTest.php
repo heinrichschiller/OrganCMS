@@ -28,32 +28,52 @@ class PostTest extends TestCase
         $this->assertInstanceOf(Post::class, $post);
     }
 
-    public function testPostIdIsEmptyByDefault(): void
+    public function testPostPropertiesAreNullByDefault(): void
     {
         $post = new Post;
 
-        $this->assertEmpty($post->getId());
+        $this->assertNull($post->getId());
+        $this->assertNull($post->getTitle());
+        $this->assertNull($post->getSlug());
+        $this->assertNull($post->getIntro());
+        $this->assertNull($post->getContent());
+        $this->assertNull($post->getAuthorId());
+        $this->assertNull($post->onMainpage());
+        $this->assertNull($post->getPublishedAt());
+        $this->assertNull($post->getPublishedAtFormated());
+        $this->assertNull($post->isPublished());
+        $this->assertNull($post->getCreatedAt());
+        $this->assertNull($post->getUpdatedAt());
     }
 
-    public function testPostIdHasInput(): void
+    public function testPostPropertiesHasInput(): void
     {
-        $post = new Post(1);
+        $post = new Post(
+            1,
+            'Post title',
+            '/slug',
+            'intro',
+            'content',
+            1,
+            false,
+            '2024-09-06 08:50:00',
+            true,
+            '2024-09-06 08:50:00',
+            '2024-09-06 08:50:00'
+        );
 
         $this->assertEquals(1, $post->getId());
-    }
-
-    public function testPostTitleIsEmptyByDefault(): void
-    {
-        $post = new Post;
-
-        $this->assertEmpty($post->getTitle());
-    }
-
-    public function testPostTitleHasInput(): void
-    {
-        $post = new Post(0, 'Post title');
-
         $this->assertEquals('Post title', $post->getTitle());
+        $this->assertEquals('/slug', $post->getSlug());
+        $this->assertEquals('intro', $post->getIntro());
+        $this->assertEquals('content', $post->getContent());
+        $this->assertEquals(1, $post->getAuthorId());
+        $this->assertEquals(false, $post->onMainpage());
+        $this->assertEquals('2024-09-06 08:50:00', $post->getPublishedAt());
+        $this->assertEquals(true, $post->isPublished());
+        $this->assertEquals('06.09.2024', $post->getPublishedAtFormated());
+        $this->assertEquals('06.09.2024', $post->getCreatedAtFormated());
+        $this->assertEquals('06.09.2024', $post->getUpdatedAtFormated());
     }
 
     public function testPostTitleDoesNotStartOrEndWithAnWhitespace(): void
@@ -68,119 +88,5 @@ class PostTest extends TestCase
         $post = new Post(0, ' post title ');
 
         $this->assertEquals('Post title', $post->getTitle());
-    }
-
-    public function testPostSlugIsNullByDefault(): void
-    {
-        $post = new Post;
-
-        $this->assertNull($post->getSlug());
-    }
-
-    public function testPostIntroIsNullByDefault(): void
-    {
-        $post = new Post;
-
-        $this->assertNull($post->getIntro());
-    }
-
-    public function testPostContentIsNullByDefault(): void
-    {
-        $post = new Post;
-
-        $this->assertNull($post->getContent());
-    }
-
-    public function testPostAuthorIdIsNullByDefault(): void
-    {
-        $post = new Post;
-
-        $this->assertNull($post->getAuthorId());
-    }
-
-    public function testPostMainpageIsNullByDefault(): void
-    {
-        $post = new Post;
-
-        $this->assertNull($post->onMainpage());
-    }
-
-    public function testPostPublishedAtIsNullByDefault(): void
-    {
-        $post = new Post;
-
-        $this->assertNull($post->getPublishedAt());
-    }
-
-    public function testPostPublishedAtFormatedAtIsNullByDefault(): void
-    {
-        $post = new Post;
-
-        $this->assertNull($post->getPublishedAtFormated());
-    }
-
-    public function testPostPublishedAtFormatedHasInput(): void
-    {
-        $post = new Post(0, 'title', '/slug', 'intro', 'content', 1, false, '2024-09-06 08:50:00');
-
-        $this->assertEquals('06.09.2024', $post->getPublishedAtFormated());
-    }
-
-    public function testPostIsPublishedIsNullByDefault(): void
-    {
-        $post = new Post;
-
-        $this->assertNull($post->isPublished());
-    }
-
-    public function testPostCreatedAtIsNullByDefault(): void
-    {
-        $post = new Post;
-
-        $this->assertNull($post->getCreatedAt());
-    }
-
-    public function testPostCreatedAtFormatedIsNullByDefault(): void
-    {
-        $post = new Post(
-            0,
-            'Title',
-            '/slug',
-            'intro',
-            'content',
-            1,
-            false,
-            '2024-09-06 08:50:00',
-            true,
-            '2024-09-06 08:50:00',
-            '2024-09-06 08:50:00'
-        );
-
-        $this->assertEquals('06.09.2024', $post->getCreatedAtFormated());
-    }
-    public function testPostUpdatedAtIsNullByDefault(): void
-    {
-        $post = new Post;
-
-        $this->assertNull($post->getUpdatedAt());
-    }
-
-    public function testPostUpdatedFormatedAtIsNullByDefault(): void
-    {
-        $post = new Post(
-            0,
-            'Title',
-            '/slug',
-            'intro',
-            'content',
-            1,
-            false,
-            '2024-09-06 08:50:00',
-            true,
-            '2024-09-06 08:50:00',
-            '2024-09-06 08:50:00'
-        );
-
-        $this->assertEquals('06.09.2024', $post->getUpdatedAtFormated());
     }
 }

@@ -32,11 +32,14 @@
         {{# events }}
         
         <div class="link-dark text-decoration-none w-75">
-          <div class="card mt-2 bg-success border border-3 border-primary border-bottom-0 border-end-0 border-start-0 shadow rounded text-primary">
+          <div class="card mt-2 bg-success border border-3 border-secondary border-bottom-0 border-end-0 border-start-0 shadow rounded text-primary">
             <div class="card-body position-relative">
               <div class="text-primary">
-                <span>{{ getEventDateFormated }} - {{ getTitle }}</span>
-                <span class="position-absolute top-25 end-0 pe-3">{{ getEventTime }} Uhr</span>
+                <h2 class="h5">{{ getTitle }}</h2>
+                <div>{{{ getDesc }}}</div>
+                <div class="position-relative pb-3">
+                  <span class="position-absolute top-25 end-0 fs-6">{{ getEventDateFormated }} - {{ getEventTime }} Uhr</span>
+                </div>
               </div>
             </div>
           </div>

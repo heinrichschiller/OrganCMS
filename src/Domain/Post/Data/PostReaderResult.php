@@ -27,7 +27,7 @@ final class PostReaderResult
         private ?string $slug = null,
         private ?string $intro = null,
         private ?string $content = null,
-        private ?int $authorId = null,
+        private ?string $author = null,
         private ?bool $onMainpage = null,
         private ?string $publishedAt = null,
         private ?bool $isPublished = null,
@@ -107,9 +107,9 @@ final class PostReaderResult
      *
      * @return int|null
      */
-    public function getAuthorId(): int|null
+    public function getAuthor(): string|null
     {
-        return $this->authorId;
+        return $this->author;
     }
 
     /**

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Post\Service;
 
 use App\Domain\Post\Data\PostReaderResult;
-use App\Domain\Post\Data\PostFinderCollection;
+use App\Domain\Post\Data\PostReaderResultCollection;
 use App\Domain\Post\Repository\PostFinderRepository;
 use App\Factory\LoggerFactory;
 use Error;
@@ -43,9 +43,9 @@ final class PostFinder
      *
      * @param int $id Post id.
      *
-     * @return PostReaderResult|null
+     * @return PostReaderResult
      */
-    public function findByIdOrFail(int $id): PostReaderResult|null
+    public function findByIdOrFail(int $id): PostReaderResult
     {
         try {
             $postItem = (array) $this->repository->findByIdOrFail($id);
@@ -68,30 +68,30 @@ final class PostFinder
                 return $post;
             }
 
-            return null;
+            return new PostReaderResult;
         } catch (Exception $e) {
             $this->logger->error(sprintf("PostFinder->findById(): %s", $e->getMessage()));
 
-            return null;
+            return new PostReaderResult;
         } catch (Error $e) {
             $this->logger->error(sprintf("PostFinder->findById(): %s", $e->getMessage()));
 
-            return null;
+            return new PostReaderResult;
         }
     }
 
     /**
      * Find all posts.
      *
-     * @return PostCollection|null
+     * @return PostCollection
      */
-    public function findAllOrFail(): PostFinderCollection|null
+    public function findAllOrFail(): PostReaderResultCollection
     {
         try {
             $postList = (array) $this->repository->findAllOrFail();
+            $collection = new PostReaderResultCollection;
 
             if (!empty($postList)) {
-                $collection = new PostFinderCollection;
                 foreach ($postList as $postItem) {
                     $post = new PostReaderResult(
                         $postItem['id'],
@@ -109,34 +109,32 @@ final class PostFinder
         
                     $collection->add($post);
                 }
-
-                return $collection;
             }
 
-            return null;
+            return $collection;
         } catch (Exception $e) {
             $this->logger->error(sprintf("PostFinder->findAllPublicPosts(): %s", $e->getMessage()));
 
-            return null;
+            return $collection;
         } catch (Error $e) {
             $this->logger->error(sprintf("PostFinder->findAllPublicPosts(): %s", $e->getMessage()));
             
-            return null;
+            return $collection;
         }
     }
 
     /**
      * Find all public posts.
      *
-     * @return PostCollection|null
+     * @return PostCollection
      */
-    public function findAllPublicPosts(): PostFinderCollection|null
+    public function findAllPublicPosts(): PostReaderResultCollection
     {
         try {
             $postList = $this->repository->findAllPublicPosts();
+            $collection = new PostReaderResultCollection;
 
             if (!empty($postList)) {
-                $collection = new PostFinderCollection;
                 foreach ($postList as $postItem) {
                     $post = new PostReaderResult(
                         (int) $postItem['id'],
@@ -154,28 +152,26 @@ final class PostFinder
 
                     $collection->add($post);
                 }
-
-                return $collection;
             }
 
-            return null;
+            return $collection;
         } catch (Exception $e) {
             $this->logger->error(sprintf("PostFinder->findAllPublicPosts(): %s", $e->getMessage()));
 
-            return null;
+            return $collection;
         } catch (Error $e) {
             $this->logger->error(sprintf("SupportFinder->delete(): %s", $e->getMessage()));
             
-            return false;
+            return $collection;
         }
     }
     
     /**
      * Find post for the mainpage.
      *
-     * @return Post|null
+     * @return Post
      */
-    public function findMainpagePost(): PostReaderResult|null
+    public function findMainpagePost(): PostReaderResult
     {
         try {
             $mainpagePost = (array) $this->repository->findMainpagePost();
@@ -198,25 +194,25 @@ final class PostFinder
                 return $post;
             }
             
-            return null;
+            return new PostReaderResult;
         } catch (Exception $e) {
             $this->logger->error(sprintf("PostFinder->findMainpagePost(): %s", $e->getMessage()));
 
-            return null;
+            return new PostReaderResult;
         } catch (Error $e) {
             $this->logger->error(sprintf("SupportFinder->delete(): %s", $e->getMessage()));
             
-            return false;
+            return new PostReaderResult;
         }
     }
 
-    public function findAllMainpagePosts(int $limit): PostFinderCollection
+    public function findAllMainpagePosts(int $limit): PostReaderResultCollection
     {
         try {
             $postList = (array) $this->repository->findAllMainpagePosts($limit);
+            $collection = new PostReaderResultCollection;
 
-            if (!empty($postList)) {
-                $collection = new PostFinderCollection;
+            if (!empty($postList)) {    
                 foreach ($postList as $postItem) {
                     $post = new PostReaderResult(
                         (int) $postItem['id'],
@@ -234,19 +230,17 @@ final class PostFinder
 
                     $collection->add($post);
                 }
-
-                return $collection;
             }
 
-            return null;
+            return $collection;
         } catch (Exception $e) {
             $this->logger->error(sprintf("PostFinder->findAllPublicPosts(): %s", $e->getMessage()));
 
-            return null;
+            return $collection;
         } catch (Error $e) {
             $this->logger->error(sprintf("SupportFinder->delete(): %s", $e->getMessage()));
             
-            return false;
+            return $collection;
         }
     }
 }

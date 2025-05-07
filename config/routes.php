@@ -46,7 +46,7 @@ return function (App $app) {
 
     $app->group('/event', function (RouteCollectorProxy $group) {
         $group->get('/', \App\Action\Backend\Event\EventAction::class)->setName('events');
-        $group->get('/new', \App\Action\Backend\Event\NewEventAction::class)->setName('events');
+        $group->get('/new', \App\Action\Backend\Event\NewEventAction::class);
         $group->get('/read/{id}', \App\Action\Backend\Event\ReadAction::class)->setName('read-event');
         $group->get('/delete/{id}', \App\Action\Backend\Event\DeleteAction::class);
         $group->post('/create', \App\Action\Backend\Event\CreateAction::class);

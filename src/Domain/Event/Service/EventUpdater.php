@@ -18,7 +18,7 @@ final class EventUpdater
 {
     /**
      * @Injection
-     * @var EventUpdaterRepository
+     * @var EventRepository
      */
     private EventRepository $repository;
 
@@ -37,7 +37,7 @@ final class EventUpdater
     /**
      * The constructor.
      *
-     * @param EventUpdaterRepository $repository
+     * @param EventRepository $repository
      * @param LoggerFactory $loggerFactory
      * @param Validator $validator  CakePHP validator
      */

@@ -1,4 +1,4 @@
-FROM ubuntu:24.04
+FROM ubuntu:25.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -17,14 +17,15 @@ RUN apt-get update && \
         php \
         php-cli \
         php-curl \
-        php8.3-dev \
-        php8.3-phpdbg \
+        php8.4-dev \
+        php8.4-phpdbg \
         php-apcu \
         php-gd \
         php-intl \
         php-mbstring \
         php-pear \
         php-pdo \
+        php-mysql \
         php-sqlite3 \
         php-simplexml \
         php-xdebug \

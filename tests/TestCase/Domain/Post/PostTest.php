@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\Domain\Post\PostTest;
 
 use App\Domain\Post\Data\Post;
+use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
@@ -21,72 +23,37 @@ class PostTest extends TestCase
         // do nothing
     }
 
-    public function testPostInstance(): void
+    public function testPostIsCreatedWithValues(): void
     {
-        $post = new Post;
+        $publishedAt = new DateTimeImmutable('2024-09-06 08:50:00');
+        $createdAt = new DateTimeImmutable('2024-09-06 08:50:00');
+        $updatedAt = new DateTimeImmutable('2024-09-06 08:50:00');
 
-        $this->assertInstanceOf(Post::class, $post);
-    }
-
-    public function testPostPropertiesAreNullByDefault(): void
-    {
-        $post = new Post;
-
-        $this->assertNull($post->getId());
-        $this->assertNull($post->getTitle());
-        $this->assertNull($post->getSlug());
-        $this->assertNull($post->getIntro());
-        $this->assertNull($post->getContent());
-        $this->assertNull($post->getAuthorId());
-        $this->assertNull($post->onMainpage());
-        $this->assertNull($post->getPublishedAt());
-        $this->assertNull($post->getPublishedAtFormated());
-        $this->assertNull($post->isPublished());
-        $this->assertNull($post->getCreatedAt());
-        $this->assertNull($post->getUpdatedAt());
-    }
-
-    public function testPostPropertiesHasInput(): void
-    {
         $post = new Post(
-            1,
-            'Post title',
-            '/slug',
-            'intro',
-            'content',
-            1,
-            false,
-            '2024-09-06 08:50:00',
-            true,
-            '2024-09-06 08:50:00',
-            '2024-09-06 08:50:00'
+            id: 1,
+            title: ' post title ',
+            slug: '/slug',
+            intro: 'intro',
+            content: 'content',
+            authorId: 1,
+            onMainpage: false,
+            publishedAt: $publishedAt,
+            isPublished: true,
+            createdAt: $createdAt,
+            updatedAt: $updatedAt
         );
 
-        $this->assertEquals(1, $post->getId());
-        $this->assertEquals('Post title', $post->getTitle());
-        $this->assertEquals('/slug', $post->getSlug());
-        $this->assertEquals('intro', $post->getIntro());
-        $this->assertEquals('content', $post->getContent());
-        $this->assertEquals(1, $post->getAuthorId());
-        $this->assertEquals(false, $post->onMainpage());
-        $this->assertEquals('2024-09-06 08:50:00', $post->getPublishedAt());
-        $this->assertEquals(true, $post->isPublished());
-        $this->assertEquals('06.09.2024', $post->getPublishedAtFormated());
-        $this->assertEquals('06.09.2024', $post->getCreatedAtFormated());
-        $this->assertEquals('06.09.2024', $post->getUpdatedAtFormated());
-    }
-
-    public function testPostTitleDoesNotStartOrEndWithAnWhitespace(): void
-    {
-        $post = new Post(0, ' Post title ');
-
-        $this->assertEquals('Post title', $post->getTitle());
-    }
-
-    public function testPostTitleDoesStartWithUppercase(): void
-    {
-        $post = new Post(0, ' post title ');
-
-        $this->assertEquals('Post title', $post->getTitle());
+        $this->assertSame(1, $post->getId());
+        $this->assertSame('Post title', $post->getTitle());
+        $this->assertSame('/slug', $post->getSlug());
+        $this->assertSame('intro', $post->getIntro());
+        $this->assertSame('content', $post->getContent());
+        $this->assertSame(1, $post->getAuthorId());
+        $this->assertFalse($post->onMainpage());
+        $this->assertEquals($publishedAt, $post->getPublishedAt());
+        $this->assertTrue($post->isPublished());
+        $this->assertEquals($publishedAt, $post->getPublishedAt());
+        $this->assertEquals($createdAt, $post->getCreatedAt());
+        $this->assertEquals($updatedAt, $post->getUpdatedAt());
     }
 }

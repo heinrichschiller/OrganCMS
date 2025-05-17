@@ -8,7 +8,7 @@ use App\Domain\DomainException\DomainRecordNotFoundException;
 
 class EventNotFoundException extends DomainRecordNotFoundException
 {
-    private $message = 'Event not found.';
+    protected $message = 'Event not found.';
 
     public function functionWithoutName()
     {

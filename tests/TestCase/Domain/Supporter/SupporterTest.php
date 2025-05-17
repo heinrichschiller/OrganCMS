@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Domain\Supporter;
 
-use App\Domain\Supporter\Supporter;
+use App\Domain\Supporter\Data\Supporter;
+use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
@@ -23,120 +25,26 @@ class SupporterTest extends TestCase
         // do nothing
     }
 
-    public function testSupporterInstance(): void
+    public function testSupporterIsCreatedWithValues(): void
     {
-        $supporter = new Supporter;
+        $publishedAt = new DateTimeImmutable('2025-05-16');
+        $createdAt = new DateTimeImmutable('2025-05-16');
+        $updatedAt = new DateTimeImmutable('2025-05-16');
 
-        $this->assertInstanceOf(Supporter::class, $supporter);
-    }
+        $supporter = new Supporter(
+            id: 1,
+            name: ' test name ',
+            isPublished: true,
+            publishedAt: $publishedAt,
+            createdAt: $createdAt,
+            updatedAt: $updatedAt
+        );
 
-    public function testSupporterIdIsNullByDefault(): void
-    {
-        $supporter = new Supporter();
-
-        $this->assertNull($supporter->getId());
-    }
-
-    public function testSupporterIdHasInput(): void
-    {
-        $supporter = new Supporter(1);
-
-        $this->assertEquals(1, $supporter->getId());
-    }
-    
-    public function testSupporterNameIsNullByDefault(): void
-    {
-        $supporter = new Supporter(0);
-
-        $this->assertNull($supporter->getName());
-    }
-
-    public function testSupporterNameHasInput(): void
-    {
-        $supporter = new Supporter(0, 'Heinrich Schiller');
-
-        $this->assertEquals('Heinrich Schiller', $supporter->getName());
-    }
-
-    public function testSupporterNameDoesNotStartOrEndWithWhitespace(): void
-    {
-        $supporter = new Supporter(0, ' Heinrich Schiller ');
-
-        $this->assertEquals('Heinrich Schiller', $supporter->getName());
-    }
-
-    public function testSupporterPublishedStatusIsFalseByDefault(): void
-    {
-        $supporter = new Supporter(0, 'Heinrich Schiller');
-
-        $this->assertFalse($supporter->isPublished());
-    }
-
-    public function testSupporterPublishedStatusIsTrue(): void
-    {
-        $supporter = new Supporter(0, 'Heinrich Schiller', true);
-
+        $this->assertSame(1, $supporter->getId());
+        $this->assertSame('test name', $supporter->getName());
         $this->assertTrue($supporter->isPublished());
-    }
-
-    public function testSupporterPublishedAtIsNullByDefault(): void
-    {
-        $supporter = new Supporter(0, 'Heinrich Schiller', false);
-
-        $this->assertNull($supporter->getPublishedAt());
-    }
-
-    public function testSupporterPublishedAtHasInput(): void
-    {
-        $supporter = new Supporter(1, 'Heinrich Schiller', true, '05-13-2022');
-
-        $this->assertSame('05-13-2022', $supporter->getPublishedAt());
-    }
-
-    public function testSupporterCreatedAtIsNullByDefault(): void
-    {
-        $supporter = new Supporter(1, 'Heinrich Schiller', true, '05-13-2022');
-
-        $this->assertNull($supporter->getCreatedAt());
-    }
-
-    public function testSupporterCreatedAtHasInput(): void
-    {
-        $supporter = new Supporter(
-            1,
-            'Heinrich Schiller',
-            true,
-            '05-13-2022',
-            '05-13-2022'
-        );
-
-        $this->assertSame('05-13-2022', $supporter->getCreatedAt());
-    }
-
-    public function testSupporterUpdatedAtIsEmptyByDefault(): void
-    {
-        $supporter = new Supporter(
-            1,
-            'Heinrich Schiller',
-            true,
-            '05-13-2022',
-            '05-13-2022'
-        );
-
-        $this->assertEmpty($supporter->getUpdatedAt());
-    }
-
-    public function testSupporterUpdatedAtHasInput(): void
-    {
-        $supporter = new Supporter(
-            1,
-            'Heinrich Schiller',
-            true,
-            '05-13-2022',
-            '05-13-2022',
-            '05-13-2022'
-        );
-
-        $this->assertSame('05-13-2022', $supporter->getUpdatedAt());
+        $this->assertEquals($publishedAt, $supporter->getPublishedAt());
+        $this->assertEquals($createdAt, $supporter->getCreatedAt());
+        $this->assertEquals($updatedAt, $supporter->getUpdatedAt());
     }
 }

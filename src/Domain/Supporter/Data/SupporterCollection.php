@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Supporter;
+namespace App\Domain\Supporter\Data;
 
 use ArrayIterator;
 use IteratorAggregate;

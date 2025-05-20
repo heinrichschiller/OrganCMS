@@ -97,7 +97,7 @@ final class LoggerFactory implements LoggerFactoryInterface
      *
      * @return self
      */
-    public function addFileHandler(string $filename, Level $level = null): self
+    public function addFileHandler(string $filename, ?Level $level = null): self
     {
         $filename = sprintf("%s/%s", $this->path, $filename);
         $rotatingFileHandler = new RotatingFileHandler($filename, 0, $level ?? $this->level, true, 0777);
@@ -117,7 +117,7 @@ final class LoggerFactory implements LoggerFactoryInterface
      *
      * @return self
      */
-    public function addConsoleHandler(Level $level = null): self
+    public function addConsoleHandler(?Level $level = null): self
     {
         $streamHandler = new StreamHandler('php://output', $level ?? $this->level);
 

@@ -85,7 +85,7 @@ final class Event
 
     /**
      * Get slug of an event.
-     * 
+     *
      *  @return string|null
      */
     public function getSlug(): string|null
@@ -95,7 +95,7 @@ final class Event
 
     /**
      * Get intro of an event.
-     * 
+     *
      * @return string|null
      */
     public function getIntro(): string|null
@@ -140,7 +140,7 @@ final class Event
 
     /**
      * Get author id.
-     * 
+     *
      * @return int|null
      */
     public function getAuthorId(): int|null
@@ -160,7 +160,7 @@ final class Event
 
     /**
      * Show this event on mainpage or not.
-     * 
+     *
      * @return bool|null
      */
     public function getOnMainpage(): bool|null
@@ -189,6 +189,22 @@ final class Event
     }
 
     /**
+     * Get the formated date of the published event.
+     *
+     * @return string|null
+     */
+    public function getPublishedAtFormated(): string|null
+    {
+        $publishedAt = '';
+
+        if ($this->publishedAt !== null) {
+            $publishedAt = $this->publishedAt->format('d.m.Y');
+        }
+    
+        return $publishedAt;
+    }
+
+    /**
      * Get the date when an event was created.
      *
      * @return DateTimeImmutable|null
@@ -199,6 +215,22 @@ final class Event
     }
 
     /**
+     * Get the formated date when an event was created.
+     *
+     * @return |null
+     */
+    public function getCreatedAtFormated(): string|null
+    {
+        $createdAt = '';
+
+        if ($this->createdAt !== null) {
+            $createdAt = $this->createdAt->format('d.m.Y');
+        }
+
+        return $createdAt;
+    }
+
+    /**
      * Get the date when an event was created.
      *
      * @return DateTimeImmutable|null
@@ -206,5 +238,21 @@ final class Event
     public function getUpdatedAt(): DateTimeImmutable|null
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Get the date when an event was created.
+     *
+     * @return string|null
+     */
+    public function getUpdatedAtFormated(): string|null
+    {
+        $updatedAt = '';
+
+        if ($this->updatedAt !== null) {
+            $updatedAt = $this->updatedAt->format('d.m.Y');
+        }
+
+        return $updatedAt;
     }
 }

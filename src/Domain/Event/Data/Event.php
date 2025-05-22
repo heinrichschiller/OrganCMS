@@ -151,11 +151,27 @@ final class Event
     /**
      * Get event date.
      *
-     * @return string|null
+     * @return DateTimeImmutable|null
      */
     public function getEventDate(): DateTimeImmutable|null
     {
         return $this->eventDate;
+    }
+
+    /**
+     * Get event date.
+     *
+     * @return string|null
+     */
+    public function getEventDateFormated(): string|null
+    {
+        $eventDate = '';
+
+        if ($this->eventDate !== null) {
+            $eventDate = $this->eventDate->format('d.m.Y');
+        }
+
+        return $eventDate;
     }
 
     /**

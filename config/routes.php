@@ -56,10 +56,10 @@ return function (App $app) {
     $app->group('/post', function (RouteCollectorProxy $group) {
         $group->get('/', \App\Action\Backend\Post\PostAction::class)->setName('posts');
         $group->get('/new', \App\Action\Backend\Post\NewPostAction::class);
-        $group->post('/create', \App\Action\Backend\Post\CreateAction::class);
-        $group->post('/update', \App\Action\Backend\Post\UpdateAction::class);
         $group->get('/edit/{id}', \App\Action\Backend\Post\ReadAction::class)->setName('read-post');
         $group->get('/delete/{id}', \App\Action\Backend\Post\DeleteAction::class)->setName('read-post');
+        $group->post('/create', \App\Action\Backend\Post\CreateAction::class);
+        $group->post('/update', \App\Action\Backend\Post\UpdateAction::class);
     })->add(UserAuthMiddleware::class);
 
     $app->group('/settings', function (RouteCollectorProxy $group) {

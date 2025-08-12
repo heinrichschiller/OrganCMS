@@ -8,10 +8,10 @@ use App\Domain\DomainException\DomainRecordNotFoundException;
 
 class PostNotFoundException extends DomainRecordNotFoundException
 {
-    private $messager = 'Post not found.';
+    protected $message = 'Post not found.';
 
     public function functionWithoutName()
     {
-        return $this->messager;
+        return $this->message;
     }
 }

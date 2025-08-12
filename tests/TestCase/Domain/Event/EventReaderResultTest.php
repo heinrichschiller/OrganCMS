@@ -4,27 +4,27 @@ declare(strict_types=1);
 
 namespace Tests\TestCase\Domain\Event;
 
-use App\Domain\Event\Data\Event;
+use App\Domain\Event\Data\EventReaderResult;
 use DateTimeImmutable;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass(Event::class)]
-#[CoversMethod(Event::class, 'getId')]
-#[CoversMethod(Event::class, 'getTitle')]
-#[CoversMethod(Event::class, 'getSlug')]
-#[CoversMethod(Event::class, 'getIntro')]
-#[CoversMethod(Event::class, 'getContent')]
-#[CoversMethod(Event::class, 'getPlace')]
-#[CoversMethod(Event::class, 'getAuthorId')]
-#[CoversMethod(Event::class, 'getEventDate')]
-#[CoversMethod(Event::class, 'getOnMainpage')]
-#[CoversMethod(Event::class, 'isPublished')]
-#[CoversMethod(Event::class, 'getPublishedAt')]
-#[CoversMethod(Event::class, 'getCreatedAt')]
-#[CoversMethod(Event::class, 'getUpdatedAt')]
-class EventTest extends TestCase
+#[CoversClass(EventReaderResult::class)]
+#[CoversMethod(EventReaderResult::class, 'getId')]
+#[CoversMethod(EventReaderResult::class, 'getTitle')]
+#[CoversMethod(EventReaderResult::class, 'getSlug')]
+#[CoversMethod(EventReaderResult::class, 'getIntro')]
+#[CoversMethod(EventReaderResult::class, 'getContent')]
+#[CoversMethod(EventReaderResult::class, 'getPlace')]
+#[CoversMethod(EventReaderResult::class, 'getAuthorId')]
+#[CoversMethod(EventReaderResult::class, 'getEventDate')]
+#[CoversMethod(EventReaderResult::class, 'getOnMainpage')]
+#[CoversMethod(EventReaderResult::class, 'isPublished')]
+#[CoversMethod(EventReaderResult::class, 'getPublishedAt')]
+#[CoversMethod(EventReaderResult::class, 'getCreatedAt')]
+#[CoversMethod(EventReaderResult::class, 'getUpdatedAt')]
+class EventReaderResultTest extends TestCase
 {
     public function setUp(): void
     {
@@ -38,7 +38,7 @@ class EventTest extends TestCase
         $createdAt = new DateTimeImmutable('2025-05-15');
         $updatedAt = new DateTimeImmutable('2025-05-15');
 
-        $event = new Event(
+        $event = new EventReaderResult(
             id: 1,
             title: '  test event ',
             slug: 'test-event/test/event',

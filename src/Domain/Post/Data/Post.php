@@ -33,7 +33,6 @@ final class Post
         private ?string $slug = null,
         private ?string $intro = null,
         private ?string $content = null,
-        private ?int $authorId = null,
         private ?bool $onMainpage = null,
         private ?DateTimeImmutable $publishedAt = null,
         private ?bool $isPublished = null,
@@ -109,16 +108,6 @@ final class Post
     }
 
     /**
-     * Get author.
-     *
-     * @return int|null
-     */
-    public function getAuthorId(): int|null
-    {
-        return $this->authorId;
-    }
-
-    /**
      * On mainpage.
      *
      * @return bool
@@ -159,6 +148,23 @@ final class Post
     }
 
     /**
+     * Get created at formated in german time.
+     * Format: d.m.Y - 06.09.2024
+     * 
+     * @return string
+     */
+    public function getCreatedAtFormated(): string|null
+    {
+        $date = null;
+
+        if ($this->updatedAt !== null) {
+            $date = $this->createdAt->format('d.m.Y');
+        }
+
+        return $date;
+    }
+
+    /**
      * Get updated at.
      *
      * @return DateTimeImmutable|null
@@ -166,5 +172,22 @@ final class Post
     public function getUpdatedAt(): DateTimeImmutable|null
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Get updated at formated in german time.
+     * Format: d.m.Y - 06.09.2024
+     * 
+     * @return string
+     */
+    public function getUpdatedAtFormated(): string|null
+    {
+        $date = null;
+
+        if ($this->updatedAt !== null) {
+            $date = $this->updatedAt->format('d.m.Y');
+        }
+
+        return $date;
     }
 }

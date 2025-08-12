@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Domain\Post\PostTest;
 
 use App\Domain\Post\Data\Post;
-use DateTime;
 use DateTimeImmutable;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversMethod;
@@ -15,7 +14,13 @@ use PHPUnit\Framework\TestCase;
 #[CoversMethod(Post::class, 'getId')]
 #[CoversMethod(Post::class, 'getTitle')]
 #[CoversMethod(Post::class, 'getSlug')]
+#[CoversMethod(Post::class, 'getIntro')]
 #[CoversMethod(Post::class, 'getContent')]
+#[CoversMethod(Post::class, 'onMainpage')]
+#[CoversMethod(Post::class, 'getPublishedAt')]
+#[CoversMethod(Post::class, 'isPublished')]
+#[CoversMethod(Post::class, 'getCreatedAt')]
+#[CoversMethod(Post::class, 'getUpdatedAt')]
 class PostTest extends TestCase
 {
     public function setUp(): void
@@ -35,7 +40,6 @@ class PostTest extends TestCase
             slug: '/slug',
             intro: 'intro',
             content: 'content',
-            authorId: 1,
             onMainpage: false,
             publishedAt: $publishedAt,
             isPublished: true,
@@ -48,12 +52,13 @@ class PostTest extends TestCase
         $this->assertSame('/slug', $post->getSlug());
         $this->assertSame('intro', $post->getIntro());
         $this->assertSame('content', $post->getContent());
-        $this->assertSame(1, $post->getAuthorId());
         $this->assertFalse($post->onMainpage());
         $this->assertEquals($publishedAt, $post->getPublishedAt());
         $this->assertTrue($post->isPublished());
         $this->assertEquals($publishedAt, $post->getPublishedAt());
         $this->assertEquals($createdAt, $post->getCreatedAt());
+        $this->assertEquals('06.09.2024', $post->getCreatedAtFormated());
         $this->assertEquals($updatedAt, $post->getUpdatedAt());
+        $this->assertEquals('06.09.2024', $post->getUpdatedAtFormated());
     }
 }

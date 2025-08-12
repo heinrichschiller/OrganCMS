@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Post;
+namespace App\Domain\Post\Data;
 
 use App\Domain\DomainException\DomainRecordNotFoundException;
 
@@ -12,6 +12,6 @@ class PostNotFoundException extends DomainRecordNotFoundException
 
     public function functionWithoutName()
     {
-        return $this->message;
+        return $this->messager;
     }
 }

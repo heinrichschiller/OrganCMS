@@ -58,6 +58,10 @@
         "process-timeout": 0
     },
     "scripts": {
+        "migrations": "php vendor/bin/doctrine-migrations ",
+        "migrations:generate": "php vendor/bin/doctrine-migrations migrations:generate",
+        "migrations:migrate": "php vendor/bin/doctrine-migrations migrations:migrate",
+        "migrations:diff": "php vendor/bin/doctrine-migrations migrations:diff",
         "start": "php -S localhost:8080 -t public",
         "test:phpstan": "phpstan analyse",
         "test:phpunit": "phpunit --configuration phpunit.xml --colors=always",

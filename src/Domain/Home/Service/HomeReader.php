@@ -61,7 +61,7 @@ final class HomeReader
         PostFinder $postFinder,
         SupporterFinder $supporterFinder
     ) {
-        $this->logger = $loggerFactory->addFileHandler('error.log')->createLogger();
+        $this->logger = $loggerFactory->addFileHandler('home-reader-error.log')->createLogger();
         $this->reader = $reader;
         $this->eventFinder = $eventFinder;
         $this->postFinder = $postFinder;
@@ -92,11 +92,11 @@ final class HomeReader
                 'supporter' => $supporter
             ];
         } catch (Exception $e) {
-            $this->logger->error(sprintf("SupportFinder->reader(): %s", $e->getMessage()));
+            $this->logger->error(sprintf("HomeReader->reader(): %s", $e->getMessage()));
             
             return [];
         } catch (Error $e) {
-            $this->logger->error(sprintf("SupportFinder->reader(): %s", $e->getMessage()));
+            $this->logger->error(sprintf("HomeReader->reader(): %s", $e->getMessage()));
             
             return [];
         }

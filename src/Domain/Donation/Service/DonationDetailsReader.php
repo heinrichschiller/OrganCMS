@@ -31,7 +31,7 @@ final class DonationDetailsReader
         LoggerFactory $loggerFactory
     ) {
         $this->repository = $repository;
-        $this->logger = $loggerFactory->addFileHandler('error.log')->createLogger();
+        $this->logger = $loggerFactory->addFileHandler('donation-details-reader.log')->createLogger();
     }
 
     /**

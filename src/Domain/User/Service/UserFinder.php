@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\User\Service;
 
 use App\Domain\User\Repository\UserReaderRepository;
-use App\Domain\User\User;
+use App\Domain\User\Data\User;
 use App\Factory\LoggerFactory;
 use Error;
 use Exception;

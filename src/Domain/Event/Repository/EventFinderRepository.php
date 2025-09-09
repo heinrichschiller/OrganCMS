@@ -29,19 +29,23 @@ final class EventFinderRepository
      *
      * @return array
      */
-    public function findAll(): array
+    public function findAllOrFail(): array
     {
         $result = $this->connection
             ->createQueryBuilder()
             ->select(
                 'id',
                 'title',
+                'slug',
+                'intro',
+                'content',
                 'place',
-                'description',
                 'event_date',
+                'on_mainpage',
+                'published_at',
+                'is_published',
                 'created_at',
-                'published',
-                'published_on'
+                'updated_at'
             )
             ->from('events')
             ->orderBy('event_date', 'ASC')
@@ -65,15 +69,19 @@ final class EventFinderRepository
             ->select(
                 'id',
                 'title',
+                'slug',
+                'intro',
+                'content',
                 'place',
-                'description',
                 'event_date',
-                'published',
-                'published_on',
-                'created_at'
+                'on_mainpage',
+                'published_at',
+                'is_published',
+                'created_at',
+                'updated_at'
             )
             ->from('events')
-            ->where('published = 1')
+            ->where('is_published = 1')
             ->orderBy('event_date', 'ASC')
             ->setMaxResults($limit)
             ->executeQuery()
@@ -94,15 +102,19 @@ final class EventFinderRepository
             ->select(
                 'id',
                 'title',
+                'slug',
+                'intro',
+                'content',
                 'place',
-                'description',
                 'event_date',
-                'published',
-                'published_on',
-                'created_at'
+                'on_mainpage',
+                'published_at',
+                'is_published',
+                'created_at',
+                'updated_at'
             )
             ->from('events')
-            ->where('published = 1')
+            ->where('is_published = 1')
             ->orderBy('event_date', 'ASC')
             ->executeQuery()
             ->fetchAllAssociative() ?: [];
@@ -117,19 +129,23 @@ final class EventFinderRepository
      *
      * @return array
      */
-    public function findById(int $id): array
+    public function findByIdOrFail(int $id): array
     {
         $result = $this->connection
             ->createQueryBuilder()
             ->select(
                 'id',
                 'title',
+                'slug',
+                'intro',
+                'content',
                 'place',
-                'description',
                 'event_date',
+                'on_mainpage',
+                'published_at',
+                'is_published',
                 'created_at',
-                'published',
-                'published_on'
+                'updated_at'
             )
             ->from('events')
             ->where('id = ?')

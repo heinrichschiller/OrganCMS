@@ -70,7 +70,7 @@ final class ReadAction
         $flash->clear();
 
         $id = (int) $request->getAttribute('id');
-        $event = $this->finder->findById($id);
+        $event = $this->finder->findByIdOrFail($id);
 
         $data = [
             'event' => $event,

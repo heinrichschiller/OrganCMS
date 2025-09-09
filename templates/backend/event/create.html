@@ -41,7 +41,7 @@
         <div class="col-sm-12 col-md-3">
           <label for="eventDate" class="form-label">Datum:</label>
           <input type="datetime-local" 
-            name="date" 
+            name="event_date" 
             class="form-control bg-success" 
             id="eventDate" 
             required
@@ -51,14 +51,14 @@
 
       <div class="mb-3">
         <label for="default-editor" class="form-label">Beschreibung:</label>
-        <textarea name="desc" class="form-control" id="default-editor" rows="10"></textarea>
+        <textarea name="content" class="form-control" id="default-editor" rows="10"></textarea>
       </div>
 
       <div class="form-check form-switch">
-        <label for="publish" class="form-check-label">Veröffentlichen. Wenn nicht aktiviert, wird die Veranstaltung nicht öffentlich angezeigt.
+        <label for="is_published" class="form-check-label">Veröffentlichen. Wenn nicht aktiviert, wird die Veranstaltung nicht öffentlich angezeigt.
           Dies ist nützlich wenn sie eine Veranstaltung noch Planen, speichern aber noch nicht veröffentlichen wollen.
         </label>
-        <input class="form-check-input bg-success" type="checkbox" name="publish" role="switch" id="publish">
+        <input class="form-check-input bg-success" type="checkbox" name="is_published" role="switch" id="is_published">
       </div>
       
       <div>

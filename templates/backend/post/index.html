@@ -30,7 +30,6 @@
               <th scope="col">Titel</th>
               <th scope="col">Erstellt am:</th>
               <th scope="col">Aktualisiert am:</th>
-              <th scope="col">Autor:</th>
               <th scope="col">Veröffentlicht?</th>
               <th scope="col">Veröffentlicht am:</th>
               <th scope="col">Hauptseite</th>
@@ -45,14 +44,13 @@
                 </a> 
               </th>
               <td>{{ getTitle }}</td>
-              <td>{{ getCreatedAt }}</td>
-              <td>{{ getUpdatedAt }}</td>
-              <td>{{ getAuthor }}</td>
+              <td>{{ getCreatedAtFormated }}</td>
+              <td>{{ getUpdatedAtFormated }}</td>
               <td>
                 {{# isPublished }}ja{{/ isPublished }}
                 {{^ isPublished }}nein{{/ isPublished }}
               </td>
-              <td>{{ getPublishedAt }}</td>
+              <td>{{ getPublishedAtFormated }}</td>
               <td>
                 {{# onMainpage }}ja{{/ onMainpage }}
                 {{^ onMainpage }}nein{{/ onMainpage }}

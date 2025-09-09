@@ -4,7 +4,8 @@ declare (strict_types=1);
 
 namespace Tests\Domain\User;
 
-use App\Domain\User\User;
+use App\Domain\User\Data\User;
+use DateTimeImmutable;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
@@ -23,175 +24,32 @@ class UserTest extends TestCase
         // do nothing
     }
 
-    public function testUserInstance(): void
+    public function testUserData(): void
     {
-        $user = new User;
+        $createdAt = new DateTimeImmutable('2025-09-09');
+        $updatedAt = new DateTimeImmutable('2025-09-09');
 
-        $this->assertInstanceOf(User::class, $user);
-    }
-
-    public function testUserIdIsNullByDefault(): void
-    {
-        $user = new User(null);
-
-        $this->assertNull($user->getId());
-    }
-
-    public function testUserHasId(): void
-    {
-        $user = new User(1);
-
-        $this->assertEquals(1, $user->getId());
-    }
-
-    public function testFirstNameIsNullByDefault(): void
-    {
-        $user = new User(1);
-
-        $this->assertNull($user->getFirstName());
-    }
-
-    public function testUserHasFirstName(): void
-    {
-        $user = new User(1, 'Heinrich');
-
-        $this->assertEquals('Heinrich', $user->getFirstName());
-    }
-
-    public function testFirstNameDoesNotStartOrEndWithAnWhitespace(): void
-    {
-        $user = new User(1, ' Heinrich ');
-
-        $this->assertEquals('Heinrich', $user->getFirstName());
-    }
-
-    public function testFirstNameDoesStartWithUppercase(): void
-    {
-        $user = new User(1, ' heinrich ');
-
-        $this->assertEquals('Heinrich', $user->getFirstName());
-    }
-
-    public function testGivenNameIsNullByDefault(): void
-    {
-        $user = new User(1, 'Heinrich');
-
-        $this->assertNull($user->getGivenName());
-    }
-
-    public function testUserHasGivenName(): void
-    {
-        $user = new User(1, 'Heinrich', 'Schiller');
-
-        $this->assertEquals('Schiller', $user->getGivenName());
-    }
-
-    public function testGivenNameDoesNotStartOrEndWithAnWhitespace(): void
-    {
-        $user = new User(1, 'Heinrich', 'Schiller');
-
-        $this->assertEquals('Schiller', $user->getGivenName());
-    }
-
-    public function testGivenNameDoesStartWithUppercase(): void
-    {
-        $user = new User(1, 'Heinrich', ' schiller ');
-
-        $this->assertEquals('Schiller', $user->getGivenName());
-    }
-
-    public function testUsernameIsNullByDefault(): void
-    {
-        $user = new User(1, 'Heinrich', 'Schiller');
-
-        $this->assertNull($user->getUsername());
-    }
-
-    public function testUserHasUsername(): void
-    {
-        $user = new User(1, 'Heinrich', 'Schiller', 'heinrich');
-
-        $this->assertEquals('heinrich', $user->getUsername());
-    }
-
-    public function testUsernameDoesNotStartOrEndWithAnWhitespace(): void
-    {
-        $user = new User(1, 'Heinrich', 'Schiller', ' heinrich ');
-
-        $this->assertEquals('heinrich', $user->getUsername());
-    }
-
-    public function testUserEmailIsNullByDefault(): void
-    {
-        $user = new User(1, 'Heinrich', 'Schiller', 'heinrich');
-
-        $this->assertNull($user->getEmail());
-    }
-
-    public function testUserHasEmail(): void
-    {
         $user = new User(
-            1,
-            'Heinrich',
-            'Schiller',
-            'heinrich',
-            'max.musterman@email.com'
+            id: 1,
+            firstName: ' heinrich ',
+            givenName: ' schiller ',
+            username: ' heinrich ',
+            email: 'max.mustermann@email.com',
+            password: ' secret ',
+            isActive: true,
+            createdAt: $createdAt,
+            updatedAt: $updatedAt
         );
 
-        $this->assertEquals('max.musterman@email.com', $user->getEmail());
-    }
-
-    public function testEmailDoesNotStartOrEndWithAnWhitespace(): void
-    {
-        $user = new User(
-            1,
-            'Heinrich',
-            'Schiller',
-            'heinrich',
-            ' max.musterman@email.com '
-        );
-
-        $this->assertEquals('max.musterman@email.com', $user->getEmail());
-    }
-
-    public function testUserPasswordIsNullByDefault(): void
-    {
-        $user = new User(
-            1,
-            'Heinrich',
-            'Schiller',
-            'heinrich',
-            'max.musterman@email.com'
-        );
-
-        $this->assertNull($user->getPassword());
-    }
-
-    public function testUserHasPassword(): void
-    {
-        $user = new User(
-            1,
-            'Heinrich',
-            'Schiller',
-            'heinrich',
-            'max.musterman@email.com',
-            'secret'
-        );
-
+        $this->assertSame(1, $user->getId());
+        $this->assertSame('Heinrich', $user->getFirstName());
+        $this->assertSame('Schiller', $user->getGivenName());
+        $this->assertSame('heinrich', $user->getUsername());
+        $this->assertSame('max.mustermann@email.com', $user->getEmail());
         $this->assertEquals('secret', $user->getPassword());
-    }
-
-    public function testPasswordDoesNotStartOrEndWithAnWhitespace(): void
-    {
-        $user = new User(
-            1,
-            'Heinrich',
-            'Schiller',
-            'heinrich',
-            'max.musterman@email.com',
-            ' secret '
-        );
-
-        $this->assertEquals('secret', $user->getPassword());
+        $this->assertTrue($user->isActive());
+        $this->assertEquals($createdAt, $user->getCreatedAt());
+        $this->assertEquals($updatedAt, $user->getUpdatedAt());
+        $this->assertSame('Heinrich Schiller', $user->getFullName());
     }
 }

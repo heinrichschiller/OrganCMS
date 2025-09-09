@@ -6,6 +6,7 @@ namespace App\Domain\Post\Repository;
 
 use App\Domain\Post\Data\Post;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Types\Types;
 
 class PostRepository
 {
@@ -41,7 +42,6 @@ class PostRepository
             ->setValue('slug', '?')
             ->setValue('intro', '?')
             ->setValue('content', '?')
-            ->setValue('author_id', '?')
             ->setValue('on_mainpage', '?')
             ->setValue('published_at', '?')
             ->setValue('is_published', '?')
@@ -51,7 +51,6 @@ class PostRepository
             ->setParameter(1, $post->getSlug())
             ->setParameter(2, $post->getIntro())
             ->setParameter(3, $post->getContent())
-            ->setParameter(4, $post->getAuthorId())
             ->setParameter(5, $post->onMainpage())
             ->setParameter(6, $post->getPublishedAt())
             ->setParameter(7, $post->isPublished())
@@ -74,7 +73,6 @@ class PostRepository
             ->set('slug', ':slug')
             ->set('intro', ':intro')
             ->set('content', ':content')
-            ->set('author_id', ':author_id')
             ->set('on_mainpage', ':on_mainpage')
             ->set('published_at', ':published_at')
             ->set('is_published', ':is_published')
@@ -85,12 +83,11 @@ class PostRepository
             ->setParameter('slug', $post->getSlug())
             ->setParameter('intro', $post->getIntro())
             ->setParameter('content', $post->getContent())
-            ->setParameter('author_id', $post->getAuthorId())
-            ->setParameter('on_mainpage', $post->onMainpage())
-            ->setParameter('published_at', $post->getPublishedAt())
-            ->setParameter('is_published', $post->isPublished())
-            ->setParameter('created_at', $post->getCreatedAt())
-            ->setParameter('updated_at', $post->getUpdatedAt())
+            ->setParameter('on_mainpage', $post->onMainpage(), Types::BOOLEAN)
+            ->setParameter('published_at', $post->getPublishedAt(), Types::DATE_IMMUTABLE)
+            ->setParameter('is_published', $post->isPublished(), Types::BOOLEAN)
+            ->setParameter('created_at', $post->getCreatedAt(), Types::DATE_IMMUTABLE)
+            ->setParameter('updated_at', $post->getUpdatedAt(), Types::DATE_IMMUTABLE)
             ->setParameter('id', $post->getId())
             ->executeQuery();
     }

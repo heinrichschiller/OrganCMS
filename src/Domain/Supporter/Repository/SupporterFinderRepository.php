@@ -50,7 +50,14 @@ final class SupporterFinderRepository
     {
         $result =  $this->connection
             ->createQueryBuilder()
-            ->select('id', 'name', 'is_published', 'published_at', 'created_at', 'updated_at')
+            ->select(
+                'id',
+                'name',
+                'is_published',
+                'published_at',
+                'created_at',
+                'updated_at'
+            )
             ->from('supporters')
             ->where('is_published = 1')
             ->executeQuery()

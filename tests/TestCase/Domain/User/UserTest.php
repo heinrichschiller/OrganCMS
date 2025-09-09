@@ -17,6 +17,10 @@ use PHPUnit\Framework\TestCase;
 #[CoversMethod(User::class, 'getUserName')]
 #[CoversMethod(User::class, 'getEmail')]
 #[CoversMethod(User::class, 'getPassword')]
+#[CoversMethod(User::class, 'isActive')]
+#[CoversMethod(User::class, 'getCreatedAt')]
+#[CoversMethod(User::class, 'getUpdatedAt')]
+#[CoversMethod(User::class, 'getFullName')]
 class UserTest extends TestCase
 {
     public function setUp(): void

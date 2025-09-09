@@ -150,7 +150,7 @@ final class Post
     /**
      * Get created at formated in german time.
      * Format: d.m.Y - 06.09.2024
-     * 
+     *
      * @return string
      */
     public function getCreatedAtFormated(): string|null
@@ -177,7 +177,7 @@ final class Post
     /**
      * Get updated at formated in german time.
      * Format: d.m.Y - 06.09.2024
-     * 
+     *
      * @return string
      */
     public function getUpdatedAtFormated(): string|null

@@ -162,14 +162,14 @@ final class PostReaderResult
     /**
      * Get created at formated in german time.
      * Format: d.m.Y - 06.09.2024
-     * 
+     *
      * @return string
      */
     public function getCreatedAtFormated(): string|null
     {
         $date = null;
 
-        if($this->createdAt !== null) {
+        if ($this->createdAt !== null) {
             $date = $this->createdAt->format('d.m.Y');
         }
 
@@ -189,7 +189,7 @@ final class PostReaderResult
     /**
      * Get updated at formated in german time.
      * Format: d.m.Y - 06.09.2024
-     * 
+     *
      * @return string
      */
     public function getUpdatedAtFormated(): string|null

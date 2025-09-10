@@ -22,7 +22,7 @@ class SupporterCollectionTest extends TestCase
         $collection->add($supporter1);
         $collection->add($supporter2);
 
-        $this->assertCount(3, iterator_to_array($collection));
+        $this->assertCount(2, iterator_to_array($collection));
         $this->assertSame([$supporter1, $supporter2], iterator_to_array($collection));
     }
 }

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Tests\TestCase\Action\Frontend\Gallery;
+
 use App\Action\Frontend\Gallery\GalleryAction;
 use App\Renderer\TemplateRenderer;
 use Fig\Http\Message\StatusCodeInterface;
@@ -10,18 +12,14 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
-use Tests\Traits\AppTestTrait;
 
 #[CoversClass(GalleryAction::class)]
 #[UsesClass(TemplateRenderer::class)]
 class GalleryActionTest extends TestCase
 {
-    use AppTestTrait;
-
     public function testInvokeRendersTemplateAndReturnsOk(): void
     {
         $renderer = $this->createMock(TemplateRenderer::class);
-
         $renderer->expects($this->once())
             ->method('render')
             ->with(

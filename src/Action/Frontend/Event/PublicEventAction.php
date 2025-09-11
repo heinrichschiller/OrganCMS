@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Event;
+namespace App\Action\Frontend\Event;
 
 use App\Domain\Event\Service\EventFinder;
 use App\Renderer\TemplateRenderer;

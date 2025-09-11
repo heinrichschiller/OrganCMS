@@ -23,7 +23,7 @@ return function (App $app) {
     $app->get('/orgelakte.html', \App\Action\Frontend\OrganAct\OrganActAction::class);
     $app->get('/orgelfreunde.html', \App\Action\Frontend\OrganFriend\OrganFriendAction::class);
     $app->get('/unsere-orgel.html', \App\Action\Frontend\OurOrgan\OurOrganAction::class);
-    $app->get('/veranstaltungen.html', \App\Action\Event\PublicEventAction::class);
+    $app->get('/veranstaltungen.html', \App\Action\Frontend\Event\PublicEventAction::class);
     $app->get('/videos.html', \App\Action\Frontend\Movie\MovieAction::class);
 
     /*

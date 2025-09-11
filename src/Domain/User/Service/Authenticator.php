@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\User\Service;
 
 use App\Domain\User\Repository\UserAuthRepository;
-use App\Domain\User\User;
+use App\Domain\User\Data\User;
 
 final class Authenticator
 {

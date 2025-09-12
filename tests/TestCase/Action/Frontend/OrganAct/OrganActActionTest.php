@@ -19,13 +19,15 @@ class OrganActActionTest extends TestCase
 {
     public function testInvokeRendersTemplateAndReturnsOk(): void
     {
+        $data = [];
+
         $renderer = $this->createMock(TemplateRenderer::class);
         $renderer->expects($this->once())
             ->method('render')
             ->with(
                 $this->isInstanceOf(ResponseInterface::class),
                 'frontend/organact/organ-act',
-                []
+                $data
             )->willReturn(new Response());
         
         $action = new OrganActAction($renderer);

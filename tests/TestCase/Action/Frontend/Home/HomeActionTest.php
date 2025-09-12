@@ -24,10 +24,12 @@ class HomeActionTest extends TestCase
 
     public function testInvokeRendersTemplateAndReturnsOk(): void
     {
+        $data = [];
+
         $reader = $this->createMock(HomeReader::class);
         $reader->expects($this->once())
             ->method('read')
-            ->willReturn([]);
+            ->willReturn($data);
 
         $renderer = $this->createMock(TemplateRenderer::class);
         $renderer->expects($this->once())
@@ -35,7 +37,7 @@ class HomeActionTest extends TestCase
             ->with(
                 $this->isInstanceOf(ResponseInterface::class),
                 'frontend/home/index',
-                []
+                $data
             )->willReturn(new Response());
 
         $action = new HomeAction($reader, $renderer);

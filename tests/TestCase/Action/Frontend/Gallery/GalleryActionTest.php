@@ -19,13 +19,15 @@ class GalleryActionTest extends TestCase
 {
     public function testInvokeRendersTemplateAndReturnsOk(): void
     {
+        $data = [];
+
         $renderer = $this->createMock(TemplateRenderer::class);
         $renderer->expects($this->once())
             ->method('render')
             ->with(
                 $this->isInstanceOf(ResponseInterface::class),
                 'frontend/gallery/gallery.html',
-                []
+                $data
             )->willReturn(new Response());
 
         $action = new GalleryAction($renderer);

@@ -20,14 +20,15 @@ class DsgvoActionTest extends TestCase
 {
     public function testInvokeRendersTemplateAndReturnsOk(): void
     {
-        $renderer = $this->createMock(TemplateRenderer::class);
+        $data = [];
 
+        $renderer = $this->createMock(TemplateRenderer::class);
         $renderer->expects($this->once())
             ->method('render')
             ->with(
                 $this->isInstanceOf(ResponseInterface::class),
                 'frontend/dsgvo/datenschutzerklaerung.html',
-                []
+                $data
             )->willReturn(new Response());
         
         $action = new DsgvoAction($renderer);

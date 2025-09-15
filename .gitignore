@@ -3,6 +3,7 @@
 composer.lock
 memory
 package-lock.json
+/config/env.php
 
 /build/
 /data/

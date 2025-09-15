@@ -22,12 +22,14 @@ RUN apt-get update && \
         php-apcu \
         php-gd \
         php-intl \
+        php-json \
         php-mbstring \
         php-pear \
         php-pdo \
         php-mysql \
+        php-pcov
         php-sqlite3 \
-        php-simplexml \
+        php-xml \
         php-xdebug \
         php-zip \
         libapache2-mod-php \

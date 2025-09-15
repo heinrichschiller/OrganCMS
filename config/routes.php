@@ -23,7 +23,7 @@ return function (App $app) {
     $app->get('/orgelakte.html', \App\Action\Frontend\OrganAct\OrganActAction::class);
     $app->get('/orgelfreunde.html', \App\Action\Frontend\OrganFriend\OrganFriendAction::class);
     $app->get('/unsere-orgel.html', \App\Action\Frontend\OurOrgan\OurOrganAction::class);
-    $app->get('/veranstaltungen.html', \App\Action\Event\PublicEventAction::class);
+    $app->get('/veranstaltungen.html', \App\Action\Frontend\Event\PublicEventAction::class);
     $app->get('/videos.html', \App\Action\Frontend\Movie\MovieAction::class);
 
     /*
@@ -56,10 +56,10 @@ return function (App $app) {
     $app->group('/post', function (RouteCollectorProxy $group) {
         $group->get('/', \App\Action\Backend\Post\PostAction::class)->setName('posts');
         $group->get('/new', \App\Action\Backend\Post\NewPostAction::class);
-        $group->post('/create', \App\Action\Backend\Post\CreateAction::class);
-        $group->post('/update', \App\Action\Backend\Post\UpdateAction::class);
         $group->get('/edit/{id}', \App\Action\Backend\Post\ReadAction::class)->setName('read-post');
         $group->get('/delete/{id}', \App\Action\Backend\Post\DeleteAction::class)->setName('read-post');
+        $group->post('/create', \App\Action\Backend\Post\CreateAction::class);
+        $group->post('/update', \App\Action\Backend\Post\UpdateAction::class);
     })->add(UserAuthMiddleware::class);
 
     $app->group('/settings', function (RouteCollectorProxy $group) {
@@ -70,9 +70,9 @@ return function (App $app) {
         $group->get('/', \App\Action\Backend\Supporter\SupporterAction::class)->setName('supporter');
         $group->get('/new', \App\Action\Backend\Supporter\NewSupporterAction::class);
         $group->get('/edit/{id}', \App\Action\Backend\Supporter\ReadAction::class);
-        $group->get('/delete/{id}', \App\Action\Supporter\DeleteAction::class);
-        $group->post('/create', \App\Action\Supporter\CreateAction::class);
-        $group->post('/update', \App\Action\Supporter\UpdateAction::class);
+        $group->get('/delete/{id}', \App\Action\Backend\Supporter\DeleteAction::class);
+        $group->post('/create', \App\Action\Backend\Supporter\CreateAction::class);
+        $group->post('/update', \App\Action\Backend\Supporter\UpdateAction::class);
     });
 
     $app->group('/user', function (RouteCollectorProxy $group) {

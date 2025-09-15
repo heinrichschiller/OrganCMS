@@ -2,7 +2,13 @@
 
 declare (strict_types=1);
 
-namespace App\Domain\User;
+namespace App\Domain\User\Data;
+
+use DateTimeImmutable;
+
+use function trim;
+use function ucfirst;
+use function sprintf;
 
 final class User
 {
@@ -12,9 +18,12 @@ final class User
      * @param int|null $id User id.
      * @param string|null $firstName User first name.
      * @param string|null $givenName User given name.
-     * @param string|null $username Login name
+     * @param string|null $username Login name.
      * @param string|null $email User email.
-     * @param string|null $password User password
+     * @param string|null $password User password.
+     * @param bool|null $isActive Status of the user.
+     * @param DateTimeImmutable|null $createdAt Created date of the user.
+     * @param DateTimeImmutable|null $updatedAt Updated date of the user.
      */
     public function __construct(
         private ?int $id = null,
@@ -22,9 +31,11 @@ final class User
         private ?string $givenName = null,
         private ?string $username = null,
         private ?string $email = null,
-        private ?string $password = null
+        private ?string $password = null,
+        private ?bool $isActive = null,
+        private ?DateTimeImmutable $createdAt = null,
+        private ?DateTimeImmutable $updatedAt = null
     ) {
-        $this->setId($id);
         $this->setFirstName($firstName);
         $this->setGivenName($givenName);
         $this->setUsername($username);
@@ -40,16 +51,6 @@ final class User
     public function getId(): int|null
     {
         return $this->id;
-    }
-
-    /**
-     * Set user id.
-     *
-     * @param int|null $id
-     */
-    private function setId(int|null $id): void
-    {
-        $this->id = $id;
     }
 
     /**
@@ -69,7 +70,7 @@ final class User
      */
     private function setFirstName(string|null $firstName): void
     {
-        if (null !== $firstName) {
+        if ($firstName !== null) {
             $firstName = trim($firstName, " \n\r\t\v\0");
             $firstName = ucfirst($firstName);
         }
@@ -94,7 +95,7 @@ final class User
      */
     private function setGivenName(string|null $givenName): void
     {
-        if (null !== $givenName) {
+        if ($givenName !== null) {
             $givenName = trim($givenName, " \n\r\t\v\0");
             $givenName = ucfirst($givenName);
         }
@@ -119,7 +120,7 @@ final class User
      */
     private function setUsername(string|null $username): void
     {
-        if (null !== $username) {
+        if ($username !== null) {
             $username = trim($username, " \n\r\t\v\0");
         }
 
@@ -143,7 +144,7 @@ final class User
      */
     private function setEmail(string|null $email): void
     {
-        if (null !== $email) {
+        if ($email !== null) {
             $email = trim($email, " \n\r\t\v\0");
         }
         $this->email = $email;
@@ -166,14 +167,49 @@ final class User
      */
     private function setPassword(string|null $password): void
     {
-        if (null !== $password) {
+        if ($password !== null) {
             $password = trim($password, " \n\r\t\v\0");
         }
         $this->password = $password;
     }
 
+    /**
+     * Get full name of the user.
+     *
+     * @return string
+     */
     public function getFullName(): string
     {
         return sprintf('%s %s', $this->firstName, $this->givenName);
+    }
+
+    /**
+     * Get active status of the user.
+     *
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * Get created date of the user.
+     *
+     * @return DateTimeImmutable
+     */
+    public function getCreatedAt(): DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Get update date of the user.
+     *
+     * @return DateTimeImmutable|null
+     */
+    public function getUpdatedAt(): DateTimeImmutable|null
+    {
+        return $this->updatedAt;
     }
 }

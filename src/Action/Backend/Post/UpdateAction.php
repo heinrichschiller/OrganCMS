@@ -52,7 +52,7 @@ final class UpdateAction
         $formData = (array) $request->getParsedBody();
         $formData['author_id'] = $user->getId();
 
-        $isUpdated = $this->updater->update($formData);
+        $isUpdated = $this->updater->updatePost($formData);
 
         $key = 'success';
         $message = 'Eintrag erfolgreich aktualisiert.';

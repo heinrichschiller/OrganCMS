@@ -57,7 +57,7 @@ final class ReadAction
      */
     public function __invoke(Request $request, Response $response): Response
     {
-        $isSuccess = '';
+        $isSuccess = false;
         $message = '';
 
         $flash = $this->session->getFlash();
@@ -70,7 +70,7 @@ final class ReadAction
         $flash->clear();
 
         $id = (int) $request->getAttribute('id');
-        $event = $this->finder->findById($id);
+        $event = $this->finder->findByIdOrFail($id);
 
         $data = [
             'event' => $event,

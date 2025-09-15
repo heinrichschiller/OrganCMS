@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\User\Service;
 
-use App\Domain\User\User;
+use App\Domain\User\Data\User;
 use App\Domain\User\Repository\UserUpdaterRepository;
 use App\Factory\LoggerFactory;
 use Error;

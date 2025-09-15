@@ -36,21 +36,19 @@ final class PostFinderRepository
         $result = $this->connection
             ->createQueryBuilder()
             ->select(
-                'p.id',
+                'id',
                 'title',
                 'slug',
                 'intro',
                 'content',
-                'author_name',
                 'on_mainpage',
                 'published_at',
                 'is_published',
                 'created_at',
                 'updated_at'
             )
-            ->from('posts', 'p')
-            ->leftJoin('p', 'authors', 'a')
-            ->where('p.id = ?')
+            ->from('posts')
+            ->where('id = ?')
             ->setParameter(0, $id)
             ->executeQuery()
             ->fetchAssociative() ?: [];
@@ -68,20 +66,18 @@ final class PostFinderRepository
         $result = $this->connection
             ->createQueryBuilder()
             ->select(
-                'p.id',
+                'id',
                 'title',
                 'slug',
                 'intro',
                 'content',
-                'author_name',
                 'on_mainpage',
                 'published_at',
                 'is_published',
                 'created_at',
                 'updated_at'
             )
-            ->from('posts', 'p')
-            ->leftJoin('p', 'authors', 'a')
+            ->from('posts')
             ->executeQuery()
             ->fetchAllAssociative() ?: [];
         
@@ -99,20 +95,18 @@ final class PostFinderRepository
         $result = $this->connection
             ->createQueryBuilder()
             ->select(
-                'p.id',
+                'id',
                 'title',
                 'slug',
                 'intro',
                 'content',
-                'author_name',
                 'on_mainpage',
                 'published_at',
                 'is_published',
                 'created_at',
                 'updated_at'
             )
-            ->from('posts', 'p')
-            ->leftJoin('p', 'authors', 'a')
+            ->from('posts')
             ->where("is_published = '1'")
             ->orderBy('published_at', 'DESC')
             ->executeQuery()
@@ -133,20 +127,18 @@ final class PostFinderRepository
         $result = $this->connection
             ->createQueryBuilder()
             ->select(
-                'p.id',
+                'id',
                 'title',
                 'slug',
                 'intro',
                 'content',
-                'author_name',
                 'on_mainpage',
                 'published_at',
                 'is_published',
                 'created_at',
                 'updated_at'
             )
-            ->from('posts', 'p')
-            ->leftJoin('p', 'authors', 'a')
+            ->from('posts')
             ->where("is_published = '1'")
             ->orderBy('published_at', 'DESC')
             ->setMaxResults($limit)
@@ -166,20 +158,18 @@ final class PostFinderRepository
         $result = $this->connection
             ->createQueryBuilder()
             ->select(
-                'p.id',
+                'id',
                 'title',
                 'slug',
                 'intro',
                 'content',
-                'author_name',
                 'on_mainpage',
                 'published_at',
                 'is_published',
                 'created_at',
                 'updated_at'
             )
-            ->from('posts', 'p')
-            ->leftJoin('p', 'authors', 'a')
+            ->from('posts')
             ->where("on_mainpage = 'on'")
             ->andWhere("is_published = 'on'")
             ->executeQuery()

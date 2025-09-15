@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Domain\Post\PostReaderResult;
 
 use App\Domain\Post\Data\PostReaderResult;
+use DateTimeImmutable;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
@@ -19,124 +20,38 @@ class PostReaderResultTest extends TestCase
         // do nothing
     }
 
-    public function testIdIsNullByDefault(): void
+    public function testPostIsCreatedWithValues(): void
     {
-        $result = new PostReaderResult;
+        $publishedAt = new DateTimeImmutable('2025-05-29');
+        $createdAt = new DateTimeImmutable('2025-05-29');
+        $updatedAt = new DateTimeImmutable('2025-05-29');
 
-        $this->assertNull($result->getId());
-    }
-
-    public function testTitleIsNullByDefault(): void
-    {
-        $result = new PostReaderResult;
-
-        $this->assertNull($result->getTitle());
-    }
-
-    public function testTitleHasInput(): void
-    {
-        $result = new PostReaderResult(0, 'Title');
-
-        $this->assertEquals('Title', $result->getTitle());
-    }
-
-    public function testSlugHasInput(): void
-    {
-        $result = new PostReaderResult(0, 'Title', '/slug');
-
-        $this->assertEquals('/slug', $result->getSlug());
-    }
-
-    public function testIntroHasInput(): void
-    {
-        $result = new PostReaderResult(0, 'Title', '/slug', 'Intro');
-
-        $this->assertEquals('Intro', $result->getIntro());
-    }
-
-    public function testContentHasInput(): void
-    {
-        $result = new PostReaderResult(0, 'Title', '/slug', 'Intro', 'Content');
-
-        $this->assertEquals('Content', $result->getContent());
-    }
-
-    public function testAuthorIdHasInput(): void
-    {
-        $result = new PostReaderResult(0, 'Title', '/slug', 'Intro', 'Content', 1);
-
-        $this->assertEquals(1, $result->getAuthorId());
-    }
-
-    public function testOnMainpageHasInput(): void
-    {
-        $result = new PostReaderResult(0, 'Title', '/slug', 'Intro', 'Content', 1, true);
-
-        $this->assertTrue($result->onMainpage());
-    }
-
-    public function testPublishedAtHasInput(): void
-    {
-        $result = new PostReaderResult(0, 'Title', '/slug', 'intro', 'content', 1, false, '2024-09-06 08:50:00');
-
-        $this->assertEquals('2024-09-06 08:50:00', $result->getPublishedAt());
-    }
-
-    public function testPublishedAtFormatedIsNullByDefault(): void
-    {
-        $result = new PostReaderResult;
-
-        $this->assertNull($result->getPublishedAtFormated());
-    }
-
-    public function testPublishedAtFormatedHasInput(): void
-    {
-        $result = new PostReaderResult(0, 'Title', '/slug', 'intro', 'content', 1, false, '2024-09-06 08:50:00');
-
-        $this->assertEquals('06.09.2024', $result->getPublishedAtFormated());
-    }
-
-    public function testIsPublishedHasInput(): void
-    {
-        $result = new PostReaderResult(0, 'Title', '/slug', 'intro', 'content', 1, false, '2024-09-06 08:50:00', true);
-
-        $this->assertTrue($result->isPublished());
-    }
-
-    public function testCreatedAtHasInput(): void
-    {
-        $result = new PostReaderResult(
-            0,
-            'Title',
-            '/slug',
-            'intro',
-            'content',
-            1,
-            false,
-            '2024-09-06 08:50:00',
-            true,
-            '2024-09-06 08:50:00'
+        $postResult = new PostReaderResult(
+            id: 1,
+            title: '  test post ',
+            slug: 'test/slug',
+            intro: 'Intro',
+            content: 'Full content here.',
+            onMainpage: true,
+            publishedAt: $publishedAt,
+            isPublished: false,
+            createdAt: $createdAt,
+            updatedAt: $updatedAt
         );
 
-        $this->assertEquals('2024-09-06 08:50:00', $result->getCreatedAt());
-    }
-
-    public function testUpdatedAtHasInput(): void
-    {
-        $result = new PostReaderResult(
-            0,
-            'Title',
-            '/slug',
-            'intro',
-            'content',
-            1,
-            false,
-            '2024-09-06 08:50:00',
-            true,
-            '2024-09-06 08:50:00',
-            '2024-09-06 08:50:00'
-        );
-
-        $this->assertEquals('2024-09-06 08:50:00', $result->getUpdatedAt());
+        $this->assertSame(1, $postResult->getId());
+        $this->assertSame('Test post', $postResult->getTitle());
+        $this->assertSame('test/slug', $postResult->getSlug());
+        $this->assertSame('Intro', $postResult->getIntro());
+        $this->assertSame('Full content here.', $postResult->getContent());
+        $this->assertTrue($postResult->onMainpage());
+        $this->assertEquals($publishedAt, $postResult->getPublishedAt());
+        $this->assertEquals('29.05.2025', $postResult->getPublishedAtFormated());
+        $this->assertSame('29.05.2025', $postResult->getUpdatedAtFormated());
+        $this->assertFalse($postResult->isPublished());
+        $this->assertEquals($createdAt, $postResult->getCreatedAt());
+        $this->assertSame('29.05.2025', $postResult->getCreatedAtFormated());
+        $this->assertEquals($updatedAt, $postResult->getUpdatedAt());
+        $this->assertSame('29.05.2025', $postResult->getUpdatedAtFormated());
     }
 }

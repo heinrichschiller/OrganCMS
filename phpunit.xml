@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit 
+  <phpunit 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.3/phpunit.xsd"
     bootstrap="tests/bootstrap.php"
-    executionOrder="depends,defects"
+    executionOrder="default"
     beStrictAboutOutputDuringTests="true"
     failOnRisky="true" 
     failOnWarning="true"
@@ -11,11 +11,11 @@
     testdox="true"
     cacheDirectory="var/caches/phpunit"
     requireCoverageMetadata="true"
-    beStrictAboutCoverageMetadata="true"
->
+    beStrictAboutCoverageMetadata="true">
+  <coverage/>
   <testsuites>
     <testsuite name="Tests">
-      <directory suffix="Test.php">tests/TestCase</directory>
+      <directory suffix="Test.php">tests</directory>
     </testsuite>
   </testsuites>
   <php>

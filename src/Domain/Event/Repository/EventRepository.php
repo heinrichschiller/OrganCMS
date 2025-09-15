@@ -6,6 +6,7 @@ namespace App\Domain\Event\Repository;
 
 use App\Domain\Event\Data\Event;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Types\Types;
 
 final class EventRepository
 {
@@ -44,7 +45,7 @@ final class EventRepository
     }
 
     /**
-     * Insert an event
+     * Insert an event entry into database table.
      *
      * @param Event $event
      *
@@ -56,19 +57,27 @@ final class EventRepository
             ->createQueryBuilder()
             ->insert('events')
             ->setValue('title', '?')
+            ->setValue('slug', '?')
+            ->setValue('intro', '?')
+            ->setValue('content', '?')
             ->setValue('place', '?')
-            ->setValue('description', '?')
             ->setValue('event_date', '?')
+            ->setValue('on_mainpage', '?')
+            ->setValue('published_at', '?')
+            ->setValue('is_published', '?')
             ->setValue('created_at', '?')
-            ->setValue('published', '?')
-            ->setValue('published_on', '?')
+            ->setValue('updated_at', '?')
             ->setParameter(0, $event->getTitle())
-            ->setParameter(1, $event->getPlace())
-            ->setParameter(2, $event->getDesc())
-            ->setParameter(3, $event->getEventDate())
-            ->setParameter(4, $event->getCreatedAt())
-            ->setParameter(5, $event->isPublished())
-            ->setParameter(6, $event->getPublishedOn())
+            ->setParameter(1, $event->getSlug())
+            ->setParameter(2, $event->getIntro())
+            ->setParameter(3, $event->getContent())
+            ->setParameter(4, $event->getPlace())
+            ->setParameter(5, $event->getEventDate(), Types::DATE_IMMUTABLE)
+            ->setParameter(6, $event->getOnMainpage(), Types::BOOLEAN)
+            ->setParameter(7, $event->getPublishedAt(), Types::DATE_IMMUTABLE)
+            ->setParameter(8, $event->isPublished(), Types::BOOLEAN)
+            ->setParameter(9, $event->getCreatedAt(), Types::DATE_IMMUTABLE)
+            ->setParameter(10, $event->getUpdatedAt(), Types::DATE_IMMUTABLE)
             ->executeQuery();
 
         $this->lastInsertId = (int) $this->connection->lastInsertId();
@@ -103,19 +112,29 @@ final class EventRepository
         $this->connection
             ->createQueryBuilder()
             ->update('events')
-            ->set('title', ':title')
-            ->set('place', ':place')
-            ->set('description', ':description')
-            ->set('event_date', ':event_date')
-            ->set('published', ':published')
-            ->set('published_on', ':published_on')
+            ->setValue('title', '?')
+            ->setValue('slug', '?')
+            ->setValue('intro', '?')
+            ->setValue('content', '?')
+            ->setValue('place', '?')
+            ->setValue('event_date', '?')
+            ->setValue('on_mainpage', '?')
+            ->setValue('published_at', '?')
+            ->setValue('is_published', '?')
+            ->setValue('created_at', '?')
+            ->setValue('updated_at', '?')
             ->where('id = :id')
-            ->setParameter('title', $event->getTitle())
-            ->setParameter('place', $event->getPlace())
-            ->setParameter('description', $event->getDesc())
-            ->setParameter('event_date', $event->getEventDate())
-            ->setParameter('published', $event->isPublished())
-            ->setParameter('published_on', $event->getPublishedOn())
+            ->setParameter(0, $event->getTitle())
+            ->setParameter(1, $event->getSlug())
+            ->setParameter(2, $event->getIntro())
+            ->setParameter(3, $event->getContent())
+            ->setParameter(4, $event->getPlace())
+            ->setParameter(5, $event->getEventDate(), Types::DATE_IMMUTABLE)
+            ->setParameter(6, $event->getOnMainpage(), Types::BOOLEAN)
+            ->setParameter(7, $event->getPublishedAt(), Types::DATE_IMMUTABLE)
+            ->setParameter(8, $event->isPublished(), Types::BOOLEAN)
+            ->setParameter(9, $event->getCreatedAt(), Types::DATE_IMMUTABLE)
+            ->setParameter(10, $event->getUpdatedAt(), Types::DATE_IMMUTABLE)
             ->setParameter('id', $event->getId())
             ->executeQuery();
     }

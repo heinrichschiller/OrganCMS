@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Supporter;
+namespace App\Action\Backend\Supporter;
 
 use App\Domain\Supporter\Service\SupporterCreator;
 use Fig\Http\Message\StatusCodeInterface;

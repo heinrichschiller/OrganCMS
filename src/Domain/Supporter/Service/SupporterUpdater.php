@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Supporter\Service;
 
 use App\Domain\Supporter\Repository\SupporterUpdaterRepository;
-use App\Domain\Supporter\Supporter;
+use App\Domain\Supporter\Data\Supporter;
 use Cake\Validation\Validator;
 use App\Factory\LoggerFactory;
 use Error;

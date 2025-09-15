@@ -4,44 +4,25 @@ declare(strict_types=1);
 
 namespace Tests\Domain\Supporter;
 
-use App\Domain\Supporter\Supporter;
-use App\Domain\Supporter\SupporterCollection;
-use ArrayIterator;
+use App\Domain\Supporter\Data\Supporter;
+use App\Domain\Supporter\Data\SupporterCollection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(SupporterCollection::class)]
 class SupporterCollectionTest extends TestCase
 {
-    public function setUp(): void
-    {
-        // nothing here
-    }
-
-    public function testSupporterCollectionInstance(): void
+    public function testSupporterCollectionCanBeIterated():void
     {
         $collection = new SupporterCollection;
 
-        $this->assertInstanceOf(SupporterCollection::class, $collection);
+        $supporter1 = $this->createMock(Supporter::class);
+        $supporter2 = $this->createMock(Supporter::class);
+
+        $collection->add($supporter1);
+        $collection->add($supporter2);
+
+        $this->assertCount(2, iterator_to_array($collection));
+        $this->assertSame([$supporter1, $supporter2], iterator_to_array($collection));
     }
-
-    // public function testSupporterCollectionCanBeIterated():void
-    // {
-    //     $heinrich = new Supporter(1, 'Heinrich Schiller');
-    //     $ella = new Supporter(2, 'Ella Lemke');
-    //     $david = new Supporter(3, 'David Kreller');
-
-    //     $collection = new SupporterCollection;
-
-    //     $collection->add($heinrich);
-    //     $collection->add($ella);
-    //     $collection->add($david);
-
-    //     foreach ($collection as $item) {
-    //         $items[] = $item;
-    //     }
-
-    //     $this->assertCount(3, $items);
-    //     $this->assertInstanceOf(ArrayIterator::class, $collection->getIterator());
-    // }
 }

@@ -6,11 +6,13 @@ namespace App\Domain\Event\Service;
 
 use App\Domain\Event\Data\Event;
 use App\Domain\Event\Repository\EventRepository;
+use App\Domain\Event\Service\EventValidator;
 use App\Factory\LoggerFactory;
-use Cake\Validation\Validator;
+use DateTimeImmutable;
 use Error;
 use Exception;
 use Psr\Log\LoggerInterface;
+use Selective\ArrayReader\ArrayReader;
 
 final class EventCreator
 {
@@ -28,9 +30,9 @@ final class EventCreator
 
     /**
      * @Injection
-     * @var Validator
+     * @var EventValidator
      */
-    private Validator $validator;
+    private EventValidator $eventValidator;
 
     /**
      * The contstructor.
@@ -42,11 +44,11 @@ final class EventCreator
     public function __construct(
         EventRepository $repository,
         LoggerFactory $loggerFactory,
-        Validator $validator
+        EventValidator $eventValidator
     ) {
         $this->repository = $repository;
         $this->logger = $loggerFactory->addFileHandler('error.log')->createLogger();
-        $this->validator = $validator;
+        $this->eventValidator = $eventValidator;
     }
 
     /**
@@ -60,24 +62,7 @@ final class EventCreator
     {
         $this->validate($formData);
 
-        if (!isset($formData['publish'])) {
-            $formData['publish'] = '';
-        }
-
-        $isPublished = (bool) $formData['publish'];
-        $publishedAt = $isPublished ? (string) date('Y-m-d H:i:s') : '';
-        $createdAt = (string) date('Y-m-d H:i:s');
-
-        $event = new Event(
-            null,
-            $formData['title'],
-            $formData['place'],
-            $formData['desc'],
-            $formData['date'],
-            (bool) $isPublished,
-            $publishedAt,
-            $createdAt
-        );
+        $event = $this->getEvent($formData);
 
         try {
             $this->repository->createEvent($event);
@@ -95,28 +80,51 @@ final class EventCreator
     }
 
     /**
+     * Get event object.
+     *
+     * @param array<string> $formData The form data.
+     *
+     * @return Event
+     */
+    private function getEvent(array $formData): Event
+    {
+        $reader = new ArrayReader($formData);
+
+        if (!isset($formData['is_published'])) {
+            $formData['is_published'] = '';
+        }
+
+        $id = null;
+        $title = $reader->findString('title');
+        $place = $reader->findString('place');
+        $content = $reader->findString('content');
+        $eventDate = $reader->findChronos('event_date');
+        $isPublished = $reader->findBool('is_published');
+
+        $publishedAt = $isPublished ? new DateTimeImmutable(date('Y-m-d H:i:s')) : null;
+        $createdAt = new DateTimeImmutable(date('Y-m-d H:i:s'));
+
+        $event = new Event(
+            id: $id,
+            title: $title,
+            place: $place,
+            content: $content,
+            eventDate: $eventDate,
+            isPublished: $isPublished,
+            publishedAt: $publishedAt,
+            createdAt: $createdAt
+        );
+
+        return $event;
+    }
+
+    /**
      * Validate data
      *
      * @param array<mixed> $formData
      */
     public function validate(array $formData): void
     {
-        $this->validator
-            ->requirePresence('title')
-            ->notEmptyString('title', 'Der Titel darf nicht leer sein.')
-            ->requirePresence('date')
-            ->notEmptyDate('date', 'Das Datum darf nicht leer sein.');
-
-        $errors = $this->validator->validate($formData);
-
-        if ($errors) {
-            foreach ($errors as $error) {
-                foreach ($error as $value) {
-                    echo "<p>$value</p>";
-                }
-            }
-
-            die;
-        }
+        $this->eventValidator->validateEvent($formData);
     }
 }

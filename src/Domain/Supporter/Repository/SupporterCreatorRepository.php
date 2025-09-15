@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Supporter\Repository;
 
-use App\Domain\Supporter\Supporter;
+use App\Domain\Supporter\Data\Supporter;
 use Doctrine\DBAL\Connection;
 
 final class SupporterCreatorRepository

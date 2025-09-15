@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Author\Data;
+namespace App\Domain\Event\Data;
 
-use App\Domain\Author\Data\Author;
 use ArrayIterator;
 use IteratorAggregate;
 use Traversable;
@@ -12,21 +11,21 @@ use Traversable;
 /**
  * @implements IteratorAggregate<int, string>
  */
-final class AuthorCollection implements IteratorAggregate
+final class EventReaderResultCollection implements IteratorAggregate
 {
     /**
-     * @var array<Author>
+     * @var array<EventReaderResult>
      */
     private array $list = [];
 
     /**
-     * Add a new Author to collection.
+     * Add a new event to collection.
      *
-     * @param Author $Author Author entry.
+     * @param EventReaderResult $event EventReaderResult entry.
      */
-    public function add(Author $Author): void
+    public function add(EventReaderResult $event): void
     {
-        $this->list[] = $Author;
+        $this->list[] = $event;
     }
 
     /**

@@ -38,8 +38,45 @@ $settings['logger'] = [
     'file_permission' => 0775,
 ];
 
-$settings['db'] = [
+$settings['sqlite'] = [
     'driver' => 'pdo_sqlite',
+];
+
+$settings['db'] = [
+    'driver' => 'pdo_mysql',
+    'host' => 'mdb-projects',
+    'dbname' => 'dev_organcms',
+    'port' => 3306,
+    'user' => 'root',
+    'password' => 'geheim',
+    'charset' => 'utf8mb4',
+    'collation' => 'utf8mb4_uca1400_ai_ci',
+    'driverOptions' => [
+        // Turn off persistent connections
+        PDO::ATTR_PERSISTENT => false,
+        // Enable exceptions
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        // Emulate prepared statements
+        PDO::ATTR_EMULATE_PREPARES => true,
+        // Set default fetch to array
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        // Set character set
+        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4 COLLATE utf8mb4_uca1400_ai_ci'
+    ],
+];
+
+$settings['migrations'] = [
+	'table_storage' => [
+		'table_name' => 'migrations',
+		'version_column_length' => 1024,
+	],
+	'migrations_paths' => [
+		'Migrations' => __DIR__ . '/../resources/migrations',
+	],
+	'all_or_nothing' => true,
+	'transactional' => true,
+	'check_database_platform' => true,
+	'organize_migrations' => 'none',
 ];
 
 // url

@@ -2,7 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Supporter;
+namespace App\Domain\Supporter\Data;
+
+use DateTimeImmutable;
+
+use function trim;
 
 final class Supporter
 {
@@ -12,17 +16,17 @@ final class Supporter
      * @param int $id Supporter id.
      * @param string $name Supporter name.
      * @param bool $isPublished Is supporter published.
-     * @param string $publishedAt
-     * @param string $createdAt
-     * @param string|null $updatedAt
+     * @param DateTimeImmutable $publishedAt
+     * @param DateTimeImmutable $createdAt
+     * @param DateTimeImmutable|null $updatedAt
      */
     public function __construct(
         private ?int $id = null,
         private ?string $name = null,
-        private bool $isPublished = false,
-        private ?string $publishedAt = null,
-        private ?string $createdAt = null,
-        private ?string $updatedAt = null,
+        private ?bool $isPublished = false,
+        private ?DateTimeImmutable $publishedAt = null,
+        private ?DateTimeImmutable $createdAt = null,
+        private ?DateTimeImmutable $updatedAt = null,
     ) {
         $this->setName($name);
     }
@@ -74,9 +78,9 @@ final class Supporter
     /**
      * Get published date.
      *
-     * @return string|null $publishedAt Published date
+     * @return DateTimeImmutable|null $publishedAt Published date
      */
-    public function getPublishedAt(): string|null
+    public function getPublishedAt(): DateTimeImmutable|null
     {
         return $this->publishedAt;
     }
@@ -84,9 +88,9 @@ final class Supporter
     /**
      * Get created date.
      *
-     * @return string|null $createdAt Get created date
+     * @return DateTimeImmutable|null $createdAt Get created date
      */
-    public function getCreatedAt(): string|null
+    public function getCreatedAt(): DateTimeImmutable|null
     {
         return $this->createdAt;
     }
@@ -94,9 +98,9 @@ final class Supporter
     /**
      * Get updated date.
      *
-     * @return string|null $updatedAt Get updated date
+     * @return DateTimeImmutable|null $updatedAt Get updated date
      */
-    public function getUpdatedAt(): string|null
+    public function getUpdatedAt(): DateTimeImmutable|null
     {
         return $this->updatedAt;
     }

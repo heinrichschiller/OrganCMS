@@ -4,6 +4,9 @@ namespace App\Domain\Post\Data;
 
 use DateTimeImmutable;
 
+use function trim;
+use function ucfirst;
+
 final class PostReaderResult
 {
     /**
@@ -14,12 +17,11 @@ final class PostReaderResult
      * @param string|null $slug Post slug.
      * @param string|null $intro Post intro.
      * @param string|null $content Post content.
-     * @param int|null $authorId Author id.
      * @param bool $onMainpage Show this Post on Mainpage.
-     * @param string|null $publishedAt Post published date.
+     * @param DateTimeImmutable|null $publishedAt Post published date.
      * @param bool $isPublished Post is published or not.
-     * @param string|null $createdAt Post creation date.
-     * @param string|null $updatedAt Post update date.
+     * @param DateTimeImmutable|null $createdAt Post creation date.
+     * @param DateTimeImmutable|null $updatedAt Post update date.
      */
     public function __construct(
         private ?int $id = null,
@@ -27,12 +29,11 @@ final class PostReaderResult
         private ?string $slug = null,
         private ?string $intro = null,
         private ?string $content = null,
-        private ?string $author = null,
         private ?bool $onMainpage = null,
-        private ?string $publishedAt = null,
+        private ?DateTimeImmutable $publishedAt = null,
         private ?bool $isPublished = null,
-        private ?string $createdAt = null,
-        private ?string $updatedAt = null
+        private ?DateTimeImmutable $createdAt = null,
+        private ?DateTimeImmutable $updatedAt = null
     ) {
         $this->setTitle($title);
     }
@@ -103,21 +104,11 @@ final class PostReaderResult
     }
 
     /**
-     * Get author.
-     *
-     * @return int|null
-     */
-    public function getAuthor(): string|null
-    {
-        return $this->author;
-    }
-
-    /**
      * On mainpage.
      *
-     * @return bool
+     * @return bool|null
      */
-    public function onMainpage(): bool
+    public function onMainpage(): bool|null
     {
         return $this->onMainpage;
     }
@@ -125,9 +116,9 @@ final class PostReaderResult
     /**
      * Get published at.
      *
-     * @return string|null
+     * @return DateTimeImmutable|null
      */
-    public function getPublishedAt(): string|null
+    public function getPublishedAt(): DateTimeImmutable|null
     {
         return $this->publishedAt;
     }
@@ -142,8 +133,7 @@ final class PostReaderResult
         $date = null;
 
         if ($this->publishedAt !== null) {
-            $date = new DateTimeImmutable($this->publishedAt);
-            $date = $date->format('d.m.Y');
+            $date = $this->publishedAt->format('d.m.Y');
         }
 
         return $date;
@@ -152,9 +142,9 @@ final class PostReaderResult
     /**
      * Is published.
      *
-     * @return bool
+     * @return bool|null
      */
-    public function isPublished(): bool
+    public function isPublished(): bool|null
     {
         return $this->isPublished;
     }
@@ -162,20 +152,54 @@ final class PostReaderResult
     /**
      * Get created at.
      *
-     * @return string|null
+     * @return DateTimeImmutable|null
      */
-    public function getCreatedAt(): string|null
+    public function getCreatedAt(): DateTimeImmutable|null
     {
         return $this->createdAt;
     }
 
     /**
+     * Get created at formated in german time.
+     * Format: d.m.Y - 06.09.2024
+     *
+     * @return string
+     */
+    public function getCreatedAtFormated(): string|null
+    {
+        $date = null;
+
+        if ($this->createdAt !== null) {
+            $date = $this->createdAt->format('d.m.Y');
+        }
+
+        return $date;
+    }
+
+    /**
      * Get updated at.
      *
-     * @return string|null
+     * @return DateTimeImmutable|null
      */
-    public function getUpdatedAt(): string|null
+    public function getUpdatedAt(): DateTimeImmutable|null
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Get updated at formated in german time.
+     * Format: d.m.Y - 06.09.2024
+     *
+     * @return string
+     */
+    public function getUpdatedAtFormated(): string|null
+    {
+        $date = null;
+
+        if ($this->updatedAt !== null) {
+            $date = $this->updatedAt->format('d.m.Y');
+        }
+
+        return $date;
     }
 }

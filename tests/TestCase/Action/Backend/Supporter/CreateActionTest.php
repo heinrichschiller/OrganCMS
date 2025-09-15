@@ -109,6 +109,5 @@ final class CreateActionTest extends TestCase
 
         $this->assertSame(StatusCodeInterface::STATUS_FOUND, $response->getStatusCode());
         $this->assertSame('/backend/supporter', $response->getHeaderLine('Location'));
-
     }
 }

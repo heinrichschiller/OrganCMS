@@ -6,13 +6,16 @@ namespace App\Domain\Event\Service;
 
 use App\Domain\Event\Data\Event;
 use App\Domain\Event\Repository\EventRepository;
-use App\Factory\LoggerFactory;
 use App\Domain\Event\Service\EventValidator;
+use App\Factory\LoggerFactory;
+use DateTimeImmutable;
 use DomainException;
 use Error;
 use Exception;
 use Psr\Log\LoggerInterface;
 use Selective\ArrayReader\ArrayReader;
+
+use function sprintf;
 
 final class EventUpdater
 {
@@ -47,14 +50,14 @@ final class EventUpdater
         EventValidator $eventValidator
     ) {
         $this->repository = $repository;
-        $this->logger = $loggerFactory->addFileHandler('error.log')->createLogger();
+        $this->logger = $loggerFactory->addFileHandler('event_updater.log')->createLogger();
         $this->eventValidator = $eventValidator;
     }
 
     /**
-     * Update data
+     * Update event entry.
      *
-     * @param array<mixed> $formData The form data
+     * @param array<string> $formData The form data
      *
      * @return bool
      */
@@ -62,24 +65,7 @@ final class EventUpdater
     {
         $this->validateEventUpdate($formData);
 
-        $reader = new ArrayReader($formData);
-
-        $id = $reader->findInt('id');
-        $title = $reader->findString('title');
-        $place = $reader->findString('place');
-        $desc = $reader->findString('desc');
-        $date = $reader->findString('date');
-        $isPublished = $reader->findBool('publish');
-        
-        $event = new Event(
-            $id,
-            $title,
-            $place,
-            $desc,
-            $date,
-            $isPublished,
-            date('Y-m-d H:i:s')
-        );
+        $event = $this->getEvent($formData);
 
         try {
             $this->repository->update($event);
@@ -94,6 +80,31 @@ final class EventUpdater
 
             return false;
         }
+    }
+
+    private function getEvent(array $formData): Event
+    {
+        $reader = new ArrayReader($formData);
+
+        $id = $reader->findInt('id');
+        $title = $reader->findString('title');
+        $place = $reader->findString('place');
+        $content = $reader->findString('content');
+        $eventDate = $reader->findString('date');
+        $isPublished = $reader->findBool('is_published');
+        $updatedAt = new DateTimeImmutable(date('Y-m-d H:i:s'));
+        
+        $event = new Event(
+            id: $id,
+            title: $title,
+            place: $place,
+            content: $content,
+            eventDate: $eventDate,
+            isPublished: $isPublished,
+            updatedAt: $updatedAt
+        );
+
+        return $event;
     }
 
     /**

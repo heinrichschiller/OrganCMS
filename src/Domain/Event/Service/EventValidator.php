@@ -22,12 +22,10 @@ final class EventValidator
             ->notEmptyString('title', 'Der Titel darf nicht leer sein.')
             ->minLength('title', 5, 'Der Titel muss min 5 Zeichen lang sein')
             ->allowEmptyString('place')
-            ->requirePresence('date')
-            ->notEmptyDate('date', 'Das Datum darf nicht leer sein.')
-            ->requirePresence('desc', 'Beschreibung darf nicht leer sein')
-            ->notEmptyString('desc', 'Beschreibung darf nicht leer sein')
-            ->requirePresence('id', true, 'Id nicht gefunden')
-            ->notEmptyString('id', 'Id nicht gefunden.');
+            ->requirePresence('event_date')
+            ->notEmptyDate('event_date', 'Das Datum darf nicht leer sein.')
+            ->requirePresence('content', 'Beschreibung darf nicht leer sein')
+            ->notEmptyString('content', 'Beschreibung darf nicht leer sein');
 
         $errors = $validator->validate($formData);
 

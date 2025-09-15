@@ -70,9 +70,9 @@ return function (App $app) {
         $group->get('/', \App\Action\Backend\Supporter\SupporterAction::class)->setName('supporter');
         $group->get('/new', \App\Action\Backend\Supporter\NewSupporterAction::class);
         $group->get('/edit/{id}', \App\Action\Backend\Supporter\ReadAction::class);
-        $group->get('/delete/{id}', \App\Action\Supporter\DeleteAction::class);
-        $group->post('/create', \App\Action\Supporter\CreateAction::class);
-        $group->post('/update', \App\Action\Supporter\UpdateAction::class);
+        $group->get('/delete/{id}', \App\Action\Backend\Supporter\DeleteAction::class);
+        $group->post('/create', \App\Action\Backend\Supporter\CreateAction::class);
+        $group->post('/update', \App\Action\Backend\Supporter\UpdateAction::class);
     });
 
     $app->group('/user', function (RouteCollectorProxy $group) {

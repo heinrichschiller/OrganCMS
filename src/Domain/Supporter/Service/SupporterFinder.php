@@ -88,7 +88,7 @@ final class SupporterFinder
     {
         $collection = new SupporterCollection;
 
-        // try {
+        try {
             $supporterList = (array) $this->repository->findAllPublicSupporter();
 
         if (!empty($supporterList)) {
@@ -102,15 +102,15 @@ final class SupporterFinder
         }
 
             return $collection;
-        // } catch (Exception $e) {
-            // $this->logger->error(sprintf("SupportFinder->findAllPublicSupporter(): %s", $e->getMessage()));
-// exit('Boom!');
-            // return $collection;
-        // } catch (Error $e) {
-            // $this->logger->error(sprintf("SupportFinder->findAllPublicSupporter(): %s", $e->getMessage()));
+        } catch (Exception $e) {
+            $this->logger->error(sprintf("SupportFinder->findAllPublicSupporter(): %s", $e->getMessage()));
             
-            // return $collection;
-        // }
+            return $collection;
+        } catch (Error $e) {
+            $this->logger->error(sprintf("SupportFinder->findAllPublicSupporter(): %s", $e->getMessage()));
+            
+            return $collection;
+        }
     }
 
     /**

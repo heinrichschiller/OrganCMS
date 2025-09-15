@@ -23,8 +23,8 @@ class EventActionTest extends TestCase
 {
     public function testInvokeRendersTemplateAndReturnsOk(): void
     {
-        $isSuccess = true;
-        $isError = true;
+        $isSuccess = false;
+        $isError = false;
         $message = '';
 
         $events = new EventCollection();

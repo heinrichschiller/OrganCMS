@@ -44,13 +44,14 @@ $settings['sqlite'] = [
 
 $settings['db'] = [
     'driver' => 'pdo_mysql',
-    'host' => 'mdb-projects',
-    'dbname' => 'dev_organcms',
-    'port' => 3306,
-    'user' => 'root',
-    'password' => 'geheim',
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_uca1400_ai_ci',
+
+    /**
+     * The driverOptions option allows to pass arbitrary options through to the driver.
+     * This is equivalent to the fourth argument of the PDO constructor.
+     * see: https://www.php.net/manual/en/pdo.construct.php
+     */
     'driverOptions' => [
         // Turn off persistent connections
         PDO::ATTR_PERSISTENT => false,

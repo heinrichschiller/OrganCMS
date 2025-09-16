@@ -7,6 +7,7 @@ use App\Handler\NotFoundHandler;
 use Doctrine\DBAL\Configuration as DoctrineConfiguration;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
+use Mustache\Engine;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Odan\Session\PhpSession;
 use Odan\Session\SessionInterface;
@@ -92,10 +93,10 @@ return [
         return $container->get(Connection::class)->getNativeConnection();
     },
 
-    Mustache_Engine::class => function (ContainerInterface $container): Mustache_Engine {
+    Engine::class => function (ContainerInterface $container): Engine {
         $config = $container->get(Configuration::class);
 
-        return new Mustache_Engine($config->getArray('mustache'));
+        return new Engine($config->getArray('mustache'));
     },
 
     SessionManagerInterface::class => function (ContainerInterface $container): SessionInterface {

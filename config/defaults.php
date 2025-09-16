@@ -101,11 +101,11 @@ $settings['mustache'] = [
     'escape' => function (string $var) {
         return htmlspecialchars($var, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
     },
-    'loader' => new Mustache_Loader_FilesystemLoader(
+    'loader' => new Mustache\Loader\FilesystemLoader(
         __DIR__ . '/../templates/',
         ['extension' => '.html']
     ),
-    'partials_loader' => new Mustache_Loader_FilesystemLoader(
+    'partials_loader' => new Mustache\Loader\FilesystemLoader(
         __DIR__ . '/../templates/partials',
         ['extension' => '.html']
     )

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Renderer;
 
-use Mustache_Engine;
+use Mustache\Engine;
 use Psr\Http\Message\ResponseInterface as Response;
 use Selective\Config\Configuration;
 
@@ -19,17 +19,17 @@ final class TemplateRenderer
 
     /**
      * @Injection
-     * @var Mustache_Engine;
+     * @var Engine;
      */
-    private Mustache_Engine $mustache;
+    private Engine $mustache;
 
     /**
      * The constructor.
      *
-     * @param Config $config
-     * @param Mustache_Engine $mustache Mustache Render Engine
+     * @param Configuration $config
+     * @param Engine $mustache Mustache Render Engine
      */
-    public function __construct(Configuration $config, Mustache_Engine $mustache)
+    public function __construct(Configuration $config, Engine $mustache)
     {
         $this->config = $config;
         $this->mustache = $mustache;

@@ -73,7 +73,7 @@ final class EventAction
 
         $flash->clear();
 
-        $events = $this->finder->findAllOrFail();
+        $events = $this->finder->findAll();
 
         $data = [
             'events' => $events,

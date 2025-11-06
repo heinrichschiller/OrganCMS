@@ -32,7 +32,7 @@ class EventActionTest extends TestCase
 
         $finder = $this->createMock(EventFinder::class);
         $finder->expects($this->once())
-            ->method('findAllOrFail')
+            ->method('findAll')
             ->willReturn($events);
 
         $data = [

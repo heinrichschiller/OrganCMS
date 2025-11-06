@@ -4,33 +4,35 @@ declare(strict_types=1);
 
 namespace App\Domain\Dashboard\Service;
 
-use App\Domain\Donation\Service\DonationDetailsReader;
+use App\Domain\Donation\Service\DonationDetailsFinder;
 use App\Domain\Event\Service\EventFinder;
 
 final class DashboardReader
 {
     /**
      * @Injection
-     * @var DonationDetailsReader
+     * @var DonationDetailsFinder
      */
-    private DonationDetailsReader $reader;
+    private DonationDetailsFinder $detailsFinder;
 
     /**
      * @Injection
      * @var EventFinder
      */
-    private EventFinder $finder;
+    private EventFinder $eventFinder;
 
     /**
      * The constructor
      *
-     * @param DonationDetailsReader $reader
-     * @param EventFinder $finder,
+     * @param DonationDetailsFinder $detailsFinder
+     * @param EventFinder $eventFinder,
      */
-    public function __construct(DonationDetailsReader $reader, EventFinder $finder)
-    {
-        $this->reader = $reader;
-        $this->finder = $finder;
+    public function __construct(
+        DonationDetailsFinder $detailsFinder,
+        EventFinder $eventFinder
+    ) {
+        $this->detailsFinder = $detailsFinder;
+        $this->eventFinder = $eventFinder;
     }
 
     /**
@@ -40,8 +42,8 @@ final class DashboardReader
      */
     public function read(): array
     {
-        $donation = $this->reader->read();
-        $event = $this->finder->findPublishedEvents();
+        $donation = $this->detailsFinder->findOne();
+        $event = $this->eventFinder->findPublishedEvents();
 
         return [
             'user' => '',

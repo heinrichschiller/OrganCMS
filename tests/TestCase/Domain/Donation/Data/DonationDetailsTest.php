@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Domain\Donation;
+namespace Tests\Domain\Donation\Data;
 
-use App\Domain\Donation\DonationDetails;
+use App\Domain\Donation\Data\DonationDetails;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;

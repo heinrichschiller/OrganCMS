@@ -35,7 +35,7 @@ class ReadActionTest extends TestCase
 
         $finder = $this->createMock(EventFinder::class);
         $finder->expects($this->once())
-            ->method('findByIdOrFail')
+            ->method('findById')
             ->with($id)
             ->willReturn($event);
         

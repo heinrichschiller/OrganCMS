@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Donation;
+namespace App\Domain\Donation\Data;
 
+/**
+ * @deprecated
+ */
 final class Donation
 {
     private string $donationAmountOption = '';

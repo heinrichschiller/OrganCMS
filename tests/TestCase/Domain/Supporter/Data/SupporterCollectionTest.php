@@ -2,16 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Tests\Domain\Supporter;
+namespace Tests\Domain\Supporter\Data;
 
 use App\Domain\Supporter\Data\Supporter;
 use App\Domain\Supporter\Data\SupporterCollection;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(SupporterCollection::class)]
 class SupporterCollectionTest extends TestCase
 {
+    #[Test]
     public function testSupporterCollectionCanBeIterated():void
     {
         $collection = new SupporterCollection;
@@ -23,6 +25,9 @@ class SupporterCollectionTest extends TestCase
         $collection->add($supporter2);
 
         $this->assertCount(2, iterator_to_array($collection));
-        $this->assertSame([$supporter1, $supporter2], iterator_to_array($collection));
+        $this->assertSame(
+            [$supporter1, $supporter2],
+            iterator_to_array($collection)
+        );
     }
 }

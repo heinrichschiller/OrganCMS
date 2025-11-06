@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\Domain\Supporter;
+namespace Tests\Domain\Supporter\Data;
 
 use App\Domain\Supporter\Data\Supporter;
-use DateTime;
 use DateTimeImmutable;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Supporter::class)]
@@ -20,11 +20,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversMethod(Supporter::class, 'getUpdatedAt')]
 class SupporterTest extends TestCase
 {
-    public function setUp(): void
-    {
-        // do nothing
-    }
-
+    #[Test]
     public function testSupporterIsCreatedWithValues(): void
     {
         $publishedAt = new DateTimeImmutable('2025-05-16');

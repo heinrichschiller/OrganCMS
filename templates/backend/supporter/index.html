@@ -47,13 +47,13 @@
                 </a>
               </th>
               <td>{{ getName }}</td>
-              <td>{{ getCreatedAt }}</td>
-              <td>{{ getUpdatedAt }}</td>
+              <td>{{ getCreatedAtFormated }}</td>
+              <td>{{ getUpdatedAtFormated }}</td>
               <td>
                 {{# isPublished }}ja{{/ isPublished }}
                 {{^ isPublished }}nein{{/ isPublished }}
               </td>
-              <td>{{ getPublishedAt }}</td>
+              <td>{{ getPublishedAtFormated }}</td>
             </tr>
             {{/ supporters }}
           </tbody>

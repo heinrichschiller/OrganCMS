@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace App\Domain\Post\Service;
 
-use App\Domain\Post\Data\PostReaderResult;
-use App\Domain\Post\Data\PostReaderResultCollection;
+use App\Domain\Post\Data\Post;
+use App\Domain\Post\Data\PostCollection;
 use App\Domain\Post\Repository\PostFinderRepository;
 use App\Factory\LoggerFactory;
 use DateTimeImmutable;
-use Error;
-use Exception;
 use Psr\Log\LoggerInterface;
-use Selective\ArrayReader\ArrayReader;
-
-use function sprintf;
+use Throwable;
 
 final class PostFinder
 {
@@ -36,9 +32,14 @@ final class PostFinder
      * @param LoggerFactory $loggerFactory
      * @param PostFinderRepository $repository Post finder repository
      */
-    public function __construct(LoggerFactory $loggerFactory, PostFinderRepository $repository)
-    {
-        $this->logger = $loggerFactory->addFileHandler('post-finder-error.log')->createLogger();
+    public function __construct(
+        LoggerFactory $loggerFactory,
+        PostFinderRepository $repository
+    ) {
+        $this->logger = $loggerFactory
+            ->addFileHandler('post-finder-error.log')
+            ->createLogger();
+        
         $this->repository = $repository;
     }
 
@@ -47,29 +48,15 @@ final class PostFinder
      *
      * @param int $id Post id.
      *
-     * @return PostReaderResult
+     * @return Post
      */
-    public function findByIdOrFail(int $id): PostReaderResult
+    public function findById(int $id): Post
     {
-        try {
-            $postItem = (array) $this->repository->findByIdOrFail($id);
+        $postItem = (array) $this->repository->findById($id);
 
-            if (!empty($postItem)) {
-                $result = $this->getPostReaderResult($postItem);
+        $result = $this->transformDataToPost($postItem);
 
-                return $result;
-            }
-
-            return new PostReaderResult;
-        } catch (Exception $e) {
-            $this->logger->error(sprintf("PostFinder->findByIdOrFail(): %s", $e->getMessage()));
-
-            return new PostReaderResult;
-        } catch (Error $e) {
-            $this->logger->error(sprintf("PostFinder->findByIdOrFail(): %s", $e->getMessage()));
-
-            return new PostReaderResult;
-        }
+        return $result;
     }
 
     /**
@@ -77,31 +64,18 @@ final class PostFinder
      *
      * @return PostCollection
      */
-    public function findAllOrFail(): PostReaderResultCollection
+    public function findAll(): PostCollection
     {
-        $collection = new PostReaderResultCollection;
+        $postItems = (array) $this->repository->findAll();
 
-        try {
-            $postList = (array) $this->repository->findAllOrFail();
+        $collection = new PostCollection;
+        foreach ($postItems as $postItem) {
+            $result = $this->transformDataToPost($postItem);
 
-            if (!empty($postList)) {
-                foreach ($postList as $postItem) {
-                    $result = $this->getPostReaderResult($postItem);
-        
-                    $collection->add($result);
-                }
-            }
-
-            return $collection;
-        } catch (Exception $e) {
-            $this->logger->error(sprintf("PostFinder->findAllOrFail(): %s", $e->getMessage()));
-
-            return $collection;
-        } catch (Error $e) {
-            $this->logger->error(sprintf("PostFinder->findAllOrFail(): %s", $e->getMessage()));
-            
-            return $collection;
+            $collection->add($result);
         }
+
+        return $collection;
     }
 
     /**
@@ -109,107 +83,108 @@ final class PostFinder
      *
      * @return PostCollection
      */
-    public function findAllPublicPosts(): PostReaderResultCollection
+    public function findAllPublicPosts(): PostCollection
     {
-        $collection = new PostReaderResultCollection;
+        $postItems = $this->repository->findAllPublicPosts();
 
-        try {
-            $postItems = $this->repository->findAllPublicPosts();
-            dd($postItems);
-            if (!empty($postList)) {
-                foreach ($postList as $item) {
-                    $result = $this->getPostReaderResult($postItem);
+        $collection = new PostCollection;
+        foreach ($postItems as $postItem) {
+            $post = $this->transformDataToPost($postItem);
 
-                    $collection->add($result);
-                }
-            }
-
-            return $collection;
-        } catch (Exception $e) {
-            $this->logger->error(sprintf("PostFinder->findAllPublicPosts(): %s", $e->getMessage()));
-
-            return $collection;
-        } catch (Error $e) {
-            $this->logger->error(sprintf("SupportFinder->delete(): %s", $e->getMessage()));
-            
-            return $collection;
+            $collection->add($post);
         }
+
+        return $collection;
     }
     
     /**
      * Find post for the mainpage.
      *
-     * @return PostReaderResult.
+     * @return Post
      */
-    public function findMainpagePost(): PostReaderResult
+    public function findMainpagePost(): Post
     {
-        try {
-            $postItem = (array) $this->repository->findMainpagePost();
+        $postItem = (array) $this->repository->findMainpagePost();
 
-            if (!empty($mainpagePost)) {
-                $result = $this->getPostReaderResult($postItem);
-    
-                return $result;
-            }
-            
-            return new PostReaderResult;
-        } catch (Exception $e) {
-            $this->logger->error(sprintf("PostFinder->findMainpagePost(): %s", $e->getMessage()));
+        $post = $this->transformDataToPost($postItem);
 
-            return new PostReaderResult;
-        } catch (Error $e) {
-            $this->logger->error(sprintf("SupportFinder->delete(): %s", $e->getMessage()));
-            
-            return new PostReaderResult;
-        }
+        return $post;
     }
 
-    public function findAllMainpagePosts(int $limit): PostReaderResultCollection
+    /**
+     * Find all mainpage posts
+     *
+     * @param int $limit Limit
+     *
+     * @return PostCollection
+     */
+    public function findAllMainpagePosts(int $limit): PostCollection
     {
-        $collection = new PostReaderResultCollection;
+        $postItems = (array) $this->repository->findAllMainpagePosts($limit);
 
-        // try {
-            $postItem = (array) $this->repository->findAllMainpagePosts($limit);
+        $collection = new PostCollection;
+        foreach ($postItems as $postItem) {
+            $post = $this->transformDataToPost($postItem);
 
-        if (!empty($postList)) {
-            foreach ($postList as $postItem) {
-                $result = $this->getPostReaderResult($postItem);
-
-                $collection->add($result);
-            }
+            $collection->add($post);
         }
 
-            return $collection;
-        // } catch (Exception $e) {
-        //     $this->logger->error(sprintf("PostFinder->findAllPublicPosts(): %s", $e->getMessage()));
-
-        //     return $collection;
-        // } catch (Error $e) {
-        //     $this->logger->error(sprintf("SupportFinder->delete(): %s", $e->getMessage()));
-            
-        //     return $collection;
-        // }
+        return $collection;
     }
 
-    private function getPostReaderResult(array $postItem): PostReaderResult
+    /**
+     * Transform array with post-data to Post object.
+     *
+     * @param array<mixed> $post Post data
+     *
+     * @return Post
+     */
+    private function transformDataToPost(array $post): Post
     {
-        $publishedAt = new DateTimeImmutable($postItem['published_at']);
-        $createdAt = new DateTimeImmutable($postItem['created_at']);
-        $updatedAt = new DateTimeImmutable($postItem['updated_at']);
+        if (empty($post)) {
+            return new Post;
+        }
 
-        $post = new PostReaderResult(
-            id: (int) $postItem['id'],
-            title: $postItem['title'],
-            slug: $postItem['slug'],
-            intro: $postItem['intro'],
-            content: $postItem['content'],
-            onMainpage: (bool) $postItem['on_mainpage'],
-            publishedAt: $publishedAt,
-            isPublished: (bool) $postItem['is_published'],
-            createdAt: $createdAt,
-            updatedAt: $updatedAt
+        $post = new Post(
+            id: (int) $post['id'],
+            title: $post['title'],
+            slug: $post['slug'],
+            intro: $post['intro'],
+            content: $post['content'],
+            onMainpage: (bool) $post['on_mainpage'],
+            publishedAt: $this->parseDate($post['published_at']),
+            isPublished: (bool) $post['is_published'],
+            createdAt: $this->parseDate($post['created_at']),
+            updatedAt: $this->parseDate($post['updated_at'])
         );
 
         return $post;
+    }
+
+    /**
+     * Parse date.
+     *
+     * @param null|string $date Date
+     *
+     * @throw
+     *
+     * @return null|DateTimeImmutable
+     */
+    private function parseDate(?string $date): ?DateTimeImmutable
+    {
+        if ($date === null || $date === '') {
+            return null;
+        }
+
+        try {
+            return new DateTimeImmutable($date);
+        } catch (Throwable $t) {
+            $this->logger->warning(
+                'Invalid date in PostFinder',
+                ['value' => $date, 'exception' => $t]
+            );
+
+            return null;
+        }
     }
 }

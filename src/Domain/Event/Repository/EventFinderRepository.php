@@ -27,9 +27,9 @@ final class EventFinderRepository
     /**
      * Find all events
      *
-     * @return array
+     * @return array<mixed>
      */
-    public function findAllOrFail(): array
+    public function findAll(): array
     {
         $result = $this->connection
             ->createQueryBuilder()
@@ -60,9 +60,9 @@ final class EventFinderRepository
      *
      * @param int $limit
      *
-     * @return array
+     * @return array<mixed>
      */
-    public function findAllMainpageEvents(int $limit): array
+    public function findLatestPublishedEvents(int $limit): array
     {
         $result = $this->connection
             ->createQueryBuilder()
@@ -93,7 +93,7 @@ final class EventFinderRepository
     /**
      * Find all published events
      *
-     * @return array
+     * @return array<mixed>
      */
     public function findPublishedEvents(): array
     {
@@ -127,9 +127,9 @@ final class EventFinderRepository
      *
      * @param int $id Event id
      *
-     * @return array
+     * @return array<mixed>
      */
-    public function findByIdOrFail(int $id): array
+    public function findById(int $id): array
     {
         $result = $this->connection
             ->createQueryBuilder()

@@ -161,9 +161,9 @@ final class EventReaderResult
     /**
      * Get event date.
      *
-     * @return string|null
+     * @return string
      */
-    public function getEventDateFormated(): string|null
+    public function getEventDateFormated(): string
     {
         $eventDate = '';
 
@@ -207,9 +207,9 @@ final class EventReaderResult
     /**
      * Get the formated date of the published event.
      *
-     * @return string|null
+     * @return string
      */
-    public function getPublishedAtFormated(): string|null
+    public function getPublishedAtFormated(): string
     {
         $publishedAt = '';
 
@@ -233,9 +233,9 @@ final class EventReaderResult
     /**
      * Get the formated date when an event was created.
      *
-     * @return |null
+     * @return string
      */
-    public function getCreatedAtFormated(): string|null
+    public function getCreatedAtFormated(): string
     {
         $createdAt = '';
 
@@ -259,9 +259,9 @@ final class EventReaderResult
     /**
      * Get the date when an event was created.
      *
-     * @return string|null
+     * @return string
      */
-    public function getUpdatedAtFormated(): string|null
+    public function getUpdatedAtFormated(): string
     {
         $updatedAt = '';
 

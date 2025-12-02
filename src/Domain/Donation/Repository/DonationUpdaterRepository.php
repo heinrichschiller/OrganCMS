@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Donation\Repository;
 
-use App\Domain\Donation\DonationDetails;
+use App\Domain\Donation\Data\DonationDetails;
 use Doctrine\DBAL\Connection;
 
 final class DonationUpdaterRepository

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Domain\Post;
+namespace Tests\Domain\Post\Data;
 
 use App\Domain\Post\Data\PostNotFoundException;
 use PHPUnit\Framework\Attributes\CoversClass;

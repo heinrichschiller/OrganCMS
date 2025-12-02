@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Domain\Post\PostReaderResult;
+namespace Tests\Domain\Post\PostReaderResult\Data;
 
 use App\Domain\Post\Data\PostReaderResult;
 use DateTimeImmutable;

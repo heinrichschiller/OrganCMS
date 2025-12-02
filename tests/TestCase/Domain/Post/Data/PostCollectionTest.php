@@ -2,20 +2,22 @@
 
 declare(strict_types=1);
 
+namespace Tests\TestCase\Domain\Post\Data;
+
 use PHPUnit\Framework\TestCase;
-use App\Domain\Post\Data\PostReaderResultCollection;
-use App\Domain\Post\Data\PostReaderResult;
+use App\Domain\Post\Data\PostCollection;
+use App\Domain\Post\Data\Post;
 use PHPUnit\Framework\Attributes\CoversClass;
 
-#[CoversClass(PostReaderResultCollection::class)]
-final class PostReaderResultCollectionTest extends TestCase
+#[CoversClass(PostCollection::class)]
+final class PostCollectionTest extends TestCase
 {
     public function testAddAndIterate(): void
     {
-        $collection = new PostReaderResultCollection();
+        $collection = new PostCollection();
         
-        $post1 = $this->createMock(PostReaderResult::class);
-        $post2 = $this->createMock(PostReaderResult::class);
+        $post1 = $this->createMock(Post::class);
+        $post2 = $this->createMock(Post::class);
         
         $collection->add($post1);
         $collection->add($post2);

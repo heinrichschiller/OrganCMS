@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Domain\Post\PostTest;
+namespace Tests\Domain\Post\PostTest\Data;
 
 use App\Domain\Post\Data\Post;
 use DateTimeImmutable;

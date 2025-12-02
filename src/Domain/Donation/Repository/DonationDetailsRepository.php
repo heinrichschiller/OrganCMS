@@ -27,9 +27,9 @@ final class DonationDetailsRepository
     /**
      * Read donation details
      *
-     * @return array
+     * @return array<mixed>
      */
-    public function read(): array
+    public function findOne(): array
     {
         $result = $this->connection
             ->createQueryBuilder()

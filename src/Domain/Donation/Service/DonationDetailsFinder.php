@@ -31,7 +31,7 @@ final class DonationDetailsFinder
      *
      * @return DonationDetails
      */
-    public function findOne(): DonationDetails|null
+    public function findOne(): DonationDetails
     {
         $details =  $this->repository->findOne();
         

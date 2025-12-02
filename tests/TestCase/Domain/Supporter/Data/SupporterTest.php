@@ -40,7 +40,10 @@ class SupporterTest extends TestCase
         $this->assertSame('test name', $supporter->getName());
         $this->assertTrue($supporter->isPublished());
         $this->assertEquals($publishedAt, $supporter->getPublishedAt());
+        $this->assertEquals('16.05.2025', $supporter->getPublishedAtFormated());
         $this->assertEquals($createdAt, $supporter->getCreatedAt());
+        $this->assertEquals('16.05.2025', $supporter->getCreatedAtFormated());
         $this->assertEquals($updatedAt, $supporter->getUpdatedAt());
+        $this->assertEquals('16.05.2025', $supporter->getUpdatedAtFormated());
     }
 }

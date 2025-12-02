@@ -29,9 +29,9 @@ final class PostFinderRepository
      *
      * @param int $id Post id.
      *
-     * @return array
+     * @return array<mixed>
      */
-    public function findByIdOrFail(int $id): array
+    public function findById(int $id): array
     {
         $result = $this->connection
             ->createQueryBuilder()
@@ -59,9 +59,9 @@ final class PostFinderRepository
     /**
      * Find all posts.
      *
-     * @return array
+     * @return array<mixed>
      */
-    public function findAllOrFail(): array
+    public function findAll(): array
     {
         $result = $this->connection
             ->createQueryBuilder()
@@ -88,7 +88,7 @@ final class PostFinderRepository
     /**
      * Find all public posts
      *
-     * @return array
+     * @return array<mixed>
      */
     public function findAllPublicPosts(): array
     {
@@ -120,7 +120,7 @@ final class PostFinderRepository
      *
      * @param int $limit
      *
-     * @return array
+     * @return array<mixed>
      */
     public function findAllMainpagePosts(int $limit): array
     {

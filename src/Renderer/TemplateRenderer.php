@@ -19,7 +19,7 @@ final class TemplateRenderer
 
     /**
      * @Injection
-     * @var Engine;
+     * @var Engine
      */
     private Engine $mustache;
 

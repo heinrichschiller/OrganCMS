@@ -9,8 +9,8 @@ use Doctrine\Migrations\Provider\SchemaProvider;
 
 final class MigrationSchemaProvider implements SchemaProvider
 {
-	public function createSchema(): Schema
-	{
-		return require __DIR__ . '/../../config/schema.php';
-	}
+    public function createSchema(): Schema
+    {
+        return require __DIR__ . '/../../config/schema.php';
+    }
 }

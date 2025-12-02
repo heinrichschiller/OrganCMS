@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\TestCase\Action\Frontend\Post;
 
 use App\Action\Frontend\Post\PostAction;
-use App\Domain\Post\Data\PostReaderResultCollection;
+use App\Domain\Post\Data\PostCollection;
 use App\Domain\Post\Service\PostFinder;
 use App\Renderer\TemplateRenderer;
 use Fig\Http\Message\StatusCodeInterface;
@@ -21,7 +21,7 @@ class PostActionTest extends TestCase
 {
     public function testInvokeRendersTemplateAndReturnsOk(): void
     {
-        $postItems = new PostReaderResultCollection();
+        $postItems = new PostCollection();
 
         $finder = $this->createMock(PostFinder::class);
         $finder->expects($this->once())

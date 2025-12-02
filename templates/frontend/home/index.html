@@ -7,7 +7,7 @@
     <div class="col-md-6 p-0">
       <div class="hero">
         <div>
-          <div class="text-primary fs-3">Willkommen bei den</div>
+          <div class="text-light fs-3">Willkommen bei den</div>
           <div class="display-3 text-light">Orgelfreunde Plauen</div>
           <a href="#card-list" class="btn btn-primary text-light mt-3">Jetzt entdecken</a>
         </div>
@@ -31,7 +31,7 @@
 
         {{# events }}
         
-        <div class="link-dark text-decoration-none w-75">
+        <div class="link-dark text-decoration-none w-100 px-3 px-lg-5">
           <div class="card mt-2 bg-success border border-3 border-secondary border-bottom-0 border-end-0 border-start-0 shadow rounded text-primary">
             <div class="card-body position-relative">
               <div class="text-primary">
@@ -53,23 +53,26 @@
     </div>
     <div class="col-md-6 p-0">
       <div class="min-vh-100 bg-secondary d-flex flex-column justify-content-center align-items-center">
-        <div class="display-3 text-primary">Blog</div>
+        <div class="display-3 text-light">Weitere Veranstaltungen</div>
 
-        {{# mainpagepost }}
+        {{# events }}
         
-        <a href="/blog/{{ getId }}/{{ getSlug }}" class="link-dark text-decoration-none w-75">
-          <div class="card mt-2 bg-primary border border-3 border-light border-bottom-0 border-end-0 border-start-0 shadow rounded text-primary">
+        <div class="link-dark text-decoration-none w-100 px-3 px-lg-5">
+          <div class="card mt-2 bg-primary border border-3 border-light border-bottom-0 border-end-0 border-start-0 shadow rounded">
             <div class="card-body position-relative">
               <div class="text-light">
-                <span>{{ getTitle }}</span>
-                <span class="position-absolute top-25 end-0 pe-3">{{ getPublishedAtFormated }}</span>
+                <h2 class="h5">{{ getTitle }}</h2>
+                <div>{{{ getDesc }}}</div>
+                <div class="position-relative pb-3">
+                  <span class="position-absolute top-25 end-0 fs-6">{{ getEventDateFormated }} - {{ getEventTime }} Uhr</span>
+                </div>
               </div>
             </div>
           </div>
-        </a>
+        </div>
 
-        
-        {{/ mainpagepost }}
+        {{/ events }}
+
       </div>
     </div>
   </div>
@@ -77,11 +80,32 @@
 
 {{> story-intro }}
 
-{{> story-part-one }}
-
-{{> story-part-two }}
-
-{{> story-result }}
+<div class="tab-list">
+  <div class="container-xl">
+  <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Vom Orgelprospekt</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Zum Orgelprojekt</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Das haben wir erreicht</button>
+    </li>
+  </ul>
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+      {{> story-part-one }}
+    </div>
+    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+      {{> story-part-two }}
+    </div>
+    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+      {{> story-result }}
+    </div>
+  </div>
+</div>
+</div>
 
 {{> story-finish }}
 

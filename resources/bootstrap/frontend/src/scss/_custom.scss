@@ -49,14 +49,12 @@ body {
 
 .card-list,
 .story-intro,
-.story-part-one,
-.story-part-two,
-.story-result,
-.story-finish {
+.story-finish,
+.tab-list {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 1rem 0rem;;
+  padding: 1rem 0rem;
 }
 
 .mini-gallery {

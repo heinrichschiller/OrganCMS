@@ -6,7 +6,7 @@ namespace App\Handler;
 
 use Fig\Http\Message\StatusCodeInterface;
 use Nyholm\Psr7\Response;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface;
 use Slim\Interfaces\ErrorHandlerInterface;
 use Throwable;
@@ -33,7 +33,7 @@ final class HttpExceptionHandler implements ErrorHandlerInterface
      * @return ResponseInterface
      */
     public function __invoke(
-        ServerRequestInterface $request,
+        Request $request,
         Throwable $exception,
         bool $displayErrorDetails,
         bool $logErrors,

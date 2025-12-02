@@ -7,7 +7,7 @@ namespace App\Support;
 final class FileUploader
 {
     /**
-     * @var array
+     * @var array<mixed>
      */
     private array $documents = [];
 
@@ -29,7 +29,7 @@ final class FileUploader
     /**
      * Upload files
      *
-     * @param array $uploadedFiles  List of uploaded files
+     * @param array<mixed> $uploadedFiles  List of uploaded files
      */
     public function upload(array $uploadedFiles = []): string
     {

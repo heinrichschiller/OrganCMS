@@ -29,7 +29,7 @@ final class UserReaderRepository
      *
      * @param string $username
      *
-     * @return array
+     * @return array<mixed>
      */
     public function findByUsername(string $username): array
     {

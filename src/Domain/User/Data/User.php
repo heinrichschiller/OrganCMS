@@ -188,7 +188,7 @@ final class User
      *
      * @return bool
      */
-    public function isActive(): bool
+    public function isActive(): bool|null
     {
         return $this->isActive;
     }
@@ -196,9 +196,9 @@ final class User
     /**
      * Get created date of the user.
      *
-     * @return DateTimeImmutable
+     * @return null|DateTimeImmutable
      */
-    public function getCreatedAt(): DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }

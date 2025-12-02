@@ -27,7 +27,7 @@ final class SupporterFinderRepository
     /**
      * Find all supporter.
      *
-     * @return array
+     * @return array<mixed>
      */
     public function findAll(): array
     {
@@ -44,7 +44,7 @@ final class SupporterFinderRepository
     /**
      * Find all public supporter
      *
-     * @return array
+     * @return array<mixed>
      */
     public function findAllPublicSupporter(): array
     {
@@ -71,7 +71,7 @@ final class SupporterFinderRepository
      *
      * @param int $id Id of supporter.
      *
-     * @return array
+     * @return array<mixed>
      */
     public function findById(int $id): array
     {

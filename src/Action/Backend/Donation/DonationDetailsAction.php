@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Action\Backend\Donation;
 
-use App\Domain\Donation\Service\DonationDetailsReader;
+use App\Domain\Donation\Service\DonationDetailsFinder;
 use App\Renderer\TemplateRenderer;
 use Odan\Session\SessionInterface;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -13,9 +13,9 @@ final class DonationDetailsAction
 {
     /**
      * @Injection
-     * @var DonationDetailsReader
+     * @var DonationDetailsFinder
      */
-    private DonationDetailsReader $reader;
+    private DonationDetailsFinder $finder;
 
     /**
      * @Injection
@@ -32,16 +32,16 @@ final class DonationDetailsAction
     /**
      * The constructor
      *
-     * @param DonationDetailsReader $reader
+     * @param DonationDetailsFinder $finder
      * @param SessionInterface $session
      * @param TemplateRenderer $renderer
      */
     public function __construct(
-        DonationDetailsReader $reader,
+        DonationDetailsFinder $finder,
         SessionInterface $session,
         TemplateRenderer $renderer
     ) {
-        $this->reader = $reader;
+        $this->finder = $finder;
         $this->session = $session;
         $this->renderer = $renderer;
     }
@@ -59,7 +59,7 @@ final class DonationDetailsAction
         $isError = false;
         $message = '';
 
-        $donation = $this->reader->read();
+        $donation = $this->finder->findOne();
 
         $flash = $this->session->getFlash();
 

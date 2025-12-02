@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\TestCase\Action\Frontend\Post;
 
 use App\Action\Frontend\Post\ReadAction;
-use App\Domain\Post\Data\PostReaderResult;
+use App\Domain\Post\Data\Post;
 use App\Domain\Post\Service\PostFinder;
 use App\Renderer\TemplateRenderer;
 use Fig\Http\Message\StatusCodeInterface;
@@ -18,17 +18,17 @@ use Psr\Http\Message\ResponseInterface;
 
 #[CoversClass(ReadAction::class)]
 #[UsesClass(PostFinder::class)]
-#[UsesClass(PostReaderResult::class)]
+#[UsesClass(Post::class)]
 class ReadActionTest extends TestCase
 {
     public function testInvokeRendersTemplateAndReturnsOk(): void
     {
         $id = 1;
-        $post = new PostReaderResult();
+        $post = new Post();
 
         $finder = $this->createMock(PostFinder::class);
         $finder->expects($this->once())
-            ->method('findByIdOrFail')
+            ->method('findById')
             ->with($id)
             ->willReturn($post);
 

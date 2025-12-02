@@ -21,7 +21,7 @@ final class PostCollection implements IteratorAggregate
     /**
      * Add a new Post to collection.
      *
-     * @param PostR $post The news post.
+     * @param Post $post The news post.
      */
     public function add(Post $post): void
     {

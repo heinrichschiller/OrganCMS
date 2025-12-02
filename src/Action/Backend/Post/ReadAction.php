@@ -76,7 +76,7 @@ final class ReadAction
         $flash->clear();
 
         $id = (int) $request->getAttribute('id');
-        $post = $this->finder->findByIdOrFail($id);
+        $post = $this->finder->findById($id);
 
         $data = [
             'post' => $post,

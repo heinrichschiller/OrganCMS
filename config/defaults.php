@@ -67,17 +67,17 @@ $settings['db'] = [
 ];
 
 $settings['migrations'] = [
-	'table_storage' => [
-		'table_name' => 'migrations',
-		'version_column_length' => 1024,
-	],
-	'migrations_paths' => [
-		'Migrations' => __DIR__ . '/../resources/migrations',
-	],
-	'all_or_nothing' => true,
-	'transactional' => true,
-	'check_database_platform' => true,
-	'organize_migrations' => 'none',
+    'table_storage' => [
+        'table_name' => 'migrations',
+        'version_column_length' => 1024,
+    ],
+    'migrations_paths' => [
+        'Migrations' => __DIR__ . '/../resources/migrations',
+    ],
+    'all_or_nothing' => true,
+    'transactional' => true,
+    'check_database_platform' => true,
+    'organize_migrations' => 'none',
 ];
 
 // url

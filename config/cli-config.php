@@ -18,7 +18,7 @@ $connection = DriverManager::getConnection($settings['db']);
 $factory = DependencyFactory::fromConnection($config, new ExistingConnection($connection));
 
 $factory->setDefinition(SchemaProvider::class, function () use ($connection) {
-	return new MigrationSchemaProvider($connection);
+    return new MigrationSchemaProvider($connection);
 });
 
 return $factory;

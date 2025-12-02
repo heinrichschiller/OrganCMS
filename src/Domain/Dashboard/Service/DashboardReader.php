@@ -38,7 +38,7 @@ final class DashboardReader
     /**
      * Read all informations for the dashboard
      *
-     * @return array
+     * @return array<mixed>
      */
     public function read(): array
     {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Domain\Event;
+namespace Tests\TestCase\Domain\Event\Data;
 
 use App\Domain\Event\Data\EventNotFoundException;
 use PHPUnit\Framework\Attributes\CoversClass;

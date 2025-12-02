@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Tests\TestCase\Domain\Event\Data;
+
 use App\Domain\Event\Data\Event;
 use App\Domain\Event\Data\EventCollection;
 use PHPUnit\Framework\Attributes\CoversClass;

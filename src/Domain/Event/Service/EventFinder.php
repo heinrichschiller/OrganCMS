@@ -9,9 +9,8 @@ use App\Domain\Event\Data\EventCollection;
 use App\Domain\Event\Repository\EventFinderRepository;
 use App\Factory\LoggerFactory;
 use DateTimeImmutable;
-use Error;
-use Exception;
 use Psr\Log\LoggerInterface;
+use Throwable;
 
 final class EventFinder
 {
@@ -33,9 +32,14 @@ final class EventFinder
      * @param LoggerFactory $loggerFactory
      * @param EventFinderRepository $repository
      */
-    public function __construct(LoggerFactory $loggerFactory, EventFinderRepository $repository)
-    {
-        $this->logger = $loggerFactory->addFileHandler('event-finder-error.log')->createLogger();
+    public function __construct(
+        LoggerFactory $loggerFactory,
+        EventFinderRepository $repository
+    ) {
+        $this->logger = $loggerFactory
+            ->addFileHandler('event-finder-error.log')
+            ->createLogger();
+
         $this->repository = $repository;
     }
 
@@ -44,104 +48,39 @@ final class EventFinder
      *
      * @return EventCollection
      */
-    public function findAllOrFail(): EventCollection
+    public function findAll(): EventCollection
     {
-        try {
-            $eventItems = (array) $this->repository->findAllOrFail();
-            $collection = new EventCollection;
+        $events = (array) $this->repository->findAll();
 
-            if (!empty($eventItems)) {
-                foreach ($eventItems as $item) {
-                    $eventDate = new DateTimeImmutable($item['event_date']);
+        $collection = new EventCollection;
+        foreach ($events as $event) {
+            $result = $this->transformDataToEvent($event);
 
-                    if ($item['published_at'] === null || $item['published_at'] === '') {
-                        $publishedAt = null;
-                    } else {
-                        $publishedAt = new DateTimeImmutable($item['published_at']);
-                    }
-                    
-                    $createdAt = new DateTimeImmutable($item['created_at']);
-
-                    $event = new Event(
-                        id: (int) $item['id'],
-                        title: $item['title'],
-                        place: $item['place'],
-                        content: $item['content'],
-                        eventDate: $eventDate,
-                        isPublished: (bool) $item['is_published'],
-                        publishedAt: $publishedAt,
-                        createdAt: $createdAt
-                    );
-
-                    $collection->add($event);
-                }
-            }
-
-            return $collection;
-        } catch (Exception $e) {
-            $this->logger->error(sprintf("EventFinder->findAllOrFail(): %s", $e->getMessage()));
-            return new EventCollection;
-        } catch (Error $e) {
-            $this->logger->error(sprintf("EventFinder->findAllOrFail(): %s", $e->getMessage()));
-            return new EventCollection;
+            $collection->add($result);
         }
+
+        return $collection;
     }
 
     /**
-     * Find all mainpage events.
+     * Find latest published Events for the homepage.
      *
      * @param int $limit
      *
      * @return EventCollection Collection with all published events.
      */
-    public function findAllMainpageEvents(int $limit): EventCollection
+    public function findLatestPublishedEvents(int $limit): EventCollection
     {
-        try {
-            $eventList = (array) $this->repository->findAllMainpageEvents($limit);
-            $collection = new EventCollection;
+        $eventList = (array) $this->repository->findLatestPublishedEvents($limit);
 
-            if (!empty($eventList)) {
-                foreach ($eventList as $eventItem) {
-                    $eventDate = null;
-                    if ($eventItem['event_date'] !== null && $eventItem['event_date'] !== '') {
-                        $eventDate = new DateTimeImmutable($eventItem['event_date']);
-                    }
+        $collection = new EventCollection;
+        foreach ($eventList as $eventItem) {
+            $result = $this->transformDataToEvent($eventItem);
 
-                    $publishedAt = null;
-                    if ($eventItem['published_at'] !== null && $eventItem['published_at'] !== '') {
-                        $publishedAt = new DateTimeImmutable($eventItem['published_at']);
-                    }
-
-                    $createdAt = null;
-                    if ($eventItem['created_at'] !== null && $eventItem['created_at'] !== '') {
-                        $createdAt = new DateTimeImmutable($eventItem['created_at']);
-                    }
-
-                    $event = new Event(
-                        id: (int) $eventItem['id'],
-                        title: $eventItem['title'],
-                        place: $eventItem['place'],
-                        content: $eventItem['content'],
-                        eventDate: $eventDate,
-                        isPublished: (bool) $eventItem['is_published'],
-                        publishedAt: $publishedAt,
-                        createdAt: $createdAt
-                    );
-
-                    $collection->add($event);
-                }
-            }
-
-            return $collection;
-        } catch (Exception $e) {
-            $this->logger->error(sprintf("EventFinder->findPublishedEvents(): %s", $e->getMessage()));
-
-            return new EventCollection;
-        } catch (Error $e) {
-            $this->logger->error(sprintf("EventFinder->findPublishedEvents(): %s", $e->getMessage()));
-
-            return new EventCollection;
+            $collection->add($result);
         }
+
+        return $collection;
     }
 
     /**
@@ -151,52 +90,16 @@ final class EventFinder
      */
     public function findPublishedEvents(): EventCollection
     {
-        try {
-            $eventList = (array) $this->repository->findPublishedEvents();
-            $collection = new EventCollection;
+        $eventList = (array) $this->repository->findPublishedEvents();
 
-            if (!empty($eventList)) {
-                foreach ($eventList as $eventItem) {
-                    $eventDate = null;
-                    if ($eventItem['event_date'] !== null && $eventItem['event_date'] !== '') {
-                        $eventDate = new DateTimeImmutable($eventItem['event_date']);
-                    }
+        $collection = new EventCollection;
+        foreach ($eventList as $eventItem) {
+            $result = $this->transformDataToEvent($eventItem);
 
-                    $publishedAt = null;
-                    if ($eventItem['published_at'] !== null && $eventItem['published_at'] !== '') {
-                        $publishedAt = new DateTimeImmutable($eventItem['published_at']);
-                    }
-
-                    $createdAt = null;
-                    if ($eventItem['created_at'] !== null && $eventItem['created_at'] !== '') {
-                        $createdAt = new DateTimeImmutable($eventItem['created_at']);
-                    }
-
-                    $event = new Event(
-                        id: (int) $eventItem['id'],
-                        title: $eventItem['title'],
-                        place: $eventItem['place'],
-                        content: $eventItem['content'],
-                        eventDate: $eventDate,
-                        isPublished: (bool) $eventItem['is_published'],
-                        publishedAt: $publishedAt,
-                        createdAt: $createdAt
-                    );
-
-                    $collection->add($event);
-                }
-            }
-
-            return $collection;
-        } catch (Exception $e) {
-            $this->logger->error(sprintf("EventFinder->findPublishedEvents(): %s", $e->getMessage()));
-
-            return new EventCollection;
-        } catch (Error $e) {
-            $this->logger->error(sprintf("EventFinder->findPublishedEvents(): %s", $e->getMessage()));
-
-            return new EventCollection;
+            $collection->add($result);
         }
+
+        return $collection;
     }
 
     /**
@@ -206,56 +109,67 @@ final class EventFinder
      *
      * @return Event
      */
-    public function findByIdOrFail(int $id): Event
+    public function findById(int $id): Event
     {
+        $eventItem = (array) $this->repository->findById($id);
+
+        $result = $this->transformDataToEvent($eventItem);
+
+        return $result;
+    }
+
+    /**
+     * Transform array with event-data to Event object.
+     *
+     * @param array<mixed> $event Event data.
+     *
+     * @return Event
+     */
+    private function transformDataToEvent(array $event): Event
+    {
+        if (empty($event)) {
+            return new Event;
+        }
+
+        $event = new Event(
+            id: (int) $event['id'],
+            title: (string) $event['title'],
+            slug: (string) $event['slug'],
+            intro: (string) $event['intro'],
+            content: (string) $event['content'],
+            place: (string) $event['place'],
+            eventDate: $this->parseDate($event['event_date']),
+            publishedAt: $this->parseDate($event['published_at']),
+            isPublished: (bool) $event['is_published'],
+            createdAt: $this->parseDate($event['created_at']),
+            updatedAt: $this->parseDate($event['updated_at'])
+        );
+
+        return $event;
+    }
+
+    /**
+     * Parse date.
+     *
+     * @param null|string $date Date
+     *
+     * @return null|DateTimeImmutable
+     */
+    private function parseDate(?string $date): ?DateTimeImmutable
+    {
+        if ($date === null || $date === '') {
+            return null;
+        }
+
         try {
-            $eventItem = (array) $this->repository->findByIdOrFail($id);
+            return new DateTimeImmutable($date);
+        } catch (Throwable $t) {
+            $this->logger->warning(
+                'Invalid date in EventFinder',
+                ['value' => $date, 'exception' => $t]
+            );
 
-            $eventDate = null;
-            if ($eventItem['event_date'] !== null && $eventItem['event_date'] !== '') {
-                $eventDate = new DateTimeImmutable($eventItem['event_date']);
-            }
-
-            $publishedAt = null;
-            if ($eventItem['published_at'] !== null && $eventItem['published_at'] !== '') {
-                $publishedAt = new DateTimeImmutable($eventItem['published_at']);
-            }
-
-            $createdAt = null;
-            if ($eventItem['created_at'] !== null && $eventItem['created_at'] !== '') {
-                $createdAt = new DateTimeImmutable($eventItem['created_at']);
-            }
-
-            $updatedAt = null;
-            if ($eventItem['updated_at'] !== null && $eventItem['updated_at'] !== '') {
-                $updatedAt = new DateTimeImmutable($eventItem['updated_at']);
-            }
-
-            if (!empty($eventItem)) {
-                $event = new Event(
-                    id: $eventItem['id'],
-                    title: $eventItem['title'],
-                    slug: $eventItem['slug'],
-                    intro: $eventItem['intro'],
-                    content: $eventItem['content'],
-                    place: $eventItem['place'],
-                    eventDate: $eventDate,
-                    publishedAt: $publishedAt,
-                    isPublished: (bool) $eventItem['is_published'],
-                    createdAt: $createdAt,
-                    updatedAt: $updatedAt
-                );
-            }
-
-            return $event;
-        } catch (Exception $e) {
-            $this->logger->error(sprintf("EventFinder->findByIdOrFail(): %s", $e->getMessage()));
-
-            return new Event;
-        } catch (Error $e) {
-            $this->logger->error(sprintf("EventFinder->findByIdOrFail(): %s", $e->getMessage()));
-
-            return new Event;
+            return null;
         }
     }
 }

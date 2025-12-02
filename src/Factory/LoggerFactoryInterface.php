@@ -13,7 +13,7 @@ interface LoggerFactoryInterface
      *
      * @param string $filename Log filename
      *
-     * @return self;
+     * @return self
      */
     public function addFileHandler(string $filename): self;
 

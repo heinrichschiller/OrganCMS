@@ -7,14 +7,15 @@ use DI\ContainerBuilder;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-if (version_compare(phpversion(), '8.2.0', '<')) {
-    $message = 'This Slim-Skeleton is supported from PHP 8.2.0 or higher. Installed PHP version is: ' . phpversion();
+if (PHP_VERSION_ID < 80400) {
+    $message = 'This Slim-Skeleton is supported from PHP 8.4.0 or higher. Installed PHP version is: ' . PHP_VERSION;
 
-    if ('cli' == PHP_SAPI) {
-        echo $message;
-    } else {
-        exit($message);
+    if (PHP_SAPI === 'cli') {
+        fwrite(STDERR, $message . PHP_EOL);
+        exit(1);
     }
+    
+    exit($message);
 }
 
 $containerBuilder = new ContainerBuilder();
@@ -28,8 +29,7 @@ $containerBuilder->addDefinitions(__DIR__ . '/container.php');
 // changes you make to the definitions (attributes, configuration files, etc.)
 // will not be taken into account.
 // https://php-di.org/doc/performances.html#development-environment
-// if (isset($_ENV['APP_ENV']) && $_ENV['APP_ENV'] === 'prod'
-//    || isset($_SERVER['APP_ENV']) && $_SERVER['APP_ENV'] === 'prod') {
+// if ($_ENV['APP_ENV'] === 'prod' || $_SERVER['APP_ENV'] === 'prod') {
 //    $containerBuilder->enableCompilation(__DIR__ . '/../var/caches/php-di');
 //    $containerBuilder->enableDefinitionCache();
 // }

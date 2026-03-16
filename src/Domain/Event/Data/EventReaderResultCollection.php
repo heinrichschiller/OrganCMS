@@ -9,7 +9,7 @@ use IteratorAggregate;
 use Traversable;
 
 /**
- * @implements IteratorAggregate<int, string>
+ * @implements IteratorAggregate<int, EventReaderResult>
  */
 final class EventReaderResultCollection implements IteratorAggregate
 {
@@ -31,7 +31,7 @@ final class EventReaderResultCollection implements IteratorAggregate
     /**
      * Iterate over this collection.
      *
-     * @return Traversable
+     * @return Traversable<int, EventReaderResult>
      */
     public function getIterator(): Traversable
     {

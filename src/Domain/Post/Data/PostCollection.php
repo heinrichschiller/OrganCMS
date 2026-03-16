@@ -9,7 +9,7 @@ use IteratorAggregate;
 use Traversable;
 
 /**
- * @implements IteratorAggregate<int, string>
+ * @implements IteratorAggregate<int, Post>
  */
 final class PostCollection implements IteratorAggregate
 {
@@ -31,7 +31,7 @@ final class PostCollection implements IteratorAggregate
     /**
      * Iterate over this collection.
      *
-     * @return Traversable
+     * @return Traversable<int, Post>
      */
     public function getIterator(): Traversable
     {

@@ -34,10 +34,10 @@
         "cocur/slugify": "4.7.1"      
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "3.94.2",
-        "phpunit/phpunit": "13.0.6",
+        "friendsofphp/php-cs-fixer": "3.95.1",
+        "phpunit/phpunit": "13.1.5",
         "symfony/console": "8.0.8",
-        "phpstan/phpstan": "2.1.46",
+        "phpstan/phpstan": "2.1.48",
         "squizlabs/php_codesniffer": "4.0.1",
         "selective/test-traits": "4.3.0",
         "symfony/var-dumper": "8.0.8",

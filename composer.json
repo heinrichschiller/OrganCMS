@@ -30,17 +30,17 @@
         "cakephp/validation": "5.3.6",
         "doctrine/dbal": "4.4.3",
         "doctrine/migrations": "3.9.7",
-        "symfony/uid": "8.0.9",
+        "symfony/uid": "8.1.0",
         "cocur/slugify": "4.7.1"      
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "3.95.2",
-        "phpunit/phpunit": "13.1.12",
-        "symfony/console": "8.0.11",
-        "phpstan/phpstan": "2.1.56",
+        "friendsofphp/php-cs-fixer": "3.95.3",
+        "phpunit/phpunit": "13.1.13",
+        "symfony/console": "8.1.0",
+        "phpstan/phpstan": "2.2.1",
         "squizlabs/php_codesniffer": "4.0.1",
         "selective/test-traits": "4.3.0",
-        "symfony/var-dumper": "8.0.8",
+        "symfony/var-dumper": "8.1.0",
         "dg/bypass-finals": "1.9.0"
     },
     "autoload": {

@@ -44,9 +44,6 @@
         "dg/bypass-finals": "1.10.1"
     },
     "autoload": {
-        "psr-0": {
-            "": "src/"
-        },
         "psr-4": {
             "App\\": "src/",
             "Migrations\\": "resources/migrations/"

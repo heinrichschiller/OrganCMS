@@ -37,18 +37,13 @@ return function (App $app) {
         $group->get('/', \App\Action\Backend\Dashboard\DashboardAction::class)->setName('dashboard');
     })->add(UserAuthMiddleware::class);
 
-    $app->group('/donation', function (RouteCollectorProxy $group) {
-        $group->get('/', \App\Action\Backend\Donation\DonationDetailsAction::class)->setName('donation');
-        $group->post('/update', \App\Action\Donation\UpdateAction::class)->setName('donation');
-    })->add(UserAuthMiddleware::class);
-
     $app->group('/event', function (RouteCollectorProxy $group) {
         $group->get('/all', \App\Action\Backend\Event\EventAction::class)->setName('events');
-        $group->get('/new', \App\Action\Backend\Event\NewAction::class);
+        $group->get('/new', \App\Action\Backend\Event\NewAction::class)->setName('create-event');
         $group->get('/read/{id}', \App\Action\Backend\Event\ReadAction::class)->setName('read-event');
-        $group->get('/delete/{id}', \App\Action\Backend\Event\DeleteAction::class);
+        $group->post('/delete/{id}', \App\Action\Backend\Event\DeleteAction::class);
         $group->post('/create', \App\Action\Backend\Event\CreateAction::class);
-        $group->post('/update', \App\Action\Backend\Event\UpdateAction::class);
+        $group->post('/update/{id}', \App\Action\Backend\Event\UpdateAction::class);
     })->add(UserAuthMiddleware::class);
 
     $app->group('/settings', function (RouteCollectorProxy $group) {
@@ -68,10 +63,10 @@ return function (App $app) {
         $group->get('/delete/{id}', \App\Action\Backend\Supporter\DeleteAction::class);
         $group->post('/create', \App\Action\Backend\Supporter\CreateAction::class);
         $group->post('/update', \App\Action\Backend\Supporter\UpdateAction::class);
-    });
+    })->add(UserAuthMiddleware::class);
 
     $app->group('/user', function (RouteCollectorProxy $group) {
-        $group->get('/user', \App\Action\Backend\User\AboutAction::class)->setName('users');
+        // $group->get('/user', \App\Action\Backend\User\AboutAction::class)->setName('users');
         $group->post('/user/update', \App\Action\User\UpdateAction::class)->setName('users');
         $group->get('/logout', \App\Action\Backend\Auth\LogoutAction::class)->setName('logout');
     })->add(UserAuthMiddleware::class);

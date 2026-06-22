@@ -15,7 +15,11 @@ $settings = require __DIR__ . '/settings.php';
 $config = new ConfigurationArray($settings['migrations']);
 
 $connection = DriverManager::getConnection($settings['db']);
-$factory = DependencyFactory::fromConnection($config, new ExistingConnection($connection));
+
+$factory = DependencyFactory::fromConnection(
+    $config,
+    new ExistingConnection($connection)
+);
 
 $factory->setDefinition(SchemaProvider::class, function () use ($connection) {
     return new MigrationSchemaProvider($connection);

@@ -6,64 +6,73 @@ namespace App\Renderer;
 
 use Mustache\Engine;
 use Psr\Http\Message\ResponseInterface as Response;
-use Selective\Config\Configuration;
 
 /**
  * TemplateRenderer used the Mustache render enginge for rendering html templates.
  *
- * For more informations, see:
+ * For more informations, see: https://github.com/bobthecow/mustache.php
  */
 final class TemplateRenderer
 {
-    private Configuration $config;
-
-    /**
-     * @Injection
-     * @var Engine
-     */
-    private Engine $mustache;
-
-    /**
-     * The constructor.
-     *
-     * @param Configuration $config
-     * @param Engine $mustache Mustache Render Engine
-     */
-    public function __construct(Configuration $config, Engine $mustache)
-    {
-        $this->config = $config;
-        $this->mustache = $mustache;
+    public function __construct(
+        private Engine $mustache,
+        private ViewContextFactory $contextFactory
+    ) {
     }
 
     /**
-     * Render a template.
-     *
-     * @param Response $response Representation of an outgoing, server-side response.
-     * @param string $template Name of the html-template that will be rendered.
      * @param array<mixed> $data Data for the html-template.
-     *
-     * @return Response
      */
-    public function render(Response $response, string $template, array $data = []): Response
-    {
-        $configHeader = $this->config->getArray('html_header');
-        $configFooter = $this->config->getArray('html_footer');
+    public function render(
+        Response $response,
+        string $template,
+        array $data = [],
+        string $area = 'frontend'
+    ): Response {
+        $context = $this->contextFactory->create($area, $data);
 
-        $renderData = [
-            'header' => $configHeader,
-            'footer' => $configFooter
-        ];
+        $content = $this->mustache->render($template, $context);
 
-        if (!empty($data)) {
-            foreach ($data as $key => $value) {
-                $renderData[$key] = $data[$key];
-            }
-        }
+        $html = $this->mustache->render($context['layout'], array_replace(
+            $context,
+            ['content' => $content]
+        ));
 
-        $response->getBody()->write(
-            $this->mustache->render($template, $renderData)
-        );
+        $response->getBody()->write($html);
 
         return $response;
+    }
+
+    /**
+     * @param array<mixed> $data The data.
+     */
+    public function renderFrontend(
+        Response $response,
+        string $template,
+        array $data = []
+    ): Response {
+        return $this->render($response, $template, $data, 'frontend');
+    }
+
+    /**
+     * @param array<mixed> $data The data.
+     */
+    public function renderBackend(
+        Response $response,
+        string $template,
+        array $data = []
+    ): Response {
+        return $this->render($response, $template, $data, 'backend');
+    }
+
+    /**
+     * @param array<mixed> $data The data.
+     */
+    public function renderError(
+        Response $response,
+        string $template,
+        array $data = []
+    ): Response {
+        return $this->render($response, $template, $data, 'error');
     }
 }

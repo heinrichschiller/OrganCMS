@@ -10,42 +10,21 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 final class DashboardAction
 {
-    /**
-     * @Injection
-     * @var DashboardReader
-     */
-    private DashboardReader $reader;
-
-    /**
-     * @Injection
-     * @var TemplateRenderer
-     */
-    private TemplateRenderer $renderer;
-
-    /**
-     * The constructor
-     *
-     * @param DashboardReader $reader
-     * @param TemplateRenderer $renderer
-     */
-    public function __construct(DashboardReader $reader, TemplateRenderer $renderer)
-    {
-        $this->reader = $reader;
-        $this->renderer = $renderer;
+    public function __construct(
+        private DashboardReader $reader,
+        private TemplateRenderer $renderer
+    ) {
     }
 
-    /**
-     * The invoker.
-     *
-     * @param Response $response Representation of an outgoing, server-side response.
-     *
-     * @return Response
-     */
     public function __invoke(Response $response): Response
     {
         $data = $this->reader->read();
 
-        $response = $this->renderer->render($response, 'backend/dashboard/dashboard', $data);
+        $response = $this->renderer->renderBackend(
+            $response,
+            'admin/dashboard',
+            $data
+        );
 
         return $response;
     }

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="{{ app.locale }}">
+<head>
+  {{> common/head.public }}
+</head>
+<body>
+  <header class="site-header">
+    {{> frontend/navbar }}
+  </header>
+
+  <main>
+    {{{ content }}}
+  </main>
+
+  <footer>
+    {{> frontend/footer }}
+  </footer>
+  
+  {{# assets.js }}
+  <script src="{{.}}"></script>
+  {{/ assets.js }}
+</body>
+</html>

@@ -1,0 +1,36 @@
+<section>
+  <div class="container-lg">
+    <div class="mb-3">
+      <h1>Veranstaltungen</h1>
+    </div>
+
+    {{> common/flash }}
+
+    {{# events }}
+
+    <div class="mb-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="card-title">{{ getTitle }}</div>
+            </div>
+
+            <div class="col-lg-2 mb-3">
+              <a href="/event/read/{{ getId }}" class="btn btn-primary w-100">Bearbeiten</a>
+            </div>
+
+            <div class="col-lg-2">
+              <form action="/event/delete/{{ getId }}" method="post">
+                <button class="btn btn-danger w-100">Löschen</button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{/ events }}
+  </div>
+</section>

@@ -1,0 +1,22 @@
+<section>
+  <div class="container-lg">
+    <div class="mb-3">
+      <h1>Datenschutzerklärung</h1>
+    </div>
+
+    {{> common/flash }}
+
+    <form action="/dsgvo/update" method="post">
+      <div class="mb-3">
+        <label for="default-editor" class="form-label">Text:</label>
+        <textarea name="details" id="default-editor" class="form-control" rows="3">
+          {{ dsgvo.getDetails }}
+        </textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">
+        Speichern
+      </button>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,63 @@
+<section>
+  <div class="container-lg">
+    <div class="mb-3">
+      <h1>Veranstaltung</h1>
+    </div>
+
+    {{> common/flash }}
+
+    <form action="/event/create" method="post">
+      
+      <div class="row mb-3">
+        <div class="col-lg-10">
+
+          <div class="mb-3">
+            <label for="title" class="form-label">Event-Titel:</label>
+            <input type="text" name="title" class="form-control" id="title" placeholder="Titel hier eingeben..." required>
+          </div>
+
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-lg">
+                <label for="place" class="form-label">Ort:</label>
+                <input type="text" name="place" class="form-control" id="place" placeholder="Ort hier eingeben...">
+              </div>
+              <div class="col-lg">
+                <label for="event-date" class="form-label">Datum:</label>
+                <input type="datetime-local" name="event_date" id="event-date" class="form-control" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="default-editor" class="form-label">Beschreibung:</label>
+            <textarea name="content" id="default-editor" rows="3"></textarea>
+          </div>
+
+        </div>
+
+        <div class="col-lg-2">
+
+          <div class="mb-2">Optionen:</div>
+
+          <div class="mb-3">
+            <a href="#" class="btn btn-secondary w-100">Vorschau</a>
+          </div>
+
+          <div class="mb-3">
+            <div class="form-check form-switch">
+              <input name="is_published" class="form-check-input" type="checkbox" role="switch" id="publish">
+              <label class="form-check-label" for="publish">Veröffentlichen?</label>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary w-100">Speichern</button>
+          </div>
+
+        </div>
+      </div>
+
+    </form>
+  </div>
+</section>

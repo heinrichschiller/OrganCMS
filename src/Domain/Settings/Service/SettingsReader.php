@@ -4,24 +4,19 @@ declare(strict_types=1);
 
 namespace App\Domain\Settings\Service;
 
-use App\Support\Config;
+use Selective\Config\Configuration;
 
 final class SettingsReader
 {
-    /**
-     * @Injection
-     * @var Config
-     */
-    private Config $config;
-
-    public function __construct(Config $config)
-    {
+    public function __construct(
+        private Configuration $config
+    ) {
         $this->config = $config;
     }
 
     public function read(): array
     {
-        $websiteConfig = $this->config->get('html_header');
+        $websiteConfig = $this->config->getArray('html_header');
 
         $data = [
             'website' => $websiteConfig,

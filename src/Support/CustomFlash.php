@@ -8,11 +8,9 @@ use Odan\Session\FlashInterface;
 
 final class CustomFlash
 {
-    private FlashInterface $flash;
-
-    public function __construct(FlashInterface $flash)
-    {
-        $this->flash = $flash;
+    public function __construct(
+        private FlashInterface $flash
+    ) {
     }
 
     public function success(string $message): void
@@ -28,7 +26,7 @@ final class CustomFlash
     }
 
     /**
-     * @return array {
+     * @return array{
      *   isSuccess: bool,
      *   isError: bool,
      *   message: string

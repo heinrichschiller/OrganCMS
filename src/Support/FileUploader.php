@@ -11,24 +11,12 @@ final class FileUploader
      */
     private array $documents = [];
 
-    /**
-     * @var string
-     */
-    private string $targetDirectory = '';
-
-    /**
-     * The constructor
-     *
-     * @param string $targetDirectory
-     */
-    public function __construct(string $targetDirectory)
-    {
-        $this->targetDirectory = $targetDirectory;
+    public function __construct(
+        private string $targetDirectory
+    ) {
     }
 
     /**
-     * Upload files
-     *
      * @param array<mixed> $uploadedFiles  List of uploaded files
      */
     public function upload(array $uploadedFiles = []): string
@@ -45,21 +33,11 @@ final class FileUploader
         return $this->getUploadedDocuments();
     }
 
-    /**
-     * Get target directory
-     *
-     * @return string
-     */
     public function getTargetDirectory(): string
     {
         return $this->targetDirectory;
     }
 
-    /**
-     * Get a list of uploaded document names
-     *
-     * @return string
-     */
     private function getUploadedDocuments(): string
     {
         $str = '';

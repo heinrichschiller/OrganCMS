@@ -1,0 +1,36 @@
+<section>
+  <div class="container-lg">
+    <div class="mb-3">
+      <h1>Unterstützer</h1>
+    </div>
+
+    {{> common/flash }}
+
+    {{# supporter }}
+
+    <div class="mb-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="card-title">{{ getName }}</div>
+            </div>
+
+            <div class="col-lg-2 mb-3">
+              <a href="/supporter/read/{{ getId }}" class="btn btn-primary w-100">Bearbeiten</a>
+            </div>
+
+            <div class="col-lg-2">
+              <form action="/supporter/delete/{{ getId }}" method="post">
+                <button class="btn btn-danger w-100">Löschen</button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{/ supporter }}
+  </div>
+</section>

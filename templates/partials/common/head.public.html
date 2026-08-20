@@ -1,0 +1,48 @@
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="{{ theme_color }}">
+
+  <!-- deprecated? 
+   <meta name="keywords" content="Plauen, Orgel, Lutherkirche in Plauen, Orgelfreunde Plauen, Orgelfreunde Lutherkirche Plauen"> -->
+
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ meta_description }}">
+
+  <!-- Canonical: wichtig bei Parametern, Slash-/Non-Slash-Varianten, CMS-Routen -->
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+  {{#assets.css}}
+  <link rel="stylesheet" href="{{.}}">
+  {{/assets.css}}
+  
+   <!-- Open Graph für Link-Vorschauen -->
+    <!-- Wichtig?
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:description" content="{{ meta_description }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:site_name" content="Orgelfreunde Lutherkirche Plauen">
+  <meta property="og:image" content="{{ og_image_url }}"> -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Orgelfreunde Lutherkirche Plauen",
+    "url": "{{ canonical_url }}",
+    "logo": "{{ logo_url }}",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Dobenaustraße 12 (Lutherhaus)",
+      "postalCode": "D-08523",
+      "addressLocality": "Plauen",
+      "addressCountry": "DE"
+    },
+    "email": "mailto:kg.plauen_luther (at) evlks.de",
+    "telephone": "+49-03741-226232",
+    "faxNumber": "+49-03741-147920"
+  }
+  </script>

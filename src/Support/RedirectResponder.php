@@ -9,13 +9,15 @@ use Slim\Interfaces\RouteParserInterface;
 
 final class RedirectResponder
 {
-    private RouteParserInterface $router;
-
-    public function __construct(RouteParserInterface $router)
-    {
-        $this->router = $router;
+    public function __construct(
+        private RouteParserInterface $router
+    ) {
     }
 
+    /**
+     * @param array<mixed> $routeArgs
+     * @param array<mixed> $queryParams
+     */
     public function toRoute(
         Response $response,
         string $routeName,

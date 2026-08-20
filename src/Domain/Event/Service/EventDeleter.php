@@ -4,59 +4,31 @@ declare(strict_types=1);
 
 namespace App\Domain\Event\Service;
 
+use App\Domain\Event\Exception\EventNotFoundException;
 use App\Domain\Event\Repository\EventRepository;
-use App\Factory\LoggerFactory;
-use Error;
-use Exception;
-use Psr\Log\LoggerInterface;
 
 final class EventDeleter
 {
-    /**
-     * @Injection
-     * @var LoggerInterface
-     */
-    private LoggerInterface $logger;
-
-    /**
-     * @Incjection
-     * @var EventRepository
-     */
-    private EventRepository $repository;
-
-    /**
-     * The constructor.
-     *
-     * @param LoggerFactory $loggerFactory Logger factory
-     * @param EventRepository $repository Supporter deleter repository
-     */
-    public function __construct(LoggerFactory $loggerFactory, EventRepository $repository)
-    {
-        $this->logger = $loggerFactory->addFileHandler('error.log')->createLogger();
-        $this->repository = $repository;
+    public function __construct(
+        private EventRepository $repository
+    ) {
     }
 
-    /**
-     * Delete supporter by id.
-     *
-     * @param int $id Supporter id.
-     *
-     * @return bool
-     */
-    public function delete(int $id): bool
+    public function delete(int $id): void
     {
-        try {
+        $id = (int) $this->validateEventId($id);
+
+        if ($id >= 0) {
             $this->repository->delete($id);
-
-            return true;
-        } catch (Exception $e) {
-            $this->logger->error(sprintf("EventFinder->delete(): %s", $e->getMessage()));
-
-            return false;
-        } catch (Error $e) {
-            $this->logger->error(sprintf("EventFinder->delete(): %s", $e->getMessage()));
-
-            return false;
         }
+    }
+
+    public function validateEventId(int $id): int
+    {
+        if (!$this->repository->existsEventId($id)) {
+            throw new EventNotFoundException($id);
+        }
+
+        return $id;
     }
 }

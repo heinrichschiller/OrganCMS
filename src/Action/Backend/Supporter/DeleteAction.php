@@ -13,38 +13,12 @@ use Slim\Routing\RouteContext;
 
 final class DeleteAction
 {
-    /**
-     * @Injection
-     * @var SessionInterface
-     */
-    private SessionInterface $session;
-
-    /**
-     * @Injection
-     * @var SupporterDeleter
-     */
-    private SupporterDeleter $deleter;
-
-    /**
-     * The constructor.
-     *
-     * @param SessionInterface $session Odan session interface
-     * @param SupporterDeleter $deleter Support deleter service
-     */
-    public function __construct(SessionInterface $session, SupporterDeleter $deleter)
-    {
-        $this->session = $session;
-        $this->deleter = $deleter;
+    public function __construct(
+        private SessionInterface $session,
+        private SupporterDeleter $deleter
+    ) {
     }
 
-    /**
-     * The invoker
-     *
-     * @param Request $request Representation of an incoming, server-side HTTP request.
-     * @param Response $response Representation of an outgoing, server-side response.
-     *
-     * @return Response
-     */
     public function __invoke(Request $request, Response $response): Response
     {
         $id = (int) $request->getAttribute('id');

@@ -5,68 +5,40 @@ declare(strict_types=1);
 namespace App\Action\Backend\Supporter;
 
 use App\Domain\Supporter\Service\SupporterCreator;
-use Fig\Http\Message\StatusCodeInterface;
-use Odan\Session\SessionInterface;
+use App\Support\CustomFlash;
+use App\Support\RedirectResponder;
+use DomainException;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use Slim\Routing\RouteContext;
+use Throwable;
 
 final class CreateAction
 {
-    /**
-     * @Injection
-     * @var SessionInterface
-     */
-    private SessionInterface $session;
-
-    /**
-     * @Injection
-     * @var SupporterCreator
-     */
-    private SupporterCreator $creator;
-
-    /**
-     * The constructor.
-     *
-     * @param SupporterCreator $creator Supporter creator service
-     * @param SessionInterface $session Session interface
-     */
-    public function __construct(SupporterCreator $creator, SessionInterface $session)
-    {
-        $this->creator = $creator;
-        $this->session = $session;
+    public function __construct(
+        private SupporterCreator $creator,
+        private CustomFlash $flash,
+        private RedirectResponder $responder,
+    ) {
     }
 
-    /**
-     * The invoker
-     *
-     * @param Request $request Representation of an incoming, server-side HTTP request.
-     * @param Response $response Representation of an outgoing, server-side response.
-     *
-     * @return Response
-     */
     public function __invoke(Request $request, Response $response): Response
     {
         $formData = (array) $request->getParsedBody();
         
-        $isCreated = $this->creator->insert($formData);
+        try {
+            $this->creator->insert($formData);
 
-        $key = 'success';
-        $message = 'Eintrag erfolgreich angelegt.';
-        if (!$isCreated) {
-            $key = 'error';
-            $message = 'Es ist ein Fehler aufgetretten. Der Eintrag konnte nicht gespeichert werden.';
+            $this->flash->success('Eintrag erfolgreich angelegt.');
+
+            return $this->responder->toRoute($response, 'supporter');
+        } catch (DomainException $e) {
+            $this->flash->error('Der Eintrag konnte nicht gespeichert werden.');
+
+            return $this->responder->toRoute($response, 'new-supporter');
+        } catch (Throwable $e) {
+            $this->flash->error('Unerwarteter Fehler');
+
+            return $this->responder->toRoute($response, 'new-supporter');
         }
-
-        $flash = $this->session->getFlash();
-        $flash->clear();
-        $flash->add($key, $message);
-
-        $routeParser = RouteContext::fromRequest($request)->getRouteParser();
-        $url = $routeParser->urlFor('supporter');
-
-        return $response
-            ->withStatus(StatusCodeInterface::STATUS_FOUND)
-            ->withHeader('Location', $url);
     }
 }

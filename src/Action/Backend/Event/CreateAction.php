@@ -4,69 +4,87 @@ declare(strict_types=1);
 
 namespace App\Action\Backend\Event;
 
+use App\Domain\Event\Exception\EventAlreadyExistsException;
+use App\Domain\Event\Exception\EventValidationException;
 use App\Domain\Event\Service\EventCreator;
+use App\Factory\LoggerFactory;
+use App\Support\CustomFlash;
+use App\Support\RedirectResponder;
 use Fig\Http\Message\StatusCodeInterface;
-use Odan\Session\SessionInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use Slim\Routing\RouteContext;
+use Psr\Log\LoggerInterface;
 
 final class CreateAction
 {
-    /**
-     * @Injection
-     * @var EventCreator
-     */
-    private EventCreator $creator;
+    private LoggerInterface $logger;
 
-    /**
-     * @Injection
-     * @var SessionInterface
-     */
-    private SessionInterface $session;
-
-    /**
-     * The constructor.
-     *
-     * @param EventCreator $creator Event creator service
-     * @param SessionInterface $session
-     */
-    public function __construct(EventCreator $creator, SessionInterface $session)
-    {
-        $this->creator = $creator;
-        $this->session = $session;
+    public function __construct(
+        private CustomFlash $flash,
+        private EventCreator $creator,
+        private LoggerFactory $loggerFactory,
+        private RedirectResponder $responder,
+    ) {
+        $this->logger = $loggerFactory
+            ->addFileHandler('event-creator-error.log')
+            ->createLogger();
     }
 
-    /**
-     * The invoker.
-     *
-     * @param Request $request Representation of an incoming, server-side HTTP request.
-     * @param Response $response Representation of an outgoing, server-side response.
-     *
-     * @return Response
-     */
     public function __invoke(Request $request, Response $response): Response
     {
-        $data = (array) $request->getParsedBody();
+        $formData = (array) $request->getParsedBody();
 
-        $isCreated = $this->creator->create($data);
+        try {
+            $this->creator->create($formData);
 
-        $key = 'success';
-        $message = 'Eintrag erfolgreich angelegt.';
-        if (!$isCreated) {
-            $key = 'error';
-            $message = 'Es ist ein Fehler aufgetretten. Der Eintrag konnte nicht gespeichert werden.';
+            $this->flash->success('Event erfolgreich erstellt.');
+
+            return $this->responder->toRoute(
+                $response,
+                'events',
+                [],
+                [],
+                StatusCodeInterface::STATUS_SEE_OTHER
+            );
+        } catch (EventAlreadyExistsException $e) {
+            $this->logger->error(
+                'Event mit dem Namen existiert bereits.',
+                [
+                    'exception' => $e,
+                ]
+            );
+
+            $this->flash->error(
+                sprintf(
+                    'Event mit dem Namen "%s" existiert bereits.',
+                    $e->getEventName()
+                )
+            );
+
+            return $this->responder->toRoute(
+                $response,
+                'create-event',
+                [],
+                [],
+                StatusCodeInterface::STATUS_SEE_OTHER
+            );
+        } catch (EventValidationException $e) {
+            $this->logger->error(
+                'Event Validierung.',
+                [
+                    'exception' => $e,
+                ]
+            );
+
+            $this->flash->error($e->getMessages()[0]);
+
+            return $this->responder->toRoute(
+                $response,
+                'create-event',
+                [],
+                [],
+                StatusCodeInterface::STATUS_SEE_OTHER
+            );
         }
-
-        $flash = $this->session->getFlash();
-        $flash->clear();
-        $flash->add($key, $message);
-        
-        $routeParser = RouteContext::fromRequest($request)->getRouteParser();
-        $url = $routeParser->urlFor('events');
-
-        return $response
-            ->withStatus(StatusCodeInterface::STATUS_CREATED)
-            ->withHeader('Location', $url);
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-error_reporting(0);
-ini_set('display_errors', '0');
-ini_set('display_startup_errors', '0');
+error_reporting(1);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
 
 // List of Supported Timezones
 // see, https://www.php.net/manual/en/timezones.php
@@ -80,21 +80,6 @@ $settings['migrations'] = [
     'organize_migrations' => 'none',
 ];
 
-// url
-$url = 'https://www.lutherorgel-plauen.de';
-
-// website
-$settings['html_header'] = [
-    'frontend_css' => $url . '/assets/css/main.css',
-    'backend_css' => $url. '/assets/css/backend.css',
-    'userjs' => $url . '/assets/js/main.bundle.js',
-    'url' => $url,
-];
-
-$settings['html_footer'] = [
-    'tinymcejs' => $url . '/assets/js/tinymce.bundle.js',
-];
-
 $settings['mustache'] = [
     'cache' => __DIR__ . '/../var/caches/mustache',
     'charset' => 'UTF-8',
@@ -109,6 +94,82 @@ $settings['mustache'] = [
         __DIR__ . '/../templates/partials',
         ['extension' => '.html']
     )
+];
+
+$url = 'http://localhost:8081';
+
+$settings['view'] = [
+    'globals' => [
+        'app_name' => 'OrganCMS',
+        'base_url' => $url,
+        'locale' => 'de',
+    ],
+    'areas' => [
+        'frontend' => [
+            'layout' => 'layout/frontend',
+            'body_class' => 'frontend',
+            'assets' => [
+                'css' => [
+                    $url.'/assets/css/main.css',
+                ],
+                'js' => [
+                    $url.'/assets/js/main.bundle.js',
+                ],
+            ]
+        ],
+        'backend' => [
+            'layout' => 'layout/backend',
+            'body_class' => 'backend',
+            'assets' => [
+                'css' => [
+                    $url.'/assets/css/backend.css',
+                ],
+                'js' => [
+                    $url.'/assets/js/main.bundle.js',
+                    $url.'/assets/js/tinymce.bundle.js',
+                ],
+            ]
+        ],
+        'error' => [
+            'layout' => 'layout/error',
+            'body_class' => 'error',
+            'assets' => [
+                'css' => [
+                    $url.'/assets/css/main.css',
+                ],
+                'js' => [],
+            ]
+        ],
+        'login' => [
+            'layout' => 'layout/login',
+            'body_class' => 'backend',
+            'assets' => [
+                'css' => [
+                    $url.'/assets/css/backend.css',
+                ],
+                'js' => [
+                    $url.'/assets/js/main.bundle.js'
+                ],
+            ]
+        ],
+        'logout' => [
+            'layout' => 'layout/logout',
+            'body_class' => 'backend',
+            'assets' => [
+                'css' => [
+                    $url.'/assets/css/backend.css',
+                ],
+                'js' => [
+                    $url.'/assets/js/main.bundle.js'
+                ],
+            ]
+        ],
+    ],
+    'features' => [
+        'tinymce' => [
+            'js' => $url . '/assets/js/tinymce.bundle.js',
+        ]
+    ]
 ];
 
 $settings['session'] = [

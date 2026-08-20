@@ -13,38 +13,12 @@ use Slim\Routing\RouteContext;
 
 final class LoginSubmitAction
 {
-    /**
-     * @Injection
-     * @var Authenticator
-     */
-    private Authenticator $auth;
-
-    /**
-     * @Injection
-     * @var SessionInterface
-     */
-    private SessionInterface $session;
-
-    /**
-     * The constructor
-     *
-     * @param Authenticator $auth
-     * @param SessionInterface $session
-     */
-    public function __construct(Authenticator $auth, SessionInterface $session)
-    {
-        $this->auth = $auth;
-        $this->session = $session;
+    public function __construct(
+        private Authenticator $auth,
+        private SessionInterface $session
+    ) {
     }
 
-    /**
-     * The invoker.
-     *
-     * @param Request $request Representation of an incoming, server-side HTTP request.
-     * @param Response $response Representation of an outgoing, server-side response.
-     *
-     * @return Response
-     */
     public function __invoke(Request $request, Response $response): Response
     {
         $formData = (array) $request->getParsedBody();

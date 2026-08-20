@@ -9,11 +9,9 @@ return function (array $settings): array {
     $settings['error']['display_error_details'] = true;
     $settings['logger']['level'] = \Monolog\Level::Debug;
 
-    // Database
-    $settings['db']['path'] = __DIR__ . '/../data/donations-test.db';
+    // $settings['db']['path'] = __DIR__ . '/../data/donations-test.db';
 
-    // url
-    $url = 'http://127.0.0.1:8080';
+    $url = 'http://127.0.0.1:8081';
 
     // website
     $settings['html_header'] = [

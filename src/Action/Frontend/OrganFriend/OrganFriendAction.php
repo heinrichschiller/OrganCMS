@@ -9,32 +9,18 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 final class OrganFriendAction
 {
-    /**
-     * @Injection
-     * @var TemplateRenderer
-     */
-    private TemplateRenderer $renderer;
-
-    /**
-     * The constructor.
-     *
-     * @param TemplateRenderer $renderer Template renderer
-     */
-    public function __construct(TemplateRenderer $renderer)
-    {
-        $this->renderer = $renderer;
+    public function __construct(
+        private TemplateRenderer $renderer
+    ) {
     }
 
-    /**
-     * The invoker.
-     *
-     * @param Response $response Representation of an outgoing, server-side response.
-     *
-     * @return Response
-     */
     public function __invoke(Response $response): Response
     {
-        $response = $this->renderer->render($response, 'frontend/friends/orgelfreunde.html', []);
+        $response = $this->renderer->renderFrontend(
+            $response,
+            'page/friends/detail',
+            []
+        );
 
         return $response;
     }

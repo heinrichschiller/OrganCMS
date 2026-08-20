@@ -18,21 +18,11 @@ final class EventReaderResultCollection implements IteratorAggregate
      */
     private array $list = [];
 
-    /**
-     * Add a new event to collection.
-     *
-     * @param EventReaderResult $event EventReaderResult entry.
-     */
     public function add(EventReaderResult $event): void
     {
         $this->list[] = $event;
     }
 
-    /**
-     * Iterate over this collection.
-     *
-     * @return Traversable<int, EventReaderResult>
-     */
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->list);

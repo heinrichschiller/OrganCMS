@@ -9,7 +9,6 @@ module.exports = {
   mode: 'development',
   entry: {
     main: './src/js/main.js',
-    tinymce: './src/js/tinymce.js',
   },
   output: {
     filename: '[name].bundle.js',

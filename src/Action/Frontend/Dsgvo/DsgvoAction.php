@@ -4,37 +4,29 @@ declare (strict_types=1);
 
 namespace App\Action\Frontend\Dsgvo;
 
+use App\Domain\Dsgvo\Service\DsgvoFinder;
 use App\Renderer\TemplateRenderer;
 use Psr\Http\Message\ResponseInterface as Response;
 
 final class DsgvoAction
 {
-    /**
-     * @Injection
-     * @var TemplateRenderer
-     */
-    private TemplateRenderer $renderer;
-
-    /**
-     * The constructor.
-     *
-     * @param TemplateRenderer $renderer Template renderer
-     */
-    public function __construct(TemplateRenderer $renderer)
-    {
-        $this->renderer = $renderer;
+    public function __construct(
+        private DsgvoFinder $finder,
+        private TemplateRenderer $renderer
+    ) {
     }
 
-    /**
-     * The invoker.
-     *
-     * @param Response $response Representation of an outgoing, server-side response.
-     *
-     * @return Response
-     */
     public function __invoke(Response $response): Response
     {
-        $response = $this->renderer->render($response, 'frontend/dsgvo/datenschutzerklaerung.html', []);
+        $dsgvo = $this->finder->find();
+
+        $response = $this->renderer->renderFrontend(
+            $response,
+            'page/dsgvo/detail.html',
+            [
+                'dsgvo' => $dsgvo,
+            ]
+        );
 
         return $response;
     }

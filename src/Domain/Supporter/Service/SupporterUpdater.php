@@ -4,117 +4,79 @@ declare(strict_types=1);
 
 namespace App\Domain\Supporter\Service;
 
-use App\Domain\Supporter\Repository\SupporterUpdaterRepository;
+use App\Domain\Supporter\Repository\SupporterRepository;
 use App\Domain\Supporter\Data\Supporter;
-use Cake\Validation\Validator;
-use App\Factory\LoggerFactory;
-use Error;
-use Exception;
-use Psr\Log\LoggerInterface;
+use App\Domain\Supporter\Exception\SupporterValidationException;
+use DateTimeImmutable;
+use DomainException;
+use Selective\ArrayReader\ArrayReader;
 
 final class SupporterUpdater
 {
-    /**
-     * @Injection
-     * @var LoggerInterface
-     */
-    private LoggerInterface $logger;
-
-    /**
-     * @Injection
-     * @var SupporterUpdaterRepository
-     */
-    private SupporterUpdaterRepository $updater;
-
-    /**
-     * @Injection
-     * @var Validator
-     */
-    private Validator $validator;
-
-    /**
-     * The constructor.
-     *
-     * @param LoggerFactory $loggerFactory Monolog logger factory.
-     * @param SupporterUpdaterRepository $updater Supporter updater repository
-     * @param Validator $validator CakePHP validator
-     */
     public function __construct(
-        LoggerFactory $loggerFactory,
-        SupporterUpdaterRepository $updater,
-        Validator $validator
+        private SupporterRepository $repository,
+        private SupporterValidator $supporterValidator,
     ) {
-        $this->logger = $loggerFactory->addFileHandler('error.log')->createLogger();
-        $this->updater = $updater;
-        $this->validator = $validator;
     }
 
     /**
-     * Update supporter entry.
-     *
-     * @param array<string> $formData The form data
-     *
-     * @return bool
+     * @param array{
+     *      id: string,
+     *      name: string,
+     *      publish?: string,
+     *      published_at: string,
+     *      created_at: string
+     *  } $formData
      */
-    public function update(array $formData): bool
+    public function update(int $id, array $formData): void
     {
-        if (!isset($formData['publish'])) {
-            $formData['publish'] = '';
-        }
+        $errors = $this->validateSupporterUpdate($id, $formData);
 
-        if ('on' === $formData['publish']) {
-            $formData['publish'] = '1';
+        if ($errors !== []) {
+            throw new SupporterValidationException($errors);
         }
+        
+        $supporter = $this->transformDataToSupporter($id, $formData);
 
-        if (null === $formData['publish']) {
-            $formData['publish'] = '';
-        }
+        $this->repository->update($supporter);
+    }
 
-        $this->validator->validate($formData);
+    private function transformDataToSupporter(int $id, array $formData): Supporter
+    {
+        $reader = new ArrayReader($formData);
 
         $supporter = new Supporter(
-            (int) $formData['id'],
-            $formData['name'],
-            (bool) $formData['publish'],
-            $formData['published_at'],
-            $formData['created_at'],
-            date('Y-m-d H:i:s')
+            id: $id,
+            name: $reader->findString('name'),
+            isPublished: $reader->findBool('publish') ? true : false,
+            publishedAt: $reader->findChronos('published_at'),
+            createdAt: $reader->findChronos('created_at'),
+            updatedAt: new DateTimeImmutable()
         );
 
-        try {
-            $this->updater->update($supporter);
-
-            return true;
-        } catch (Exception $e) {
-            $this->logger->error(sprintf("SupportFinder->update(): %s", $e->getMessage()));
-            
-            return false;
-        } catch (Error $e) {
-            $this->logger->error(sprintf("SupportFinder->delete(): %s", $e->getMessage()));
-            
-            return false;
-        }
+        return $supporter;
     }
 
     /**
-     * Validate the form data.
+     * @param array{
+     *      id: string,
+     *      name: string,
+     *      publish?: string,
+     *      published_at: string,
+     *      created_at: string
+     *  } $formData The form data
      *
-     * @param array<mixed> $formData The form data.
-     *
-     * @return void
+     * @return array<mixed>
      */
-    public function validate(array $formData): void
+    public function validateSupporterUpdate(int $id, array $formData): array
     {
-        $this->validator
-            ->requirePresence('name')
-            ->notEmptyString('name', 'Der Name darf nicht leer sein.');
-    
-        $errors = $this->validator->validate($formData);
-
-        if ($errors) {
-            foreach ($errors as $error) {
-                dd($error);
-            }
+        if (!$this->repository->existsSupporterId($id)) {
+            throw new DomainException(sprintf(
+                'Event nicht gefunden: %s',
+                $id
+            ));
         }
+        
+        return $this->supporterValidator->validateSupporter($formData);
     }
 }

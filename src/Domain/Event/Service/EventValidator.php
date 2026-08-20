@@ -9,34 +9,30 @@ use Cake\Validation\Validator;
 final class EventValidator
 {
     /**
-     * Validate data
-     *
      * @param array<mixed> $formData The form data
+     *
+     * @return array<mixed>
      */
-    public function validateEvent(array $formData): void
+    public function validateEvent(array $formData): array
     {
         $validator = new Validator();
 
-        $validator->requirePresence('title')
-            ->requirePresence('title', true, 'Der Titel darf nicht leer sein.')
-            ->notEmptyString('title', 'Der Titel darf nicht leer sein.')
-            ->minLength('title', 5, 'Der Titel muss min 5 Zeichen lang sein')
-            ->allowEmptyString('place')
-            ->requirePresence('event_date')
-            ->notEmptyDate('event_date', 'Das Datum darf nicht leer sein.')
-            ->requirePresence('content', 'Beschreibung darf nicht leer sein')
-            ->notEmptyString('content', 'Beschreibung darf nicht leer sein');
+        $validator
+            ->requirePresence(['title', 'event_date', 'content'], true)
+            ->notEmptyString(
+                'title',
+                'Der Titel darf nicht leer sein.'
+            )
+            ->minLength(
+                'title',
+                5,
+                'Der Titel muss min. 5 Zeichen lang sein'
+            )
+            ->notEmptyDate(
+                'event_date',
+                'Das Datum darf nicht leer sein.'
+            );
 
-        $errors = $validator->validate($formData);
-
-        if ($errors) {
-            foreach ($errors as $error) {
-                foreach ($error as $value) {
-                    echo "<p>$value</p>";
-                }
-            }
-
-            die;
-        }
+        return $validator->validate($formData);
     }
 }

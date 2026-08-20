@@ -1,0 +1,19 @@
+{{# flash.isSuccess }}
+<div class="mb-3">
+  <div class="card text-bg-success">
+    <div class="card-body">
+      {{ flash.message }}
+    </div>
+  </div>
+</div>
+{{/ flash.isSuccess }}
+
+{{# flash.isError }}
+<div class="mb-3">
+  <div class="card text-bg-danger">
+    <div class="card-body">
+      {{ flash.message }}
+    </div>
+  </div>
+</div>
+{{/ flash.isError }}

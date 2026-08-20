@@ -8,32 +8,27 @@ use Doctrine\DBAL\Connection;
 
 final class SupporterFinderRepository
 {
-    /**
-     * @Injection
-     * @var Connection
-     */
-    private Connection $connection;
-
-    /**
-     * The constructor
-     *
-     * @param Connection $connection Doctrine DBAL connection
-     */
-    public function __construct(Connection $connection)
-    {
+    public function __construct(
+        private Connection $connection
+    ) {
         $this->connection = $connection;
     }
 
     /**
-     * Find all supporter.
-     *
      * @return array<mixed>
      */
     public function findAll(): array
     {
         $result = $this->connection
             ->createQueryBuilder()
-            ->select('id', 'name', 'is_published', 'published_at', 'created_at', 'updated_at')
+            ->select(
+                'id',
+                'name',
+                'is_published',
+                'published_at',
+                'created_at',
+                'updated_at'
+            )
             ->from('supporters')
             ->executeQuery()
             ->fetchAllAssociative() ?: [];
@@ -42,8 +37,6 @@ final class SupporterFinderRepository
     }
 
     /**
-     * Find all public supporter
-     *
      * @return array<mixed>
      */
     public function findAllPublicSupporter(): array
@@ -67,8 +60,6 @@ final class SupporterFinderRepository
     }
 
     /**
-     * Find a supporter by id.
-     *
      * @param int $id Id of supporter.
      *
      * @return array<mixed>
@@ -77,10 +68,31 @@ final class SupporterFinderRepository
     {
         $result = $this->connection
             ->createQueryBuilder()
-            ->select('id', 'name', 'is_published', 'published_at', 'created_at', 'updated_at')
+            ->select(
+                'id',
+                'name',
+                'is_published',
+                'published_at',
+                'created_at',
+                'updated_at'
+            )
             ->from('supporters')
             ->where('id = ?')
             ->setParameter(0, $id)
+            ->executeQuery()
+            ->fetchAssociative() ?: [];
+        
+        return $result;
+    }
+
+    public function findByName(string $name)
+    {
+        $result = $this->connection
+            ->createQueryBuilder()
+            ->select('name')
+            ->from('supporters')
+            ->where('name = ?')
+            ->setParameter(0, $name)
             ->executeQuery()
             ->fetchAssociative() ?: [];
         

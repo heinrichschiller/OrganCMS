@@ -14,40 +14,11 @@ use Throwable;
 
 final class SupporterFinder
 {
-    /**
-     * @Injection
-     * @var LoggerInterface
-     */
-    private LoggerInterface $logger;
-
-    /**
-     * @Injection
-     * @var SupporterFinderRepository
-     */
-    private SupporterFinderRepository $repository;
-
-    /**
-     * The constructor.
-     *
-     * @param LoggerFactory $loggerFactory
-     * @param SupporterFinderRepository $repository Supporter finder repository
-     */
     public function __construct(
-        LoggerFactory $loggerFactory,
-        SupporterFinderRepository $repository
+        private SupporterFinderRepository $repository
     ) {
-        $this->logger = $loggerFactory
-            ->addFileHandler('supporter-finder-error.log')
-            ->createLogger();
-
-        $this->repository = $repository;
     }
 
-    /**
-     * Find all supporter.
-     *
-     * @return SupporterCollection
-     */
     public function findAll(): SupporterCollection
     {
         $supporterItems = (array) $this->repository->findAll();
@@ -62,11 +33,6 @@ final class SupporterFinder
         return $collection;
     }
 
-    /**
-     * Find all published supporter.
-     *
-     * @return SupporterCollection|null
-     */
     public function findAllPublicSupporter(): SupporterCollection
     {
         $supporterItems = (array) $this->repository->findAllPublicSupporter();
@@ -81,28 +47,21 @@ final class SupporterFinder
         return $collection;
     }
 
-    /**
-     * Find a supporter by id.
-     *
-     * @param int $id Id of the supporter.
-     *
-     * @return Supporter|null
-     */
-    public function findById(int $id): Supporter|null
+    public function findById(int $id): Supporter
     {
-        $supporterItem = (array) $this->repository->findById($id);
+        $data = (array) $this->repository->findById($id);
 
-        $supporter = $this->transformDataToSupporter($supporterItem);
+        if ($data === []) {
+            throw new SupporterNotFoundException($id);
+        }
+
+        $supporter = $this->transformDataToSupporter($data);
 
         return $supporter;
     }
 
     /**
-     * Transform array with supporter-data to Supporter object.
-     *
-     * @param array<mixed> $supporter Array that contains supporter data.
-     *
-     * @return Supporter
+     * @param array<mixed> $supporter
      */
     public function transformDataToSupporter(array $supporter): Supporter
     {
@@ -110,42 +69,22 @@ final class SupporterFinder
             return new Supporter;
         }
 
-        $supporter = new Supporter(
-            id: $supporter['id'],
-            name: $supporter['name'],
+        return new Supporter(
+            id: (int) $supporter['id'],
+            name: (string) $supporter['name'],
             isPublished: (bool) $supporter['is_published'],
             publishedAt: $this->parseDate($supporter['published_at']),
             createdAt: $this->parseDate($supporter['created_at']),
             updatedAt: $this->parseDate($supporter['updated_at'])
         );
-
-        return $supporter;
     }
 
-    /**
-     * Parse date.
-     *
-     * @param null|string $date Date
-     *
-     * @throw
-     *
-     * @return null|DateTimeImmutable
-     */
     private function parseDate(?string $date): ?DateTimeImmutable
     {
         if ($date === null || $date === '') {
             return null;
         }
 
-        try {
-            return new DateTimeImmutable($date);
-        } catch (Throwable $t) {
-            $this->logger->warning(
-                'Invalid date in SupporterFinder',
-                ['value' => $date, 'exception' => $t]
-            );
-
-            return null;
-        }
+        return new DateTimeImmutable($date);
     }
 }

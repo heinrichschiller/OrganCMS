@@ -4,87 +4,65 @@ declare(strict_types=1);
 
 namespace App\Action\Backend\Supporter;
 
+use App\Domain\Exception\DomainRecordNotFoundException;
 use App\Domain\Supporter\Service\SupporterFinder;
+use App\Factory\LoggerFactory;
 use App\Renderer\TemplateRenderer;
-use Odan\Session\SessionInterface;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use App\Support\CustomFlash;
+use App\Support\RedirectResponder;
+use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Log\LoggerInterface;
 
 final class SupporterAction
 {
-    /**
-     * @Injection
-     * @var SessionInterface
-     */
-    private SessionInterface $session;
+    private LoggerInterface $logger;
 
-    /**
-     * @Injection
-     * @var SupporterFinder
-     */
-    private SupporterFinder $finder;
-
-    /**
-     * @Injection
-     * @var TemplateRenderer
-     */
-    private TemplateRenderer $renderer;
-    
-    /**
-     * The constructor.
-     *
-     * @param SessionInterface $session
-     * @param SupporterFinder $finder
-     * @param TemplateRenderer $renderer
-     */
     public function __construct(
-        SessionInterface $session,
-        SupporterFinder $finder,
-        TemplateRenderer $renderer
+        private CustomFlash $flash,
+        private SupporterFinder $finder,
+        private TemplateRenderer $renderer,
+        private RedirectResponder $responder,
+        LoggerFactory $loggerFactory
     ) {
-        $this->session = $session;
-        $this->finder = $finder;
-        $this->renderer = $renderer;
+        $this->logger = $loggerFactory
+            ->addFileHandler('supporter-all-error.log')
+            ->createLogger();
     }
 
-    /**
-     * The invoker
-     *
-     * @param Response $response Representation of an outgoing, server-side response.
-     *
-     * @return Response
-     */
     public function __invoke(Response $response): Response
     {
-        $isSuccess = false;
-        $isError = false;
-        $message = '';
+        try {
+            $supporters = $this->finder->findAll();
 
-        $flash = $this->session->getFlash();
+            $data = [
+                'supporters' => $supporters,
+                'flash' => $this->flash->readStatus()
+            ];
 
-        if ($flash->has('success')) {
-            $isSuccess = true;
-            $message = $flash->get('success')[0];
+            return $this->renderer->renderBackend(
+                $response,
+                'admin/supporter/index',
+                $data
+            );
+        } catch (DomainRecordNotFoundException $e) {
+            $this->logger->error(
+                'Supporter mit dem Namen existiert bereits.',
+                [
+                    'exception' => $e
+                ]
+            );
+
+            $this->flash->error($e->getMessage());
+
+            return $this->responder->toRoute(
+                $response,
+                'supporters',
+                [],
+                [],
+                StatusCodeInterface::STATUS_SEE_OTHER
+            );
         }
 
-        if ($flash->has('error')) {
-            $isError = true;
-            $message = $flash->get('error')[0];
-        }
-
-        $flash->clear();
-
-        $collection = $this->finder->findAll();
-
-        $data = [
-            'supporters' => $collection,
-            'isSuccess' => $isSuccess,
-            'isError' => $isError,
-            'message' => $message
-        ];
-
-        $response = $this->renderer->render($response, 'backend/supporter/index', $data);
-
-        return $response;
     }
 }

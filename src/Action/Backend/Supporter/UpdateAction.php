@@ -13,38 +13,12 @@ use Slim\Routing\RouteContext;
 
 final class UpdateAction
 {
-    /**
-     * @Injection
-     * @var SessionInterface
-     */
-    private SessionInterface $session;
-
-    /**
-     * @Injection
-     * @var SupporterUpdater
-     */
-    private SupporterUpdater $updater;
-
-    /**
-     * The constructor.
-     *
-     * @param SessionInterface $session Odan session
-     * @param SupporterUpdater $updater Supporter updater service
-     */
-    public function __construct(SessionInterface $session, SupporterUpdater $updater)
-    {
-        $this->session = $session;
-        $this->updater = $updater;
+    public function __construct(
+        private SessionInterface $session,
+        private SupporterUpdater $updater
+    ) {
     }
 
-    /**
-     * The invoker
-     *
-     * @param Request $request Representation of an incoming, server-side HTTP request.
-     * @param Response $response Representation of an outgoing, server-side response.
-     *
-     * @return Response
-     */
     public function __invoke(Request $request, Response $response): Response
     {
         $formData = (array) $request->getParsedBody();

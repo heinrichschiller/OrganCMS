@@ -8,25 +8,12 @@ use Doctrine\DBAL\Connection;
 
 final class EventFinderRepository
 {
-    /**
-     * @Injection
-     * @var Connection
-     */
-    private Connection $connection;
-
-    /**
-     * The constructor.
-     *
-     * @param Connection $connection
-     */
-    public function __construct(Connection $connection)
-    {
-        $this->connection = $connection;
+    public function __construct(
+        private Connection $connection
+    ) {
     }
 
     /**
-     * Find all events
-     *
      * @return array<mixed>
      */
     public function findAll(): array
@@ -37,11 +24,9 @@ final class EventFinderRepository
                 'id',
                 'title',
                 'slug',
-                'intro',
                 'content',
                 'place',
                 'event_date',
-                'on_mainpage',
                 'published_at',
                 'is_published',
                 'created_at',
@@ -56,10 +41,6 @@ final class EventFinderRepository
     }
 
     /**
-     * Find all mainpage events
-     *
-     * @param int $limit
-     *
      * @return array<mixed>
      */
     public function findLatestPublishedEvents(int $limit): array
@@ -70,11 +51,9 @@ final class EventFinderRepository
                 'id',
                 'title',
                 'slug',
-                'intro',
                 'content',
                 'place',
                 'event_date',
-                'on_mainpage',
                 'published_at',
                 'is_published',
                 'created_at',
@@ -91,8 +70,6 @@ final class EventFinderRepository
     }
 
     /**
-     * Find all published events
-     *
      * @return array<mixed>
      */
     public function findPublishedEvents(): array
@@ -103,11 +80,9 @@ final class EventFinderRepository
                 'id',
                 'title',
                 'slug',
-                'intro',
                 'content',
                 'place',
                 'event_date',
-                'on_mainpage',
                 'published_at',
                 'is_published',
                 'created_at',
@@ -123,10 +98,6 @@ final class EventFinderRepository
     }
 
     /**
-     * Find an event by event id.
-     *
-     * @param int $id Event id
-     *
      * @return array<mixed>
      */
     public function findById(int $id): array
@@ -137,11 +108,9 @@ final class EventFinderRepository
                 'id',
                 'title',
                 'slug',
-                'intro',
                 'content',
                 'place',
                 'event_date',
-                'on_mainpage',
                 'published_at',
                 'is_published',
                 'created_at',
@@ -154,5 +123,31 @@ final class EventFinderRepository
             ->fetchAssociative() ?: [];
 
         return $result;
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    public function findByName(string $name): array
+    {
+        return $this->connection
+            ->createQueryBuilder()
+            ->select(
+                'id',
+                'title',
+                'slug',
+                'content',
+                'place',
+                'event_date',
+                'published_at',
+                'is_published',
+                'created_at',
+                'updated_at'
+            )
+            ->from('events')
+            ->where('title = :title')
+            ->setParameter('title', $name)
+            ->executeQuery()
+            ->fetchAssociative() ?: [];
     }
 }

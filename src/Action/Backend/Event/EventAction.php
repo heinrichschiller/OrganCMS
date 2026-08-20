@@ -5,85 +5,63 @@ declare(strict_types=1);
 namespace App\Action\Backend\Event;
 
 use App\Domain\Event\Service\EventFinder;
+use App\Domain\Exception\DomainRecordNotFoundException;
+use App\Factory\LoggerFactory;
 use App\Renderer\TemplateRenderer;
-use Odan\Session\SessionInterface;
+use App\Support\CustomFlash;
+use App\Support\RedirectResponder;
+use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Log\LoggerInterface;
 
 final class EventAction
 {
-    /**
-     * @Injection
-     * @var EventFinder
-     */
-    private EventFinder $finder;
+    private LoggerInterface $logger;
 
-    /**
-     * @Injection
-     * @var SessionInterface
-     */
-    private SessionInterface $session;
-
-    /**
-     * @Injection
-     * @var TemplateRenderer
-     */
-    private TemplateRenderer $renderer;
-
-    /**
-     * The constructor.
-     *
-     * @param EventFinder $finder Event finder service.
-     * @param SessionInterface $session Odan session interface.
-     * @param TemplateRenderer $renderer Template renderer.
-     */
     public function __construct(
-        EventFinder $finder,
-        SessionInterface $session,
-        TemplateRenderer $renderer
+        private CustomFlash $flash,
+        private EventFinder $finder,
+        private TemplateRenderer $renderer,
+        private RedirectResponder $responder,
+        LoggerFactory $loggerFactory
     ) {
-        $this->finder = $finder;
-        $this->session = $session;
-        $this->renderer = $renderer;
+        $this->logger = $loggerFactory
+            ->addFileHandler('event-all-error.log')
+            ->createLogger();
     }
 
-    /**
-     * The invoker.
-     *
-     * @param Response $response Representation of an outgoing, server-side response.
-     *
-     * @return Response
-     */
     public function __invoke(Response $response): Response
     {
-        $isSuccess = false;
-        $isError = false;
-        $message = '';
+        try {
+            $events = $this->finder->findAll();
 
-        $flash = $this->session->getFlash();
+            $data = [
+                'events' => $events,
+                'flash' => $this->flash->readStatus()
+            ];
 
-        if ($flash->has('success')) {
-            $isSuccess = true;
-            $message = $flash->get('success')[0];
+            return $this->renderer->renderBackend(
+                $response,
+                'admin/event/index',
+                $data
+            );
+        } catch (DomainRecordNotFoundException $e) {
+            $this->logger->error(
+                'Event mit dem Namen existiert bereits.',
+                [
+                    'exception' => $e,
+                ]
+            );
+
+            $this->flash->error($e->getMessage());
+
+            return $this->responder->toRoute(
+                $response,
+                'events',
+                [],
+                [],
+                StatusCodeInterface::STATUS_SEE_OTHER
+            );
         }
-
-        if ($flash->has('error')) {
-            $isError = true;
-            $message = $flash->get('error')[0];
-        }
-
-        $flash->clear();
-
-        $events = $this->finder->findAll();
-
-        $data = [
-            'events' => $events,
-            'isSuccess' => $isSuccess,
-            'isError' => $isError,
-            'message' => $message
-        ];
-
-        $response = $this->renderer->render($response, 'backend/event/index', $data);
-        
-        return $response;
     }
 }

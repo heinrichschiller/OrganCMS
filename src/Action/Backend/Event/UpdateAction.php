@@ -4,63 +4,92 @@ declare(strict_types=1);
 
 namespace App\Action\Backend\Event;
 
+use App\Domain\Event\Exception\EventValidationException;
 use App\Domain\Event\Service\EventUpdater;
+use App\Factory\LoggerFactory;
+use App\Support\CustomFlash;
+use App\Support\RedirectResponder;
 use Fig\Http\Message\StatusCodeInterface;
-use Odan\Session\SessionInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use Slim\Routing\RouteContext;
+use Psr\Log\LoggerInterface;
+use RuntimeException;
 
 final class UpdateAction
 {
-    /**
-     * @Injection
-     * @var SessionInterface
-     */
-    private SessionInterface $session;
+    private LoggerInterface $logger;
 
-    /**
-     * @Injection
-     * @var EventUpdater
-     */
-    private EventUpdater $updater;
-
-    /**
-     * The constructor.
-     *
-     * @param SessionInterface $session
-     * @param EventUpdater $updater
-     */
-    public function __construct(SessionInterface $session, EventUpdater $updater)
-    {
-        $this->session = $session;
-        $this->updater = $updater;
+    public function __construct(
+        private CustomFlash $flash,
+        private EventUpdater $updater,
+        private RedirectResponder $responder,
+        LoggerFactory $loggerFactory,
+    ) {
+        $this->logger = $loggerFactory
+            ->addFileHandler('event-updater-error.log')
+            ->createLogger();
     }
 
-    /**
-     * The invoker.
-     *
-     * @param Request $request
-     * @param Response $response
-     *
-     * @return Response
-     */
     public function __invoke(Request $request, Response $response): Response
     {
+        $id = (int) $request->getAttribute('id');
+
+        if ($id <= 0) {
+            throw new RuntimeException('Ungültige Event Id!');
+        }
+
         $formData = (array) $request->getParsedBody();
 
-        $this->updater->update($formData);
+        try {
+            $this->updater->update($id, $formData);
 
-        $flash = $this->session->getFlash();
-        $flash->clear();
+            $this->flash->success('Event erfolgreich aktualisiert');
 
-        $flash->add('success', 'Daten erfolgreich aktualisiert.');
+            return $this->responder->toRoute(
+                $response,
+                'read-event',
+                ['id' => $id],
+                [],
+                StatusCodeInterface::STATUS_SEE_OTHER
+            );
+        } catch (EventValidationException $e) {
+            $message = $e->getMessages();
 
-        $routeParser = RouteContext::fromRequest($request)->getRouteParser();
-        $url = $routeParser->urlFor('read-event', ['id' => $formData['id']]);
+            $this->logger->error(
+                'Die Validierung ist fehlgeschlagen.',
+                [
+                    'exception' => $e,
+                ]
+            );
 
-        return $response
-            ->withStatus(StatusCodeInterface::STATUS_FOUND)
-            ->withHeader('Location', $url);
+            $this->flash->error($message[0]);
+
+            return $this->responder->toRoute(
+                $response,
+                'read-event',
+                ['id' => $id],
+                [],
+                StatusCodeInterface::STATUS_SEE_OTHER
+            );
+        } catch (RuntimeException $e) {
+            $message = $e->getMessage();
+
+            $this->logger->error(
+                'Die Validierung ist fehlgeschlagen.',
+                [
+                    'exception' => $e,
+                ]
+            );
+
+            $this->flash->error($message[0]);
+
+            return $this->responder->toRoute(
+                $response,
+                'read-event',
+                ['id' => $id],
+                [],
+                StatusCodeInterface::STATUS_SEE_OTHER
+            );
+        }
     }
 }

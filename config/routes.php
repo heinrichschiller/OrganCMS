@@ -57,7 +57,7 @@ return function (App $app) {
     })->add(UserAuthMiddleware::class);
 
     $app->group('/supporter', function (RouteCollectorProxy $group) {
-        $group->get('/', \App\Action\Backend\Supporter\SupporterAction::class)->setName('supporter');
+        $group->get('/all', \App\Action\Backend\Supporter\SupporterAction::class)->setName('supporter');
         $group->get('/new', \App\Action\Backend\Supporter\NewSupporterAction::class)->setName('new-supporter');
         $group->get('/edit/{id}', \App\Action\Backend\Supporter\ReadAction::class);
         $group->get('/delete/{id}', \App\Action\Backend\Supporter\DeleteAction::class);

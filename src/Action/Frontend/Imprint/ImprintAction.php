@@ -18,7 +18,7 @@ final class ImprintAction
     {
         $response = $this->renderer->renderFrontend(
             $response,
-            'page/imprint/details',
+            'page/imprint/detail',
             []
         );
 

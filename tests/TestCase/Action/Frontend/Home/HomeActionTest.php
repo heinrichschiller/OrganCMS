@@ -33,10 +33,10 @@ class HomeActionTest extends TestCase
 
         $renderer = $this->createMock(TemplateRenderer::class);
         $renderer->expects($this->once())
-            ->method('render')
+            ->method('renderFrontend')
             ->with(
                 $this->isInstanceOf(ResponseInterface::class),
-                'frontend/home/index',
+                'page/homepage',
                 $data
             )->willReturn(new Response());
 

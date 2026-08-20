@@ -15,34 +15,19 @@ use Symfony\Component\Uid\Uuid;
 
 final class LoggerFactory implements LoggerFactoryInterface
 {
-    /**
-     * @var string
-     */
     private string $path = '';
-
-    /**
-     * @var Level
-     */
     private Level $level;
-
-    /**
-     * @var array<mixed>
-     */
+    /** @var array<HandlerInterface> */
     private array $handler = [];
 
-    /**
-     * @var LoggerInterface|null
-     */
     private ?LoggerInterface $testLogger = null;
 
     /**
-     * The constructor.
-     *
-     * @param array<mixed> $settings Logger settings.
+     * @param array<mixed> $settings
      */
     public function __construct(array $settings)
     {
-        $this->path = (string) $settings['path'] ?? 'vfs://root/logs';
+        $this->path = (string) $settings['path'] ?: 'vfs://root/logs';
         $this->level = $settings['level'] ?? Level::Debug;
 
         // This can be used for testing to make the Factory testable
@@ -51,20 +36,14 @@ final class LoggerFactory implements LoggerFactoryInterface
         }
     }
 
-    /**
-     * Create Logger instance.
-     *
-     * @param string|null $name Logger file name
-     *
-     * @return LoggerInterface The logger
-     */
     public function createLogger(string|null $name = null): LoggerInterface
     {
-        if ($this->testLogger) {
-            $this->handler = [$this->testLogger];
+        if ($this->testLogger !== null) {
+            //$this->handler = [$this->testLogger];
+            return $this->testLogger;
         }
 
-        $logger = new Logger($name ?: Uuid::v4()->toRfc4122());
+        $logger = new Logger($name ?? Uuid::v4()->toRfc4122());
 
         foreach ($this->handler as $handler) {
             $logger->pushHandler($handler);
@@ -75,13 +54,6 @@ final class LoggerFactory implements LoggerFactoryInterface
         return $logger;
     }
 
-    /**
-     * Add handler.
-     *
-     * @param HandlerInterface $handler Handler
-     *
-     * @return self
-     */
     public function addHandler(HandlerInterface $handler):self
     {
         $this->handler[] = $handler;
@@ -89,14 +61,6 @@ final class LoggerFactory implements LoggerFactoryInterface
         return $this;
     }
 
-    /**
-     * Add rotating file logger handler.
-     *
-     * @param string $filename The filename.
-     * @param Level|null $level Monolog log level.
-     *
-     * @return self
-     */
     public function addFileHandler(string $filename, ?Level $level = null): self
     {
         $filename = sprintf("%s/%s", $this->path, $filename);
@@ -110,13 +74,6 @@ final class LoggerFactory implements LoggerFactoryInterface
         return $this;
     }
 
-    /**
-     * Add console handler.
-     *
-     * @param Level $level Monolog log level
-     *
-     * @return self
-     */
     public function addConsoleHandler(?Level $level = null): self
     {
         $streamHandler = new StreamHandler('php://output', $level ?? $this->level);

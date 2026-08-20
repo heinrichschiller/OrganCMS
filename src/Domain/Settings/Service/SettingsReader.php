@@ -14,6 +14,9 @@ final class SettingsReader
         $this->config = $config;
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function read(): array
     {
         $websiteConfig = $this->config->getArray('html_header');

@@ -13,6 +13,11 @@ final class ViewContextFactory
     ) {
     }
 
+    /**
+     * @param array<mixed> $data The data.
+     *
+     * @return array<string>
+     */
     public function create(string $area, array $data = []): array
     {
         $viewConfig = $this->config->getArray('view');

@@ -12,30 +12,11 @@ use Slim\Routing\RouteContext;
 
 final class LogoutAction
 {
-    /**
-     * @Injection
-     * @var SessionInterface
-     */
-    private SessionInterface $session;
-
-    /**
-     * The constructor
-     *
-     * @param SessionInterface $session
-     */
-    public function __construct(SessionInterface $session)
-    {
-        $this->session = $session;
+    public function __construct(
+        private SessionInterface $session
+    ) {
     }
 
-    /**
-     * The invoker
-     *
-     * @param Request $request Representation of an incoming, server-side HTTP request.
-     * @param Response $response Representation of an outgoing, server-side response.
-     *
-     * @return Response
-     */
     public function __invoke(Request $request, Response $response): Response
     {
         $this->session->destroy();
